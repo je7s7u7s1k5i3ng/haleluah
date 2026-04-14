@@ -1,0 +1,16 @@
+# env
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# outputs
+output/audio/
+output/renders/
+output/final/
+output/*.log
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,113 @@
+{
+  "title": "Operation_Dawn_Strike",
+  "level": "/Game/Maps/Battlefield_Desert",
+  "format": "shorts",
+  "line_gap": 0.4,
+  "tail_padding": 1.5,
+  "characters": [
+    {
+      "id": "Sniper_1",
+      "role": "sniper",
+      "blueprint": "/Game/Characters/BP_Sniper_Female_01",
+      "transform": {"location": [1200, -400, 180], "rotation": [0, 90, 0]},
+      "idle_anim": "/Game/Animations/Mixamo/Female/Sniper_Idle_Prone"
+    },
+    {
+      "id": "Sniper_2",
+      "role": "sniper",
+      "blueprint": "/Game/Characters/BP_Sniper_Female_02",
+      "transform": {"location": [1250, -600, 180], "rotation": [0, 90, 0]}
+    },
+    {
+      "id": "SpecOps_1",
+      "role": "spec_ops",
+      "blueprint": "/Game/Characters/BP_SpecOps_Female_01",
+      "transform": {"location": [800, 200, 90], "rotation": [0, 0, 0]}
+    },
+    {
+      "id": "SpecOps_2",
+      "role": "spec_ops",
+      "blueprint": "/Game/Characters/BP_SpecOps_Female_02",
+      "transform": {"location": [800, 400, 90], "rotation": [0, 0, 0]}
+    },
+    {
+      "id": "Commander",
+      "role": "commander",
+      "blueprint": "/Game/Characters/BP_Commander_Female",
+      "transform": {"location": [400, 0, 90], "rotation": [0, 180, 0]}
+    },
+    {
+      "id": "Soldier_1",
+      "role": "soldier",
+      "blueprint": "/Game/Characters/BP_Soldier_Male_01",
+      "transform": {"location": [700, -100, 90], "rotation": [0, 0, 0]}
+    },
+    {
+      "id": "Soldier_2",
+      "role": "soldier",
+      "blueprint": "/Game/Characters/BP_Soldier_Male_02",
+      "transform": {"location": [750, 100, 90], "rotation": [0, 0, 0]}
+    }
+  ],
+  "cameras": [
+    {
+      "time": 0.0,
+      "transform": {"location": [0, -1500, 400], "rotation": [-10, 90, 0]},
+      "fov": 85
+    },
+    {
+      "time": 4.0,
+      "transform": {"location": [600, -600, 250], "rotation": [-5, 70, 0]},
+      "fov": 70
+    },
+    {
+      "time": 8.0,
+      "transform": {"location": [1100, -350, 220], "rotation": [-8, 30, 0]},
+      "fov": 50
+    },
+    {
+      "time": 12.0,
+      "transform": {"location": [500, -200, 600], "rotation": [-30, 45, 0]},
+      "fov": 95
+    }
+  ],
+  "character_cues": [
+    {"time": 2.0, "character_id": "Commander", "anim": "/Game/Animations/Mixamo/Female/Pointing_Forward", "duration": 3.0},
+    {"time": 5.5, "character_id": "Sniper_1", "anim": "/Game/Animations/Mixamo/Female/Rifle_Aim_Prone", "duration": 4.0},
+    {"time": 7.0, "character_id": "SpecOps_1", "anim": "/Game/Animations/Mixamo/Female/Combat_Run", "duration": 3.0},
+    {"time": 7.0, "character_id": "SpecOps_2", "anim": "/Game/Animations/Mixamo/Female/Combat_Run", "duration": 3.0}
+  ],
+  "effects": [
+    {
+      "time": 8.0,
+      "kind": "muzzle_flash",
+      "system": "/Game/Effects/NS_MuzzleFlash_Sniper",
+      "location": [1200, -400, 180],
+      "scale": 1.0,
+      "duration": 0.2
+    },
+    {
+      "time": 10.5,
+      "kind": "explosion",
+      "system": "/Game/Effects/NS_Explosion_Large",
+      "location": [2000, 0, 100],
+      "scale": 2.0,
+      "duration": 3.0
+    },
+    {
+      "time": 10.7,
+      "kind": "smoke",
+      "system": "/Game/Effects/NS_BlackSmoke",
+      "location": [2000, 0, 100],
+      "scale": 3.0,
+      "duration": 6.0
+    }
+  ],
+  "lines": [
+    {"speaker": "Commander", "text": "전방 2시 방향, 적 탱크 접근 중. 저격수 1조, 엔진룸 겨냥."},
+    {"speaker": "Sniper_1",  "text": "사거리 1200. 바람 우측 3노트. 조준 완료."},
+    {"speaker": "Commander", "text": "돌격조, 엄폐물 뒤로 이동. 3초 대기."},
+    {"speaker": "Sniper_1",  "text": "발사합니다."},
+    {"speaker": "narrator",  "text": "그리고 새벽의 사막은, 섬광 하나로 갈라졌다."}
+  ]
+}
