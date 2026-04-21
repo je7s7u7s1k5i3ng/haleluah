@@ -32,6 +32,13 @@ CREATE TABLE IF NOT EXISTS rank_track (
     rank        INTEGER,
     PRIMARY KEY (product_id, keyword, captured_at)
 );
+
+CREATE TABLE IF NOT EXISTS api_quota (
+    day       TEXT NOT NULL,
+    api       TEXT NOT NULL,
+    calls     INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (day, api)
+);
 """
 
 
@@ -116,3 +123,93 @@ class Storage:
                 "INSERT OR REPLACE INTO rank_track VALUES (?,?,?,?)",
                 (product_id, keyword, now, rank),
             )
+
+    def bump_quota(self, api: str, calls: int = 1) -> None:
+        day = datetime.utcnow().date().isoformat()
+        with self._conn() as c:
+            c.execute(
+                """INSERT INTO api_quota(day, api, calls) VALUES(?, ?, ?)
+                   ON CONFLICT(day, api) DO UPDATE SET calls = calls + excluded.calls""",
+                (day, api, calls),
+            )
+
+    def quota_today(self) -> dict[str, int]:
+        day = datetime.utcnow().date().isoformat()
+        with self._conn() as c:
+            rows = c.execute(
+                "SELECT api, calls FROM api_quota WHERE day = ?", (day,)
+            ).fetchall()
+        return {r["api"]: r["calls"] for r in rows}
+
+    def query_keywords(
+        self,
+        *,
+        min_vol: int | None = None,
+        max_vol: int | None = None,
+        min_comp: float | None = None,
+        max_comp: float | None = None,
+        grades: list[str] | None = None,
+        contains: str | None = None,
+        order_by: str = "golden_score",
+        limit: int = 100,
+    ) -> list[dict]:
+        """유연한 DB 조회 (Claude가 쓰기 좋은 형태)."""
+        wh: list[str] = ["1=1"]
+        params: list = []
+        if min_vol is not None:
+            wh.append("(monthly_pc + monthly_mobile) >= ?"); params.append(min_vol)
+        if max_vol is not None:
+            wh.append("(monthly_pc + monthly_mobile) <= ?"); params.append(max_vol)
+        if min_comp is not None:
+            wh.append("competition >= ?"); params.append(min_comp)
+        if max_comp is not None:
+            wh.append("competition IS NOT NULL AND competition <= ?"); params.append(max_comp)
+        if grades:
+            ph = ",".join("?" for _ in grades)
+            wh.append(f"grade IN ({ph})"); params.extend(grades)
+        if contains:
+            wh.append("keyword LIKE ?"); params.append(f"%{contains}%")
+
+        allowed = {"golden_score", "competition", "total_products", "captured_at"}
+        ob = order_by if order_by in allowed else "golden_score"
+        direction = "ASC" if ob == "competition" else "DESC"
+
+        sql = f"""
+            SELECT keyword, total_products, monthly_pc, monthly_mobile,
+                   (monthly_pc + monthly_mobile) AS total_qc,
+                   competition, golden_score, grade, comp_idx, captured_at
+            FROM keyword_snapshot
+            WHERE {" AND ".join(wh)}
+            ORDER BY {ob} {direction}
+            LIMIT ?
+        """
+        params.append(limit)
+        with self._conn() as c:
+            rows = c.execute(sql, params).fetchall()
+        return [dict(r) for r in rows]
+
+    def summary(self) -> dict:
+        with self._conn() as c:
+            row = c.execute(
+                """SELECT COUNT(*) AS total,
+                          SUM(CASE WHEN grade='S' THEN 1 ELSE 0 END) AS s_cnt,
+                          SUM(CASE WHEN grade='A' THEN 1 ELSE 0 END) AS a_cnt,
+                          SUM(CASE WHEN grade='B' THEN 1 ELSE 0 END) AS b_cnt,
+                          MIN(captured_at) AS first_at,
+                          MAX(captured_at) AS last_at
+                   FROM keyword_snapshot"""
+            ).fetchone()
+        return dict(row) if row else {}
+
+    def seed_coverage(self, seeds: list[str], ttl_hours: int) -> dict[str, bool]:
+        """시드 목록 중 최근 수집된 것 여부. Claude가 중복 시드 피하는 용도."""
+        cutoff = (datetime.utcnow() - timedelta(hours=ttl_hours)).isoformat(timespec="seconds")
+        out: dict[str, bool] = {}
+        with self._conn() as c:
+            for s in seeds:
+                row = c.execute(
+                    "SELECT 1 FROM keyword_snapshot WHERE keyword=? AND captured_at>=? LIMIT 1",
+                    (s, cutoff),
+                ).fetchone()
+                out[s] = row is not None
+        return out

@@ -2,13 +2,14 @@
 from __future__ import annotations
 
 import asyncio
+import sys
 from datetime import date, timedelta
 from pathlib import Path
 
+import orjson
 import pandas as pd
 import typer
 from rich.console import Console
-from rich.live import Live
 from rich.progress import (
     BarColumn,
     MofNCompleteColumn,
@@ -37,6 +38,19 @@ from .storage.db import Storage
 
 app = typer.Typer(help="네이버 API 기반 키워드 스카우트 (대량 수집 지원)")
 console = Console()
+
+
+def _emit_json(payload) -> None:
+    """Claude Code 등 에이전트가 파싱할 stdout JSON 출력."""
+    sys.stdout.buffer.write(orjson.dumps(payload, option=orjson.OPT_INDENT_2))
+    sys.stdout.buffer.write(b"\n")
+
+
+def _metric_dict(m: KeywordMetric) -> dict:
+    d = m.to_row()
+    if d["competition"] == float("inf"):
+        d["competition"] = None
+    return d
 
 
 def _render(metrics: list[KeywordMetric], title: str = "결과") -> None:
@@ -83,7 +97,10 @@ def _progress() -> Progress:
 
 
 @app.command()
-def search(keyword: str):
+def search(
+    keyword: str,
+    json_out: bool = typer.Option(False, "--json", help="JSON 출력 (에이전트용)"),
+):
     """단일 키워드 진단 (쇼핑 + 검색광고)."""
     s = get_settings()
     s.require_shopping()
@@ -108,7 +125,13 @@ def search(keyword: str):
         )
 
     metric = asyncio.run(run())
-    Storage(s.scout_db_path).save_metrics([metric])
+    storage = Storage(s.scout_db_path)
+    storage.save_metrics([metric])
+    storage.bump_quota("shopping", 1)
+    storage.bump_quota("searchad", 1)
+    if json_out:
+        _emit_json({"metric": _metric_dict(metric)})
+        return
     _render([metric], title=f"'{keyword}' 진단")
 
 
@@ -117,6 +140,7 @@ def expand(
     seed: str,
     depth: int = typer.Option(1, min=1, max=3),
     max_keywords: int = typer.Option(500, "--max"),
+    json_out: bool = typer.Option(False, "--json"),
 ):
     """연관 키워드 확장만 (쇼핑 total 미조회, 빠름)."""
     s = get_settings()
@@ -129,10 +153,27 @@ def expand(
             return await expand_keywords(ad, [seed], depth=depth, max_keywords=max_keywords)
 
     pool = asyncio.run(run())
+    ranked = sorted(pool.values(), key=lambda r: r.total_qc, reverse=True)
+    if json_out:
+        _emit_json({
+            "seed": seed,
+            "count": len(pool),
+            "keywords": [
+                {
+                    "keyword": r.keyword,
+                    "monthly_pc": r.monthly_pc_qc,
+                    "monthly_mobile": r.monthly_mobile_qc,
+                    "total_qc": r.total_qc,
+                    "comp_idx": r.comp_idx,
+                }
+                for r in ranked
+            ],
+        })
+        return
     table = Table(title=f"'{seed}' 연관 키워드 ({len(pool)}개)")
     for col in ["키워드", "PC검색", "모바일", "총검색", "경쟁정도"]:
         table.add_column(col, justify="right" if col != "키워드" else "left")
-    for rk in sorted(pool.values(), key=lambda r: r.total_qc, reverse=True)[:100]:
+    for rk in ranked[:100]:
         table.add_row(
             rk.keyword,
             f"{rk.monthly_pc_qc:,}",
@@ -232,6 +273,8 @@ def mine(
     out: Path = typer.Option(Path("gold.xlsx")),
     resume: bool = typer.Option(True, "--resume/--no-resume", help="체크포인트 재개"),
     ckpt: str | None = typer.Option(None, "--ckpt", help="체크포인트 파일명 고정"),
+    json_out: bool = typer.Option(False, "--json", help="결과 JSON 출력 (엑셀도 저장)"),
+    top_n: int = typer.Option(50, "--top", help="JSON/콘솔로 반환할 상위 N개"),
 ):
     """시드에서 황금키워드 채굴 (중급, 진행바 포함)."""
     s = get_settings()
@@ -244,8 +287,21 @@ def mine(
     metrics = asyncio.run(_run_mine(s, seeds, depth=depth, max_keywords=max_keywords, resume=resume, checkpoint_name=ckpt))
     gold = filter_golden(metrics, min_vol=min_vol, max_comp=max_comp, max_products=max_products or None)
     pd.DataFrame([m.to_row() for m in gold]).to_excel(out, index=False)
+    storage = Storage(s.scout_db_path)
+    storage.bump_quota("shopping", len(metrics))
+    storage.bump_quota("searchad", max(1, len(seeds) // 5 * depth))
+
+    if json_out:
+        _emit_json({
+            "collected": len(metrics),
+            "gold_total": len(gold),
+            "out": str(out),
+            "top": [_metric_dict(m) for m in gold[:top_n]],
+            "grade_counts": {g: sum(1 for m in metrics if m.grade == g) for g in "SABCD"},
+        })
+        return
     console.print(f"[green]황금키워드 {len(gold):,}개 → {out}[/]")
-    _render(gold[:30], title="상위 30개")
+    _render(gold[:top_n], title=f"상위 {top_n}개")
 
 
 @app.command("bulk-mine")
@@ -258,6 +314,8 @@ def bulk_mine(
     max_comp: float = typer.Option(1.5),
     chunk: int = typer.Option(1000, help="시드를 이 크기로 분할 처리"),
     resume: bool = typer.Option(True, "--resume/--no-resume"),
+    json_out: bool = typer.Option(False, "--json", help="요약 JSON 출력"),
+    top_n: int = typer.Option(50, "--top"),
 ):
     """초대량 시드(수천~수만) 분할 처리 + 재개 지원.
 
@@ -305,10 +363,20 @@ def bulk_mine(
     pd.DataFrame([m.to_row() for m in gold_all]).to_excel(
         out_dir / "gold_all.xlsx", index=False
     )
+    if json_out:
+        _emit_json({
+            "batches": len(batches),
+            "collected": len(all_metrics),
+            "gold_total": len(gold_all),
+            "out_dir": str(out_dir),
+            "top": [_metric_dict(m) for m in gold_all[:top_n]],
+            "grade_counts": {g: sum(1 for m in all_metrics if m.grade == g) for g in "SABCD"},
+        })
+        return
     console.print(
         f"[bold green]완료[/] · 수집 {len(all_metrics):,}개 · 황금 {len(gold_all):,}개 → {out_dir}"
     )
-    _render(gold_all[:50], title="전체 Top 50")
+    _render(gold_all[:top_n], title=f"전체 Top {top_n}")
 
 
 @app.command()
@@ -381,10 +449,14 @@ def top_from_db(
     min_vol: int = typer.Option(500),
     max_comp: float = typer.Option(1.0),
     limit: int = typer.Option(50),
+    json_out: bool = typer.Option(False, "--json"),
 ):
     """DB에 쌓인 스냅샷에서 황금키워드 TOP 조회."""
     s = get_settings()
     rows = Storage(s.scout_db_path).query_golden(min_vol=min_vol, max_comp=max_comp, limit=limit)
+    if json_out:
+        _emit_json({"count": len(rows), "rows": rows})
+        return
     table = Table(title=f"저장된 황금키워드 TOP {len(rows)}")
     for col in ["키워드", "상품수", "총검색", "경쟁강도", "점수", "등급", "수집시각"]:
         table.add_column(col)
@@ -401,6 +473,161 @@ def top_from_db(
             r["captured_at"],
         )
     console.print(table)
+
+
+@app.command()
+def query(
+    min_vol: int = typer.Option(None, "--min-vol"),
+    max_vol: int = typer.Option(None, "--max-vol"),
+    max_comp: float = typer.Option(None, "--max-comp"),
+    min_comp: float = typer.Option(None, "--min-comp"),
+    grade: list[str] = typer.Option([], "--grade", "-g", help="S A B 등 반복 지정"),
+    contains: str = typer.Option(None, "--contains", help="키워드 부분 일치"),
+    order: str = typer.Option("golden_score", "--order"),
+    limit: int = typer.Option(100, "--limit"),
+    json_out: bool = typer.Option(True, "--json/--no-json"),
+):
+    """DB에서 조건별로 키워드 조회 (Claude 기본 조회용, 디폴트 JSON)."""
+    s = get_settings()
+    rows = Storage(s.scout_db_path).query_keywords(
+        min_vol=min_vol,
+        max_vol=max_vol,
+        min_comp=min_comp,
+        max_comp=max_comp,
+        grades=list(grade) if grade else None,
+        contains=contains,
+        order_by=order,
+        limit=limit,
+    )
+    if json_out:
+        _emit_json({"count": len(rows), "rows": rows})
+        return
+    table = Table(title=f"조회 결과 {len(rows)}건")
+    for col in ["키워드", "상품수", "총검색", "경쟁강도", "점수", "등급"]:
+        table.add_column(col)
+    for r in rows:
+        comp = r["competition"]
+        table.add_row(
+            r["keyword"],
+            f"{r['total_products']:,}",
+            f"{r['total_qc']:,}",
+            f"{comp:.3f}" if comp is not None else "∞",
+            f"{r['golden_score']:,.1f}",
+            r["grade"],
+        )
+    console.print(table)
+
+
+@app.command()
+def summary(
+    json_out: bool = typer.Option(True, "--json/--no-json"),
+):
+    """DB 요약 + 오늘 API 호출량 (Claude 상태 점검용)."""
+    s = get_settings()
+    st = Storage(s.scout_db_path)
+    data = {
+        "db_path": str(s.scout_db_path),
+        "summary": st.summary(),
+        "quota_today": st.quota_today(),
+        "limits": {
+            "shopping_daily": 25000,
+            "rps_shopping": s.scout_rps_shopping,
+            "rps_searchad": s.scout_rps_searchad,
+        },
+    }
+    if json_out:
+        _emit_json(data)
+        return
+    console.print(data)
+
+
+@app.command()
+def estimate(
+    seed_count: int = typer.Argument(..., help="시드 키워드 개수"),
+    depth: int = typer.Option(2, min=1, max=3),
+    max_keywords: int = typer.Option(2000, "--max"),
+    json_out: bool = typer.Option(True, "--json/--no-json"),
+):
+    """bulk-mine 실행 전 호출량·소요시간 예측 (쿨타 초과 사전 차단)."""
+    s = get_settings()
+    ad_calls = max(1, (seed_count + 4) // 5) * depth
+    shop_calls = min(max_keywords, seed_count * 50 * depth)
+    est_seconds = max(
+        ad_calls / max(s.scout_rps_searchad, 0.1),
+        shop_calls / max(s.scout_rps_shopping, 0.1) / max(1, s.scout_concurrency // 4),
+    )
+    used = Storage(s.scout_db_path).quota_today()
+    shop_remaining = 25000 - used.get("shopping", 0)
+    warnings = []
+    if shop_calls > shop_remaining:
+        warnings.append(
+            f"쇼핑 API 잔여 {shop_remaining:,} < 예상 {shop_calls:,}. 한도 초과 위험."
+        )
+    if depth >= 3 and seed_count > 50:
+        warnings.append("depth=3 + 시드 많음 → 연관키워드 폭증 가능.")
+
+    payload = {
+        "seed_count": seed_count,
+        "depth": depth,
+        "max_keywords": max_keywords,
+        "estimated_calls": {"searchad": ad_calls, "shopping_max": shop_calls},
+        "estimated_seconds": round(est_seconds, 1),
+        "estimated_minutes": round(est_seconds / 60, 1),
+        "quota_today": used,
+        "shopping_remaining_today": shop_remaining,
+        "warnings": warnings,
+    }
+    if json_out:
+        _emit_json(payload)
+        return
+    console.print(payload)
+
+
+@app.command()
+def suggest(
+    category: str = typer.Option(None, "--category", "-c", help="카테고리명/코드"),
+    ttl_hours: int = typer.Option(24, help="이 시간 내 수집된 키워드는 제외"),
+    limit: int = typer.Option(10),
+    json_out: bool = typer.Option(True, "--json/--no-json"),
+):
+    """다음 시드 후보 제안. DB 커버리지 분석 기반.
+
+    전략: 아직 미수집이거나 오래된 카테고리 루트 키워드를 반환해서
+    Claude가 다음 단계 시드를 고르기 쉽게 함.
+    """
+    s = get_settings()
+    st = Storage(s.scout_db_path)
+    base_seeds = list(CATEGORIES.keys()) if not category else [category]
+    coverage = st.seed_coverage(base_seeds, ttl_hours=ttl_hours)
+    stale = [k for k, fresh in coverage.items() if not fresh]
+
+    # DB에서 가장 높은 경쟁강도 키워드 = 더 긴 꼬리로 쪼갤 필요
+    rows = st.query_keywords(min_comp=1.5, order_by="golden_score", limit=limit)
+    narrow_candidates = [r["keyword"] for r in rows]
+
+    payload = {
+        "stale_categories": stale[:limit],
+        "narrow_candidates": narrow_candidates,
+        "hint": (
+            "stale_categories 는 아직 최근 수집 안 된 카테고리. narrow_candidates 는 "
+            "경쟁강도가 높아 롱테일로 쪼개면 황금이 나올 가능성 있는 키워드."
+        ),
+    }
+    if json_out:
+        _emit_json(payload)
+        return
+    console.print(payload)
+
+
+@app.command()
+def seeds_write(
+    out: Path = typer.Argument(..., help="생성할 시드 파일 경로"),
+    seeds: list[str] = typer.Argument(..., help="공백 구분 시드들"),
+):
+    """Claude 가 생성한 시드를 파일로 기록 (후속 mine/bulk-mine 입력)."""
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("\n".join(seeds) + "\n", encoding="utf-8")
+    _emit_json({"out": str(out), "count": len(seeds)})
 
 
 if __name__ == "__main__":
