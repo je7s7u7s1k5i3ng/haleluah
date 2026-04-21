@@ -5,8 +5,9 @@ description = "Naver 쇼핑/검색광고/데이터랩 API를 활용한 키워드
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "httpx>=0.27",
+    "httpx[http2]>=0.27",
     "aiolimiter>=1.1",
+    "orjson>=3.10",
     "pydantic>=2.6",
     "pydantic-settings>=2.2",
     "python-dotenv>=1.0",
@@ -23,6 +24,9 @@ dev = [
     "pytest-asyncio>=0.23",
     "respx>=0.21",
     "ruff>=0.4",
+]
+build = [
+    "pyinstaller>=6.6",
 ]
 
 [project.scripts]

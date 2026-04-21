@@ -53,6 +53,8 @@ class Storage:
             conn.close()
 
     def save_metrics(self, metrics: list[KeywordMetric]) -> None:
+        if not metrics:
+            return
         now = datetime.utcnow().isoformat(timespec="seconds")
         rows = [
             (
@@ -70,10 +72,29 @@ class Storage:
             for m in metrics
         ]
         with self._conn() as c:
+            c.execute("PRAGMA journal_mode=WAL")
             c.executemany(
                 "INSERT OR REPLACE INTO keyword_snapshot VALUES (?,?,?,?,?,?,?,?,?,?)",
                 rows,
             )
+
+    def query_golden(
+        self,
+        *,
+        min_vol: int = 500,
+        max_comp: float = 1.0,
+        limit: int = 500,
+    ) -> list[dict]:
+        with self._conn() as c:
+            rows = c.execute(
+                """SELECT * FROM keyword_snapshot
+                   WHERE (monthly_pc + monthly_mobile) >= ?
+                     AND competition IS NOT NULL AND competition <= ?
+                   ORDER BY golden_score DESC, captured_at DESC
+                   LIMIT ?""",
+                (min_vol, max_comp, limit),
+            ).fetchall()
+        return [dict(r) for r in rows]
 
     def fresh_keyword(self, keyword: str, ttl_hours: int) -> dict | None:
         cutoff = (datetime.utcnow() - timedelta(hours=ttl_hours)).isoformat(

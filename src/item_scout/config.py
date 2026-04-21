@@ -14,11 +14,13 @@ class Settings(BaseSettings):
     searchad_secret_key: str = ""
     searchad_customer_id: str = ""
 
-    scout_concurrency: int = 10
+    scout_concurrency: int = 20
     scout_rps_shopping: float = 8.0
     scout_rps_searchad: float = 4.0
     scout_cache_ttl_hours: int = 24
     scout_db_path: Path = Field(default=Path("./data/scout.db"))
+    scout_checkpoint_dir: Path = Field(default=Path("./data/checkpoints"))
+    scout_http2: bool = True
 
     def require_shopping(self) -> None:
         if not self.naver_client_id or not self.naver_client_secret:

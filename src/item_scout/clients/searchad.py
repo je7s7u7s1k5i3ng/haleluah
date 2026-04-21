@@ -18,8 +18,8 @@ from dataclasses import dataclass
 from typing import Any
 
 import httpx
-from aiolimiter import AsyncLimiter
-from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
+
+from .http import AdaptiveLimiter, build_http_client, loads, request_with_backoff
 
 BASE_URL = "https://api.searchad.naver.com"
 
@@ -77,12 +77,13 @@ class SearchAdClient:
         customer_id: str,
         rps: float = 4.0,
         http: httpx.AsyncClient | None = None,
+        http2: bool = True,
     ):
         self._api_key = api_key
         self._secret_key = secret_key
         self._customer_id = customer_id
-        self._limiter = AsyncLimiter(max_rate=rps, time_period=1.0)
-        self._http = http or httpx.AsyncClient(base_url=BASE_URL, timeout=15.0)
+        self._limiter = AdaptiveLimiter(rps=rps)
+        self._http = http or build_http_client(base_url=BASE_URL, http2=http2)
         self._owns_http = http is None
 
     async def __aenter__(self) -> "SearchAdClient":
@@ -101,12 +102,6 @@ class SearchAdClient:
             "X-Signature": sign(ts, method, uri, self._secret_key),
         }
 
-    @retry(
-        stop=stop_after_attempt(4),
-        wait=wait_exponential(multiplier=0.5, min=0.5, max=8),
-        retry=retry_if_exception_type((httpx.TransportError, httpx.HTTPStatusError)),
-        reraise=True,
-    )
     async def keywordstool(
         self,
         hint_keywords: list[str],
@@ -114,20 +109,20 @@ class SearchAdClient:
         show_detail: bool = True,
         include_hint: bool = True,
     ) -> list[RelatedKeyword]:
-        """연관 키워드 + 월간 검색량 조회. hint_keywords 최대 5개."""
+        """연관 키워드 + 월간 검색량. hint_keywords 최대 5개."""
         if not hint_keywords:
             return []
         if len(hint_keywords) > 5:
             raise ValueError("hint_keywords 는 최대 5개까지 허용됩니다.")
-
         uri = "/keywordstool"
         params = {
             "hintKeywords": ",".join(hint_keywords),
             "showDetail": "1" if show_detail else "0",
             "includeHintKeywords": "1" if include_hint else "0",
         }
-        async with self._limiter:
-            r = await self._http.get(uri, headers=self._headers("GET", uri), params=params)
-            r.raise_for_status()
-        data = r.json()
+        r = await request_with_backoff(
+            self._http, self._limiter, "GET", uri,
+            headers=self._headers("GET", uri), params=params,
+        )
+        data = loads(r.content)
         return [RelatedKeyword.from_api(x) for x in data.get("keywordList", [])]

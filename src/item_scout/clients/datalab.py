@@ -9,8 +9,8 @@ from datetime import date
 from typing import Any
 
 import httpx
-from aiolimiter import AsyncLimiter
-from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
+
+from .http import AdaptiveLimiter, build_http_client, loads, request_with_backoff
 
 BASE_URL = "https://openapi.naver.com/v1/datalab/shopping"
 
@@ -19,6 +19,7 @@ BASE_URL = "https://openapi.naver.com/v1/datalab/shopping"
 class TrendPoint:
     period: str
     ratio: float
+    group: str | None = None
 
 
 @dataclass(slots=True)
@@ -35,14 +36,15 @@ class DataLabClient:
         client_secret: str,
         rps: float = 4.0,
         http: httpx.AsyncClient | None = None,
+        http2: bool = True,
     ):
         self._headers = {
             "X-Naver-Client-Id": client_id,
             "X-Naver-Client-Secret": client_secret,
             "Content-Type": "application/json",
         }
-        self._limiter = AsyncLimiter(max_rate=rps, time_period=1.0)
-        self._http = http or httpx.AsyncClient(base_url=BASE_URL, timeout=15.0)
+        self._limiter = AdaptiveLimiter(rps=rps)
+        self._http = http or build_http_client(base_url=BASE_URL, http2=http2)
         self._owns_http = http is None
 
     async def __aenter__(self) -> "DataLabClient":
@@ -52,12 +54,13 @@ class DataLabClient:
         if self._owns_http:
             await self._http.aclose()
 
-    @retry(
-        stop=stop_after_attempt(4),
-        wait=wait_exponential(multiplier=0.5, min=0.5, max=8),
-        retry=retry_if_exception_type((httpx.TransportError, httpx.HTTPStatusError)),
-        reraise=True,
-    )
+    async def _post(self, path: str, payload: dict[str, Any]) -> dict[str, Any]:
+        r = await request_with_backoff(
+            self._http, self._limiter, "POST", path,
+            headers=self._headers, json=payload,
+        )
+        return loads(r.content)
+
     async def category_keywords_trend(
         self,
         category: str,
@@ -69,7 +72,6 @@ class DataLabClient:
         ages: list[str] | None = None,
         gender: str | None = None,
     ) -> list[TrendResult]:
-        """카테고리 내 키워드 트렌드 비교."""
         payload: dict[str, Any] = {
             "startDate": start.isoformat(),
             "endDate": end.isoformat(),
@@ -83,23 +85,42 @@ class DataLabClient:
             payload["ages"] = ages
         if gender:
             payload["gender"] = gender
+        data = await self._post("/category/keywords", payload)
+        return [
+            TrendResult(
+                title=res.get("title", ""),
+                keywords=res.get("keywords", []),
+                data=[
+                    TrendPoint(period=p["period"], ratio=float(p["ratio"]))
+                    for p in res.get("data", [])
+                ],
+            )
+            for res in data.get("results", [])
+        ]
 
-        async with self._limiter:
-            r = await self._http.post(
-                "/category/keywords", headers=self._headers, json=payload
+    async def category_trend(
+        self,
+        categories: list[tuple[str, list[str]]],
+        start: date,
+        end: date,
+        time_unit: str = "month",
+    ) -> list[TrendResult]:
+        """카테고리(복수) 트렌드 비교."""
+        payload = {
+            "startDate": start.isoformat(),
+            "endDate": end.isoformat(),
+            "timeUnit": time_unit,
+            "category": [{"name": n, "param": p} for n, p in categories],
+        }
+        data = await self._post("/categories", payload)
+        return [
+            TrendResult(
+                title=res.get("title", ""),
+                keywords=res.get("keywords", []),
+                data=[
+                    TrendPoint(period=p["period"], ratio=float(p["ratio"]))
+                    for p in res.get("data", [])
+                ],
             )
-            r.raise_for_status()
-        data = r.json()
-        results = []
-        for res in data.get("results", []):
-            results.append(
-                TrendResult(
-                    title=res.get("title", ""),
-                    keywords=res.get("keywords", []),
-                    data=[
-                        TrendPoint(period=p["period"], ratio=float(p["ratio"]))
-                        for p in res.get("data", [])
-                    ],
-                )
-            )
-        return results
+            for res in data.get("results", [])
+        ]

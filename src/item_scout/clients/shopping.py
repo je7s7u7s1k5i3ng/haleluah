@@ -8,8 +8,8 @@ from dataclasses import dataclass
 from typing import Any
 
 import httpx
-from aiolimiter import AsyncLimiter
-from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
+
+from .http import AdaptiveLimiter, build_http_client, loads, request_with_backoff
 
 BASE_URL = "https://openapi.naver.com/v1/search/shop.json"
 
@@ -65,13 +65,14 @@ class ShoppingClient:
         client_secret: str,
         rps: float = 8.0,
         http: httpx.AsyncClient | None = None,
+        http2: bool = True,
     ):
         self._headers = {
             "X-Naver-Client-Id": client_id,
             "X-Naver-Client-Secret": client_secret,
         }
-        self._limiter = AsyncLimiter(max_rate=rps, time_period=1.0)
-        self._http = http or httpx.AsyncClient(timeout=10.0)
+        self._limiter = AdaptiveLimiter(rps=rps)
+        self._http = http or build_http_client(http2=http2)
         self._owns_http = http is None
 
     async def __aenter__(self) -> "ShoppingClient":
@@ -81,12 +82,6 @@ class ShoppingClient:
         if self._owns_http:
             await self._http.aclose()
 
-    @retry(
-        stop=stop_after_attempt(4),
-        wait=wait_exponential(multiplier=0.5, min=0.5, max=8),
-        retry=retry_if_exception_type((httpx.TransportError, httpx.HTTPStatusError)),
-        reraise=True,
-    )
     async def search(
         self,
         query: str,
@@ -95,12 +90,12 @@ class ShoppingClient:
         start: int = 1,
         sort: str = "sim",
     ) -> ShoppingSearchResult:
-        """키워드 검색. `total` 이 등록 상품수 지표."""
         params = {"query": query, "display": display, "start": start, "sort": sort}
-        async with self._limiter:
-            r = await self._http.get(BASE_URL, headers=self._headers, params=params)
-            r.raise_for_status()
-        data = r.json()
+        r = await request_with_backoff(
+            self._http, self._limiter, "GET", BASE_URL,
+            headers=self._headers, params=params,
+        )
+        data = loads(r.content)
         return ShoppingSearchResult(
             query=query,
             total=int(data.get("total", 0)),
@@ -108,12 +103,11 @@ class ShoppingClient:
         )
 
     async def total_only(self, query: str) -> int:
-        """대량 수집용: display=1 로 total 필드만 얻음."""
+        """대량 수집용: display=1 로 total 만."""
         res = await self.search(query, display=1)
         return res.total
 
     async def find_rank(self, query: str, product_id: str, max_pages: int = 10) -> int | None:
-        """특정 productId 가 검색결과 상위 몇 위인지. 없으면 None."""
         for page in range(max_pages):
             start = 1 + page * 100
             if start > 1000:
