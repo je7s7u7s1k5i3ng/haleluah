@@ -1,0 +1,66 @@
+# ===========================
+# 쇼츠 자동화 설정 파일
+# ===========================
+
+# LLM 설정 (대본 생성)
+llm:
+  provider: "anthropic"  # anthropic / openai
+  model: "claude-sonnet-4-6"
+  max_tokens: 1024
+
+# TTS 설정
+tts:
+  engine: "edge-tts"  # edge-tts (무료) / elevenlabs
+  voice: "ko-KR-SunHiNeural"  # 한국어 여성
+  rate: "+10%"
+  volume: "+0%"
+
+# 영상 설정
+video:
+  width: 1080
+  height: 1920
+  fps: 30
+  duration_max: 59  # 쇼츠 최대 60초
+  background_color: "#000000"
+
+# 자막 설정
+subtitle:
+  font_size: 60
+  font_color: "#FFFFFF"
+  stroke_color: "#000000"
+  stroke_width: 3
+  position: "center"  # top / center / bottom
+  max_chars_per_line: 15
+  font_path: "assets/fonts/NanumGothicBold.ttf"
+
+# YouTube 업로드 설정
+youtube:
+  category_id: "22"  # People & Blogs
+  privacy_status: "public"  # public / private / unlisted
+  default_tags:
+    - "shorts"
+    - "쇼츠"
+  made_for_kids: false
+
+# 배치 생산 설정
+batch:
+  daily_target: 100
+  parallel_workers: 4
+  retry_max: 3
+  output_dir: "output"
+
+# 콘텐츠 카테고리 (주제별 대본 생성)
+content:
+  categories:
+    - name: "동기부여"
+      prompt_template: "motivation"
+      daily_count: 25
+    - name: "재미있는사실"
+      prompt_template: "fun_facts"
+      daily_count: 25
+    - name: "생활꿀팁"
+      prompt_template: "life_tips"
+      daily_count: 25
+    - name: "역사이야기"
+      prompt_template: "history"
+      daily_count: 25

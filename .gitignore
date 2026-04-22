@@ -1,0 +1,40 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Output
+output/
+*.mp4
+*.mp3
+*.wav
+
+# Assets (user-provided, large files)
+assets/backgrounds/*.mp4
+assets/music/*.mp3
+
+# Config secrets
+config/secrets.yaml
+config/client_secret.json
+config/token.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
