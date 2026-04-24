@@ -374,7 +374,219 @@ class QwenProcessor:
         return processed
 
 
-class RealTimeCollector:
+class AutonomousAgent:
+    """Qwen tool calling으로 스스로 검색 전략을 세우고 개선하는 자율 에이전트"""
+
+    TOOLS = [
+        {
+            "type": "function",
+            "function": {
+                "name": "search_news",
+                "description": "Google News RSS에서 뉴스 기사를 검색합니다.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "검색 키워드 (한국어 또는 영어)",
+                        },
+                        "lang": {
+                            "type": "string",
+                            "enum": ["ko", "en"],
+                            "description": "검색 언어 (기본: ko)",
+                        },
+                    },
+                    "required": ["query"],
+                },
+            },
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "search_papers",
+                "description": "arXiv에서 학술 논문을 검색합니다.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "검색 키워드 (영어 권장)",
+                        },
+                        "max_results": {
+                            "type": "integer",
+                            "description": "최대 결과 수 (기본: 5)",
+                        },
+                    },
+                    "required": ["query"],
+                },
+            },
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "finish",
+                "description": "수집 완료. 최종 보고서를 저장하고 종료합니다.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "summary": {
+                            "type": "string",
+                            "description": "수집 결과 한국어 요약 보고서",
+                        }
+                    },
+                    "required": ["summary"],
+                },
+            },
+        },
+    ]
+
+    def __init__(self, qwen: "QwenProcessor", news_collector: NewsCollector,
+                 paper_collector: PaperCollector, output_dir: str = "collected_data"):
+        self.qwen = qwen
+        self.news_collector = news_collector
+        self.paper_collector = paper_collector
+        self.output_dir = Path(output_dir)
+        self.output_dir.mkdir(exist_ok=True)
+        self._articles: list = []
+        self._papers: list = []
+        self._seen_links: set = set()
+
+    def _call_tool(self, name: str, args: dict) -> str:
+        """도구 실행 후 에이전트에게 돌려줄 텍스트 결과 반환"""
+        if name == "search_news":
+            query = args["query"]
+            lang = args.get("lang", "ko")
+            items = self.news_collector.collect_google_news_rss(query, lang=lang)
+            new = [a for a in items if a.get("link") not in self._seen_links]
+            for a in new:
+                self._seen_links.add(a.get("link", ""))
+            self._articles.extend(new)
+            if not new:
+                return f"'{query}' 검색: 새 기사 없음"
+            titles = "\n".join(f"- {a['title']}" for a in new[:10])
+            return f"'{query}' 검색 결과 {len(new)}건:\n{titles}"
+
+        if name == "search_papers":
+            query = args["query"]
+            max_r = args.get("max_results", 5)
+            items = self.paper_collector.collect_arxiv(query, max_results=max_r)
+            new = [p for p in items if p.get("link") not in self._seen_links]
+            for p in new:
+                self._seen_links.add(p.get("link", ""))
+            self._papers.extend(new)
+            if not new:
+                return f"'{query}' 논문 검색: 새 논문 없음"
+            titles = "\n".join(f"- {p['title']}" for p in new[:5])
+            return f"'{query}' 논문 {len(new)}건:\n{titles}"
+
+        if name == "finish":
+            return args.get("summary", "")
+
+        return f"알 수 없는 도구: {name}"
+
+    def run(self, goal: str, max_steps: int = 15) -> dict:
+        """
+        목표를 주면 Qwen이 스스로 검색 전략을 세워 수집합니다.
+
+        Args:
+            goal: 수집 목표 (예: "최신 AI 반도체 뉴스와 논문 수집")
+            max_steps: 최대 실행 단계 (무한 루프 방지)
+
+        Returns:
+            {"articles": [...], "papers": [...], "summary": "..."}
+        """
+        print(f"\n{'='*60}")
+        print(f"  자율 에이전트 시작: {goal}")
+        print(f"{'='*60}\n")
+
+        messages = [
+            {
+                "role": "system",
+                "content": (
+                    "당신은 뉴스와 논문을 수집하는 자율 에이전트입니다. "
+                    "주어진 목표를 위해 search_news와 search_papers 도구로 관련 정보를 수집하세요. "
+                    "검색 결과를 보고 더 구체적인 키워드로 추가 검색을 반복하며 정보를 확장하세요. "
+                    "충분한 정보가 모이면 finish를 호출해 한국어 요약 보고서를 작성하세요."
+                ),
+            },
+            {"role": "user", "content": f"목표: {goal}"},
+        ]
+
+        final_summary = ""
+
+        for step in range(max_steps):
+            print(f"[Agent 스텝 {step + 1}/{max_steps}]")
+            try:
+                resp = self.qwen.client.chat.completions.create(
+                    model=self.qwen.model,
+                    messages=messages,
+                    tools=self.TOOLS,
+                    tool_choice="auto",
+                    max_tokens=1024,
+                    temperature=0.3,
+                )
+            except Exception as e:
+                print(f"[Agent] API 오류: {e}")
+                break
+
+            msg = resp.choices[0].message
+            messages.append(msg)
+
+            if not msg.tool_calls:
+                final_summary = msg.content or ""
+                print(f"[Agent] 완료\n{final_summary}")
+                break
+
+            done = False
+            for tc in msg.tool_calls:
+                fn = tc.function.name
+                try:
+                    args = json.loads(tc.function.arguments)
+                except json.JSONDecodeError:
+                    args = {}
+
+                print(f"  -> {fn}({args})")
+                result = self._call_tool(fn, args)
+
+                messages.append({
+                    "role": "tool",
+                    "content": result,
+                    "tool_call_id": tc.id,
+                })
+
+                if fn == "finish":
+                    final_summary = args.get("summary", "")
+                    done = True
+
+            if done:
+                print("\n[Agent] 수집 완료!")
+                break
+
+        self._save_results(final_summary)
+        return {"articles": self._articles, "papers": self._papers, "summary": final_summary}
+
+    def _save_results(self, summary: str) -> None:
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        if self._articles:
+            p = self.output_dir / f"agent_news_{ts}.json"
+            p.write_text(
+                json.dumps(self._articles, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+            print(f"  뉴스 저장: {p} ({len(self._articles)}건)")
+        if self._papers:
+            p = self.output_dir / f"agent_papers_{ts}.json"
+            p.write_text(
+                json.dumps(self._papers, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+            print(f"  논문 저장: {p} ({len(self._papers)}건)")
+        if summary:
+            p = self.output_dir / f"agent_report_{ts}.txt"
+            p.write_text(summary, encoding="utf-8")
+            print(f"  보고서 저장: {p}")
+            print(f"\n{'='*60}\n  최종 보고서:\n{'='*60}\n{summary}")
+
+
+
     """실시간 통합 수집기"""
 
     def __init__(self, newsapi_key=None, output_dir="collected_data",
@@ -538,43 +750,50 @@ class RealTimeCollector:
 
 def main():
     """사용 예시"""
-    # --- 설정 ---
-    NEWS_QUERIES = ["인공지능", "AI"]          # 뉴스 검색 키워드
-    PAPER_QUERIES = ["artificial intelligence", "large language model"]  # 논문 검색 키워드
-    NEWS_CATEGORIES = ["주요뉴스", "기술"]     # 한국 뉴스 카테고리
-    NEWSAPI_KEY = None                         # (선택) https://newsapi.org 에서 무료 발급
-    INTERVAL_MIN = 30                          # 수집 주기 (분)
-
-    # Qwen 설정 (선택): DASHSCOPE_API_KEY 환경변수 또는 아래에 직접 입력
-    # 모델 선택: "qwen-turbo" (빠름/저렴) | "qwen-plus" (균형) | "qwen-max" (고성능)
-    QWEN_API_KEY = os.environ.get("DASHSCOPE_API_KEY")  # 또는 직접 문자열 입력
+    NEWSAPI_KEY = None
+    QWEN_API_KEY = os.environ.get("DASHSCOPE_API_KEY")
+    # 모델: "qwen-turbo" (빠름/저렴) | "qwen-plus" (균형) | "qwen-max" (고성능)
     QWEN_MODEL = "qwen-plus"
 
-    collector = RealTimeCollector(
-        newsapi_key=NEWSAPI_KEY,
-        output_dir="collected_data",
-        qwen_api_key=QWEN_API_KEY,
-        qwen_model=QWEN_MODEL,
-    )
+    # ── 모드 선택 ──────────────────────────────────────────
+    MODE = "agent"   # "agent" | "scheduled"
+    # ──────────────────────────────────────────────────────
 
-    # 1회 수집 (Qwen 한국어 처리 포함)
-    # results = collector.collect_all(
-    #     NEWS_QUERIES, PAPER_QUERIES, NEWS_CATEGORIES,
-    #     qwen_summarize=True,   # 한국어 요약 추가
-    #     qwen_categorize=True,  # 카테고리 자동 분류
-    #     qwen_translate=True,   # 영어 제목 한국어 번역
-    # )
+    if MODE == "agent":
+        # 자율 에이전트: 목표만 주면 Qwen이 스스로 검색 전략 수립 및 반복 검색
+        if not QWEN_API_KEY:
+            print("DASHSCOPE_API_KEY 환경변수를 설정하세요.")
+            return
 
-    # 실시간 주기적 수집
-    collector.start_scheduled(
-        news_queries=NEWS_QUERIES,
-        paper_queries=PAPER_QUERIES,
-        news_categories=NEWS_CATEGORIES,
-        interval_minutes=INTERVAL_MIN,
-        qwen_summarize=True,   # 한국어 요약
-        qwen_categorize=True,  # 카테고리 분류
-        qwen_translate=True,   # 영어 제목 번역
-    )
+        qwen = QwenProcessor(api_key=QWEN_API_KEY, model=QWEN_MODEL)
+        agent = AutonomousAgent(
+            qwen=qwen,
+            news_collector=NewsCollector(newsapi_key=NEWSAPI_KEY),
+            paper_collector=PaperCollector(),
+            output_dir="collected_data",
+        )
+        agent.run(
+            goal="최신 AI 반도체 및 거대언어모델 뉴스와 논문을 수집하고 한국어로 요약하세요.",
+            max_steps=15,
+        )
+
+    elif MODE == "scheduled":
+        # 전통적인 스케줄 수집 (Qwen 한국어 후처리 포함)
+        collector = RealTimeCollector(
+            newsapi_key=NEWSAPI_KEY,
+            output_dir="collected_data",
+            qwen_api_key=QWEN_API_KEY,
+            qwen_model=QWEN_MODEL,
+        )
+        collector.start_scheduled(
+            news_queries=["인공지능", "AI"],
+            paper_queries=["artificial intelligence", "large language model"],
+            news_categories=["주요뉴스", "기술"],
+            interval_minutes=30,
+            qwen_summarize=True,
+            qwen_categorize=True,
+            qwen_translate=True,
+        )
 
 
 if __name__ == "__main__":
