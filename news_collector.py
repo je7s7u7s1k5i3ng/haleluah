@@ -6,7 +6,7 @@
 지원 소스:
 - 뉴스: NewsAPI, Google News RSS, Naver News RSS
 - 논문: arXiv API, CrossRef API
-- AI 처리: Qwen (한국어 요약, 분류, 번역)
+- AI 처리: Claude (한국어 요약, 분류, 번역)
 """
 
 import json
@@ -37,7 +37,6 @@ class NewsCollector:
         try:
             return ET.fromstring(content)
         except ET.ParseError:
-            # BOM 또는 잘못된 헤더 제거 후 UTF-8로 재시도
             text = content.decode("utf-8", errors="replace")
             text = text.lstrip("﻿")
             return ET.fromstring(text.encode("utf-8"))
@@ -245,56 +244,32 @@ class PaperCollector:
         return papers
 
 
-class QwenProcessor:
-    """Qwen LLM을 활용한 한국어 텍스트 처리 (요약, 분류, 번역)"""
+class ClaudeProcessor:
+    """Claude LLM을 활용한 한국어 텍스트 처리 (요약, 분류, 번역)"""
 
     CATEGORIES = ["정치", "경제", "사회", "기술", "문화", "스포츠", "국제", "기타"]
 
-    def __init__(self, api_key=None, model="qwen-plus",
-                 base_url="https://dashscope.aliyuncs.com/compatible-mode/v1"):
-        """
-        Args:
-            api_key: DashScope API 키. 없으면 DASHSCOPE_API_KEY 환경변수를 사용.
-            model: 사용할 Qwen 모델 ("qwen-turbo" / "qwen-plus" / "qwen-max")
-            base_url: OpenAI 호환 엔드포인트
-        """
-        try:
-            from openai import OpenAI
-        except ImportError as exc:
-            raise ImportError(
-                "Qwen 사용을 위해 'openai' 패키지가 필요합니다: pip install openai"
-            ) from exc
-
-        resolved_key = api_key or os.environ.get("DASHSCOPE_API_KEY")
-        if not resolved_key:
-            raise ValueError(
-                "Qwen API 키가 필요합니다. "
-                "DASHSCOPE_API_KEY 환경변수를 설정하거나 api_key 인자를 전달하세요."
-            )
-
+    def __init__(self, api_key=None, model="claude-opus-4-8"):
+        import anthropic
         self.model = model
-        self.client = OpenAI(api_key=resolved_key, base_url=base_url)
-
-    def _chat(self, system: str, user: str, max_tokens: int = 512,
-              temperature: float = 0.3) -> str:
-        """공통 채팅 호출 (UTF-8 응답 보장)"""
-        response = self.client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-            max_tokens=max_tokens,
-            temperature=temperature,
+        self.client = anthropic.Anthropic(
+            api_key=api_key or os.environ.get("ANTHROPIC_API_KEY")
         )
-        # content는 이미 str이지만 bytes로 돌아오는 경우 대비
-        content = response.choices[0].message.content or ""
-        if isinstance(content, bytes):
-            content = content.decode("utf-8", errors="replace")
-        return content.strip()
+
+    def _chat(self, system: str, user: str, max_tokens: int = 512) -> str:
+        response = self.client.messages.create(
+            model=self.model,
+            max_tokens=max_tokens,
+            thinking={"type": "adaptive"},
+            system=system,
+            messages=[{"role": "user", "content": user}],
+        )
+        for block in response.content:
+            if block.type == "text":
+                return block.text.strip()
+        return ""
 
     def summarize(self, text: str, max_chars: int = 150) -> str:
-        """한국어 텍스트 요약"""
         if not text or not text.strip():
             return ""
         try:
@@ -304,11 +279,10 @@ class QwenProcessor:
                 max_tokens=300,
             )
         except Exception as e:
-            print(f"[Qwen] 요약 오류: {e}")
+            print(f"[Claude] 요약 오류: {e}")
             return text[:max_chars]
 
     def categorize(self, title: str, description: str = "") -> str:
-        """한국어 뉴스 카테고리 분류"""
         body = f"제목: {title}"
         if description:
             body += f"\n내용: {description[:300]}"
@@ -320,16 +294,13 @@ class QwenProcessor:
                 ),
                 user=body,
                 max_tokens=10,
-                temperature=0.0,
             )
-            # 응답이 목록에 없으면 기타 반환
             return result if result in self.CATEGORIES else "기타"
         except Exception as e:
-            print(f"[Qwen] 분류 오류: {e}")
+            print(f"[Claude] 분류 오류: {e}")
             return "기타"
 
     def translate_to_korean(self, text: str) -> str:
-        """영어 → 한국어 번역"""
         if not text or not text.strip():
             return ""
         try:
@@ -339,7 +310,7 @@ class QwenProcessor:
                 max_tokens=500,
             )
         except Exception as e:
-            print(f"[Qwen] 번역 오류: {e}")
+            print(f"[Claude] 번역 오류: {e}")
             return text
 
     @staticmethod
@@ -349,11 +320,10 @@ class QwenProcessor:
     def process_articles(self, articles: list, summarize: bool = True,
                          categorize: bool = False,
                          translate_titles: bool = False) -> list:
-        """뉴스 기사 목록에 Qwen 처리 결과 추가"""
         processed = []
         total = len(articles)
         for i, article in enumerate(articles, 1):
-            print(f"  [Qwen] {i}/{total}: {article.get('title', '')[:40]}...")
+            print(f"  [Claude] {i}/{total}: {article.get('title', '')[:40]}...")
             item = article.copy()
 
             desc = item.get("description", "")
@@ -369,80 +339,71 @@ class QwenProcessor:
                 item["title_ko"] = self.translate_to_korean(title)
 
             processed.append(item)
-            time.sleep(0.5)  # Rate limit 준수
+            time.sleep(0.3)
 
         return processed
 
 
 class AutonomousAgent:
-    """Qwen tool calling으로 스스로 검색 전략을 세우고 개선하는 자율 에이전트"""
+    """Claude tool calling으로 스스로 검색 전략을 세우고 개선하는 자율 에이전트"""
 
     TOOLS = [
         {
-            "type": "function",
-            "function": {
-                "name": "search_news",
-                "description": "Google News RSS에서 뉴스 기사를 검색합니다.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "query": {
-                            "type": "string",
-                            "description": "검색 키워드 (한국어 또는 영어)",
-                        },
-                        "lang": {
-                            "type": "string",
-                            "enum": ["ko", "en"],
-                            "description": "검색 언어 (기본: ko)",
-                        },
+            "name": "search_news",
+            "description": "Google News RSS에서 뉴스 기사를 검색합니다.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "검색 키워드 (한국어 또는 영어)",
                     },
-                    "required": ["query"],
+                    "lang": {
+                        "type": "string",
+                        "enum": ["ko", "en"],
+                        "description": "검색 언어 (기본: ko)",
+                    },
                 },
+                "required": ["query"],
             },
         },
         {
-            "type": "function",
-            "function": {
-                "name": "search_papers",
-                "description": "arXiv에서 학술 논문을 검색합니다.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "query": {
-                            "type": "string",
-                            "description": "검색 키워드 (영어 권장)",
-                        },
-                        "max_results": {
-                            "type": "integer",
-                            "description": "최대 결과 수 (기본: 5)",
-                        },
+            "name": "search_papers",
+            "description": "arXiv에서 학술 논문을 검색합니다.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "검색 키워드 (영어 권장)",
                     },
-                    "required": ["query"],
+                    "max_results": {
+                        "type": "integer",
+                        "description": "최대 결과 수 (기본: 5)",
+                    },
                 },
+                "required": ["query"],
             },
         },
         {
-            "type": "function",
-            "function": {
-                "name": "finish",
-                "description": "수집 완료. 최종 보고서를 저장하고 종료합니다.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "summary": {
-                            "type": "string",
-                            "description": "수집 결과 한국어 요약 보고서",
-                        }
-                    },
-                    "required": ["summary"],
+            "name": "finish",
+            "description": "수집 완료. 최종 보고서를 저장하고 종료합니다.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "summary": {
+                        "type": "string",
+                        "description": "수집 결과 한국어 요약 보고서",
+                    }
                 },
+                "required": ["summary"],
             },
         },
     ]
 
-    def __init__(self, qwen: "QwenProcessor", news_collector: NewsCollector,
+    def __init__(self, claude: ClaudeProcessor, news_collector: NewsCollector,
                  paper_collector: PaperCollector, output_dir: str = "collected_data"):
-        self.qwen = qwen
+        self.claude = claude
         self.news_collector = news_collector
         self.paper_collector = paper_collector
         self.output_dir = Path(output_dir)
@@ -452,7 +413,6 @@ class AutonomousAgent:
         self._seen_links: set = set()
 
     def _call_tool(self, name: str, args: dict) -> str:
-        """도구 실행 후 에이전트에게 돌려줄 텍스트 결과 반환"""
         if name == "search_news":
             query = args["query"]
             lang = args.get("lang", "ko")
@@ -486,77 +446,74 @@ class AutonomousAgent:
 
     def run(self, goal: str, max_steps: int = 15) -> dict:
         """
-        목표를 주면 Qwen이 스스로 검색 전략을 세워 수집합니다.
+        목표를 주면 Claude가 스스로 검색 전략을 세워 수집합니다.
 
         Args:
             goal: 수집 목표 (예: "최신 AI 반도체 뉴스와 논문 수집")
             max_steps: 최대 실행 단계 (무한 루프 방지)
-
-        Returns:
-            {"articles": [...], "papers": [...], "summary": "..."}
         """
+        import anthropic
+
         print(f"\n{'='*60}")
         print(f"  자율 에이전트 시작: {goal}")
         print(f"{'='*60}\n")
 
-        messages = [
-            {
-                "role": "system",
-                "content": (
-                    "당신은 뉴스와 논문을 수집하는 자율 에이전트입니다. "
-                    "주어진 목표를 위해 search_news와 search_papers 도구로 관련 정보를 수집하세요. "
-                    "검색 결과를 보고 더 구체적인 키워드로 추가 검색을 반복하며 정보를 확장하세요. "
-                    "충분한 정보가 모이면 finish를 호출해 한국어 요약 보고서를 작성하세요."
-                ),
-            },
-            {"role": "user", "content": f"목표: {goal}"},
-        ]
+        system = (
+            "당신은 뉴스와 논문을 수집하는 자율 에이전트입니다. "
+            "주어진 목표를 위해 search_news와 search_papers 도구로 관련 정보를 수집하세요. "
+            "검색 결과를 보고 더 구체적인 키워드로 추가 검색을 반복하며 정보를 확장하세요. "
+            "충분한 정보가 모이면 finish를 호출해 한국어 요약 보고서를 작성하세요."
+        )
 
+        messages = [{"role": "user", "content": f"목표: {goal}"}]
         final_summary = ""
 
         for step in range(max_steps):
             print(f"[Agent 스텝 {step + 1}/{max_steps}]")
             try:
-                resp = self.qwen.client.chat.completions.create(
-                    model=self.qwen.model,
-                    messages=messages,
+                response = self.claude.client.messages.create(
+                    model=self.claude.model,
+                    max_tokens=4096,
+                    thinking={"type": "adaptive"},
+                    system=system,
                     tools=self.TOOLS,
-                    tool_choice="auto",
-                    max_tokens=1024,
-                    temperature=0.3,
+                    messages=messages,
                 )
             except Exception as e:
                 print(f"[Agent] API 오류: {e}")
                 break
 
-            msg = resp.choices[0].message
-            messages.append(msg)
+            # 응답을 메시지 히스토리에 추가
+            messages.append({"role": "assistant", "content": response.content})
 
-            if not msg.tool_calls:
-                final_summary = msg.content or ""
-                print(f"[Agent] 완료\n{final_summary}")
+            if response.stop_reason != "tool_use":
+                for block in response.content:
+                    if block.type == "text":
+                        final_summary = block.text
+                        print(f"[Agent] 완료\n{final_summary}")
                 break
 
+            # tool_use 블록 처리
+            tool_results = []
             done = False
-            for tc in msg.tool_calls:
-                fn = tc.function.name
-                try:
-                    args = json.loads(tc.function.arguments)
-                except json.JSONDecodeError:
-                    args = {}
+            for block in response.content:
+                if block.type != "tool_use":
+                    continue
 
-                print(f"  -> {fn}({args})")
-                result = self._call_tool(fn, args)
+                print(f"  -> {block.name}({block.input})")
+                result = self._call_tool(block.name, block.input)
 
-                messages.append({
-                    "role": "tool",
+                tool_results.append({
+                    "type": "tool_result",
+                    "tool_use_id": block.id,
                     "content": result,
-                    "tool_call_id": tc.id,
                 })
 
-                if fn == "finish":
-                    final_summary = args.get("summary", "")
+                if block.name == "finish":
+                    final_summary = block.input.get("summary", "")
                     done = True
+
+            messages.append({"role": "user", "content": tool_results})
 
             if done:
                 print("\n[Agent] 수집 완료!")
@@ -586,29 +543,27 @@ class AutonomousAgent:
             print(f"\n{'='*60}\n  최종 보고서:\n{'='*60}\n{summary}")
 
 
-
+class RealTimeCollector:
     """실시간 통합 수집기"""
 
     def __init__(self, newsapi_key=None, output_dir="collected_data",
-                 qwen_api_key=None, qwen_model="qwen-plus"):
+                 claude_api_key=None, claude_model="claude-opus-4-8"):
         self.news_collector = NewsCollector(newsapi_key=newsapi_key)
         self.paper_collector = PaperCollector()
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(exist_ok=True)
-        self.collected_links = set()  # 중복 방지
+        self.collected_links = set()
 
-        # Qwen 프로세서 (API 키가 있을 때만 초기화)
-        self.qwen: QwenProcessor | None = None
-        resolved_key = qwen_api_key or os.environ.get("DASHSCOPE_API_KEY")
+        self.claude: ClaudeProcessor | None = None
+        resolved_key = claude_api_key or os.environ.get("ANTHROPIC_API_KEY")
         if resolved_key:
             try:
-                self.qwen = QwenProcessor(api_key=resolved_key, model=qwen_model)
-                print(f"[Qwen] 초기화 완료 (모델: {qwen_model})")
+                self.claude = ClaudeProcessor(api_key=resolved_key, model=claude_model)
+                print(f"[Claude] 초기화 완료 (모델: {claude_model})")
             except Exception as e:
-                print(f"[Qwen] 초기화 실패: {e}")
+                print(f"[Claude] 초기화 실패: {e}")
 
     def _save_results(self, results, prefix):
-        """수집 결과를 JSON 파일로 저장"""
         if not results:
             return None
 
@@ -622,7 +577,6 @@ class AutonomousAgent:
         return filename
 
     def _deduplicate(self, items):
-        """중복 제거"""
         unique = []
         for item in items:
             link = item.get("link", "")
@@ -632,17 +586,8 @@ class AutonomousAgent:
         return unique
 
     def collect_news(self, queries, categories=None,
-                     qwen_summarize=False, qwen_categorize=False,
-                     qwen_translate=False):
-        """뉴스 수집 (여러 키워드)
-
-        Args:
-            queries: 검색 키워드 목록
-            categories: 한국 뉴스 카테고리 목록
-            qwen_summarize: Qwen으로 한국어 요약 추가
-            qwen_categorize: Qwen으로 카테고리 자동 분류
-            qwen_translate: Qwen으로 영어 제목 한국어 번역
-        """
+                     claude_summarize=False, claude_categorize=False,
+                     claude_translate=False):
         all_articles = []
 
         for query in queries:
@@ -656,13 +601,13 @@ class AutonomousAgent:
 
         unique = self._deduplicate(all_articles)
 
-        if unique and self.qwen and (qwen_summarize or qwen_categorize or qwen_translate):
-            print(f"\n[Qwen] {len(unique)}건 기사 한국어 처리 중...")
-            unique = self.qwen.process_articles(
+        if unique and self.claude and (claude_summarize or claude_categorize or claude_translate):
+            print(f"\n[Claude] {len(unique)}건 기사 한국어 처리 중...")
+            unique = self.claude.process_articles(
                 unique,
-                summarize=qwen_summarize,
-                categorize=qwen_categorize,
-                translate_titles=qwen_translate,
+                summarize=claude_summarize,
+                categorize=claude_categorize,
+                translate_titles=claude_translate,
             )
 
         if unique:
@@ -670,13 +615,12 @@ class AutonomousAgent:
         return unique
 
     def collect_papers(self, queries):
-        """논문 수집 (여러 키워드)"""
         all_papers = []
 
         for query in queries:
             all_papers.extend(self.paper_collector.collect_arxiv(query))
             all_papers.extend(self.paper_collector.collect_crossref(query))
-            time.sleep(1)  # API rate limit 준수
+            time.sleep(1)
 
         unique = self._deduplicate(all_papers)
         if unique:
@@ -684,9 +628,8 @@ class AutonomousAgent:
         return unique
 
     def collect_all(self, news_queries, paper_queries, news_categories=None,
-                    qwen_summarize=False, qwen_categorize=False,
-                    qwen_translate=False):
-        """뉴스 + 논문 동시 수집"""
+                    claude_summarize=False, claude_categorize=False,
+                    claude_translate=False):
         print(f"\n{'='*60}")
         print(f"  수집 시작: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"{'='*60}")
@@ -694,9 +637,9 @@ class AutonomousAgent:
         print("\n[뉴스 수집 중...]")
         news = self.collect_news(
             news_queries, news_categories,
-            qwen_summarize=qwen_summarize,
-            qwen_categorize=qwen_categorize,
-            qwen_translate=qwen_translate,
+            claude_summarize=claude_summarize,
+            claude_categorize=claude_categorize,
+            claude_translate=claude_translate,
         )
 
         print("\n[논문 수집 중...]")
@@ -710,34 +653,31 @@ class AutonomousAgent:
 
     def start_scheduled(self, news_queries, paper_queries,
                         news_categories=None, interval_minutes=30,
-                        qwen_summarize=False, qwen_categorize=False,
-                        qwen_translate=False):
-        """스케줄 기반 주기적 수집"""
+                        claude_summarize=False, claude_categorize=False,
+                        claude_translate=False):
         print(f"실시간 수집기 시작! (수집 주기: {interval_minutes}분)")
         print(f"뉴스 키워드: {news_queries}")
         print(f"논문 키워드: {paper_queries}")
-        if self.qwen:
+        if self.claude:
             flags = [k for k, v in {
-                "요약": qwen_summarize,
-                "분류": qwen_categorize,
-                "번역": qwen_translate,
+                "요약": claude_summarize,
+                "분류": claude_categorize,
+                "번역": claude_translate,
             }.items() if v]
-            print(f"Qwen 처리: {', '.join(flags) if flags else '비활성화'}")
+            print(f"Claude 처리: {', '.join(flags) if flags else '비활성화'}")
         print("중지하려면 Ctrl+C를 누르세요.\n")
 
-        # 즉시 1회 수집
         self.collect_all(
             news_queries, paper_queries, news_categories,
-            qwen_summarize=qwen_summarize,
-            qwen_categorize=qwen_categorize,
-            qwen_translate=qwen_translate,
+            claude_summarize=claude_summarize,
+            claude_categorize=claude_categorize,
+            claude_translate=claude_translate,
         )
 
-        # 주기적 수집 스케줄 등록
         schedule.every(interval_minutes).minutes.do(
             self.collect_all,
             news_queries, paper_queries, news_categories,
-            qwen_summarize, qwen_categorize, qwen_translate,
+            claude_summarize, claude_categorize, claude_translate,
         )
 
         try:
@@ -751,23 +691,21 @@ class AutonomousAgent:
 def main():
     """사용 예시"""
     NEWSAPI_KEY = None
-    QWEN_API_KEY = os.environ.get("DASHSCOPE_API_KEY")
-    # 모델: "qwen-turbo" (빠름/저렴) | "qwen-plus" (균형) | "qwen-max" (고성능)
-    QWEN_MODEL = "qwen-plus"
+    ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
+    CLAUDE_MODEL = "claude-opus-4-8"
 
     # ── 모드 선택 ──────────────────────────────────────────
     MODE = "agent"   # "agent" | "scheduled"
     # ──────────────────────────────────────────────────────
 
     if MODE == "agent":
-        # 자율 에이전트: 목표만 주면 Qwen이 스스로 검색 전략 수립 및 반복 검색
-        if not QWEN_API_KEY:
-            print("DASHSCOPE_API_KEY 환경변수를 설정하세요.")
+        if not ANTHROPIC_API_KEY:
+            print("ANTHROPIC_API_KEY 환경변수를 설정하세요.")
             return
 
-        qwen = QwenProcessor(api_key=QWEN_API_KEY, model=QWEN_MODEL)
+        claude = ClaudeProcessor(api_key=ANTHROPIC_API_KEY, model=CLAUDE_MODEL)
         agent = AutonomousAgent(
-            qwen=qwen,
+            claude=claude,
             news_collector=NewsCollector(newsapi_key=NEWSAPI_KEY),
             paper_collector=PaperCollector(),
             output_dir="collected_data",
@@ -778,21 +716,20 @@ def main():
         )
 
     elif MODE == "scheduled":
-        # 전통적인 스케줄 수집 (Qwen 한국어 후처리 포함)
         collector = RealTimeCollector(
             newsapi_key=NEWSAPI_KEY,
             output_dir="collected_data",
-            qwen_api_key=QWEN_API_KEY,
-            qwen_model=QWEN_MODEL,
+            claude_api_key=ANTHROPIC_API_KEY,
+            claude_model=CLAUDE_MODEL,
         )
         collector.start_scheduled(
             news_queries=["인공지능", "AI"],
             paper_queries=["artificial intelligence", "large language model"],
             news_categories=["주요뉴스", "기술"],
             interval_minutes=30,
-            qwen_summarize=True,
-            qwen_categorize=True,
-            qwen_translate=True,
+            claude_summarize=True,
+            claude_categorize=True,
+            claude_translate=True,
         )
 
 
