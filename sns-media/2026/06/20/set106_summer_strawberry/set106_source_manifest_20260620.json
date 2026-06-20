@@ -1,0 +1,36 @@
+[
+  {
+    "query": "wild strawberry fruit photo",
+    "title": "2015-06-19 (170/365) MOCK Wild Strawberry",
+    "url": "https://live.staticflickr.com/324/18350164634_9506a29796_b.jpg",
+    "source_page": "https://www.flickr.com/photos/55252106@N00/18350164634",
+    "mime": "image/jpeg",
+    "license": "by-nd",
+    "license_url": "https://creativecommons.org/licenses/by-nd/2.0/",
+    "artist": "lundyd",
+    "credit": "\"2015-06-19 (170/365) MOCK Wild Strawberry\" by lundyd is licensed under CC BY-ND 2.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nd/2.0/.",
+    "local_file": "strawberry_source_05.jpg",
+    "width": 1024,
+    "height": 819,
+    "bytes": 151321,
+    "sha256": "a539b708aedae7d0658023244fe9f561530055150b15312f12a5e37af2da185d",
+    "source": "openverse"
+  },
+  {
+    "query": "wild strawberry fruit photo",
+    "title": "now it's just a memory",
+    "url": "https://live.staticflickr.com/4255/34588046504_1c01404ca5_b.jpg",
+    "source_page": "https://www.flickr.com/photos/130870572@N03/34588046504",
+    "mime": "image/jpeg",
+    "license": "by",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "artist": "e27182818284",
+    "credit": "\"now it's just a memory\" by e27182818284 is licensed under CC BY 2.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/2.0/.",
+    "local_file": "strawberry_source_06.jpg",
+    "width": 1024,
+    "height": 678,
+    "bytes": 49800,
+    "sha256": "39d80308eb0d88379551f7fac6e05f31b239127ae4de838bf6169d428371ad96",
+    "source": "openverse"
+  }
+]
