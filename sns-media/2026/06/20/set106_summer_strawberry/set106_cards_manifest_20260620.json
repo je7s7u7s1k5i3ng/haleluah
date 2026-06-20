@@ -1,0 +1,44 @@
+{
+  "set": "health_70_set106_summer_strawberry_20260620",
+  "status": "CANDIDATE",
+  "keyword": "산딸기",
+  "owner_topic": "여름딸기",
+  "itemscout": {
+    "kw": "산딸기",
+    "grade": "S",
+    "monthly_qc": 87620,
+    "comp": 0.1435
+  },
+  "cards": [
+    {
+      "file": "set106_summer_strawberry_card_01.jpg",
+      "sha256": "b2026a211ecc0518d3c36092b6f0a73d775e3fba53ff516e9ba6656ede538cc6"
+    },
+    {
+      "file": "set106_summer_strawberry_card_02.jpg",
+      "sha256": "6a52b9f3e58bc915602c542ea5c730fcdf6e3b5328e04952d64a6b8f74fe35b8"
+    },
+    {
+      "file": "set106_summer_strawberry_card_03.jpg",
+      "sha256": "2c6bd74b4f98144fe1a07876ca0a056402ece59a40ba5c642bb7b474454ba3bc"
+    },
+    {
+      "file": "set106_summer_strawberry_card_04.jpg",
+      "sha256": "93c92e0b6c8357d7776c7f2edb22573264d0a1d7cbafee3a922a000004493e45"
+    },
+    {
+      "file": "set106_summer_strawberry_card_05.jpg",
+      "sha256": "0c33c9490e7ce2c34e163f04db3663c8080b29efbc2d6fa3eda1903986ca4a04"
+    },
+    {
+      "file": "set106_summer_strawberry_card_06.jpg",
+      "sha256": "2fedd11cea05bdc11bf3fe6efb4192b3d67109fee598ed8d628acfa3c558213b"
+    }
+  ],
+  "non_regression_notes": [
+    "six source-unique images",
+    "semi-transparent text panels",
+    "food/agriculture topic",
+    "not posted yet"
+  ]
+}
