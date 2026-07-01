@@ -782,9 +782,17 @@ document.getElementById('complete').onclick=function(){
  if(!product||!qty||!name||!phone||!payer||!addr){alert('품목, 수량, 주문자명, 전화번호, 입금자명, 주소를 입력해 주세요.');return;}
  if(name.trim()!==payer.trim()){alert('입금자명은 주문자명과 동일해야 합니다.');return;}
  if(!confirm('입금 완료하셨나요?\n하나은행 225-910100-54404\n예금주 호종건')) return;
- var body='맛가득 주문%0A품목: '+encodeURIComponent(product)+'%0A수량: '+encodeURIComponent(qty)+'%0A주문자: '+encodeURIComponent(name)+'%0A전화: '+encodeURIComponent(phone)+'%0A입금자: '+encodeURIComponent(payer)+'%0A주소: '+encodeURIComponent(addr)+'%0A요청: '+encodeURIComponent(memo);
- alert('주문 문자 화면이 열리면 전송해 주세요.');
- location.href='sms:01077011586?body='+body;
+ var payload={product:product,qty:qty,customer_name:name,phone:phone,depositor:payer,address:addr,memo:memo,source:'github-pages'};
+ var btn=document.getElementById('complete');btn.disabled=true;btn.textContent='주문 접수 중...';
+ fetch('https://script.google.com/macros/s/AKfycbxGWr7jU0OUZOQyyYvBVxLUs2OXwRoJ54iSo8DPxHL-x9Xuhvu6QBwWX-hIA2tRRZDHDQ/exec',{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)})
+ .then(function(r){return r.json();})
+ .then(function(res){if(res&&res.ok){alert('주문이 접수되었습니다.\n주문번호: '+res.order_no);modal.style.display='none';}else{throw new Error((res&&res.message)||'주문 접수 실패');}})
+ .catch(function(err){
+   var body='맛가득 주문%0A품목: '+encodeURIComponent(product)+'%0A수량: '+encodeURIComponent(qty)+'%0A주문자: '+encodeURIComponent(name)+'%0A전화: '+encodeURIComponent(phone)+'%0A입금자: '+encodeURIComponent(payer)+'%0A주소: '+encodeURIComponent(addr)+'%0A요청: '+encodeURIComponent(memo);
+   alert('자동 접수가 지연되어 문자 주문 화면을 엽니다. 전송해 주세요.');
+   location.href='sms:01077011586?body='+body;
+ })
+ .finally(function(){btn.disabled=false;btn.textContent='입금 완료 후 주문하기';});
 };
 </script>
 </body>
