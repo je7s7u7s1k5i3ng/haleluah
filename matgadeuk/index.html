@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>맛가득 주문</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#f7f2ea;color:#201814;font-family:Arial,"Malgun Gothic",sans-serif;word-break:keep-all} a{color:inherit} .wrap{max-width:1040px;margin:0 auto;background:#fff;min-height:100vh} .hero{padding:22px 16px 30px;text-align:center;color:#fff;background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.72)),url('assets/banner.jpg') center/cover} .logo{width:86px;height:86px;border-radius:20px;background:#fff;padding:5px;object-fit:cover} h1{margin:8px 0 4px;font-size:42px;letter-spacing:0} .phone{font-size:24px;font-weight:900;margin:4px 0 8px;color:#ffd77c} .lead{max-width:680px;margin:0 auto;font-size:16px;line-height:1.75} .nav{position:sticky;top:0;z-index:10;display:flex;gap:8px;overflow-x:auto;padding:12px;background:#16140f} .nav a{flex:0 0 auto;text-decoration:none;background:#285a38;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:11px 15px;font-weight:900} .notice{margin:16px;padding:15px;border:2px solid #2f6b46;background:#f3fbf4;border-radius:8px;line-height:1.7} .section{padding:10px 16px 22px;scroll-margin-top:74px} .section h2{font-size:27px;margin:18px 0 12px} .grid{display:grid;grid-template-columns:1fr;gap:14px} .card{border:1px solid #eadfce;border-radius:8px;background:#fff;overflow:hidden;box-shadow:0 8px 24px rgba(35,24,12,.08)} .card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#ddd} .card-body{padding:15px} .cat{margin:0 0 5px;color:#87601e;font-weight:900;font-size:13px} h3{margin:0 0 8px;font-size:24px;line-height:1.28} .price{margin:0 0 14px;color:#a32616;font-size:19px;font-weight:900} button,.btn{border:0;border-radius:8px;padding:16px 18px;width:100%;background:linear-gradient(135deg,#1f5135,#3f7f52);color:#fff;font-size:20px;font-weight:900;box-shadow:0 10px 22px rgba(31,81,53,.22)} .blink{position:relative;overflow:hidden;animation:pulse 1.45s ease-in-out infinite} .blink:after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:34%;background:linear-gradient(90deg,transparent,rgba(255,229,160,.55),transparent);transform:skewX(-18deg);animation:shine 2.2s ease-in-out infinite} @keyframes pulse{0%,100%{box-shadow:0 10px 22px rgba(31,81,53,.22)}50%{box-shadow:0 12px 28px rgba(191,145,62,.36);transform:translateY(-1px)}} @keyframes shine{0%{left:-45%}58%,100%{left:115%}} .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.66);z-index:100;align-items:center;justify-content:center;padding:16px} .panel{background:#fff;border-radius:8px;max-width:520px;width:100%;max-height:92vh;overflow:auto;padding:18px} label{display:block;font-weight:900;margin:10px 0 5px} input,textarea,select{width:100%;border:1px solid #d7c9b6;border-radius:8px;padding:13px;font-size:16px;font-family:inherit} .small{color:#6d6258;font-size:13px;line-height:1.55} .row{display:grid;grid-template-columns:1fr;gap:10px} @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)} h1{font-size:54px} .row{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="hero"><img class="logo" src="assets/logo.jpg" alt="맛가득"><h1>맛가득</h1><p class="phone">010-7701-1586</p><p class="lead">네이버 맛가득과 동일한 곳입니다. 카테고리를 누르거나 아래 품목을 스크롤해서 주문하기를 눌러 주세요.</p></header>
+<nav class="nav"><a href="#top">전체</a><a href="#cat-vb0bo61c">과일</a><a href="#cat-q45evf8lc">견과/건과</a><a href="#cat-q45en50bqjfozbrxj">수산/건어물</a><a href="#cat-b97ep10bcza850b">채소/농산</a><a href="#cat-ok0bl96d">기타</a><a href="#guide">주문안내</a></nav>
+<div id="top" class="notice"><b>하나은행 225-910100-54404</b><br>예금주 호종건<br>주문자와 동일한 입금자명으로 입금하셔야 확인이 빠릅니다. 합배송은 주문서 품목 칸에 여러 품목을 같이 적어 주세요.</div>
+<section id="cat-vb0bo61c" class="section"><h2>과일</h2><div class="grid"><article class="card">
+<img src="assets/wp2fh9v3g33a.jpg" alt="영업용 배">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>영업용 배</h3>
+<p class="price">영업용 기스배 15kg 40,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;1&quot;, &quot;name&quot;: &quot;영업용 배&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;영업용 기스배 15kg 40,500원&quot;, &quot;thumbnail&quot;: &quot;G:\\내 드라이브\\00 쇼핑몰 최종관리\\쿠팡 데이터 관리 api\\상세페이지 기준점 가이드라인\\배(가정용)\\썸네일_1대1_CANDIDATE_20260616\\배(가정용)_thumb_1x1_CANDIDATE_20260616.jpg&quot;, &quot;slug&quot;: &quot;wp2fh9v3g33a&quot;, &quot;image&quot;: &quot;assets/wp2fh9v3g33a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/o22b15jppbh3ih2k.jpg" alt="샤인머스켓">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>샤인머스켓</h3>
+<p class="price">샤인머스켓 2kg 30,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;2&quot;, &quot;name&quot;: &quot;샤인머스켓&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;샤인머스켓 2kg 30,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;o22b15jppbh3ih2k&quot;, &quot;image&quot;: &quot;assets/o22b15jppbh3ih2k.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/hz2b194bba.jpg" alt="토마토">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>토마토</h3>
+<p class="price">대저토마토 가성비 2.5Kg 원 20,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;3&quot;, &quot;name&quot;: &quot;토마토&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;대저토마토 가성비 2.5Kg 원 20,500원&quot;, &quot;thumbnail&quot;: &quot;G:\\내 드라이브\\00 쇼핑몰 최종관리\\쿠팡 데이터 관리 api\\상세페이지 기준점 가이드라인\\(특가) 대저토마토&amp;짭짤이\\썸네일_1대1_CANDIDATE_20260616\\(특가) 대저토마토&amp;짭짤이_thumb_1x1_CANDIDATE_20260616.jpg&quot;, &quot;slug&quot;: &quot;hz2b194bba&quot;, &quot;image&quot;: &quot;assets/hz2b194bba.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/2i0b75tqwkulj.jpg" alt="그린키위">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>그린키위</h3>
+<p class="price">그린키위 10Kg 원 87,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;4&quot;, &quot;name&quot;: &quot;그린키위&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;그린키위 10Kg 원 87,000원&quot;, &quot;thumbnail&quot;: &quot;G:\\내 드라이브\\00 쇼핑몰 최종관리\\쿠팡 데이터 관리 api\\상세페이지 기준점 가이드라인\\제스프리 그린키위\\썸네일_1대1_CANDIDATE_20260616\\제스프리 그린키위_thumb_1x1_CANDIDATE_20260616.jpg&quot;, &quot;slug&quot;: &quot;2i0b75tqwkulj&quot;, &quot;image&quot;: &quot;assets/2i0b75tqwkulj.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/bb0bw4moxpu7i.jpg" alt="골드키위">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>골드키위</h3>
+<p class="price">가격 문의</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;5&quot;, &quot;name&quot;: &quot;골드키위&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;가격 문의&quot;, &quot;thumbnail&quot;: &quot;G:\\내 드라이브\\00 쇼핑몰 최종관리\\쿠팡 데이터 관리 api\\상세페이지 기준점 가이드라인\\제스프리 골드키위\\썸네일_1대1_CANDIDATE_20260616\\제스프리 골드키위_thumb_1x1_CANDIDATE_20260616.jpg&quot;, &quot;slug&quot;: &quot;bb0bw4moxpu7i&quot;, &quot;image&quot;: &quot;assets/bb0bw4moxpu7i.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/pn3bzx39fnua16g.jpg" alt="신비복숭아">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>신비복숭아</h3>
+<p class="price">신비복숭아 30-40과 5.0kg 원 65,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;6&quot;, &quot;name&quot;: &quot;신비복숭아&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;신비복숭아 30-40과 5.0kg 원 65,500원&quot;, &quot;thumbnail&quot;: &quot;G:\\내 드라이브\\00 쇼핑몰 최종관리\\쿠팡 데이터 관리 api\\상세페이지 기준점 가이드라인\\신비복숭아\\썸네일_1대1_CANDIDATE_20260616\\신비복숭아_thumb_1x1_CANDIDATE_20260616.jpg&quot;, &quot;slug&quot;: &quot;pn3bzx39fnua16g&quot;, &quot;image&quot;: &quot;assets/pn3bzx39fnua16g.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/hq1b97oskeosdqqm.jpg" alt="천도복숭아">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>천도복숭아</h3>
+<p class="price">천도복숭아 12-15과 1.5kg 원 33,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;7&quot;, &quot;name&quot;: &quot;천도복숭아&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;천도복숭아 12-15과 1.5kg 원 33,000원&quot;, &quot;thumbnail&quot;: &quot;G:\\내 드라이브\\00 쇼핑몰 최종관리\\쿠팡 데이터 관리 api\\상세페이지 기준점 가이드라인\\천도복숭아\\썸네일_1대1_CANDIDATE_20260616\\천도복숭아_thumb_1x1_CANDIDATE_20260616.jpg&quot;, &quot;slug&quot;: &quot;hq1b97oskeosdqqm&quot;, &quot;image&quot;: &quot;assets/hq1b97oskeosdqqm.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/6o2b99a.jpg" alt="멜론">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>멜론</h3>
+<p class="price">가격 문의</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;8&quot;, &quot;name&quot;: &quot;멜론&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;가격 문의&quot;, &quot;thumbnail&quot;: &quot;G:\\내 드라이브\\00 쇼핑몰 최종관리\\쿠팡 데이터 관리 api\\상세페이지 기준점 가이드라인\\골든듀멜론\\썸네일_1대1_CANDIDATE_20260616\\골든듀멜론_thumb_1x1_CANDIDATE_20260616.jpg&quot;, &quot;slug&quot;: &quot;6o2b99a&quot;, &quot;image&quot;: &quot;assets/6o2b99a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/ok0b96kjwd76p.jpg" alt="여름딸기">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>여름딸기</h3>
+<p class="price">여름딸기 1kg 40,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;9&quot;, &quot;name&quot;: &quot;여름딸기&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;여름딸기 1kg 40,000원&quot;, &quot;thumbnail&quot;: &quot;G:\\내 드라이브\\00 쇼핑몰 최종관리\\쿠팡 데이터 관리 api\\상세페이지 기준점 가이드라인\\여름딸기\\여름딸기 썸네일.jpg&quot;, &quot;slug&quot;: &quot;ok0b96kjwd76p&quot;, &quot;image&quot;: &quot;assets/ok0b96kjwd76p.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/5kg-9d4ppb203h2wj.jpg" alt="골드망고 5Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>골드망고 5Kg</h3>
+<p class="price">골드망고 5Kg 원 54,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;12&quot;, &quot;name&quot;: &quot;골드망고 5Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;골드망고 5Kg 원 54,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;5kg-9d4ppb203h2wj&quot;, &quot;image&quot;: &quot;assets/5kg-9d4ppb203h2wj.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/4kg-9d4pn73dnnsbv2a.jpg" alt="애플망고 4Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>애플망고 4Kg</h3>
+<p class="price">애플망고 4Kg 원 72,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;13&quot;, &quot;name&quot;: &quot;애플망고 4Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;애플망고 4Kg 원 72,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;4kg-9d4pn73dnnsbv2a&quot;, &quot;image&quot;: &quot;assets/4kg-9d4pn73dnnsbv2a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/10kg-344wt1dx73e59e5qb.jpg" alt="사과 가성비 10Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>사과 가성비 10Kg</h3>
+<p class="price">사과 가성비 10Kg 원 47,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;14&quot;, &quot;name&quot;: &quot;사과 가성비 10Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;사과 가성비 10Kg 원 47,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;10kg-344wt1dx73e59e5qb&quot;, &quot;image&quot;: &quot;assets/10kg-344wt1dx73e59e5qb.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/10kg-hl6w474f4hkh7an12b.jpg" alt="사과 선물용 10Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>사과 선물용 10Kg</h3>
+<p class="price">사과 선물용 10Kg 원 87,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;15&quot;, &quot;name&quot;: &quot;사과 선물용 10Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;사과 선물용 10Kg 원 87,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;10kg-hl6w474f4hkh7an12b&quot;, &quot;image&quot;: &quot;assets/10kg-hl6w474f4hkh7an12b.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/17kg-df4uu53eitg.jpg" alt="오렌지 17Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>오렌지 17Kg</h3>
+<p class="price">오렌지 17Kg 원 80,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;16&quot;, &quot;name&quot;: &quot;오렌지 17Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;오렌지 17Kg 원 80,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;17kg-df4uu53eitg&quot;, &quot;image&quot;: &quot;assets/17kg-df4uu53eitg.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/2s-2-5kg-9968av37b8h4bhf0aba.jpg" alt="대저토마토 2S 2.5Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>대저토마토 2S 2.5Kg</h3>
+<p class="price">대저토마토 2S 2.5Kg 원 30,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;17&quot;, &quot;name&quot;: &quot;대저토마토 2S 2.5Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;대저토마토 2S 2.5Kg 원 30,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;2s-2-5kg-9968av37b8h4bhf0aba&quot;, &quot;image&quot;: &quot;assets/2s-2-5kg-9968av37b8h4bhf0aba.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/15kg-il6wt30g4dld38a.jpg" alt="배 큰과수 15Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>배 큰과수 15Kg</h3>
+<p class="price">배 큰과수 15Kg 원 49,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;18&quot;, &quot;name&quot;: &quot;배 큰과수 15Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;배 큰과수 15Kg 원 49,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;15kg-il6wt30g4dld38a&quot;, &quot;image&quot;: &quot;assets/15kg-il6wt30g4dld38a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/10kg-vj0t928h.jpg" alt="사과 10Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>사과 10Kg</h3>
+<p class="price">사과 10Kg 원 18,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;19&quot;, &quot;name&quot;: &quot;사과 10Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;사과 10Kg 원 18,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;10kg-vj0t928h&quot;, &quot;image&quot;: &quot;assets/10kg-vj0t928h.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/10kg-344wt1d853fdsmnvd.jpg" alt="사과 가정용 10Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>사과 가정용 10Kg</h3>
+<p class="price">사과 가정용 10Kg 원 47,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;20&quot;, &quot;name&quot;: &quot;사과 가정용 10Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;사과 가정용 10Kg 원 47,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;10kg-344wt1d853fdsmnvd&quot;, &quot;image&quot;: &quot;assets/10kg-344wt1d853fdsmnvd.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/5kg-9u7qf31bn7gzqyba.jpg" alt="완숙토마토 5Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>완숙토마토 5Kg</h3>
+<p class="price">완숙토마토 5Kg 원 11,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;21&quot;, &quot;name&quot;: &quot;완숙토마토 5Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;완숙토마토 5Kg 원 11,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;5kg-9u7qf31bn7gzqyba&quot;, &quot;image&quot;: &quot;assets/5kg-9u7qf31bn7gzqyba.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/2-5kg-he5x201b894a9duba.jpg" alt="대저토마토 2.5Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>대저토마토 2.5Kg</h3>
+<p class="price">대저토마토 2.5Kg 원 13,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;22&quot;, &quot;name&quot;: &quot;대저토마토 2.5Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;대저토마토 2.5Kg 원 13,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;2-5kg-he5x201b894a9duba&quot;, &quot;image&quot;: &quot;assets/2-5kg-he5x201b894a9duba.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/100g-10-h306a95cu1orte600g.jpg" alt="블루베리 100g 10팩">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>블루베리 100g 10팩</h3>
+<p class="price">블루베리 100g 10팩 원 74,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;23&quot;, &quot;name&quot;: &quot;블루베리 100g 10팩&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;블루베리 100g 10팩 원 74,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;100g-10-h306a95cu1orte600g&quot;, &quot;image&quot;: &quot;assets/100g-10-h306a95cu1orte600g.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/5kg-kj3py1g.jpg" alt="감귤 5Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>감귤 5Kg</h3>
+<p class="price">감귤 5Kg 원 12,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;25&quot;, &quot;name&quot;: &quot;감귤 5Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;감귤 5Kg 원 12,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;5kg-kj3py1g&quot;, &quot;image&quot;: &quot;assets/5kg-kj3py1g.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/100g-10-b163a076fv0bg9oe0e.jpg" alt="블루베리 100g 10개">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>블루베리 100g 10개</h3>
+<p class="price">블루베리 100g 10개 원 74,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;26&quot;, &quot;name&quot;: &quot;블루베리 100g 10개&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;블루베리 100g 10개 원 74,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;100g-10-b163a076fv0bg9oe0e&quot;, &quot;image&quot;: &quot;assets/100g-10-b163a076fv0bg9oe0e.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/9kg-fg5p53v9xmmga312e4ym.jpg" alt="만다린수입귤 9Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>만다린수입귤 9Kg</h3>
+<p class="price">만다린수입귤 9Kg 원 58,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;27&quot;, &quot;name&quot;: &quot;만다린수입귤 9Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;만다린수입귤 9Kg 원 58,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;9kg-fg5p53v9xmmga312e4ym&quot;, &quot;image&quot;: &quot;assets/9kg-fg5p53v9xmmga312e4ym.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/17kg-3x1yvg81bi15al1duz5aixk.jpg" alt="오렌지 블랙라벨 17Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>오렌지 블랙라벨 17Kg</h3>
+<p class="price">오렌지 블랙라벨 17Kg 원 74,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;28&quot;, &quot;name&quot;: &quot;오렌지 블랙라벨 17Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;오렌지 블랙라벨 17Kg 원 74,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;17kg-3x1yvg81bi15al1duz5aixk&quot;, &quot;image&quot;: &quot;assets/17kg-3x1yvg81bi15al1duz5aixk.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/9kg-uj7ss43b1xa.jpg" alt="천혜향 9Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>천혜향 9Kg</h3>
+<p class="price">천혜향 9Kg 원 74,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;29&quot;, &quot;name&quot;: &quot;천혜향 9Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;천혜향 9Kg 원 74,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;9kg-uj7ss43b1xa&quot;, &quot;image&quot;: &quot;assets/9kg-uj7ss43b1xa.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/9kg-9g5qo0ymn8b.jpg" alt="한라봉 9Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>한라봉 9Kg</h3>
+<p class="price">한라봉 9Kg 원 58,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;30&quot;, &quot;name&quot;: &quot;한라봉 9Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;한라봉 9Kg 원 58,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;9kg-9g5qo0ymn8b&quot;, &quot;image&quot;: &quot;assets/9kg-9g5qo0ymn8b.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/10kg-ov5vh4yg9e6ui.jpg" alt="성주참외 10Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>성주참외 10Kg</h3>
+<p class="price">성주참외 10Kg 원 55,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;31&quot;, &quot;name&quot;: &quot;성주참외 10Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;성주참외 10Kg 원 55,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;10kg-ov5vh4yg9e6ui&quot;, &quot;image&quot;: &quot;assets/10kg-ov5vh4yg9e6ui.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/35-14kg-ro83a503g1q3a.jpg" alt="자몽 35과 14Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>자몽 35과 14Kg</h3>
+<p class="price">자몽 35과 14Kg 원 68,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;37&quot;, &quot;name&quot;: &quot;자몽 35과 14Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;자몽 35과 14Kg 원 68,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;35-14kg-ro83a503g1q3a&quot;, &quot;image&quot;: &quot;assets/35-14kg-ro83a503g1q3a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/5-8kg-o37xu9ppy1b8du.jpg" alt="레드키위 5.8Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>레드키위 5.8Kg</h3>
+<p class="price">레드키위 5.8Kg 원 78,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;38&quot;, &quot;name&quot;: &quot;레드키위 5.8Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;레드키위 5.8Kg 원 78,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;5-8kg-o37xu9ppy1b8du&quot;, &quot;image&quot;: &quot;assets/5-8kg-o37xu9ppy1b8du.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/115-18kg-eq47axy6e1vg.jpg" alt="레몬 115과 18Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>레몬 115과 18Kg</h3>
+<p class="price">레몬 115과 18Kg 원 87,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;39&quot;, &quot;name&quot;: &quot;레몬 115과 18Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;레몬 115과 18Kg 원 87,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;115-18kg-eq47axy6e1vg&quot;, &quot;image&quot;: &quot;assets/115-18kg-eq47axy6e1vg.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/300g-hq9tu74e1fhw3b655d.jpg" alt="하우스자두 300g">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>하우스자두 300g</h3>
+<p class="price">하우스자두 300g 원 14,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;41&quot;, &quot;name&quot;: &quot;하우스자두 300g&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;하우스자두 300g 원 14,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;300g-hq9tu74e1fhw3b655d&quot;, &quot;image&quot;: &quot;assets/300g-hq9tu74e1fhw3b655d.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/6-8-1-5kg-zr01b278iigotqbcwtk0fnw6e.jpg" alt="하우스복숭아 6-8과 1.5kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>하우스복숭아 6-8과 1.5kg</h3>
+<p class="price">하우스복숭아 6-8과 1.5kg 원 37,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;42&quot;, &quot;name&quot;: &quot;하우스복숭아 6-8과 1.5kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;하우스복숭아 6-8과 1.5kg 원 37,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;6-8-1-5kg-zr01b278iigotqbcwtk0fnw6e&quot;, &quot;image&quot;: &quot;assets/6-8-1-5kg-zr01b278iigotqbcwtk0fnw6e.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/10-12-1-5kg-8u28boz9iumqmwbq0udng1l5f.jpg" alt="하우스복숭아 10-12과 1.5kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>하우스복숭아 10-12과 1.5kg</h3>
+<p class="price">하우스복숭아 10-12과 1.5kg 원 33,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;43&quot;, &quot;name&quot;: &quot;하우스복숭아 10-12과 1.5kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;하우스복숭아 10-12과 1.5kg 원 33,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;10-12-1-5kg-8u28boz9iumqmwbq0udng1l5f&quot;, &quot;image&quot;: &quot;assets/10-12-1-5kg-8u28boz9iumqmwbq0udng1l5f.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/15-18-1-5kg-8u28bhw2cpq5a0prh6l0g6a.jpg" alt="천도복숭아 15-18과 1.5kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>천도복숭아 15-18과 1.5kg</h3>
+<p class="price">천도복숭아 15-18과 1.5kg 원 28,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;44&quot;, &quot;name&quot;: &quot;천도복숭아 15-18과 1.5kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;천도복숭아 15-18과 1.5kg 원 28,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;15-18-1-5kg-8u28bhw2cpq5a0prh6l0g6a&quot;, &quot;image&quot;: &quot;assets/15-18-1-5kg-8u28bhw2cpq5a0prh6l0g6a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/40-50-5-0kg-8u28boz9itdewzs4yc33p.jpg" alt="신비복숭아 40-50과 5.0kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>신비복숭아 40-50과 5.0kg</h3>
+<p class="price">신비복숭아 40-50과 5.0kg 원 53,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;45&quot;, &quot;name&quot;: &quot;신비복숭아 40-50과 5.0kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;신비복숭아 40-50과 5.0kg 원 53,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;40-50-5-0kg-8u28boz9itdewzs4yc33p&quot;, &quot;image&quot;: &quot;assets/40-50-5-0kg-8u28boz9itdewzs4yc33p.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/50-60-5-0kg-8u28boz9itdewzs4yc33p.jpg" alt="신비복숭아 50-60과 5.0kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>신비복숭아 50-60과 5.0kg</h3>
+<p class="price">신비복숭아 50-60과 5.0kg 원 45,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;46&quot;, &quot;name&quot;: &quot;신비복숭아 50-60과 5.0kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;신비복숭아 50-60과 5.0kg 원 45,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;50-60-5-0kg-8u28boz9itdewzs4yc33p&quot;, &quot;image&quot;: &quot;assets/50-60-5-0kg-8u28boz9itdewzs4yc33p.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/60-70-5-0kg-8u28boz9itdewzs4yc33p.jpg" alt="신비복숭아 60-70과 5.0kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>신비복숭아 60-70과 5.0kg</h3>
+<p class="price">신비복숭아 60-70과 5.0kg 원 40,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;47&quot;, &quot;name&quot;: &quot;신비복숭아 60-70과 5.0kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;신비복숭아 60-70과 5.0kg 원 40,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;60-70-5-0kg-8u28boz9itdewzs4yc33p&quot;, &quot;image&quot;: &quot;assets/60-70-5-0kg-8u28boz9itdewzs4yc33p.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/70-80-5-0kg-8u28boz9itdewzs4yc33p.jpg" alt="신비복숭아 70-80과 5.0kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>신비복숭아 70-80과 5.0kg</h3>
+<p class="price">신비복숭아 70-80과 5.0kg 원 33,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;48&quot;, &quot;name&quot;: &quot;신비복숭아 70-80과 5.0kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;신비복숭아 70-80과 5.0kg 원 33,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;70-80-5-0kg-8u28boz9itdewzs4yc33p&quot;, &quot;image&quot;: &quot;assets/70-80-5-0kg-8u28boz9itdewzs4yc33p.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/5-0kg-co27af5e576eotdc2o7kc04dm5opyrbj7b.jpg" alt="신비복숭아 중소과 특가! 5.0kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>신비복숭아 중소과 특가! 5.0kg</h3>
+<p class="price">신비복숭아 중소과 특가! 5.0kg 원 30,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;49&quot;, &quot;name&quot;: &quot;신비복숭아 중소과 특가! 5.0kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;신비복숭아 중소과 특가! 5.0kg 원 30,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;5-0kg-co27af5e576eotdc2o7kc04dm5opyrbj7b&quot;, &quot;image&quot;: &quot;assets/5-0kg-co27af5e576eotdc2o7kc04dm5opyrbj7b.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/5-0kg-co27af5e576eotdc2o7kc04dm5o396d.jpg" alt="신비복숭아 소과 특가! 5.0kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>신비복숭아 소과 특가! 5.0kg</h3>
+<p class="price">신비복숭아 소과 특가! 5.0kg 원 29,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;50&quot;, &quot;name&quot;: &quot;신비복숭아 소과 특가! 5.0kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;신비복숭아 소과 특가! 5.0kg 원 29,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;5-0kg-co27af5e576eotdc2o7kc04dm5o396d&quot;, &quot;image&quot;: &quot;assets/5-0kg-co27af5e576eotdc2o7kc04dm5o396d.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/5kg-9q7qp72g.jpg" alt="체리 5Kg">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>체리 5Kg</h3>
+<p class="price">체리 5Kg 원 180,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;62&quot;, &quot;name&quot;: &quot;체리 5Kg&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;체리 5Kg 원 180,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;5kg-9q7qp72g&quot;, &quot;image&quot;: &quot;assets/5kg-9q7qp72g.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1000g-zq10a17dj75fmwxb8mb.jpg" alt="건살구 터키 1000g">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>건살구 터키 1000g</h3>
+<p class="price">건살구 터키 1000g 원 28,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;70&quot;, &quot;name&quot;: &quot;건살구 터키 1000g&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;건살구 터키 1000g 원 28,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1000g-zq10a17dj75fmwxb8mb&quot;, &quot;image&quot;: &quot;assets/1000g-zq10a17dj75fmwxb8mb.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1000g-zq10a17dla6602bq4l.jpg" alt="건살구 미국 1000g">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>건살구 미국 1000g</h3>
+<p class="price">건살구 미국 1000g 원 15,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;71&quot;, &quot;name&quot;: &quot;건살구 미국 1000g&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;건살구 미국 1000g 원 15,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1000g-zq10a17dla6602bq4l&quot;, &quot;image&quot;: &quot;assets/1000g-zq10a17dla6602bq4l.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/300g-pb7xm25fnvhcicyu8d.jpg" alt="하우스 자두 300g">
+<div class="card-body">
+<p class="cat">과일</p>
+<h3>하우스 자두 300g</h3>
+<p class="price">하우스 자두 300g 원 14,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;72&quot;, &quot;name&quot;: &quot;하우스 자두 300g&quot;, &quot;category&quot;: &quot;과일&quot;, &quot;price&quot;: &quot;하우스 자두 300g 원 14,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;300g-pb7xm25fnvhcicyu8d&quot;, &quot;image&quot;: &quot;assets/300g-pb7xm25fnvhcicyu8d.jpg&quot;}">주문하기</button>
+</div>
+</article></div></section><section id="cat-q45evf8lc" class="section"><h2>견과/건과</h2><div class="grid"><article class="card">
+<img src="assets/1kg-936r46n8tq1qef5l.jpg" alt="피스타치오 1Kg">
+<div class="card-body">
+<p class="cat">견과/건과</p>
+<h3>피스타치오 1Kg</h3>
+<p class="price">피스타치오 1Kg 원 27,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;11&quot;, &quot;name&quot;: &quot;피스타치오 1Kg&quot;, &quot;category&quot;: &quot;견과/건과&quot;, &quot;price&quot;: &quot;피스타치오 1Kg 원 27,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1kg-936r46n8tq1qef5l&quot;, &quot;image&quot;: &quot;assets/1kg-936r46n8tq1qef5l.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1000g-vt63ab60dwto8ogt93athcgsh.jpg" alt="가염 아몬드 볶음 1000g">
+<div class="card-body">
+<p class="cat">견과/건과</p>
+<h3>가염 아몬드 볶음 1000g</h3>
+<p class="price">가염 아몬드 볶음 1000g 원 24,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;52&quot;, &quot;name&quot;: &quot;가염 아몬드 볶음 1000g&quot;, &quot;category&quot;: &quot;견과/건과&quot;, &quot;price&quot;: &quot;가염 아몬드 볶음 1000g 원 24,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1000g-vt63ab60dwto8ogt93athcgsh&quot;, &quot;image&quot;: &quot;assets/1000g-vt63ab60dwto8ogt93athcgsh.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1000g-7i90aq49emlmsxmuhv.jpg" alt="캐슈넛 볶음 1000g">
+<div class="card-body">
+<p class="cat">견과/건과</p>
+<h3>캐슈넛 볶음 1000g</h3>
+<p class="price">캐슈넛 볶음 1000g 원 22,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;53&quot;, &quot;name&quot;: &quot;캐슈넛 볶음 1000g&quot;, &quot;category&quot;: &quot;견과/건과&quot;, &quot;price&quot;: &quot;캐슈넛 볶음 1000g 원 22,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1000g-7i90aq49emlmsxmuhv&quot;, &quot;image&quot;: &quot;assets/1000g-7i90aq49emlmsxmuhv.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1000g-v74xg71bbye951ae9w.jpg" alt="마카다미아 1000g">
+<div class="card-body">
+<p class="cat">견과/건과</p>
+<h3>마카다미아 1000g</h3>
+<p class="price">마카다미아 1000g 원 37,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;54&quot;, &quot;name&quot;: &quot;마카다미아 1000g&quot;, &quot;category&quot;: &quot;견과/건과&quot;, &quot;price&quot;: &quot;마카다미아 1000g 원 37,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1000g-v74xg71bbye951ae9w&quot;, &quot;image&quot;: &quot;assets/1000g-v74xg71bbye951ae9w.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1-2-1000g-7t94bix7bt43g2fsa.jpg" alt="호두 1/2 크기 1000g">
+<div class="card-body">
+<p class="cat">견과/건과</p>
+<h3>호두 1/2 크기 1000g</h3>
+<p class="price">호두 1/2 크기 1000g 원 22,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;55&quot;, &quot;name&quot;: &quot;호두 1/2 크기 1000g&quot;, &quot;category&quot;: &quot;견과/건과&quot;, &quot;price&quot;: &quot;호두 1/2 크기 1000g 원 22,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1-2-1000g-7t94bix7bt43g2fsa&quot;, &quot;image&quot;: &quot;assets/1-2-1000g-7t94bix7bt43g2fsa.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1-4-1000g-sj31bq76b6g0gp7q.jpg" alt="호두 1/4크기 1000g">
+<div class="card-body">
+<p class="cat">견과/건과</p>
+<h3>호두 1/4크기 1000g</h3>
+<p class="price">호두 1/4크기 1000g 원 19,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;56&quot;, &quot;name&quot;: &quot;호두 1/4크기 1000g&quot;, &quot;category&quot;: &quot;견과/건과&quot;, &quot;price&quot;: &quot;호두 1/4크기 1000g 원 19,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1-4-1000g-sj31bq76b6g0gp7q&quot;, &quot;image&quot;: &quot;assets/1-4-1000g-sj31bq76b6g0gp7q.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1000g-vk51a467a.jpg" alt="피칸 1000g">
+<div class="card-body">
+<p class="cat">견과/건과</p>
+<h3>피칸 1000g</h3>
+<p class="price">피칸 1000g 원 35,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;57&quot;, &quot;name&quot;: &quot;피칸 1000g&quot;, &quot;category&quot;: &quot;견과/건과&quot;, &quot;price&quot;: &quot;피칸 1000g 원 35,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1000g-vk51a467a&quot;, &quot;image&quot;: &quot;assets/1000g-vk51a467a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1000g-oi2xu19a8lolv1aetu.jpg" alt="브라질너트 1000g">
+<div class="card-body">
+<p class="cat">견과/건과</p>
+<h3>브라질너트 1000g</h3>
+<p class="price">브라질너트 1000g 원 45,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;58&quot;, &quot;name&quot;: &quot;브라질너트 1000g&quot;, &quot;category&quot;: &quot;견과/건과&quot;, &quot;price&quot;: &quot;브라질너트 1000g 원 45,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1000g-oi2xu19a8lolv1aetu&quot;, &quot;image&quot;: &quot;assets/1000g-oi2xu19a8lolv1aetu.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/3000g-9s5w266d1he85i002d.jpg" alt="건크랜베리 3000g">
+<div class="card-body">
+<p class="cat">견과/건과</p>
+<h3>건크랜베리 3000g</h3>
+<p class="price">건크랜베리 3000g 원 37,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;59&quot;, &quot;name&quot;: &quot;건크랜베리 3000g&quot;, &quot;category&quot;: &quot;견과/건과&quot;, &quot;price&quot;: &quot;건크랜베리 3000g 원 37,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;3000g-9s5w266d1he85i002d&quot;, &quot;image&quot;: &quot;assets/3000g-9s5w266d1he85i002d.jpg&quot;}">주문하기</button>
+</div>
+</article></div></section><section id="cat-q45en50bqjfozbrxj" class="section"><h2>수산/건어물</h2><div class="grid"><article class="card">
+<img src="assets/3-4cm-bo27a14h1s2cyfc8y8afgxlgzwqq.jpg" alt="멸치 가이리 특 국산 3~4cm">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>멸치 가이리 특 국산 3~4cm</h3>
+<p class="price">멸치 가이리 특 국산 3~4cm 원 34,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;32&quot;, &quot;name&quot;: &quot;멸치 가이리 특 국산 3~4cm&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;멸치 가이리 특 국산 3~4cm 원 34,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;3-4cm-bo27a14h1s2cyfc8y8afgxlgzwqq&quot;, &quot;image&quot;: &quot;assets/3-4cm-bo27a14h1s2cyfc8y8afgxlgzwqq.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/3-4cm-bo27a14h1s2cyfc8y8ahhaz39gzy0a.jpg" alt="멸치 가이리 상 국산 3~4cm">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>멸치 가이리 상 국산 3~4cm</h3>
+<p class="price">멸치 가이리 상 국산 3~4cm 원 24,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;33&quot;, &quot;name&quot;: &quot;멸치 가이리 상 국산 3~4cm&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;멸치 가이리 상 국산 3~4cm 원 24,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;3-4cm-bo27a14h1s2cyfc8y8ahhaz39gzy0a&quot;, &quot;image&quot;: &quot;assets/3-4cm-bo27a14h1s2cyfc8y8ahhaz39gzy0a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/4-5cm-bi47an6bx00gca188c34tyha352sea.jpg" alt="멸치 고바멸치 상 국산 4~5cm">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>멸치 고바멸치 상 국산 4~5cm</h3>
+<p class="price">멸치 고바멸치 상 국산 4~5cm 원 24,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;34&quot;, &quot;name&quot;: &quot;멸치 고바멸치 상 국산 4~5cm&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;멸치 고바멸치 상 국산 4~5cm 원 24,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;4-5cm-bi47an6bx00gca188c34tyha352sea&quot;, &quot;image&quot;: &quot;assets/4-5cm-bi47an6bx00gca188c34tyha352sea.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/4-5cm-bi47an6bx00gca188c34t7q5cea392r.jpg" alt="멸치 고바멸치 특 국산 4~5cm">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>멸치 고바멸치 특 국산 4~5cm</h3>
+<p class="price">멸치 고바멸치 특 국산 4~5cm 원 29,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;35&quot;, &quot;name&quot;: &quot;멸치 고바멸치 특 국산 4~5cm&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;멸치 고바멸치 특 국산 4~5cm 원 29,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;4-5cm-bi47an6bx00gca188c34t7q5cea392r&quot;, &quot;image&quot;: &quot;assets/4-5cm-bi47an6bx00gca188c34t7q5cea392r.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/500g-zq10ad8dx12az85adia251exne.jpg" alt="건새우 두절 국산 500g">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>건새우 두절 국산 500g</h3>
+<p class="price">건새우 두절 국산 500g 원 카테고리[식품&gt;사과식초/땅콩버터 외&gt;조미료/오일/소스&gt;에리스리톨/조미료&gt;건새우] 43,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;65&quot;, &quot;name&quot;: &quot;건새우 두절 국산 500g&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;건새우 두절 국산 500g 원 카테고리[식품&gt;사과식초/땅콩버터 외&gt;조미료/오일/소스&gt;에리스리톨/조미료&gt;건새우] 43,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;500g-zq10ad8dx12az85adia251exne&quot;, &quot;image&quot;: &quot;assets/500g-zq10ad8dx12az85adia251exne.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1kg-zq10ab54b77c092ccia79mi4uq3c0tc.jpg" alt="건새우 두절 대 수입산 1Kg">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>건새우 두절 대 수입산 1Kg</h3>
+<p class="price">건새우 두절 대 수입산 1Kg 원 카테고리[식품&gt;사과식초/땅콩버터 외&gt;조미료/오일/소스&gt;에리스리톨/조미료&gt;건새우] 32,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;66&quot;, &quot;name&quot;: &quot;건새우 두절 대 수입산 1Kg&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;건새우 두절 대 수입산 1Kg 원 카테고리[식품&gt;사과식초/땅콩버터 외&gt;조미료/오일/소스&gt;에리스리톨/조미료&gt;건새우] 32,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1kg-zq10ab54b77c092ccia79mi4uq3c0tc&quot;, &quot;image&quot;: &quot;assets/1kg-zq10ab54b77c092ccia79mi4uq3c0tc.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1kg-zq10ao13chg3aoha57fb9bi93aq3c0tc.jpg" alt="건새우 두절 소 수입산 1Kg">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>건새우 두절 소 수입산 1Kg</h3>
+<p class="price">건새우 두절 소 수입산 1Kg 원 카테고리[식품&gt;사과식초/땅콩버터 외&gt;조미료/오일/소스&gt;에리스리톨/조미료&gt;건새우] 27,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;67&quot;, &quot;name&quot;: &quot;건새우 두절 소 수입산 1Kg&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;건새우 두절 소 수입산 1Kg 원 카테고리[식품&gt;사과식초/땅콩버터 외&gt;조미료/오일/소스&gt;에리스리톨/조미료&gt;건새우] 27,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1kg-zq10ao13chg3aoha57fb9bi93aq3c0tc&quot;, &quot;image&quot;: &quot;assets/1kg-zq10ao13chg3aoha57fb9bi93aq3c0tc.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/400g-220t221as2n55h2jvg9af5hj2j.jpg" alt="불닭구이맛오징어 400g">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>불닭구이맛오징어 400g</h3>
+<p class="price">불닭구이맛오징어 400g 원 24,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;74&quot;, &quot;name&quot;: &quot;불닭구이맛오징어 400g&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;불닭구이맛오징어 400g 원 24,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;400g-220t221as2n55h2jvg9af5hj2j&quot;, &quot;image&quot;: &quot;assets/400g-220t221as2n55h2jvg9af5hj2j.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/20g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o.jpg" alt="건새우 두절 대 수입산 20g - 순마진">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>건새우 두절 대 수입산 20g - 순마진</h3>
+<p class="price">건새우 두절 대 수입산 20g - 순마진 원 7,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;75&quot;, &quot;name&quot;: &quot;건새우 두절 대 수입산 20g - 순마진&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;건새우 두절 대 수입산 20g - 순마진 원 7,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;20g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o&quot;, &quot;image&quot;: &quot;assets/20g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/40g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o.jpg" alt="건새우 두절 대 수입산 40g - 순마진">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>건새우 두절 대 수입산 40g - 순마진</h3>
+<p class="price">건새우 두절 대 수입산 40g - 순마진 원 7,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;76&quot;, &quot;name&quot;: &quot;건새우 두절 대 수입산 40g - 순마진&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;건새우 두절 대 수입산 40g - 순마진 원 7,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;40g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o&quot;, &quot;image&quot;: &quot;assets/40g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/60g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o.jpg" alt="건새우 두절 대 수입산 60g - 순마진">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>건새우 두절 대 수입산 60g - 순마진</h3>
+<p class="price">건새우 두절 대 수입산 60g - 순마진 원 7,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;77&quot;, &quot;name&quot;: &quot;건새우 두절 대 수입산 60g - 순마진&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;건새우 두절 대 수입산 60g - 순마진 원 7,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;60g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o&quot;, &quot;image&quot;: &quot;assets/60g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/80g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o.jpg" alt="건새우 두절 대 수입산 80g - 순마진">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>건새우 두절 대 수입산 80g - 순마진</h3>
+<p class="price">건새우 두절 대 수입산 80g - 순마진 원 7,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;78&quot;, &quot;name&quot;: &quot;건새우 두절 대 수입산 80g - 순마진&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;건새우 두절 대 수입산 80g - 순마진 원 7,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;80g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o&quot;, &quot;image&quot;: &quot;assets/80g-4j90by89b02dk6yrny2kar4qkcx94j5zdq8cs1o.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/100g-uh54buy0cmgelzz8hzrlax5rpc954j85dhqdiwp.jpg" alt="건새우 두절 대 수입산 100g - 순마진">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>건새우 두절 대 수입산 100g - 순마진</h3>
+<p class="price">건새우 두절 대 수입산 100g - 순마진 원 7,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;79&quot;, &quot;name&quot;: &quot;건새우 두절 대 수입산 100g - 순마진&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;건새우 두절 대 수입산 100g - 순마진 원 7,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;100g-uh54buy0cmgelzz8hzrlax5rpc954j85dhqdiwp&quot;, &quot;image&quot;: &quot;assets/100g-uh54buy0cmgelzz8hzrlax5rpc954j85dhqdiwp.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/120g-uh54buy0cmgelzz8hzrlax5rpc954j85dhqdiwp.jpg" alt="건새우 두절 대 수입산 120g - 순마진">
+<div class="card-body">
+<p class="cat">수산/건어물</p>
+<h3>건새우 두절 대 수입산 120g - 순마진</h3>
+<p class="price">건새우 두절 대 수입산 120g - 순마진 원 7,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;80&quot;, &quot;name&quot;: &quot;건새우 두절 대 수입산 120g - 순마진&quot;, &quot;category&quot;: &quot;수산/건어물&quot;, &quot;price&quot;: &quot;건새우 두절 대 수입산 120g - 순마진 원 7,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;120g-uh54buy0cmgelzz8hzrlax5rpc954j85dhqdiwp&quot;, &quot;image&quot;: &quot;assets/120g-uh54buy0cmgelzz8hzrlax5rpc954j85dhqdiwp.jpg&quot;}">주문하기</button>
+</div>
+</article></div></section><section id="cat-b97ep10bcza850b" class="section"><h2>채소/농산</h2><div class="grid"><article class="card">
+<img src="assets/1kg-9s5wyy99ala75suz6d10syu0a.jpg" alt="건고구마줄기(국산) 1Kg">
+<div class="card-body">
+<p class="cat">채소/농산</p>
+<h3>건고구마줄기(국산) 1Kg</h3>
+<p class="price">건고구마줄기(국산) 1Kg 원 49,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;63&quot;, &quot;name&quot;: &quot;건고구마줄기(국산) 1Kg&quot;, &quot;category&quot;: &quot;채소/농산&quot;, &quot;price&quot;: &quot;건고구마줄기(국산) 1Kg 원 49,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1kg-9s5wyy99ala75suz6d10syu0a&quot;, &quot;image&quot;: &quot;assets/1kg-9s5wyy99ala75suz6d10syu0a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1kg-9s5wyy99a95c164dx3u69pd3e.jpg" alt="건고구마줄기(수입) 1Kg">
+<div class="card-body">
+<p class="cat">채소/농산</p>
+<h3>건고구마줄기(수입) 1Kg</h3>
+<p class="price">건고구마줄기(수입) 1Kg 원 29,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;64&quot;, &quot;name&quot;: &quot;건고구마줄기(수입) 1Kg&quot;, &quot;category&quot;: &quot;채소/농산&quot;, &quot;price&quot;: &quot;건고구마줄기(수입) 1Kg 원 29,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1kg-9s5wyy99a95c164dx3u69pd3e&quot;, &quot;image&quot;: &quot;assets/1kg-9s5wyy99a95c164dx3u69pd3e.jpg&quot;}">주문하기</button>
+</div>
+</article></div></section><section id="cat-ok0bl96d" class="section"><h2>기타</h2><div class="grid"><article class="card">
+<img src="assets/8kg-914rg8uu9cns7a.jpg" alt="사파이어 8Kg">
+<div class="card-body">
+<p class="cat">기타</p>
+<h3>사파이어 8Kg</h3>
+<p class="price">사파이어 8Kg 원 72,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;10&quot;, &quot;name&quot;: &quot;사파이어 8Kg&quot;, &quot;category&quot;: &quot;기타&quot;, &quot;price&quot;: &quot;사파이어 8Kg 원 72,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;8kg-914rg8uu9cns7a&quot;, &quot;image&quot;: &quot;assets/8kg-914rg8uu9cns7a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/10kg-fe9su58a.jpg" alt="단감 10Kg">
+<div class="card-body">
+<p class="cat">기타</p>
+<h3>단감 10Kg</h3>
+<p class="price">단감 10Kg 원 65,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;24&quot;, &quot;name&quot;: &quot;단감 10Kg&quot;, &quot;category&quot;: &quot;기타&quot;, &quot;price&quot;: &quot;단감 10Kg 원 65,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;10kg-fe9su58a&quot;, &quot;image&quot;: &quot;assets/10kg-fe9su58a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/10-5kg-y500ar1d8v0j12b2t1df2j.jpg" alt="화이트용과 10개 5Kg">
+<div class="card-body">
+<p class="cat">기타</p>
+<h3>화이트용과 10개 5Kg</h3>
+<p class="price">화이트용과 10개 5Kg 원 38,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;36&quot;, &quot;name&quot;: &quot;화이트용과 10개 5Kg&quot;, &quot;category&quot;: &quot;기타&quot;, &quot;price&quot;: &quot;화이트용과 10개 5Kg 원 38,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;10-5kg-y500ar1d8v0j12b2t1df2j&quot;, &quot;image&quot;: &quot;assets/10-5kg-y500ar1d8v0j12b2t1df2j.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/10kg-o80vo6n.jpg" alt="부사 10Kg">
+<div class="card-body">
+<p class="cat">기타</p>
+<h3>부사 10Kg</h3>
+<p class="price">부사 10Kg 원 53,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;40&quot;, &quot;name&quot;: &quot;부사 10Kg&quot;, &quot;category&quot;: &quot;기타&quot;, &quot;price&quot;: &quot;부사 10Kg 원 53,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;10kg-o80vo6n&quot;, &quot;image&quot;: &quot;assets/10kg-o80vo6n.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/5kg-25-2500a171c8uv12upgz.jpg" alt="아보카도 5Kg 25개">
+<div class="card-body">
+<p class="cat">기타</p>
+<h3>아보카도 5Kg 25개</h3>
+<p class="price">아보카도 5Kg 25개 원 60,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;51&quot;, &quot;name&quot;: &quot;아보카도 5Kg 25개&quot;, &quot;category&quot;: &quot;기타&quot;, &quot;price&quot;: &quot;아보카도 5Kg 25개 원 60,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;5kg-25-2500a171c8uv12upgz&quot;, &quot;image&quot;: &quot;assets/5kg-25-2500a171c8uv12upgz.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/200g-9g3p78vpvo6v7ba.jpg" alt="코코넛가루200g">
+<div class="card-body">
+<p class="cat">기타</p>
+<h3>코코넛가루200g</h3>
+<p class="price">코코넛가루200g 원 7,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;60&quot;, &quot;name&quot;: &quot;코코넛가루200g&quot;, &quot;category&quot;: &quot;기타&quot;, &quot;price&quot;: &quot;코코넛가루200g 원 7,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;200g-9g3p78vpvo6v7ba&quot;, &quot;image&quot;: &quot;assets/200g-9g3p78vpvo6v7ba.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/400g-qp5tn06a2ow9bt39dr7ua.jpg" alt="코코넛슬라이스 400g">
+<div class="card-body">
+<p class="cat">기타</p>
+<h3>코코넛슬라이스 400g</h3>
+<p class="price">코코넛슬라이스 400g 원 9,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;61&quot;, &quot;name&quot;: &quot;코코넛슬라이스 400g&quot;, &quot;category&quot;: &quot;기타&quot;, &quot;price&quot;: &quot;코코넛슬라이스 400g 원 9,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;400g-qp5tn06a2ow9bt39dr7ua&quot;, &quot;image&quot;: &quot;assets/400g-qp5tn06a2ow9bt39dr7ua.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1000g-zq10a22ag3bb81cowifl3a.jpg" alt="건곤드레 국산 1000g">
+<div class="card-body">
+<p class="cat">기타</p>
+<h3>건곤드레 국산 1000g</h3>
+<p class="price">건곤드레 국산 1000g 원 53,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;68&quot;, &quot;name&quot;: &quot;건곤드레 국산 1000g&quot;, &quot;category&quot;: &quot;기타&quot;, &quot;price&quot;: &quot;건곤드레 국산 1000g 원 53,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1000g-zq10a22ag3bb81cowifl3a&quot;, &quot;image&quot;: &quot;assets/1000g-zq10a22ag3bb81cowifl3a.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1000g-zq10a22ag3bb81cowifl3a76z.jpg" alt="건곤드레 중국산 1000g">
+<div class="card-body">
+<p class="cat">기타</p>
+<h3>건곤드레 중국산 1000g</h3>
+<p class="price">건곤드레 중국산 1000g 원 29,500원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;69&quot;, &quot;name&quot;: &quot;건곤드레 중국산 1000g&quot;, &quot;category&quot;: &quot;기타&quot;, &quot;price&quot;: &quot;건곤드레 중국산 1000g 원 29,500원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1000g-zq10a22ag3bb81cowifl3a76z&quot;, &quot;image&quot;: &quot;assets/1000g-zq10a22ag3bb81cowifl3a76z.jpg&quot;}">주문하기</button>
+</div>
+</article><article class="card">
+<img src="assets/1kg-2j9sgoo8d778dmxgf5ttpg.jpg" alt="건부지갱이 1Kg 국산">
+<div class="card-body">
+<p class="cat">기타</p>
+<h3>건부지갱이 1Kg 국산</h3>
+<p class="price">건부지갱이 1Kg 국산 원 53,000원</p>
+<button class="order blink" data-product="{&quot;rank&quot;: &quot;73&quot;, &quot;name&quot;: &quot;건부지갱이 1Kg 국산&quot;, &quot;category&quot;: &quot;기타&quot;, &quot;price&quot;: &quot;건부지갱이 1Kg 국산 원 53,000원&quot;, &quot;thumbnail&quot;: &quot;&quot;, &quot;slug&quot;: &quot;1kg-2j9sgoo8d778dmxgf5ttpg&quot;, &quot;image&quot;: &quot;assets/1kg-2j9sgoo8d778dmxgf5ttpg.jpg&quot;}">주문하기</button>
+</div>
+</article></div></section>
+<section id="guide" class="section"><h2>주문 안내</h2><div class="notice">전화 주문: 010-7701-1586<br>사업자: 베라카주식회사 / 698-86-02906<br>주소: 경기도 용인시 구성로 279번길 19 1층</div></section>
+</main>
+<div id="modal" class="modal"><div class="panel">
+<h2 style="margin:0 0 8px">주문서 작성</h2>
+<p class="small">고객은 구글 로그인이 필요 없습니다. 현재는 가장 빠른 판매용으로 문자 주문이 열립니다.</p>
+<label>품목</label><textarea id="product" rows="3"></textarea><p class="small">합배송 예: 골드키위 1박스 + 샤인머스켓 1박스</p>
+<div class="row"><div><label>수량</label><input id="qty" placeholder="예: 1박스"></div><div><label>전화번호</label><input id="phone" placeholder="010-0000-0000"></div></div>
+<div class="row"><div><label>주문자명</label><input id="name" placeholder="입금자명과 동일"></div><div><label>입금자명</label><input id="payer" placeholder="주문자명과 동일"></div></div>
+<label>주소</label><textarea id="addr" rows="3" placeholder="받으실 주소"></textarea>
+<label>요청사항</label><textarea id="memo" rows="3" placeholder="배송 요청사항"></textarea>
+<div class="notice"><b>하나은행 225-910100-54404</b><br>예금주 호종건</div>
+<button class="blink" id="complete">입금 완료 후 주문하기</button>
+<button style="margin-top:8px;background:#eee;color:#222;box-shadow:none" id="close">닫기</button>
+</div></div>
+<script>
+var modal=document.getElementById('modal');
+document.querySelectorAll('.order').forEach(function(btn){btn.addEventListener('click',function(){var p=JSON.parse(this.dataset.product);document.getElementById('product').value=p.name;modal.style.display='flex';})});
+document.getElementById('close').onclick=function(){modal.style.display='none'};
+document.getElementById('complete').onclick=function(){
+ var product=document.getElementById('product').value, qty=document.getElementById('qty').value, name=document.getElementById('name').value, phone=document.getElementById('phone').value, payer=document.getElementById('payer').value, addr=document.getElementById('addr').value, memo=document.getElementById('memo').value;
+ if(!product||!qty||!name||!phone||!payer||!addr){alert('품목, 수량, 주문자명, 전화번호, 입금자명, 주소를 입력해 주세요.');return;}
+ if(name.trim()!==payer.trim()){alert('입금자명은 주문자명과 동일해야 합니다.');return;}
+ if(!confirm('입금 완료하셨나요?\n하나은행 225-910100-54404\n예금주 호종건')) return;
+ var body='맛가득 주문%0A품목: '+encodeURIComponent(product)+'%0A수량: '+encodeURIComponent(qty)+'%0A주문자: '+encodeURIComponent(name)+'%0A전화: '+encodeURIComponent(phone)+'%0A입금자: '+encodeURIComponent(payer)+'%0A주소: '+encodeURIComponent(addr)+'%0A요청: '+encodeURIComponent(memo);
+ alert('주문 문자 화면이 열리면 전송해 주세요.');
+ location.href='sms:01077011586?body='+body;
+};
+</script>
+</body>
+</html>
