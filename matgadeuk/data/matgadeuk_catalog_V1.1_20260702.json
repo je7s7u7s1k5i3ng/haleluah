@@ -15,10 +15,36 @@
       "rank": "2",
       "name": "샤인머스켓",
       "category": "과일",
-      "price": "샤인머스켓 2kg 32,000원",
-      "note": "",
+      "price": "샤인머스켓 1kg 20,500원 / 1.6kg 29,000원 / 2kg 34,500원 / 2.5kg 41,500원 / 4kg 62,000원",
+      "note": "2kg 원가 22,000원 기준 / 배송비·박스·쿠션 포함",
       "image": "assets/shine-muscat-20260702.jpg",
-      "options": [],
+      "options": [
+        {
+          "label": "1kg / 20,500원",
+          "value": "1kg / 20,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "1.6kg / 29,000원",
+          "value": "1.6kg / 29,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 34,500원",
+          "value": "2kg / 34,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2.5kg / 41,500원",
+          "value": "2.5kg / 41,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 62,000원",
+          "value": "4kg / 62,000원",
+          "title": "중량 선택"
+        }
+      ],
       "bulk_list": false,
       "sold_out": false
     },
