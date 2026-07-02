@@ -60,6 +60,43 @@
       "sold_out": false
     },
     {
+      "rank": "62",
+      "name": "체리 5Kg",
+      "category": "과일",
+      "price": "체리 5Kg 1kg / 42,000원 / 2kg / 77,000원 / 3kg / 112,000원 / 4kg / 147,000원 / 5kg / 182,000원",
+      "note": "",
+      "image": "assets/cherry-california-2026.jpg",
+      "options": [
+        {
+          "label": "1kg / 42,000원",
+          "value": "1kg / 42,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 77,000원",
+          "value": "2kg / 77,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 112,000원",
+          "value": "3kg / 112,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 147,000원",
+          "value": "4kg / 147,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 182,000원",
+          "value": "5kg / 182,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false,
+      "sold_out": false
+    },
+    {
       "rank": "9",
       "name": "설향멜론 정품 1.5kg",
       "category": "과일",
@@ -305,7 +342,7 @@
       "category": "과일",
       "price": "대저토마토 가성비 2.5Kg 22,000원",
       "note": "",
-      "image": "assets/hz2b194bba.jpg",
+      "image": "assets/daej-tomato-2026.jpg",
       "options": [],
       "bulk_list": false,
       "sold_out": false
@@ -338,7 +375,7 @@
       "category": "과일",
       "price": "대저토마토 2S 2.5Kg 32,000원",
       "note": "",
-      "image": "assets/2s-2-5kg-9968av37b8h4bhf0aba.jpg",
+      "image": "assets/daej-tomato-2026.jpg",
       "options": [],
       "bulk_list": false,
       "sold_out": false
@@ -362,43 +399,6 @@
       "note": "",
       "image": "assets/mandarin-import-20260702.jpg",
       "options": [],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
-      "rank": "62",
-      "name": "체리 5Kg",
-      "category": "과일",
-      "price": "체리 5Kg 1kg / 42,000원 / 2kg / 77,000원 / 3kg / 112,000원 / 4kg / 147,000원 / 5kg / 182,000원",
-      "note": "",
-      "image": "assets/cherry-california-20260702.jpg",
-      "options": [
-        {
-          "label": "1kg / 42,000원",
-          "value": "1kg / 42,000원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "2kg / 77,000원",
-          "value": "2kg / 77,000원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "3kg / 112,000원",
-          "value": "3kg / 112,000원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "4kg / 147,000원",
-          "value": "4kg / 147,000원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "5kg / 182,000원",
-          "value": "5kg / 182,000원",
-          "title": "중량 선택"
-        }
-      ],
       "bulk_list": false,
       "sold_out": false
     },
@@ -822,7 +822,7 @@
       "category": "과일",
       "price": "대저토마토 2.5Kg 14,500원",
       "note": "",
-      "image": "assets/2-5kg-he5x201b894a9duba.jpg",
+      "image": "assets/daej-tomato-2026.jpg",
       "options": [],
       "bulk_list": false,
       "sold_out": false
