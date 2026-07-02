@@ -526,17 +526,6 @@
       "sold_out": false
     },
     {
-      "rank": "26",
-      "name": "블루베리 100g 10개",
-      "category": "과일",
-      "price": "블루베리 1kg 44,500원",
-      "note": "",
-      "image": "assets/blueberry-20260702.jpg",
-      "options": [],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
       "rank": "27",
       "name": "만다린수입귤 9Kg",
       "category": "과일",
@@ -7734,7 +7723,7 @@
     }
   ],
   "category_counts": {
-    "과일": 46,
+    "과일": 45,
     "건어물": 183,
     "건과류": 22,
     "기타": 5,
