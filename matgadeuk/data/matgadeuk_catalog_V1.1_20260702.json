@@ -2,17 +2,6 @@
   "products": [
     {
       "rank": "1",
-      "name": "영업용 배",
-      "category": "과일",
-      "price": "영업용 기스배 15kg 45,000원",
-      "note": "판매가 45,000원 적용",
-      "image": "assets/pear-naju-20260702.jpg",
-      "options": [],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
-      "rank": "2",
       "name": "샤인머스켓",
       "category": "과일",
       "price": "샤인머스켓 1kg 19,950원 / 1.6kg 27,250원 / 2kg 32,250원 / 2.5kg 38,870원 / 4kg 59,370원",
@@ -49,7 +38,29 @@
       "sold_out": false
     },
     {
+      "rank": "2",
+      "name": "여름딸기",
+      "category": "과일",
+      "price": "여름딸기 1kg 37,000원",
+      "note": "난좌 포장 / 판매가 37,000원 / 순마진 8,000원",
+      "image": "assets/ok0b96kjwd76p.jpg",
+      "options": [],
+      "bulk_list": false,
+      "sold_out": false
+    },
+    {
       "rank": "3",
+      "name": "영업용 배",
+      "category": "과일",
+      "price": "영업용 기스배 15kg 45,000원",
+      "note": "판매가 45,000원 적용",
+      "image": "assets/pear-naju-20260702.jpg",
+      "options": [],
+      "bulk_list": false,
+      "sold_out": false
+    },
+    {
+      "rank": "4",
       "name": "토마토",
       "category": "과일",
       "price": "대저토마토 가성비 2.5Kg 22,000원",
@@ -60,7 +71,7 @@
       "sold_out": false
     },
     {
-      "rank": "4",
+      "rank": "5",
       "name": "그린키위",
       "category": "과일",
       "price": "그린키위 2.5kg / 25,000원 / 5kg / 43,500원 / 7.5kg / 61,500원 / 10kg / 79,500원",
@@ -92,7 +103,7 @@
       "sold_out": false
     },
     {
-      "rank": "5",
+      "rank": "6",
       "name": "골드키위",
       "category": "과일",
       "price": "가격 문의",
@@ -103,7 +114,7 @@
       "sold_out": false
     },
     {
-      "rank": "6",
+      "rank": "7",
       "name": "신비복숭아",
       "category": "과일",
       "price": "신비복숭아 1kg / 19,000원 / 2kg / 31,000원 / 3kg / 43,000원 / 4kg / 55,000원 / 5kg / 67,000원",
@@ -140,7 +151,7 @@
       "sold_out": false
     },
     {
-      "rank": "7",
+      "rank": "8",
       "name": "천도복숭아",
       "category": "과일",
       "price": "천도복숭아 1kg / 14,000원 / 2kg / 21,000원 / 3kg / 28,000원 / 4kg / 35,000원 / 5kg / 42,000원",
@@ -177,23 +188,12 @@
       "sold_out": false
     },
     {
-      "rank": "8",
+      "rank": "9",
       "name": "멜론",
       "category": "과일",
       "price": "가격 문의",
       "note": "",
       "image": "assets/6o2b99a.jpg",
-      "options": [],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
-      "rank": "9",
-      "name": "여름딸기",
-      "category": "과일",
-      "price": "여름딸기 1kg 37,000원",
-      "note": "난좌 포장 / 판매가 37,000원 / 순마진 8,000원",
-      "image": "assets/ok0b96kjwd76p.jpg",
       "options": [],
       "bulk_list": false,
       "sold_out": false
