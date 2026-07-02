@@ -199,6 +199,43 @@
       "sold_out": false
     },
     {
+      "rank": "9",
+      "name": "살구 5Kg",
+      "category": "과일",
+      "price": "살구 1kg / 14,000원 / 2kg / 21,000원 / 3kg / 28,000원 / 4kg / 35,000원 / 5kg / 42,000원",
+      "note": "",
+      "image": "assets/apricot-20260702.jpg",
+      "options": [
+        {
+          "label": "1kg / 14,000원",
+          "value": "살구 1kg / 14,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 21,000원",
+          "value": "살구 2kg / 21,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 28,000원",
+          "value": "살구 3kg / 28,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 35,000원",
+          "value": "살구 4kg / 35,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 42,000원",
+          "value": "살구 5kg / 42,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false,
+      "sold_out": false
+    },
+    {
       "rank": "10",
       "name": "사파이어 8Kg",
       "category": "과일",
@@ -252,7 +289,7 @@
       "category": "과일",
       "price": "애플망고 4Kg 63,500원",
       "note": "",
-      "image": "assets/4kg-9d4pn73dnnsbv2a.jpg",
+      "image": "assets/apple-mango-brazil-20260702.jpg",
       "options": [],
       "bulk_list": false,
       "sold_out": false
@@ -7723,7 +7760,7 @@
     }
   ],
   "category_counts": {
-    "과일": 45,
+    "과일": 46,
     "건어물": 183,
     "건과류": 22,
     "기타": 5,
