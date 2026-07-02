@@ -1,0 +1,4792 @@
+{
+  "products": [
+    {
+      "rank": "1",
+      "name": "영업용 배",
+      "category": "과일",
+      "price": "영업용 기스배 15kg 48,500원",
+      "note": "",
+      "image": "assets/pear-naju-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "2",
+      "name": "샤인머스켓",
+      "category": "과일",
+      "price": "샤인머스켓 2kg 32,000원",
+      "note": "",
+      "image": "assets/shine-muscat-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "3",
+      "name": "토마토",
+      "category": "과일",
+      "price": "대저토마토 가성비 2.5Kg 22,000원",
+      "note": "",
+      "image": "assets/hz2b194bba.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "4",
+      "name": "그린키위",
+      "category": "과일",
+      "price": "그린키위 2.5kg / 25,000원 / 5kg / 43,500원 / 7.5kg / 61,500원 / 10kg / 79,500원",
+      "note": "",
+      "image": "assets/2i0b75tqwkulj.jpg",
+      "options": [
+        {
+          "label": "2.5kg / 25,000원",
+          "value": "2.5kg / 25,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 43,500원",
+          "value": "5kg / 43,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "7.5kg / 61,500원",
+          "value": "7.5kg / 61,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "10kg / 79,500원",
+          "value": "10kg / 79,500원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "5",
+      "name": "골드키위",
+      "category": "과일",
+      "price": "가격 문의",
+      "note": "",
+      "image": "assets/bb0bw4moxpu7i.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "6",
+      "name": "신비복숭아",
+      "category": "과일",
+      "price": "신비복숭아 1kg / 19,000원 / 2kg / 31,000원 / 3kg / 43,000원 / 4kg / 55,000원 / 5kg / 67,000원",
+      "note": "",
+      "image": "assets/sinbi-peach-20260702.jpg",
+      "options": [
+        {
+          "label": "1kg / 19,000원",
+          "value": "1kg / 19,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 31,000원",
+          "value": "2kg / 31,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 43,000원",
+          "value": "3kg / 43,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 55,000원",
+          "value": "4kg / 55,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 67,000원",
+          "value": "5kg / 67,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "7",
+      "name": "천도복숭아",
+      "category": "과일",
+      "price": "천도복숭아 1kg / 14,000원 / 2kg / 21,000원 / 3kg / 28,000원 / 4kg / 35,000원 / 5kg / 42,000원",
+      "note": "",
+      "image": "assets/hq1b97oskeosdqqm.jpg",
+      "options": [
+        {
+          "label": "1kg / 14,000원",
+          "value": "1kg / 14,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 21,000원",
+          "value": "2kg / 21,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 28,000원",
+          "value": "3kg / 28,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 35,000원",
+          "value": "4kg / 35,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 42,000원",
+          "value": "5kg / 42,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "8",
+      "name": "멜론",
+      "category": "과일",
+      "price": "가격 문의",
+      "note": "",
+      "image": "assets/6o2b99a.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "9",
+      "name": "여름딸기",
+      "category": "과일",
+      "price": "여름딸기 1kg 40,000원",
+      "note": "난좌 포장",
+      "image": "assets/ok0b96kjwd76p.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "12",
+      "name": "골드망고 5Kg",
+      "category": "과일",
+      "price": "골드망고 5Kg 1kg / 16,500원 / 2kg / 26,500원 / 3kg / 36,500원 / 4kg / 46,000원 / 5kg / 56,000원",
+      "note": "",
+      "image": "assets/5kg-9d4ppb203h2wj.jpg",
+      "options": [
+        {
+          "label": "1kg / 16,500원",
+          "value": "1kg / 16,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 26,500원",
+          "value": "2kg / 26,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 36,500원",
+          "value": "3kg / 36,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 46,000원",
+          "value": "4kg / 46,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 56,000원",
+          "value": "5kg / 56,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "13",
+      "name": "애플망고 4Kg",
+      "category": "과일",
+      "price": "애플망고 4Kg 73,500원",
+      "note": "",
+      "image": "assets/4kg-9d4pn73dnnsbv2a.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "14",
+      "name": "사과 가성비 10Kg",
+      "category": "과일",
+      "price": "사과 가성비 10Kg 2.5kg / 17,500원 / 5kg / 27,500원 / 7.5kg / 38,000원 / 10kg / 48,500원",
+      "note": "",
+      "image": "assets/apple-10kg-20260702.jpg",
+      "options": [
+        {
+          "label": "2.5kg / 17,500원",
+          "value": "2.5kg / 17,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 27,500원",
+          "value": "5kg / 27,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "7.5kg / 38,000원",
+          "value": "7.5kg / 38,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "10kg / 48,500원",
+          "value": "10kg / 48,500원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "15",
+      "name": "사과 선물용 10Kg",
+      "category": "과일",
+      "price": "사과 선물용 10Kg 2.5kg / 27,500원 / 5kg / 47,500원 / 7.5kg / 68,000원 / 10kg / 88,500원",
+      "note": "",
+      "image": "assets/apple-10kg-20260702.jpg",
+      "options": [
+        {
+          "label": "2.5kg / 27,500원",
+          "value": "2.5kg / 27,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 47,500원",
+          "value": "5kg / 47,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "7.5kg / 68,000원",
+          "value": "7.5kg / 68,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "10kg / 88,500원",
+          "value": "10kg / 88,500원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "16",
+      "name": "오렌지 17Kg",
+      "category": "과일",
+      "price": "오렌지 17Kg 82,000원",
+      "note": "",
+      "image": "assets/orange-blacklabel-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "17",
+      "name": "대저토마토 2S 2.5Kg",
+      "category": "과일",
+      "price": "대저토마토 2S 2.5Kg 32,000원",
+      "note": "",
+      "image": "assets/2s-2-5kg-9968av37b8h4bhf0aba.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "18",
+      "name": "배 큰과수 15Kg",
+      "category": "과일",
+      "price": "배 큰과수 15Kg 51,000원",
+      "note": "",
+      "image": "assets/pear-naju-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "19",
+      "name": "사과 10Kg",
+      "category": "과일",
+      "price": "사과 10Kg 2.5kg / 10,000원 / 5kg / 13,000원 / 7.5kg / 16,500원 / 10kg / 19,500원",
+      "note": "",
+      "image": "assets/apple-10kg-20260702.jpg",
+      "options": [
+        {
+          "label": "2.5kg / 10,000원",
+          "value": "2.5kg / 10,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 13,000원",
+          "value": "5kg / 13,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "7.5kg / 16,500원",
+          "value": "7.5kg / 16,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "10kg / 19,500원",
+          "value": "10kg / 19,500원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "20",
+      "name": "사과 가정용 10Kg",
+      "category": "과일",
+      "price": "사과 가정용 10Kg 2.5kg / 17,500원 / 5kg / 27,500원 / 7.5kg / 38,000원 / 10kg / 48,500원",
+      "note": "",
+      "image": "assets/apple-10kg-20260702.jpg",
+      "options": [
+        {
+          "label": "2.5kg / 17,500원",
+          "value": "2.5kg / 17,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 27,500원",
+          "value": "5kg / 27,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "7.5kg / 38,000원",
+          "value": "7.5kg / 38,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "10kg / 48,500원",
+          "value": "10kg / 48,500원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "21",
+      "name": "완숙토마토 5Kg",
+      "category": "과일",
+      "price": "완숙토마토 5Kg 1kg / 8,000원 / 2kg / 9,000원 / 3kg / 10,500원 / 4kg / 11,500원 / 5kg / 12,500원",
+      "note": "",
+      "image": "assets/5kg-9u7qf31bn7gzqyba.jpg",
+      "options": [
+        {
+          "label": "1kg / 8,000원",
+          "value": "1kg / 8,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 9,000원",
+          "value": "2kg / 9,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 10,500원",
+          "value": "3kg / 10,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 11,500원",
+          "value": "4kg / 11,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 12,500원",
+          "value": "5kg / 12,500원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "22",
+      "name": "대저토마토 2.5Kg",
+      "category": "과일",
+      "price": "대저토마토 2.5Kg 14,500원",
+      "note": "",
+      "image": "assets/2-5kg-he5x201b894a9duba.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "23",
+      "name": "블루베리 100g 10팩",
+      "category": "과일",
+      "price": "블루베리 1kg 44,500원",
+      "note": "",
+      "image": "assets/blueberry-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "25",
+      "name": "감귤 5Kg",
+      "category": "과일",
+      "price": "감귤 5Kg 1kg / 8,000원 / 2kg / 9,500원 / 3kg / 11,000원 / 4kg / 12,500원 / 5kg / 14,000원",
+      "note": "",
+      "image": "assets/5kg-kj3py1g.jpg",
+      "options": [
+        {
+          "label": "1kg / 8,000원",
+          "value": "1kg / 8,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 9,500원",
+          "value": "2kg / 9,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 11,000원",
+          "value": "3kg / 11,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 12,500원",
+          "value": "4kg / 12,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 14,000원",
+          "value": "5kg / 14,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "26",
+      "name": "블루베리 100g 10개",
+      "category": "과일",
+      "price": "블루베리 1kg 44,500원",
+      "note": "",
+      "image": "assets/blueberry-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "27",
+      "name": "만다린수입귤 9Kg",
+      "category": "과일",
+      "price": "만다린수입귤 9Kg 59,500원",
+      "note": "",
+      "image": "assets/mandarin-import-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "28",
+      "name": "오렌지 블랙라벨 17Kg",
+      "category": "과일",
+      "price": "오렌지 블랙라벨 17Kg 76,000원",
+      "note": "",
+      "image": "assets/orange-blacklabel-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "29",
+      "name": "천혜향 9Kg",
+      "category": "과일",
+      "price": "천혜향 9Kg 76,000원",
+      "note": "",
+      "image": "assets/9kg-uj7ss43b1xa.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "30",
+      "name": "한라봉 9Kg",
+      "category": "과일",
+      "price": "한라봉 9Kg 59,500원",
+      "note": "",
+      "image": "assets/9kg-9g5qo0ymn8b.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "31",
+      "name": "성주참외 10Kg",
+      "category": "과일",
+      "price": "성주참외 10Kg 2.5kg / 19,500원 / 5kg / 32,000원 / 7.5kg / 44,500원 / 10kg / 57,000원",
+      "note": "",
+      "image": "assets/10kg-ov5vh4yg9e6ui.jpg",
+      "options": [
+        {
+          "label": "2.5kg / 19,500원",
+          "value": "2.5kg / 19,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 32,000원",
+          "value": "5kg / 32,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "7.5kg / 44,500원",
+          "value": "7.5kg / 44,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "10kg / 57,000원",
+          "value": "10kg / 57,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "37",
+      "name": "자몽 35과 14Kg",
+      "category": "과일",
+      "price": "자몽 35과 14Kg 69,500원",
+      "note": "",
+      "image": "assets/grapefruit-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "38",
+      "name": "레드키위 5.8Kg",
+      "category": "과일",
+      "price": "레드키위 5.8Kg 79,500원",
+      "note": "",
+      "image": "assets/5-8kg-o37xu9ppy1b8du.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "39",
+      "name": "레몬 115과 18Kg",
+      "category": "과일",
+      "price": "레몬 115과 18Kg 88,500원",
+      "note": "",
+      "image": "assets/115-18kg-eq47axy6e1vg.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "41",
+      "name": "하우스자두 300g",
+      "category": "과일",
+      "price": "하우스자두 300g 16,000원",
+      "note": "",
+      "image": "assets/plum-chuhui-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "42",
+      "name": "하우스복숭아 6-8과 1.5kg",
+      "category": "과일",
+      "price": "하우스복숭아 6-8과 1.5kg 38,000원",
+      "note": "",
+      "image": "assets/6-8-1-5kg-zr01b278iigotqbcwtk0fnw6e.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "43",
+      "name": "하우스복숭아 10-12과 1.5kg",
+      "category": "과일",
+      "price": "하우스복숭아 10-12과 1.5kg 34,500원",
+      "note": "",
+      "image": "assets/10-12-1-5kg-8u28boz9iumqmwbq0udng1l5f.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "44",
+      "name": "천도복숭아 15-18과 1.5kg",
+      "category": "과일",
+      "price": "천도복숭아 15-18과 1.5kg 29,500원",
+      "note": "",
+      "image": "assets/15-18-1-5kg-8u28bhw2cpq5a0prh6l0g6a.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "45",
+      "name": "신비복숭아 40-50과 5.0kg",
+      "category": "과일",
+      "price": "신비복숭아 40-50과 5.0kg 1kg / 16,500원 / 2kg / 26,000원 / 3kg / 35,500원 / 4kg / 45,000원 / 5kg / 54,500원",
+      "note": "",
+      "image": "assets/sinbi-peach-20260702.jpg",
+      "options": [
+        {
+          "label": "1kg / 16,500원",
+          "value": "1kg / 16,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 26,000원",
+          "value": "2kg / 26,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 35,500원",
+          "value": "3kg / 35,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 45,000원",
+          "value": "4kg / 45,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 54,500원",
+          "value": "5kg / 54,500원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "46",
+      "name": "신비복숭아 50-60과 5.0kg",
+      "category": "과일",
+      "price": "신비복숭아 50-60과 5.0kg 1kg / 15,000원 / 2kg / 23,000원 / 3kg / 31,000원 / 4kg / 39,000원 / 5kg / 47,000원",
+      "note": "",
+      "image": "assets/sinbi-peach-20260702.jpg",
+      "options": [
+        {
+          "label": "1kg / 15,000원",
+          "value": "1kg / 15,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 23,000원",
+          "value": "2kg / 23,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 31,000원",
+          "value": "3kg / 31,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 39,000원",
+          "value": "4kg / 39,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 47,000원",
+          "value": "5kg / 47,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "47",
+      "name": "신비복숭아 60-70과 5.0kg",
+      "category": "과일",
+      "price": "신비복숭아 60-70과 5.0kg 1kg / 14,000원 / 2kg / 21,000원 / 3kg / 28,000원 / 4kg / 35,000원 / 5kg / 42,000원",
+      "note": "",
+      "image": "assets/sinbi-peach-20260702.jpg",
+      "options": [
+        {
+          "label": "1kg / 14,000원",
+          "value": "1kg / 14,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 21,000원",
+          "value": "2kg / 21,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 28,000원",
+          "value": "3kg / 28,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 35,000원",
+          "value": "4kg / 35,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 42,000원",
+          "value": "5kg / 42,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "48",
+      "name": "신비복숭아 70-80과 5.0kg",
+      "category": "과일",
+      "price": "신비복숭아 70-80과 5.0kg 1kg / 12,500원 / 2kg / 18,000원 / 3kg / 23,500원 / 4kg / 29,000원 / 5kg / 34,500원",
+      "note": "",
+      "image": "assets/sinbi-peach-20260702.jpg",
+      "options": [
+        {
+          "label": "1kg / 12,500원",
+          "value": "1kg / 12,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 18,000원",
+          "value": "2kg / 18,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 23,500원",
+          "value": "3kg / 23,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 29,000원",
+          "value": "4kg / 29,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 34,500원",
+          "value": "5kg / 34,500원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "49",
+      "name": "신비복숭아 중소과 특가! 5.0kg",
+      "category": "과일",
+      "price": "신비복숭아 중소과 특가! 5.0kg 1kg / 12,000원 / 2kg / 17,000원 / 3kg / 22,000원 / 4kg / 27,000원 / 5kg / 32,000원",
+      "note": "",
+      "image": "assets/sinbi-peach-20260702.jpg",
+      "options": [
+        {
+          "label": "1kg / 12,000원",
+          "value": "1kg / 12,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 17,000원",
+          "value": "2kg / 17,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 22,000원",
+          "value": "3kg / 22,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 27,000원",
+          "value": "4kg / 27,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 32,000원",
+          "value": "5kg / 32,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "50",
+      "name": "신비복숭아 소과 특가! 5.0kg",
+      "category": "과일",
+      "price": "신비복숭아 소과 특가! 5.0kg 1kg / 11,500원 / 2kg / 16,500원 / 3kg / 21,500원 / 4kg / 26,000원 / 5kg / 31,000원",
+      "note": "",
+      "image": "assets/sinbi-peach-20260702.jpg",
+      "options": [
+        {
+          "label": "1kg / 11,500원",
+          "value": "1kg / 11,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 16,500원",
+          "value": "2kg / 16,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 21,500원",
+          "value": "3kg / 21,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 26,000원",
+          "value": "4kg / 26,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 31,000원",
+          "value": "5kg / 31,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "62",
+      "name": "체리 5Kg",
+      "category": "과일",
+      "price": "체리 5Kg 1kg / 42,000원 / 2kg / 77,000원 / 3kg / 112,000원 / 4kg / 147,000원 / 5kg / 182,000원",
+      "note": "",
+      "image": "assets/cherry-california-20260702.jpg",
+      "options": [
+        {
+          "label": "1kg / 42,000원",
+          "value": "1kg / 42,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 77,000원",
+          "value": "2kg / 77,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 112,000원",
+          "value": "3kg / 112,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 147,000원",
+          "value": "4kg / 147,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 182,000원",
+          "value": "5kg / 182,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "70",
+      "name": "건살구 터키 1000g",
+      "category": "과일",
+      "price": "건살구 터키 1000g 29,500원",
+      "note": "",
+      "image": "assets/dried-apricot-turkey-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "71",
+      "name": "건살구 미국 1000g",
+      "category": "과일",
+      "price": "건살구 미국 1000g 17,000원",
+      "note": "",
+      "image": "assets/dried-apricot-usa-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "72",
+      "name": "하우스 자두 300g",
+      "category": "과일",
+      "price": "하우스 자두 300g 16,000원",
+      "note": "",
+      "image": "assets/plum-chuhui-20260702.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "1000",
+      "name": "건망고 베트남산",
+      "category": "견과/건과",
+      "price": "11,500원부터",
+      "note": "원산지: 베트남 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 11,500원",
+          "value": "500g / 11,500원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0227"
+        },
+        {
+          "label": "1K / 18,000원",
+          "value": "1K / 18,000원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0226"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1001",
+      "name": "건블루베리 미국산",
+      "category": "견과/건과",
+      "price": "18,000원부터",
+      "note": "원산지: 미국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 18,000원",
+          "value": "500g / 18,000원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0229"
+        },
+        {
+          "label": "1K / 30,900원",
+          "value": "1K / 30,900원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0228"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1002",
+      "name": "건살구 터키산",
+      "category": "견과/건과",
+      "price": "8,600원부터",
+      "note": "원산지: 터키 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 터키",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0231"
+        },
+        {
+          "label": "1K / 25,000원",
+          "value": "1K / 25,000원 / 원산지 터키",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0230"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1003",
+      "name": "건자두 미국산",
+      "category": "견과/건과",
+      "price": "9,200원부터",
+      "note": "원산지: 미국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 9,200원",
+          "value": "500g / 9,200원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0233"
+        },
+        {
+          "label": "1K / 13,300원",
+          "value": "1K / 13,300원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0232"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1004",
+      "name": "건키위 중국산",
+      "category": "견과/건과",
+      "price": "21,500원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 21,500원",
+          "value": "1K / 21,500원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0234"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1005",
+      "name": "건파인애플 태국산",
+      "category": "견과/건과",
+      "price": "11,500원부터",
+      "note": "원산지: 태국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 11,500원",
+          "value": "500g / 11,500원 / 원산지 태국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0236"
+        },
+        {
+          "label": "1K / 18,000원",
+          "value": "1K / 18,000원 / 원산지 태국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0235"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1006",
+      "name": "건파파야 태국산",
+      "category": "견과/건과",
+      "price": "12,100원부터",
+      "note": "원산지: 태국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 12,100원",
+          "value": "500g / 12,100원 / 원산지 태국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0238"
+        },
+        {
+          "label": "1K / 19,200원",
+          "value": "1K / 19,200원 / 원산지 태국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0237"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1007",
+      "name": "건포도 칠레산",
+      "category": "견과/건과",
+      "price": "6,500원부터",
+      "note": "원산지: 칠레 / 옵션 4개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 6,500원",
+          "value": "200g / 6,500원 / 원산지 칠레",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0240"
+        },
+        {
+          "label": "500g / 7,800원",
+          "value": "500g / 7,800원 / 원산지 칠레",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0242"
+        },
+        {
+          "label": "1K / 10,900원",
+          "value": "1K / 10,900원 / 원산지 칠레",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0239"
+        },
+        {
+          "label": "3KG / 23,900원",
+          "value": "3KG / 23,900원 / 원산지 칠레",
+          "title": "중량 선택",
+          "source_spec": "3KG",
+          "source_id": "DN-0241"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1008",
+      "name": "고구마스틱 인도네시아산",
+      "category": "견과/건과",
+      "price": "7,600원부터",
+      "note": "원산지: 인도네시아 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "350g / 7,600원",
+          "value": "350g / 7,600원 / 원산지 인도네시아",
+          "title": "중량 선택",
+          "source_spec": "350g",
+          "source_id": "DN-0243"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1009",
+      "name": "고추맛콘 국내가공",
+      "category": "견과/건과",
+      "price": "7,600원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 7,600원",
+          "value": "500g / 7,600원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0244"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1010",
+      "name": "김고소아 국내가공",
+      "category": "견과/건과",
+      "price": "8,000원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 8,000원",
+          "value": "500g / 8,000원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0245"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1011",
+      "name": "깐은행",
+      "category": "견과/건과",
+      "price": "6,000원부터",
+      "note": "원산지: 국산 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "100g / 6,000원",
+          "value": "100g / 6,000원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "100g",
+          "source_id": "DN-0409"
+        },
+        {
+          "label": "1KG / 19,200원",
+          "value": "1KG / 19,200원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0410"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1012",
+      "name": "깐은행 냉동 중국산",
+      "category": "견과/건과",
+      "price": "8,800원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 8,800원",
+          "value": "500g / 8,800원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0414"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1013",
+      "name": "깐은행 누드 중국산",
+      "category": "견과/건과",
+      "price": "8,800원부터",
+      "note": "원산지: 중국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 8,800원",
+          "value": "500g / 8,800원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0412"
+        },
+        {
+          "label": "1KG / 13,300원",
+          "value": "1KG / 13,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0411"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1014",
+      "name": "깐은행 중국산",
+      "category": "견과/건과",
+      "price": "13,300원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1KG / 13,300원",
+          "value": "1KG / 13,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0413"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1015",
+      "name": "깨도리 국내가공",
+      "category": "견과/건과",
+      "price": "8,000원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "600g / 8,000원",
+          "value": "600g / 8,000원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "600g",
+          "source_id": "DN-0246"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1016",
+      "name": "대추 바삭대추 중국산",
+      "category": "견과/건과",
+      "price": "14,500원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1KG / 14,500원",
+          "value": "1KG / 14,500원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0426"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1017",
+      "name": "대추 별",
+      "category": "견과/건과",
+      "price": "25,000원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1KG / 25,000원",
+          "value": "1KG / 25,000원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0415"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1018",
+      "name": "대추 상",
+      "category": "견과/건과",
+      "price": "10,900원부터",
+      "note": "원산지: 국산 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500G / 10,900원",
+          "value": "500G / 10,900원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "500G",
+          "source_id": "DN-0417"
+        },
+        {
+          "label": "1KG / 16,800원",
+          "value": "1KG / 16,800원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0416"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1019",
+      "name": "대추 특",
+      "category": "견과/건과",
+      "price": "6,500원부터",
+      "note": "원산지: 국산 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "100g / 6,500원",
+          "value": "100g / 6,500원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "100g",
+          "source_id": "DN-0418"
+        },
+        {
+          "label": "500G / 12,700원",
+          "value": "500G / 12,700원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "500G",
+          "source_id": "DN-0420"
+        },
+        {
+          "label": "1KG / 20,300원",
+          "value": "1KG / 20,300원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0419"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1020",
+      "name": "대추 특 중국산",
+      "category": "견과/건과",
+      "price": "18,000원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1KG / 18,000원",
+          "value": "1KG / 18,000원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0421"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1021",
+      "name": "대추채",
+      "category": "견과/건과",
+      "price": "6,800원부터",
+      "note": "원산지: 국산 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "100g / 6,800원",
+          "value": "100g / 6,800원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "100g",
+          "source_id": "DN-0422"
+        },
+        {
+          "label": "200g / 9,200원",
+          "value": "200g / 9,200원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0424"
+        },
+        {
+          "label": "1KG / 26,200원",
+          "value": "1KG / 26,200원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0423"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1022",
+      "name": "대추채 중국산",
+      "category": "견과/건과",
+      "price": "16,800원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1KG / 16,800원",
+          "value": "1KG / 16,800원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0425"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1023",
+      "name": "땅콩 로스티드피넛 베트남산",
+      "category": "견과/건과",
+      "price": "7,400원부터",
+      "note": "원산지: 베트남 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "800g / 7,400원",
+          "value": "800g / 7,400원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "800g",
+          "source_id": "DN-0247"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1024",
+      "name": "땅콩 볶음 관 중국산",
+      "category": "견과/건과",
+      "price": "26,800원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "3.75K / 26,800원",
+          "value": "3.75K / 26,800원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "3.75K",
+          "source_id": "DN-0248"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1025",
+      "name": "땅콩 볶음 중국산",
+      "category": "견과/건과",
+      "price": "6,800원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 6,800원",
+          "value": "200g / 6,800원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0250"
+        },
+        {
+          "label": "500g / 8,000원",
+          "value": "500g / 8,000원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0251"
+        },
+        {
+          "label": "1K / 10,900원",
+          "value": "1K / 10,900원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0249"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1026",
+      "name": "땅콩 생",
+      "category": "견과/건과",
+      "price": "23,900원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 23,900원",
+          "value": "1K / 23,900원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0252"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1027",
+      "name": "땅콩 생 중국산",
+      "category": "견과/건과",
+      "price": "16,200원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 16,200원",
+          "value": "1K / 16,200원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0253"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1028",
+      "name": "땅콩 조미깐땅콩 중국산",
+      "category": "견과/건과",
+      "price": "7,600원부터",
+      "note": "원산지: 중국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 7,600원",
+          "value": "500g / 7,600원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0255"
+        },
+        {
+          "label": "1K / 10,900원",
+          "value": "1K / 10,900원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0254"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1029",
+      "name": "땅콩 피땅콩 중국산",
+      "category": "견과/건과",
+      "price": "5,900원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 5,900원",
+          "value": "200g / 5,900원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0257"
+        },
+        {
+          "label": "500g / 7,400원",
+          "value": "500g / 7,400원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0258"
+        },
+        {
+          "label": "1KG / 10,900원",
+          "value": "1KG / 10,900원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0256"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1030",
+      "name": "땅콩반태 중국산",
+      "category": "견과/건과",
+      "price": "6,200원부터",
+      "note": "원산지: 중국 / 옵션 5개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 6,200원",
+          "value": "200g / 6,200원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0260"
+        },
+        {
+          "label": "500g / 7,400원",
+          "value": "500g / 7,400원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0262"
+        },
+        {
+          "label": "1K / 10,300원",
+          "value": "1K / 10,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0259"
+        },
+        {
+          "label": "3KG / 21,500원",
+          "value": "3KG / 21,500원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "3KG",
+          "source_id": "DN-0261"
+        },
+        {
+          "label": "5KG / 33,300원",
+          "value": "5KG / 33,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "5KG",
+          "source_id": "DN-0263"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1031",
+      "name": "땅콩분말 중국산",
+      "category": "견과/건과",
+      "price": "7,400원부터",
+      "note": "원산지: 중국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 7,400원",
+          "value": "500g / 7,400원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0265"
+        },
+        {
+          "label": "1K / 10,300원",
+          "value": "1K / 10,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0264"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1032",
+      "name": "땅콩분태 중국산",
+      "category": "견과/건과",
+      "price": "7,400원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 7,400원",
+          "value": "500g / 7,400원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0267"
+        },
+        {
+          "label": "1K / 10,300원",
+          "value": "1K / 10,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0266"
+        },
+        {
+          "label": "1K / 10,300원",
+          "value": "1K / 10,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0268"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1033",
+      "name": "땅콩쵸코볼 중국산",
+      "category": "견과/건과",
+      "price": "8,300원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 8,300원",
+          "value": "1K / 8,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0269"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1034",
+      "name": "마카다미아 태국산",
+      "category": "견과/건과",
+      "price": "19,200원부터",
+      "note": "원산지: 태국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 19,200원",
+          "value": "500g / 19,200원 / 원산지 태국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0271"
+        },
+        {
+          "label": "1K / 33,300원",
+          "value": "1K / 33,300원 / 원산지 태국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0270"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1035",
+      "name": "무화과 건 이란산",
+      "category": "견과/건과",
+      "price": "9,200원부터",
+      "note": "원산지: 이란 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 9,200원",
+          "value": "200g / 9,200원 / 원산지 이란",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0273"
+        },
+        {
+          "label": "500g / 15,000원",
+          "value": "500g / 15,000원 / 원산지 이란",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0274"
+        },
+        {
+          "label": "1K / 26,200원",
+          "value": "1K / 26,200원 / 원산지 이란",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0272"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1036",
+      "name": "무화과 반건 이란산",
+      "category": "견과/건과",
+      "price": "19,200원부터",
+      "note": "원산지: 이란 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 19,200원",
+          "value": "1K / 19,200원 / 원산지 이란",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0275"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1037",
+      "name": "믹스넛",
+      "category": "견과/건과",
+      "price": "6,500원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 6,500원",
+          "value": "200g / 6,500원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0276"
+        },
+        {
+          "label": "500g / 9,200원",
+          "value": "500g / 9,200원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0277"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1038",
+      "name": "믹스넛츠 한솔",
+      "category": "견과/건과",
+      "price": "13,300원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 13,300원",
+          "value": "1K / 13,300원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0278"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1039",
+      "name": "믹스웟 프리미엄",
+      "category": "견과/건과",
+      "price": "15,600원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 15,600원",
+          "value": "500g / 15,600원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0279"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1040",
+      "name": "믹스웟2",
+      "category": "견과/건과",
+      "price": "13,900원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 13,900원",
+          "value": "1K / 13,900원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0280"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1041",
+      "name": "바나나칩 필리핀산",
+      "category": "견과/건과",
+      "price": "9,200원부터",
+      "note": "원산지: 필리핀 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 9,200원",
+          "value": "500g / 9,200원 / 원산지 필리핀",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0283"
+        },
+        {
+          "label": "1K / 13,300원",
+          "value": "1K / 13,300원 / 원산지 필리핀",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0282"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1042",
+      "name": "브라질넛 페루",
+      "category": "견과/건과",
+      "price": "12,100원부터",
+      "note": "원산지: 브라질 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 12,100원",
+          "value": "200g / 12,100원 / 원산지 브라질",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0284"
+        },
+        {
+          "label": "500g / 23,300원",
+          "value": "500g / 23,300원 / 원산지 브라질",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0285"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1043",
+      "name": "브라질넛트 페루",
+      "category": "견과/건과",
+      "price": "41,500원부터",
+      "note": "원산지: 브라질 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 41,500원",
+          "value": "1K / 41,500원 / 원산지 브라질",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0286"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1044",
+      "name": "생율",
+      "category": "견과/건과",
+      "price": "8,000원부터",
+      "note": "원산지: 국산 / 옵션 5개",
+      "image": "",
+      "options": [
+        {
+          "label": "120g / 8,000원",
+          "value": "120g / 8,000원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "120g",
+          "source_id": "DN-0427"
+        },
+        {
+          "label": "170g / 9,200원",
+          "value": "170g / 9,200원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "170g",
+          "source_id": "DN-0428"
+        },
+        {
+          "label": "200g / 9,800원",
+          "value": "200g / 9,800원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0430"
+        },
+        {
+          "label": "500g / 16,800원",
+          "value": "500g / 16,800원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0431"
+        },
+        {
+          "label": "1KG / 28,600원",
+          "value": "1KG / 28,600원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0429"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1045",
+      "name": "아몬드 볶음 가염 미국산",
+      "category": "견과/건과",
+      "price": "8,600원부터",
+      "note": "원산지: 미국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0288"
+        },
+        {
+          "label": "500g / 13,300원",
+          "value": "500g / 13,300원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0289"
+        },
+        {
+          "label": "1K / 20,300원",
+          "value": "1K / 20,300원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0287"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1046",
+      "name": "아몬드 볶음 무염 미국산",
+      "category": "견과/건과",
+      "price": "8,600원부터",
+      "note": "원산지: 미국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0291"
+        },
+        {
+          "label": "500g / 12,700원",
+          "value": "500g / 12,700원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0292"
+        },
+        {
+          "label": "1K / 20,300원",
+          "value": "1K / 20,300원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0290"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1047",
+      "name": "아몬드 분말 미국산",
+      "category": "견과/건과",
+      "price": "20,300원부터",
+      "note": "원산지: 미국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 20,300원",
+          "value": "1K / 20,300원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0293"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1048",
+      "name": "아몬드 분태 미국산",
+      "category": "견과/건과",
+      "price": "20,300원부터",
+      "note": "원산지: 미국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 20,300원",
+          "value": "1K / 20,300원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0294"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1049",
+      "name": "아몬드S L 미국산",
+      "category": "견과/건과",
+      "price": "8,600원부터",
+      "note": "원산지: 미국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0296"
+        },
+        {
+          "label": "500g / 12,700원",
+          "value": "500g / 12,700원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0297"
+        },
+        {
+          "label": "1K / 20,300원",
+          "value": "1K / 20,300원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0295"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1050",
+      "name": "아몬드S L 백 미국산",
+      "category": "견과/건과",
+      "price": "8,600원부터",
+      "note": "원산지: 미국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0299"
+        },
+        {
+          "label": "500g / 13,300원",
+          "value": "500g / 13,300원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0300"
+        },
+        {
+          "label": "1K / 22,100원",
+          "value": "1K / 22,100원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0298"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1051",
+      "name": "잣 가공",
+      "category": "견과/건과",
+      "price": "19,200원부터",
+      "note": "원산지: 국산 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "100g / 19,200원",
+          "value": "100g / 19,200원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "100g",
+          "source_id": "DN-0432"
+        },
+        {
+          "label": "500g / 75,600원",
+          "value": "500g / 75,600원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0434"
+        },
+        {
+          "label": "1KG / 145,000원",
+          "value": "1KG / 145,000원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0433"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1052",
+      "name": "잣 가공 중국산",
+      "category": "견과/건과",
+      "price": "10,900원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "100g / 10,900원",
+          "value": "100g / 10,900원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "100g",
+          "source_id": "DN-0435"
+        },
+        {
+          "label": "500g / 39,200원",
+          "value": "500g / 39,200원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0437"
+        },
+        {
+          "label": "1KG / 72,100원",
+          "value": "1KG / 72,100원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0436"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1053",
+      "name": "참깨고소해",
+      "category": "견과/건과",
+      "price": "8,000원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "450g / 8,000원",
+          "value": "450g / 8,000원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "450g",
+          "source_id": "DN-0301"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1054",
+      "name": "초코락 중국산",
+      "category": "견과/건과",
+      "price": "8,000원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 8,000원",
+          "value": "1K / 8,000원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0302"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1055",
+      "name": "커피나 중국산",
+      "category": "견과/건과",
+      "price": "5,600원부터",
+      "note": "원산지: 중국 / 옵션 4개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 5,600원",
+          "value": "200g / 5,600원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0304"
+        },
+        {
+          "label": "500g / 6,500원",
+          "value": "500g / 6,500원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0305"
+        },
+        {
+          "label": "1K / 8,600원",
+          "value": "1K / 8,600원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0303"
+        },
+        {
+          "label": "5KG / 24,500원",
+          "value": "5KG / 24,500원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "5KG",
+          "source_id": "DN-0306"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1056",
+      "name": "케슈넛츠 볶음 인도산",
+      "category": "견과/건과",
+      "price": "8,600원부터",
+      "note": "원산지: 인도 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 인도",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0308"
+        },
+        {
+          "label": "500g / 13,300원",
+          "value": "500g / 13,300원 / 원산지 인도",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0309"
+        },
+        {
+          "label": "1K / 21,500원",
+          "value": "1K / 21,500원 / 원산지 인도",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0307"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1057",
+      "name": "케슈넛츠 생 인도네시아산",
+      "category": "견과/건과",
+      "price": "19,200원부터",
+      "note": "원산지: 인도네시아 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 19,200원",
+          "value": "1K / 19,200원 / 원산지 인도네시아",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0310"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1058",
+      "name": "코코넛가루 필리핀산",
+      "category": "견과/건과",
+      "price": "5,600원부터",
+      "note": "원산지: 필리핀 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 5,600원",
+          "value": "200g / 5,600원 / 원산지 필리핀",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0311"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1059",
+      "name": "코코넛슬라이스 필리핀산",
+      "category": "견과/건과",
+      "price": "7,600원부터",
+      "note": "원산지: 필리핀 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "400g / 7,600원",
+          "value": "400g / 7,600원 / 원산지 필리핀",
+          "title": "중량 선택",
+          "source_spec": "400g",
+          "source_id": "DN-0312"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1060",
+      "name": "크랜베리 미국산",
+      "category": "견과/건과",
+      "price": "6,800원부터",
+      "note": "원산지: 미국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 6,800원",
+          "value": "200g / 6,800원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0313"
+        },
+        {
+          "label": "500g / 9,200원",
+          "value": "500g / 9,200원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0315"
+        },
+        {
+          "label": "3KG / 33,900원",
+          "value": "3KG / 33,900원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "3KG",
+          "source_id": "DN-0314"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1061",
+      "name": "크렌베리 미국산",
+      "category": "견과/건과",
+      "price": "13,300원부터",
+      "note": "원산지: 미국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 13,300원",
+          "value": "1K / 13,300원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0316"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1062",
+      "name": "파래맛고돌이 국내가공",
+      "category": "견과/건과",
+      "price": "7,600원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "600g / 7,600원",
+          "value": "600g / 7,600원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "600g",
+          "source_id": "DN-0317"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1063",
+      "name": "편강 중국산",
+      "category": "견과/건과",
+      "price": "11,500원부터",
+      "note": "원산지: 중국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 11,500원",
+          "value": "500g / 11,500원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0319"
+        },
+        {
+          "label": "1K / 18,000원",
+          "value": "1K / 18,000원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0318"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1064",
+      "name": "피스타치오 구운 미국산",
+      "category": "견과/건과",
+      "price": "8,600원부터",
+      "note": "원산지: 미국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0321"
+        },
+        {
+          "label": "500g / 14,500원",
+          "value": "500g / 14,500원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0322"
+        },
+        {
+          "label": "1K / 23,900원",
+          "value": "1K / 23,900원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0320"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1065",
+      "name": "피스타치오 탈각 미국산",
+      "category": "견과/건과",
+      "price": "50,900원부터",
+      "note": "원산지: 미국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 50,900원",
+          "value": "1K / 50,900원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0323"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1066",
+      "name": "피칸 미국산",
+      "category": "견과/건과",
+      "price": "18,600원부터",
+      "note": "원산지: 미국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 18,600원",
+          "value": "500g / 18,600원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0325"
+        },
+        {
+          "label": "1K / 32,100원",
+          "value": "1K / 32,100원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0324"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1067",
+      "name": "해바라기씨 불가리아",
+      "category": "견과/건과",
+      "price": "6,000원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 4개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 6,000원",
+          "value": "200g / 6,000원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0327"
+        },
+        {
+          "label": "500g / 6,200원",
+          "value": "500g / 6,200원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0329"
+        },
+        {
+          "label": "1K / 8,600원",
+          "value": "1K / 8,600원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0326"
+        },
+        {
+          "label": "3KG / 16,200원",
+          "value": "3KG / 16,200원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "3KG",
+          "source_id": "DN-0328"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1068",
+      "name": "해씨쵸코볼 중국산",
+      "category": "견과/건과",
+      "price": "8,000원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 8,000원",
+          "value": "1K / 8,000원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0330"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1069",
+      "name": "해이즐넛 미국산",
+      "category": "견과/건과",
+      "price": "23,900원부터",
+      "note": "원산지: 미국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 23,900원",
+          "value": "500g / 23,900원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0332"
+        },
+        {
+          "label": "1K / 42,700원",
+          "value": "1K / 42,700원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0331"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1070",
+      "name": "호두 1 4 미국산",
+      "category": "견과/건과",
+      "price": "7,400원부터",
+      "note": "원산지: 미국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 7,400원",
+          "value": "200g / 7,400원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0333"
+        },
+        {
+          "label": "500g / 10,900원",
+          "value": "500g / 10,900원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0334"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1071",
+      "name": "호두 2 1 미국산",
+      "category": "견과/건과",
+      "price": "12,100원부터",
+      "note": "원산지: 미국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 12,100원",
+          "value": "500g / 12,100원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0336"
+        },
+        {
+          "label": "1K / 19,200원",
+          "value": "1K / 19,200원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0335"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1072",
+      "name": "호두 4 1 미국산",
+      "category": "견과/건과",
+      "price": "16,800원부터",
+      "note": "원산지: 미국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 16,800원",
+          "value": "1K / 16,800원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0337"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1073",
+      "name": "호두분태 미국산",
+      "category": "견과/건과",
+      "price": "11,500원부터",
+      "note": "원산지: 미국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 11,500원",
+          "value": "500g / 11,500원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0339"
+        },
+        {
+          "label": "1K / 18,000원",
+          "value": "1K / 18,000원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0338"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1074",
+      "name": "호박씨 중국산",
+      "category": "견과/건과",
+      "price": "6,800원부터",
+      "note": "원산지: 중국 / 옵션 4개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 6,800원",
+          "value": "200g / 6,800원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0341"
+        },
+        {
+          "label": "500g / 8,600원",
+          "value": "500g / 8,600원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0343"
+        },
+        {
+          "label": "1K / 12,700원",
+          "value": "1K / 12,700원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0340"
+        },
+        {
+          "label": "3KG / 28,600원",
+          "value": "3KG / 28,600원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "3KG",
+          "source_id": "DN-0342"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1075",
+      "name": "황율",
+      "category": "견과/건과",
+      "price": "33,300원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1KG / 33,300원",
+          "value": "1KG / 33,300원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0438"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1076",
+      "name": "가문어살 오족 페루산",
+      "category": "수산/건어물",
+      "price": "20,300원부터",
+      "note": "원산지: 페루 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 20,300원",
+          "value": "500g / 20,300원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0002"
+        },
+        {
+          "label": "1K / 35,600원",
+          "value": "1K / 35,600원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0001"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1077",
+      "name": "가쓰오부시 고명 인도네시아산",
+      "category": "수산/건어물",
+      "price": "22,700원부터",
+      "note": "원산지: 인도네시아 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 22,700원",
+          "value": "500g / 22,700원 / 원산지 인도네시아",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0004"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1078",
+      "name": "가쓰오부시 육수 인도네시아산",
+      "category": "수산/건어물",
+      "price": "18,000원부터",
+      "note": "원산지: 인도네시아 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 18,000원",
+          "value": "500g / 18,000원 / 원산지 인도네시아",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0003"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1079",
+      "name": "건맛살채 미국산",
+      "category": "수산/건어물",
+      "price": "13,900원부터",
+      "note": "원산지: 미국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 13,900원",
+          "value": "500g / 13,900원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0006"
+        },
+        {
+          "label": "1K / 22,700원",
+          "value": "1K / 22,700원 / 원산지 미국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0005"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1080",
+      "name": "건새우 두절",
+      "category": "수산/건어물",
+      "price": "20,900원부터",
+      "note": "원산지: 국산 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 20,900원",
+          "value": "200g / 20,900원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0007"
+        },
+        {
+          "label": "500g / 42,700원",
+          "value": "500g / 42,700원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0008"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1081",
+      "name": "건새우 두절 대 중국산",
+      "category": "수산/건어물",
+      "price": "10,300원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 10,300원",
+          "value": "200g / 10,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0009"
+        },
+        {
+          "label": "500g / 16,800원",
+          "value": "500g / 16,800원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0010"
+        },
+        {
+          "label": "1K / 28,600원",
+          "value": "1K / 28,600원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0011"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1082",
+      "name": "건새우 두절 소 중국산",
+      "category": "수산/건어물",
+      "price": "8,600원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0013"
+        },
+        {
+          "label": "500g / 15,000원",
+          "value": "500g / 15,000원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0014"
+        },
+        {
+          "label": "1K / 23,900원",
+          "value": "1K / 23,900원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0012"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1083",
+      "name": "건새우 먹 중국산",
+      "category": "수산/건어물",
+      "price": "7,400원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 7,400원",
+          "value": "200g / 7,400원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0016"
+        },
+        {
+          "label": "500g / 11,500원",
+          "value": "500g / 11,500원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0017"
+        },
+        {
+          "label": "1KG / 18,000원",
+          "value": "1KG / 18,000원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0015"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1084",
+      "name": "건새우 보리",
+      "category": "수산/건어물",
+      "price": "27,400원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 27,400원",
+          "value": "1K / 27,400원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0020"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1085",
+      "name": "건새우 보리 중국산",
+      "category": "수산/건어물",
+      "price": "8,600원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0022"
+        },
+        {
+          "label": "500g / 13,300원",
+          "value": "500g / 13,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0023"
+        },
+        {
+          "label": "1K / 21,500원",
+          "value": "1K / 21,500원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0021"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1086",
+      "name": "건새우 적 중국산",
+      "category": "수산/건어물",
+      "price": "9,200원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 9,200원",
+          "value": "200g / 9,200원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0025"
+        },
+        {
+          "label": "500g / 15,600원",
+          "value": "500g / 15,600원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0026"
+        },
+        {
+          "label": "1K / 26,200원",
+          "value": "1K / 26,200원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0024"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1087",
+      "name": "건새우 집게적 중국산",
+      "category": "수산/건어물",
+      "price": "21,500원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 21,500원",
+          "value": "1K / 21,500원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0027"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1088",
+      "name": "건새우 홍",
+      "category": "수산/건어물",
+      "price": "7,200원부터",
+      "note": "원산지: 국산 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 7,200원",
+          "value": "200g / 7,200원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0019"
+        },
+        {
+          "label": "1KG / 18,000원",
+          "value": "1KG / 18,000원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0018"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1089",
+      "name": "건조개살 중국산",
+      "category": "수산/건어물",
+      "price": "19,200원부터",
+      "note": "원산지: 중국 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 19,200원",
+          "value": "500g / 19,200원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0029"
+        },
+        {
+          "label": "1K / 33,300원",
+          "value": "1K / 33,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0028"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1090",
+      "name": "건해삼 인도네시아산",
+      "category": "수산/건어물",
+      "price": "168,600원부터",
+      "note": "원산지: 인도네시아 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 168,600원",
+          "value": "500g / 168,600원 / 원산지 인도네시아",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0031"
+        },
+        {
+          "label": "1K / 321,500원",
+          "value": "1K / 321,500원 / 원산지 인도네시아",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0030"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1091",
+      "name": "건해삼슬라이스 베트남산",
+      "category": "수산/건어물",
+      "price": "89,800원부터",
+      "note": "원산지: 베트남 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "600g / 89,800원",
+          "value": "600g / 89,800원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "600g",
+          "source_id": "DN-0032"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1092",
+      "name": "건홍합",
+      "category": "수산/건어물",
+      "price": "17,400원부터",
+      "note": "원산지: 국산 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 17,400원",
+          "value": "500g / 17,400원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0034"
+        },
+        {
+          "label": "1K / 29,800원",
+          "value": "1K / 29,800원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0033"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1093",
+      "name": "꼴뚜기",
+      "category": "수산/건어물",
+      "price": "19,200원부터",
+      "note": "원산지: 국산 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "400g / 19,200원",
+          "value": "400g / 19,200원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "400g",
+          "source_id": "DN-0036"
+        },
+        {
+          "label": "1.5K / 49,800원",
+          "value": "1.5K / 49,800원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0035"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1094",
+      "name": "노가리 조미 두절 러시아산",
+      "category": "수산/건어물",
+      "price": "14,500원부터",
+      "note": "원산지: 러시아 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 14,500원",
+          "value": "500g / 14,500원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0038"
+        },
+        {
+          "label": "1K / 23,900원",
+          "value": "1K / 23,900원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0037"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1095",
+      "name": "노가리채 러시아산",
+      "category": "수산/건어물",
+      "price": "10,900원부터",
+      "note": "원산지: 러시아 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 10,900원",
+          "value": "200g / 10,900원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0042"
+        },
+        {
+          "label": "500g / 19,200원",
+          "value": "500g / 19,200원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0043"
+        },
+        {
+          "label": "1KG / 33,300원",
+          "value": "1KG / 33,300원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0041"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1096",
+      "name": "대구두절 조미 중국산",
+      "category": "수산/건어물",
+      "price": "10,900원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 10,900원",
+          "value": "200g / 10,900원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0047"
+        },
+        {
+          "label": "500g / 19,200원",
+          "value": "500g / 19,200원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0048"
+        },
+        {
+          "label": "1KG / 33,300원",
+          "value": "1KG / 33,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0046"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1097",
+      "name": "대구채 건 중국산",
+      "category": "수산/건어물",
+      "price": "35,600원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1KG / 35,600원",
+          "value": "1KG / 35,600원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0045"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1098",
+      "name": "대구채 조미 중국산",
+      "category": "수산/건어물",
+      "price": "20,300원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1KG / 20,300원",
+          "value": "1KG / 20,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0044"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1099",
+      "name": "대구포 국내가공",
+      "category": "수산/건어물",
+      "price": "23,900원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "300g / 23,900원",
+          "value": "300g / 23,900원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "300g",
+          "source_id": "DN-0049"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1100",
+      "name": "디포리 베트남산",
+      "category": "수산/건어물",
+      "price": "15,600원부터",
+      "note": "원산지: 베트남 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1.5K / 15,600원",
+          "value": "1.5K / 15,600원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0050"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1101",
+      "name": "디포리 특",
+      "category": "수산/건어물",
+      "price": "30,900원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1.5K / 30,900원",
+          "value": "1.5K / 30,900원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0051"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1102",
+      "name": "멸치 가이리 상",
+      "category": "수산/건어물",
+      "price": "21,500원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1.5K / 21,500원",
+          "value": "1.5K / 21,500원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0058"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1103",
+      "name": "멸치 가이리 특",
+      "category": "수산/건어물",
+      "price": "9,200원부터",
+      "note": "원산지: 국산 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 9,200원",
+          "value": "200g / 9,200원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0059"
+        },
+        {
+          "label": "500g / 15,600원",
+          "value": "500g / 15,600원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0060"
+        },
+        {
+          "label": "1.5K / 30,900원",
+          "value": "1.5K / 30,900원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0057"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1104",
+      "name": "멸치 고바멸치 상",
+      "category": "수산/건어물",
+      "price": "21,500원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1.5K / 21,500원",
+          "value": "1.5K / 21,500원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0063"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1105",
+      "name": "멸치 고바멸치 특",
+      "category": "수산/건어물",
+      "price": "8,600원부터",
+      "note": "원산지: 국산 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0062"
+        },
+        {
+          "label": "500g / 13,300원",
+          "value": "500g / 13,300원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0061"
+        },
+        {
+          "label": "1.5K / 26,200원",
+          "value": "1.5K / 26,200원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0064"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1106",
+      "name": "멸치 다시멸치 1번",
+      "category": "수산/건어물",
+      "price": "22,700원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1.5K / 22,700원",
+          "value": "1.5K / 22,700원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0065"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1107",
+      "name": "멸치 다시멸치 2번",
+      "category": "수산/건어물",
+      "price": "15,600원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1.5K / 15,600원",
+          "value": "1.5K / 15,600원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0066"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1108",
+      "name": "멸치 다시멸치 특",
+      "category": "수산/건어물",
+      "price": "8,000원부터",
+      "note": "원산지: 국산 / 옵션 4개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,000원",
+          "value": "200g / 8,000원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0068"
+        },
+        {
+          "label": "500g / 13,900원",
+          "value": "500g / 13,900원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0069"
+        },
+        {
+          "label": "1KG / 22,700원",
+          "value": "1KG / 22,700원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0067"
+        },
+        {
+          "label": "1.5K / 29,800원",
+          "value": "1.5K / 29,800원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0070"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1109",
+      "name": "멸치 잔가이리 상",
+      "category": "수산/건어물",
+      "price": "22,700원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1.5K / 22,700원",
+          "value": "1.5K / 22,700원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0071"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1110",
+      "name": "멸치 잔가이리 특",
+      "category": "수산/건어물",
+      "price": "9,200원부터",
+      "note": "원산지: 국산 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 9,200원",
+          "value": "200g / 9,200원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0074"
+        },
+        {
+          "label": "500g / 16,800원",
+          "value": "500g / 16,800원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0073"
+        },
+        {
+          "label": "1.5K / 33,300원",
+          "value": "1.5K / 33,300원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0072"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1111",
+      "name": "멸치 지가이리 특",
+      "category": "수산/건어물",
+      "price": "33,300원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1.5K / 33,300원",
+          "value": "1.5K / 33,300원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0075"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1112",
+      "name": "멸치 지리멸치 상",
+      "category": "수산/건어물",
+      "price": "23,900원부터",
+      "note": "원산지: 국산 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1.5k / 23,900원",
+          "value": "1.5k / 23,900원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5k",
+          "source_id": "DN-0076"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1113",
+      "name": "멸치 지리멸치 특",
+      "category": "수산/건어물",
+      "price": "9,800원부터",
+      "note": "원산지: 국산 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 9,800원",
+          "value": "200g / 9,800원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0078"
+        },
+        {
+          "label": "500g / 16,800원",
+          "value": "500g / 16,800원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0079"
+        },
+        {
+          "label": "1.5K / 35,600원",
+          "value": "1.5K / 35,600원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0077"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1114",
+      "name": "명엽채 베트남산",
+      "category": "수산/건어물",
+      "price": "6,200원부터",
+      "note": "원산지: 베트남 / 옵션 4개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 6,200원",
+          "value": "200g / 6,200원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0081"
+        },
+        {
+          "label": "500g / 8,000원",
+          "value": "500g / 8,000원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0083"
+        },
+        {
+          "label": "1KG / 10,900원",
+          "value": "1KG / 10,900원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0080"
+        },
+        {
+          "label": "3.75K / 29,800원",
+          "value": "3.75K / 29,800원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "3.75K",
+          "source_id": "DN-0082"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1115",
+      "name": "명태알포 국내가공",
+      "category": "수산/건어물",
+      "price": "18,000원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "400g / 18,000원",
+          "value": "400g / 18,000원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "400g",
+          "source_id": "DN-0084"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1116",
+      "name": "물메기 실채 국내가공 중국산",
+      "category": "수산/건어물",
+      "price": "32,100원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 32,100원",
+          "value": "1K / 32,100원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0120"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1117",
+      "name": "물메기구이채 중국산",
+      "category": "수산/건어물",
+      "price": "10,300원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 10,300원",
+          "value": "200g / 10,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0086"
+        },
+        {
+          "label": "500g / 19,200원",
+          "value": "500g / 19,200원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0087"
+        },
+        {
+          "label": "1K / 33,300원",
+          "value": "1K / 33,300원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0085"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1118",
+      "name": "북어머리 대 러시아산",
+      "category": "수산/건어물",
+      "price": "11,500원부터",
+      "note": "원산지: 러시아 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 11,500원",
+          "value": "500g / 11,500원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0093"
+        },
+        {
+          "label": "1K / 18,000원",
+          "value": "1K / 18,000원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0092"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1119",
+      "name": "아귀구이채 중국산",
+      "category": "수산/건어물",
+      "price": "11,500원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 11,500원",
+          "value": "200g / 11,500원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0097"
+        },
+        {
+          "label": "500g / 20,900원",
+          "value": "500g / 20,900원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0098"
+        },
+        {
+          "label": "1K / 36,800원",
+          "value": "1K / 36,800원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0096"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1120",
+      "name": "아귀꼬리포 중국산",
+      "category": "수산/건어물",
+      "price": "38,000원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 38,000원",
+          "value": "1K / 38,000원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0099"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1121",
+      "name": "아귀살포통구이 중국산",
+      "category": "수산/건어물",
+      "price": "12,100원부터",
+      "note": "원산지: 중국 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 12,100원",
+          "value": "200g / 12,100원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0101"
+        },
+        {
+          "label": "500g / 22,100원",
+          "value": "500g / 22,100원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0102"
+        },
+        {
+          "label": "1K / 39,200원",
+          "value": "1K / 39,200원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0100"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1122",
+      "name": "양태구이채 베트남산",
+      "category": "수산/건어물",
+      "price": "18,000원부터",
+      "note": "원산지: 베트남 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 18,000원",
+          "value": "500g / 18,000원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0103"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1123",
+      "name": "양태구이채 중국산",
+      "category": "수산/건어물",
+      "price": "30,900원부터",
+      "note": "원산지: 중국 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 30,900원",
+          "value": "1K / 30,900원 / 원산지 중국",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0104"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1124",
+      "name": "오징어 건",
+      "category": "수산/건어물",
+      "price": "88,600원부터",
+      "note": "원산지: 국산 / 옵션 6개",
+      "image": "",
+      "options": [
+        {
+          "label": "1.2K / 88,600원",
+          "value": "1.2K / 88,600원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.2K",
+          "source_id": "DN-0105"
+        },
+        {
+          "label": "1.5K / 121,500원",
+          "value": "1.5K / 121,500원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0106"
+        },
+        {
+          "label": "1.7K / 133,300원",
+          "value": "1.7K / 133,300원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.7K",
+          "source_id": "DN-0107"
+        },
+        {
+          "label": "2.0K / 150,900원",
+          "value": "2.0K / 150,900원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "2.0K",
+          "source_id": "DN-0108"
+        },
+        {
+          "label": "2.3K / 168,600원",
+          "value": "2.3K / 168,600원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "2.3K",
+          "source_id": "DN-0109"
+        },
+        {
+          "label": "2.5K / 192,100원",
+          "value": "2.5K / 192,100원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "2.5K",
+          "source_id": "DN-0110"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1125",
+      "name": "오징어 구이족 국내가공 페루산",
+      "category": "수산/건어물",
+      "price": "25,000원부터",
+      "note": "원산지: 페루 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 25,000원",
+          "value": "1K / 25,000원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0122"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1126",
+      "name": "오징어 대발이 국내가공 페루산",
+      "category": "수산/건어물",
+      "price": "32,100원부터",
+      "note": "원산지: 페루 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 32,100원",
+          "value": "1K / 32,100원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0121"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1127",
+      "name": "오징어 반건조",
+      "category": "수산/건어물",
+      "price": "38,000원부터",
+      "note": "원산지: 국산 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "1.2K / 38,000원",
+          "value": "1.2K / 38,000원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.2K",
+          "source_id": "DN-0114"
+        },
+        {
+          "label": "1.5K / 46,200원",
+          "value": "1.5K / 46,200원 / 원산지 국산",
+          "title": "중량 선택",
+          "source_spec": "1.5K",
+          "source_id": "DN-0115"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1128",
+      "name": "오징어 실채 국내가공 페루산",
+      "category": "수산/건어물",
+      "price": "12,100원부터",
+      "note": "원산지: 페루 / 옵션 4개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 12,100원",
+          "value": "200g / 12,100원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0117"
+        },
+        {
+          "label": "500g / 22,100원",
+          "value": "500g / 22,100원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0119"
+        },
+        {
+          "label": "1K / 39,200원",
+          "value": "1K / 39,200원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0116"
+        },
+        {
+          "label": "3.75K / 130,900원",
+          "value": "3.75K / 130,900원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "3.75K",
+          "source_id": "DN-0118"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1129",
+      "name": "육포 코주부",
+      "category": "수산/건어물",
+      "price": "18,000원부터",
+      "note": "원산지: 원산지 확인중 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "150g / 18,000원",
+          "value": "150g / 18,000원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "150g",
+          "source_id": "DN-0123"
+        },
+        {
+          "label": "800g / 65,000원",
+          "value": "800g / 65,000원 / 원산지 확인중",
+          "title": "중량 선택",
+          "source_spec": "800g",
+          "source_id": "DN-0124"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1130",
+      "name": "쥐어채 베트남산",
+      "category": "수산/건어물",
+      "price": "6,200원부터",
+      "note": "원산지: 베트남 / 옵션 4개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 6,200원",
+          "value": "200g / 6,200원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0126"
+        },
+        {
+          "label": "500g / 8,000원",
+          "value": "500g / 8,000원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0128"
+        },
+        {
+          "label": "1KG / 10,900원",
+          "value": "1KG / 10,900원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0125"
+        },
+        {
+          "label": "3.75K / 29,800원",
+          "value": "3.75K / 29,800원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "3.75K",
+          "source_id": "DN-0127"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1131",
+      "name": "쥐포 3L 베트남산",
+      "category": "수산/건어물",
+      "price": "23,900원부터",
+      "note": "원산지: 베트남 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 23,900원",
+          "value": "1K / 23,900원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0129"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1132",
+      "name": "쥐포 M 베트남산",
+      "category": "수산/건어물",
+      "price": "14,500원부터",
+      "note": "원산지: 베트남 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 14,500원",
+          "value": "500g / 14,500원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0131"
+        },
+        {
+          "label": "1K / 23,900원",
+          "value": "1K / 23,900원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0130"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1133",
+      "name": "쥐포 나비 베트남산",
+      "category": "수산/건어물",
+      "price": "8,600원부터",
+      "note": "원산지: 베트남 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0133"
+        },
+        {
+          "label": "500g / 14,500원",
+          "value": "500g / 14,500원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0134"
+        },
+        {
+          "label": "1KG / 23,900원",
+          "value": "1KG / 23,900원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0132"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1134",
+      "name": "쥐포 동전 베트남산",
+      "category": "수산/건어물",
+      "price": "8,600원부터",
+      "note": "원산지: 베트남 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 8,600원",
+          "value": "200g / 8,600원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0136"
+        },
+        {
+          "label": "500g / 14,500원",
+          "value": "500g / 14,500원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0137"
+        },
+        {
+          "label": "1K / 23,900원",
+          "value": "1K / 23,900원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0135"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1135",
+      "name": "쥐포 맛나포 베트남산",
+      "category": "수산/건어물",
+      "price": "10,000원부터",
+      "note": "원산지: 베트남 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "400g / 10,000원",
+          "value": "400g / 10,000원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "400g",
+          "source_id": "DN-0145"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1136",
+      "name": "쥐포 뼈 베트남산",
+      "category": "수산/건어물",
+      "price": "7,400원부터",
+      "note": "원산지: 베트남 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 7,400원",
+          "value": "200g / 7,400원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0139"
+        },
+        {
+          "label": "500g / 10,900원",
+          "value": "500g / 10,900원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0140"
+        },
+        {
+          "label": "1KG / 16,800원",
+          "value": "1KG / 16,800원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0138"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1137",
+      "name": "쥐포구이채 베트남산",
+      "category": "수산/건어물",
+      "price": "9,200원부터",
+      "note": "원산지: 베트남 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 9,200원",
+          "value": "200g / 9,200원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0142"
+        },
+        {
+          "label": "500g / 15,000원",
+          "value": "500g / 15,000원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0143"
+        },
+        {
+          "label": "1K / 26,200원",
+          "value": "1K / 26,200원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0141"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1138",
+      "name": "쥐포채 베트남산",
+      "category": "수산/건어물",
+      "price": "25,000원부터",
+      "note": "원산지: 베트남 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 25,000원",
+          "value": "1K / 25,000원 / 원산지 베트남",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0144"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1139",
+      "name": "진미 맛진미 국내가공 페루산",
+      "category": "수산/건어물",
+      "price": "16,200원부터",
+      "note": "원산지: 페루 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 16,200원",
+          "value": "500g / 16,200원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0148"
+        },
+        {
+          "label": "1K / 27,400원",
+          "value": "1K / 27,400원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0147"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1140",
+      "name": "진미 백진미 국내가공 페루산",
+      "category": "수산/건어물",
+      "price": "16,200원부터",
+      "note": "원산지: 페루 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 16,200원",
+          "value": "500g / 16,200원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0151"
+        },
+        {
+          "label": "1K / 27,400원",
+          "value": "1K / 27,400원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0149"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1141",
+      "name": "진미 백진미 중국가공 페루산",
+      "category": "수산/건어물",
+      "price": "14,500원부터",
+      "note": "원산지: 페루 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 14,500원",
+          "value": "500g / 14,500원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0153"
+        },
+        {
+          "label": "1K / 24,500원",
+          "value": "1K / 24,500원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0152"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1142",
+      "name": "진미 절단 국내가공 페루산",
+      "category": "수산/건어물",
+      "price": "19,200원부터",
+      "note": "원산지: 페루 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "1KG / 19,200원",
+          "value": "1KG / 19,200원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "1KG",
+          "source_id": "DN-0154"
+        },
+        {
+          "label": "3KG / 49,800원",
+          "value": "3KG / 49,800원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "3KG",
+          "source_id": "DN-0155"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1143",
+      "name": "진미 홍진미 국내가공 페루산",
+      "category": "수산/건어물",
+      "price": "16,200원부터",
+      "note": "원산지: 페루 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 16,200원",
+          "value": "500g / 16,200원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0157"
+        },
+        {
+          "label": "1K / 27,400원",
+          "value": "1K / 27,400원 / 원산지 페루",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0156"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1144",
+      "name": "황태껍질 러시아산",
+      "category": "수산/건어물",
+      "price": "9,200원부터",
+      "note": "원산지: 러시아 / 옵션 2개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 9,200원",
+          "value": "500g / 9,200원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0091"
+        },
+        {
+          "label": "1K / 13,300원",
+          "value": "1K / 13,300원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0090"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1145",
+      "name": "황태머리 대 러시아산",
+      "category": "수산/건어물",
+      "price": "22,700원부터",
+      "note": "원산지: 러시아 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "1K / 22,700원",
+          "value": "1K / 22,700원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0165"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1146",
+      "name": "황태채 러시아산",
+      "category": "수산/건어물",
+      "price": "12,100원부터",
+      "note": "원산지: 러시아 / 옵션 3개",
+      "image": "",
+      "options": [
+        {
+          "label": "200g / 12,100원",
+          "value": "200g / 12,100원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "200g",
+          "source_id": "DN-0170"
+        },
+        {
+          "label": "500g / 23,300원",
+          "value": "500g / 23,300원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0171"
+        },
+        {
+          "label": "1K / 41,500원",
+          "value": "1K / 41,500원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "1K",
+          "source_id": "DN-0169"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "1147",
+      "name": "황태채 용대리 국내가공 러시아산",
+      "category": "수산/건어물",
+      "price": "27,400원부터",
+      "note": "원산지: 러시아 / 옵션 1개",
+      "image": "",
+      "options": [
+        {
+          "label": "500g / 27,400원",
+          "value": "500g / 27,400원 / 원산지 러시아",
+          "title": "중량 선택",
+          "source_spec": "500g",
+          "source_id": "DN-0172"
+        }
+      ],
+      "bulk_list": true
+    },
+    {
+      "rank": "63",
+      "name": "건고구마줄기(국산) 1Kg",
+      "category": "채소/농산",
+      "price": "건고구마줄기(국산) 1Kg 50,500원",
+      "note": "",
+      "image": "assets/1kg-9s5wyy99ala75suz6d10syu0a.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "64",
+      "name": "건고구마줄기(수입) 1Kg",
+      "category": "채소/농산",
+      "price": "건고구마줄기(수입) 1Kg 30,500원",
+      "note": "",
+      "image": "assets/1kg-9s5wyy99a95c164dx3u69pd3e.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "10",
+      "name": "사파이어 8Kg",
+      "category": "기타",
+      "price": "사파이어 8Kg 73,500원",
+      "note": "",
+      "image": "assets/8kg-914rg8uu9cns7a.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "24",
+      "name": "단감 10Kg",
+      "category": "기타",
+      "price": "단감 10Kg 2.5kg / 22,000원 / 5kg / 37,000원 / 7.5kg / 52,000원 / 10kg / 67,000원",
+      "note": "",
+      "image": "assets/10kg-fe9su58a.jpg",
+      "options": [
+        {
+          "label": "2.5kg / 22,000원",
+          "value": "2.5kg / 22,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 37,000원",
+          "value": "5kg / 37,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "7.5kg / 52,000원",
+          "value": "7.5kg / 52,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "10kg / 67,000원",
+          "value": "10kg / 67,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "36",
+      "name": "화이트용과 10개 5Kg",
+      "category": "기타",
+      "price": "화이트용과 10개 5Kg 1kg / 13,500원 / 2kg / 20,000원 / 3kg / 26,500원 / 4kg / 33,000원 / 5kg / 39,500원",
+      "note": "",
+      "image": "assets/10-5kg-y500ar1d8v0j12b2t1df2j.jpg",
+      "options": [
+        {
+          "label": "1kg / 13,500원",
+          "value": "1kg / 13,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 20,000원",
+          "value": "2kg / 20,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 26,500원",
+          "value": "3kg / 26,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 33,000원",
+          "value": "4kg / 33,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 39,500원",
+          "value": "5kg / 39,500원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "40",
+      "name": "부사 10Kg",
+      "category": "기타",
+      "price": "부사 10Kg 2.5kg / 19,000원 / 5kg / 31,000원 / 7.5kg / 42,500원 / 10kg / 54,500원",
+      "note": "",
+      "image": "assets/apple-10kg-20260702.jpg",
+      "options": [
+        {
+          "label": "2.5kg / 19,000원",
+          "value": "2.5kg / 19,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 31,000원",
+          "value": "5kg / 31,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "7.5kg / 42,500원",
+          "value": "7.5kg / 42,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "10kg / 54,500원",
+          "value": "10kg / 54,500원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "51",
+      "name": "아보카도 5Kg 25개",
+      "category": "기타",
+      "price": "아보카도 5Kg 25개 1kg / 18,000원 / 2kg / 29,000원 / 3kg / 40,000원 / 4kg / 51,000원 / 5kg / 62,000원",
+      "note": "",
+      "image": "assets/5kg-25-2500a171c8uv12upgz.jpg",
+      "options": [
+        {
+          "label": "1kg / 18,000원",
+          "value": "1kg / 18,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 29,000원",
+          "value": "2kg / 29,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 40,000원",
+          "value": "3kg / 40,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 51,000원",
+          "value": "4kg / 51,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 62,000원",
+          "value": "5kg / 62,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false
+    },
+    {
+      "rank": "60",
+      "name": "코코넛가루200g",
+      "category": "기타",
+      "price": "코코넛가루200g 9,000원",
+      "note": "",
+      "image": "assets/200g-9g3p78vpvo6v7ba.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "61",
+      "name": "코코넛슬라이스 400g",
+      "category": "기타",
+      "price": "코코넛슬라이스 400g 11,000원",
+      "note": "",
+      "image": "assets/400g-qp5tn06a2ow9bt39dr7ua.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "68",
+      "name": "건곤드레 국산 1000g",
+      "category": "기타",
+      "price": "건곤드레 국산 1000g 54,500원",
+      "note": "",
+      "image": "assets/1000g-zq10a22ag3bb81cowifl3a.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "69",
+      "name": "건곤드레 중국산 1000g",
+      "category": "기타",
+      "price": "건곤드레 중국산 1000g 30,500원",
+      "note": "",
+      "image": "assets/1000g-zq10a22ag3bb81cowifl3a76z.jpg",
+      "options": [],
+      "bulk_list": false
+    },
+    {
+      "rank": "73",
+      "name": "건부지갱이 1Kg 국산",
+      "category": "기타",
+      "price": "건부지갱이 1Kg 국산 54,500원",
+      "note": "",
+      "image": "assets/1kg-2j9sgoo8d778dmxgf5ttpg.jpg",
+      "options": [],
+      "bulk_list": false
+    }
+  ],
+  "category_counts": {
+    "과일": 45,
+    "채소/농산": 2,
+    "기타": 10,
+    "견과/건과": 76,
+    "수산/건어물": 72
+  }
+}
