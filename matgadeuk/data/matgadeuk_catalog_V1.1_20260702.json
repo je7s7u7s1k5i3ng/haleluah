@@ -8,7 +8,8 @@
       "note": "",
       "image": "assets/pear-naju-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "2",
@@ -18,7 +19,8 @@
       "note": "",
       "image": "assets/shine-muscat-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "3",
@@ -28,7 +30,8 @@
       "note": "",
       "image": "assets/hz2b194bba.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "4",
@@ -59,7 +62,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "5",
@@ -69,7 +73,8 @@
       "note": "",
       "image": "assets/bb0bw4moxpu7i.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "6",
@@ -105,7 +110,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "7",
@@ -141,7 +147,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "8",
@@ -151,7 +158,8 @@
       "note": "",
       "image": "assets/6o2b99a.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "9",
@@ -161,7 +169,8 @@
       "note": "난좌 포장",
       "image": "assets/ok0b96kjwd76p.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "12",
@@ -197,7 +206,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "13",
@@ -207,7 +217,8 @@
       "note": "",
       "image": "assets/4kg-9d4pn73dnnsbv2a.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "14",
@@ -238,7 +249,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "15",
@@ -269,7 +281,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "16",
@@ -279,7 +292,8 @@
       "note": "",
       "image": "assets/orange-blacklabel-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "17",
@@ -289,7 +303,8 @@
       "note": "",
       "image": "assets/2s-2-5kg-9968av37b8h4bhf0aba.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "18",
@@ -299,7 +314,8 @@
       "note": "",
       "image": "assets/pear-naju-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "19",
@@ -330,7 +346,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "20",
@@ -361,7 +378,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "21",
@@ -397,7 +415,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "22",
@@ -407,7 +426,8 @@
       "note": "",
       "image": "assets/2-5kg-he5x201b894a9duba.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "23",
@@ -417,7 +437,19 @@
       "note": "",
       "image": "assets/blueberry-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
+    },
+    {
+      "rank": "24",
+      "name": "단감 10Kg",
+      "category": "과일",
+      "price": "품절",
+      "note": "현재 품절입니다. 재입고 시 주문 가능합니다.",
+      "image": "assets/sweet-persimmon-soldout-20260702.jpg",
+      "options": [],
+      "bulk_list": false,
+      "sold_out": true
     },
     {
       "rank": "25",
@@ -453,7 +485,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "26",
@@ -463,7 +496,8 @@
       "note": "",
       "image": "assets/blueberry-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "27",
@@ -473,7 +507,8 @@
       "note": "",
       "image": "assets/mandarin-import-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "28",
@@ -483,7 +518,8 @@
       "note": "",
       "image": "assets/orange-blacklabel-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "29",
@@ -493,7 +529,8 @@
       "note": "",
       "image": "assets/9kg-uj7ss43b1xa.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "30",
@@ -503,7 +540,8 @@
       "note": "",
       "image": "assets/9kg-9g5qo0ymn8b.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "31",
@@ -534,7 +572,45 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
+    },
+    {
+      "rank": "36",
+      "name": "화이트용과 10개 5Kg",
+      "category": "과일",
+      "price": "화이트용과 10개 5Kg 1kg / 13,500원 / 2kg / 20,000원 / 3kg / 26,500원 / 4kg / 33,000원 / 5kg / 39,500원",
+      "note": "",
+      "image": "assets/dragon-fruit-white-20260702.jpg",
+      "options": [
+        {
+          "label": "1kg / 13,500원",
+          "value": "1kg / 13,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 20,000원",
+          "value": "2kg / 20,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 26,500원",
+          "value": "3kg / 26,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 33,000원",
+          "value": "4kg / 33,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 39,500원",
+          "value": "5kg / 39,500원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "37",
@@ -544,7 +620,8 @@
       "note": "",
       "image": "assets/grapefruit-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "38",
@@ -554,7 +631,8 @@
       "note": "",
       "image": "assets/5-8kg-o37xu9ppy1b8du.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "39",
@@ -564,7 +642,8 @@
       "note": "",
       "image": "assets/115-18kg-eq47axy6e1vg.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "41",
@@ -574,7 +653,8 @@
       "note": "",
       "image": "assets/plum-chuhui-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "42",
@@ -584,7 +664,8 @@
       "note": "",
       "image": "assets/6-8-1-5kg-zr01b278iigotqbcwtk0fnw6e.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "43",
@@ -594,7 +675,8 @@
       "note": "",
       "image": "assets/10-12-1-5kg-8u28boz9iumqmwbq0udng1l5f.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "44",
@@ -604,7 +686,8 @@
       "note": "",
       "image": "assets/15-18-1-5kg-8u28bhw2cpq5a0prh6l0g6a.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "45",
@@ -640,7 +723,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "46",
@@ -676,7 +760,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "47",
@@ -712,7 +797,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "48",
@@ -748,7 +834,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "49",
@@ -784,7 +871,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "50",
@@ -820,7 +908,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "62",
@@ -856,7 +945,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "70",
@@ -866,7 +956,8 @@
       "note": "",
       "image": "assets/dried-apricot-turkey-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "71",
@@ -876,7 +967,8 @@
       "note": "",
       "image": "assets/dried-apricot-usa-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "72",
@@ -886,7 +978,8 @@
       "note": "",
       "image": "assets/plum-chuhui-20260702.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "1000",
@@ -911,7 +1004,8 @@
           "source_id": "DN-0226"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1001",
@@ -936,7 +1030,8 @@
           "source_id": "DN-0228"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1002",
@@ -961,7 +1056,8 @@
           "source_id": "DN-0230"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1003",
@@ -986,7 +1082,8 @@
           "source_id": "DN-0232"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1004",
@@ -1004,7 +1101,8 @@
           "source_id": "DN-0234"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1005",
@@ -1029,7 +1127,8 @@
           "source_id": "DN-0235"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1006",
@@ -1054,7 +1153,8 @@
           "source_id": "DN-0237"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1007",
@@ -1093,7 +1193,8 @@
           "source_id": "DN-0241"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1008",
@@ -1111,7 +1212,8 @@
           "source_id": "DN-0243"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1009",
@@ -1129,7 +1231,8 @@
           "source_id": "DN-0244"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1010",
@@ -1147,7 +1250,8 @@
           "source_id": "DN-0245"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1011",
@@ -1172,7 +1276,8 @@
           "source_id": "DN-0410"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1012",
@@ -1190,7 +1295,8 @@
           "source_id": "DN-0414"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1013",
@@ -1215,7 +1321,8 @@
           "source_id": "DN-0411"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1014",
@@ -1233,7 +1340,8 @@
           "source_id": "DN-0413"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1015",
@@ -1251,7 +1359,8 @@
           "source_id": "DN-0246"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1016",
@@ -1269,7 +1378,8 @@
           "source_id": "DN-0426"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1017",
@@ -1287,7 +1397,8 @@
           "source_id": "DN-0415"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1018",
@@ -1312,7 +1423,8 @@
           "source_id": "DN-0416"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1019",
@@ -1344,7 +1456,8 @@
           "source_id": "DN-0419"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1020",
@@ -1362,7 +1475,8 @@
           "source_id": "DN-0421"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1021",
@@ -1394,7 +1508,8 @@
           "source_id": "DN-0423"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1022",
@@ -1412,7 +1527,8 @@
           "source_id": "DN-0425"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1023",
@@ -1430,7 +1546,8 @@
           "source_id": "DN-0247"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1024",
@@ -1448,7 +1565,8 @@
           "source_id": "DN-0248"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1025",
@@ -1480,7 +1598,8 @@
           "source_id": "DN-0249"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1026",
@@ -1498,7 +1617,8 @@
           "source_id": "DN-0252"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1027",
@@ -1516,7 +1636,8 @@
           "source_id": "DN-0253"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1028",
@@ -1541,7 +1662,8 @@
           "source_id": "DN-0254"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1029",
@@ -1573,7 +1695,8 @@
           "source_id": "DN-0256"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1030",
@@ -1619,7 +1742,8 @@
           "source_id": "DN-0263"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1031",
@@ -1644,7 +1768,8 @@
           "source_id": "DN-0264"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1032",
@@ -1676,7 +1801,8 @@
           "source_id": "DN-0268"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1033",
@@ -1694,7 +1820,8 @@
           "source_id": "DN-0269"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1034",
@@ -1719,7 +1846,8 @@
           "source_id": "DN-0270"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1035",
@@ -1751,7 +1879,8 @@
           "source_id": "DN-0272"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1036",
@@ -1769,7 +1898,8 @@
           "source_id": "DN-0275"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1037",
@@ -1794,7 +1924,8 @@
           "source_id": "DN-0277"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1038",
@@ -1812,7 +1943,8 @@
           "source_id": "DN-0278"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1039",
@@ -1830,7 +1962,8 @@
           "source_id": "DN-0279"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1040",
@@ -1848,7 +1981,8 @@
           "source_id": "DN-0280"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1041",
@@ -1873,7 +2007,8 @@
           "source_id": "DN-0282"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1042",
@@ -1898,7 +2033,8 @@
           "source_id": "DN-0285"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1043",
@@ -1916,7 +2052,8 @@
           "source_id": "DN-0286"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1044",
@@ -1962,7 +2099,8 @@
           "source_id": "DN-0429"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1045",
@@ -1994,7 +2132,8 @@
           "source_id": "DN-0287"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1046",
@@ -2026,7 +2165,8 @@
           "source_id": "DN-0290"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1047",
@@ -2044,7 +2184,8 @@
           "source_id": "DN-0293"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1048",
@@ -2062,7 +2203,8 @@
           "source_id": "DN-0294"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1049",
@@ -2094,7 +2236,8 @@
           "source_id": "DN-0295"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1050",
@@ -2126,7 +2269,8 @@
           "source_id": "DN-0298"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1051",
@@ -2158,7 +2302,8 @@
           "source_id": "DN-0433"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1052",
@@ -2190,7 +2335,8 @@
           "source_id": "DN-0436"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1053",
@@ -2208,7 +2354,8 @@
           "source_id": "DN-0301"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1054",
@@ -2226,7 +2373,8 @@
           "source_id": "DN-0302"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1055",
@@ -2265,7 +2413,8 @@
           "source_id": "DN-0306"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1056",
@@ -2297,7 +2446,8 @@
           "source_id": "DN-0307"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1057",
@@ -2315,7 +2465,8 @@
           "source_id": "DN-0310"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1058",
@@ -2333,7 +2484,8 @@
           "source_id": "DN-0311"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1059",
@@ -2351,7 +2503,8 @@
           "source_id": "DN-0312"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1060",
@@ -2383,7 +2536,8 @@
           "source_id": "DN-0314"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1061",
@@ -2401,7 +2555,8 @@
           "source_id": "DN-0316"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1062",
@@ -2419,7 +2574,8 @@
           "source_id": "DN-0317"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1063",
@@ -2444,7 +2600,8 @@
           "source_id": "DN-0318"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1064",
@@ -2476,7 +2633,8 @@
           "source_id": "DN-0320"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1065",
@@ -2494,7 +2652,8 @@
           "source_id": "DN-0323"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1066",
@@ -2519,7 +2678,8 @@
           "source_id": "DN-0324"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1067",
@@ -2558,7 +2718,8 @@
           "source_id": "DN-0328"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1068",
@@ -2576,7 +2737,8 @@
           "source_id": "DN-0330"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1069",
@@ -2601,7 +2763,8 @@
           "source_id": "DN-0331"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1070",
@@ -2626,7 +2789,8 @@
           "source_id": "DN-0334"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1071",
@@ -2651,7 +2815,8 @@
           "source_id": "DN-0335"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1072",
@@ -2669,7 +2834,8 @@
           "source_id": "DN-0337"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1073",
@@ -2694,7 +2860,8 @@
           "source_id": "DN-0338"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1074",
@@ -2733,7 +2900,8 @@
           "source_id": "DN-0342"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1075",
@@ -2751,7 +2919,8 @@
           "source_id": "DN-0438"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1076",
@@ -2776,7 +2945,8 @@
           "source_id": "DN-0001"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1077",
@@ -2794,7 +2964,8 @@
           "source_id": "DN-0004"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1078",
@@ -2812,7 +2983,8 @@
           "source_id": "DN-0003"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1079",
@@ -2837,7 +3009,8 @@
           "source_id": "DN-0005"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1080",
@@ -2862,7 +3035,8 @@
           "source_id": "DN-0008"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1081",
@@ -2894,7 +3068,8 @@
           "source_id": "DN-0011"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1082",
@@ -2926,7 +3101,8 @@
           "source_id": "DN-0012"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1083",
@@ -2958,7 +3134,8 @@
           "source_id": "DN-0015"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1084",
@@ -2976,7 +3153,8 @@
           "source_id": "DN-0020"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1085",
@@ -3008,7 +3186,8 @@
           "source_id": "DN-0021"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1086",
@@ -3040,7 +3219,8 @@
           "source_id": "DN-0024"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1087",
@@ -3058,7 +3238,8 @@
           "source_id": "DN-0027"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1088",
@@ -3083,7 +3264,8 @@
           "source_id": "DN-0018"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1089",
@@ -3108,7 +3290,8 @@
           "source_id": "DN-0028"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1090",
@@ -3133,7 +3316,8 @@
           "source_id": "DN-0030"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1091",
@@ -3151,7 +3335,8 @@
           "source_id": "DN-0032"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1092",
@@ -3176,7 +3361,8 @@
           "source_id": "DN-0033"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1093",
@@ -3201,7 +3387,8 @@
           "source_id": "DN-0035"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1094",
@@ -3226,7 +3413,8 @@
           "source_id": "DN-0037"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1095",
@@ -3258,7 +3446,8 @@
           "source_id": "DN-0041"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1096",
@@ -3290,7 +3479,8 @@
           "source_id": "DN-0046"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1097",
@@ -3308,7 +3498,8 @@
           "source_id": "DN-0045"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1098",
@@ -3326,7 +3517,8 @@
           "source_id": "DN-0044"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1099",
@@ -3344,7 +3536,8 @@
           "source_id": "DN-0049"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1100",
@@ -3362,7 +3555,8 @@
           "source_id": "DN-0050"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1101",
@@ -3380,7 +3574,8 @@
           "source_id": "DN-0051"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1102",
@@ -3398,7 +3593,8 @@
           "source_id": "DN-0058"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1103",
@@ -3430,7 +3626,8 @@
           "source_id": "DN-0057"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1104",
@@ -3448,7 +3645,8 @@
           "source_id": "DN-0063"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1105",
@@ -3480,7 +3678,8 @@
           "source_id": "DN-0064"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1106",
@@ -3498,7 +3697,8 @@
           "source_id": "DN-0065"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1107",
@@ -3516,7 +3716,8 @@
           "source_id": "DN-0066"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1108",
@@ -3555,7 +3756,8 @@
           "source_id": "DN-0070"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1109",
@@ -3573,7 +3775,8 @@
           "source_id": "DN-0071"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1110",
@@ -3605,7 +3808,8 @@
           "source_id": "DN-0072"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1111",
@@ -3623,7 +3827,8 @@
           "source_id": "DN-0075"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1112",
@@ -3641,7 +3846,8 @@
           "source_id": "DN-0076"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1113",
@@ -3673,7 +3879,8 @@
           "source_id": "DN-0077"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1114",
@@ -3712,7 +3919,8 @@
           "source_id": "DN-0082"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1115",
@@ -3730,7 +3938,8 @@
           "source_id": "DN-0084"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1116",
@@ -3748,7 +3957,8 @@
           "source_id": "DN-0120"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1117",
@@ -3780,7 +3990,8 @@
           "source_id": "DN-0085"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1118",
@@ -3805,7 +4016,8 @@
           "source_id": "DN-0092"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1119",
@@ -3837,7 +4049,8 @@
           "source_id": "DN-0096"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1120",
@@ -3855,7 +4068,8 @@
           "source_id": "DN-0099"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1121",
@@ -3887,7 +4101,8 @@
           "source_id": "DN-0100"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1122",
@@ -3905,7 +4120,8 @@
           "source_id": "DN-0103"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1123",
@@ -3923,7 +4139,8 @@
           "source_id": "DN-0104"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1124",
@@ -3976,7 +4193,8 @@
           "source_id": "DN-0110"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1125",
@@ -3994,7 +4212,8 @@
           "source_id": "DN-0122"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1126",
@@ -4012,7 +4231,8 @@
           "source_id": "DN-0121"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1127",
@@ -4037,7 +4257,8 @@
           "source_id": "DN-0115"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1128",
@@ -4076,7 +4297,8 @@
           "source_id": "DN-0118"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1129",
@@ -4101,7 +4323,8 @@
           "source_id": "DN-0124"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1130",
@@ -4140,7 +4363,8 @@
           "source_id": "DN-0127"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1131",
@@ -4158,7 +4382,8 @@
           "source_id": "DN-0129"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1132",
@@ -4183,7 +4408,8 @@
           "source_id": "DN-0130"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1133",
@@ -4215,7 +4441,8 @@
           "source_id": "DN-0132"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1134",
@@ -4247,7 +4474,8 @@
           "source_id": "DN-0135"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1135",
@@ -4265,7 +4493,8 @@
           "source_id": "DN-0145"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1136",
@@ -4297,7 +4526,8 @@
           "source_id": "DN-0138"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1137",
@@ -4329,7 +4559,8 @@
           "source_id": "DN-0141"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1138",
@@ -4347,7 +4578,8 @@
           "source_id": "DN-0144"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1139",
@@ -4372,7 +4604,8 @@
           "source_id": "DN-0147"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1140",
@@ -4397,7 +4630,8 @@
           "source_id": "DN-0149"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1141",
@@ -4422,7 +4656,8 @@
           "source_id": "DN-0152"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1142",
@@ -4447,7 +4682,8 @@
           "source_id": "DN-0155"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1143",
@@ -4472,7 +4708,8 @@
           "source_id": "DN-0156"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1144",
@@ -4497,7 +4734,8 @@
           "source_id": "DN-0090"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1145",
@@ -4515,7 +4753,8 @@
           "source_id": "DN-0165"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1146",
@@ -4547,7 +4786,8 @@
           "source_id": "DN-0169"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "1147",
@@ -4565,7 +4805,8 @@
           "source_id": "DN-0172"
         }
       ],
-      "bulk_list": true
+      "bulk_list": true,
+      "sold_out": false
     },
     {
       "rank": "63",
@@ -4575,7 +4816,8 @@
       "note": "",
       "image": "assets/1kg-9s5wyy99ala75suz6d10syu0a.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "64",
@@ -4585,7 +4827,8 @@
       "note": "",
       "image": "assets/1kg-9s5wyy99a95c164dx3u69pd3e.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "10",
@@ -4595,74 +4838,8 @@
       "note": "",
       "image": "assets/8kg-914rg8uu9cns7a.jpg",
       "options": [],
-      "bulk_list": false
-    },
-    {
-      "rank": "24",
-      "name": "단감 10Kg",
-      "category": "기타",
-      "price": "단감 10Kg 2.5kg / 22,000원 / 5kg / 37,000원 / 7.5kg / 52,000원 / 10kg / 67,000원",
-      "note": "",
-      "image": "assets/10kg-fe9su58a.jpg",
-      "options": [
-        {
-          "label": "2.5kg / 22,000원",
-          "value": "2.5kg / 22,000원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "5kg / 37,000원",
-          "value": "5kg / 37,000원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "7.5kg / 52,000원",
-          "value": "7.5kg / 52,000원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "10kg / 67,000원",
-          "value": "10kg / 67,000원",
-          "title": "중량 선택"
-        }
-      ],
-      "bulk_list": false
-    },
-    {
-      "rank": "36",
-      "name": "화이트용과 10개 5Kg",
-      "category": "기타",
-      "price": "화이트용과 10개 5Kg 1kg / 13,500원 / 2kg / 20,000원 / 3kg / 26,500원 / 4kg / 33,000원 / 5kg / 39,500원",
-      "note": "",
-      "image": "assets/10-5kg-y500ar1d8v0j12b2t1df2j.jpg",
-      "options": [
-        {
-          "label": "1kg / 13,500원",
-          "value": "1kg / 13,500원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "2kg / 20,000원",
-          "value": "2kg / 20,000원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "3kg / 26,500원",
-          "value": "3kg / 26,500원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "4kg / 33,000원",
-          "value": "4kg / 33,000원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "5kg / 39,500원",
-          "value": "5kg / 39,500원",
-          "title": "중량 선택"
-        }
-      ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "40",
@@ -4693,7 +4870,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "51",
@@ -4729,7 +4907,8 @@
           "title": "중량 선택"
         }
       ],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "60",
@@ -4739,7 +4918,8 @@
       "note": "",
       "image": "assets/200g-9g3p78vpvo6v7ba.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "61",
@@ -4749,7 +4929,8 @@
       "note": "",
       "image": "assets/400g-qp5tn06a2ow9bt39dr7ua.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "68",
@@ -4759,7 +4940,8 @@
       "note": "",
       "image": "assets/1000g-zq10a22ag3bb81cowifl3a.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "69",
@@ -4769,7 +4951,8 @@
       "note": "",
       "image": "assets/1000g-zq10a22ag3bb81cowifl3a76z.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     },
     {
       "rank": "73",
@@ -4779,13 +4962,14 @@
       "note": "",
       "image": "assets/1kg-2j9sgoo8d778dmxgf5ttpg.jpg",
       "options": [],
-      "bulk_list": false
+      "bulk_list": false,
+      "sold_out": false
     }
   ],
   "category_counts": {
-    "과일": 45,
+    "과일": 47,
     "채소/농산": 2,
-    "기타": 10,
+    "기타": 8,
     "견과/건과": 76,
     "수산/건어물": 72
   }
