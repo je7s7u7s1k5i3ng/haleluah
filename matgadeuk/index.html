@@ -36,7 +36,7 @@
 <script>
 const CATEGORY_ORDER=["과일", "견과/건과", "수산/건어물", "채소/농산", "기타"];
 const CATEGORY_IDS={"과일": "cat-fruit", "견과/건과": "cat-nuts-dried", "수산/건어물": "cat-dried-seafood", "채소/농산": "cat-vegetable", "기타": "cat-other"};
-const CATALOG_URL='data/matgadeuk_catalog_V1.1_20260702.json?v=20260702b';
+const CATALOG_URL='data/matgadeuk_catalog_V1.1_20260702.json?v=20260702coconut-order';
 let products=[], currentProduct=null;
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function categoryId(v){return CATEGORY_IDS[v]||('cat-'+String(v).replace(/[^0-9A-Za-z가-힣]+/g,'-'));}
