@@ -199,6 +199,17 @@
       "sold_out": false
     },
     {
+      "rank": "10",
+      "name": "사파이어 8Kg",
+      "category": "과일",
+      "price": "사파이어 8Kg 73,500원",
+      "note": "",
+      "image": "assets/black-sapphire-20260702.jpg",
+      "options": [],
+      "bulk_list": false,
+      "sold_out": false
+    },
+    {
       "rank": "12",
       "name": "골드망고 5Kg",
       "category": "과일",
@@ -1366,28 +1377,6 @@
         }
       ],
       "bulk_list": true,
-      "sold_out": false
-    },
-    {
-      "rank": "63",
-      "name": "건고구마줄기(국산) 1Kg",
-      "category": "건어물",
-      "price": "건고구마줄기(국산) 1Kg 50,500원",
-      "note": "",
-      "image": "assets/dried-sweet-potato-stem-20260702.jpg",
-      "options": [],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
-      "rank": "64",
-      "name": "건고구마줄기(수입) 1Kg",
-      "category": "건어물",
-      "price": "건고구마줄기(수입) 1Kg 30,500원",
-      "note": "",
-      "image": "assets/dried-sweet-potato-stem-20260702.jpg",
-      "options": [],
-      "bulk_list": false,
       "sold_out": false
     },
     {
@@ -7122,50 +7111,6 @@
       "sold_out": false
     },
     {
-      "rank": "60",
-      "name": "코코넛가루200g",
-      "category": "건과류",
-      "price": "코코넛가루200g 9,000원",
-      "note": "",
-      "image": "assets/coconut-powder-20260702.jpg",
-      "options": [],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
-      "rank": "61",
-      "name": "코코넛슬라이스 400g",
-      "category": "건과류",
-      "price": "코코넛슬라이스 400g 11,000원",
-      "note": "",
-      "image": "assets/coconut-slice-20260702.jpg",
-      "options": [],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
-      "rank": "70",
-      "name": "건살구 터키 1000g",
-      "category": "건과류",
-      "price": "건살구 터키 1000g 29,500원",
-      "note": "",
-      "image": "assets/dried-apricot-turkey-20260702.jpg",
-      "options": [],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
-      "rank": "71",
-      "name": "건살구 미국 1000g",
-      "category": "건과류",
-      "price": "건살구 미국 1000g 17,000원",
-      "note": "",
-      "image": "assets/dried-apricot-usa-20260702.jpg",
-      "options": [],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
       "rank": "1198",
       "name": "건살구 터키산",
       "category": "건과류",
@@ -7620,17 +7565,6 @@
       "sold_out": false
     },
     {
-      "rank": "10",
-      "name": "사파이어 8Kg",
-      "category": "기타",
-      "price": "사파이어 8Kg 73,500원",
-      "note": "",
-      "image": "assets/8kg-914rg8uu9cns7a.jpg",
-      "options": [],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
       "rank": "40",
       "name": "부사 10Kg",
       "category": "기타",
@@ -7734,11 +7668,11 @@
     }
   ],
   "category_counts": {
-    "과일": 45,
-    "건과류": 22,
-    "건어물": 183,
-    "기타": 6,
+    "과일": 46,
+    "기타": 5,
     "수산물": 15,
-    "견과류": 58
+    "건어물": 181,
+    "견과류": 58,
+    "건과류": 18
   }
 }
