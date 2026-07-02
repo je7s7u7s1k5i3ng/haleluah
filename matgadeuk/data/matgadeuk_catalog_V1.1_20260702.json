@@ -236,6 +236,17 @@
       "sold_out": false
     },
     {
+      "rank": "9",
+      "name": "설향멜론",
+      "category": "과일",
+      "price": "가격 문의",
+      "note": "",
+      "image": "assets/seolhyang-melon-20260702.jpg",
+      "options": [],
+      "bulk_list": false,
+      "sold_out": false
+    },
+    {
       "rank": "10",
       "name": "사파이어 8Kg",
       "category": "과일",
@@ -7760,7 +7771,7 @@
     }
   ],
   "category_counts": {
-    "과일": 46,
+    "과일": 47,
     "건어물": 183,
     "건과류": 22,
     "기타": 5,
