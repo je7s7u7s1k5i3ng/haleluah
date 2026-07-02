@@ -11,15 +11,9 @@
 <body>
 <main class="wrap">
 <header class="hero"><img class="logo" src="assets/logo.jpg" alt="맛가득"><h1>맛가득</h1><p class="phone">010-7701-1586</p><p class="lead">네이버 맛가득과 동일한 곳입니다. 카테고리에서 품목을 고르고, 중량을 선택해 주문서를 작성해 주세요.</p></header>
-<nav class="nav"><a href="#top">전체</a><a href="#cat-fruit" data-cat="과일">과일</a><a href="#cat-nuts-dried" data-cat="견과/건과">견과/건과</a><a href="#cat-dried-seafood" data-cat="수산/건어물">수산/건어물</a><a href="#cat-vegetable" data-cat="채소/농산">채소/농산</a><a href="#cat-other" data-cat="기타">기타</a><a href="#lookup">주문조회</a><a href="#guide">주문안내</a></nav>
+<nav class="nav"><a href="#top">전체</a><a href="#cat-fruit" data-cat="과일">과일</a><a href="#cat-nuts-dried" data-cat="견과/건과">견과/건과</a><a href="#cat-dried-seafood" data-cat="수산/건어물">수산/건어물</a><a href="#cat-vegetable" data-cat="채소/농산">채소/농산</a><a href="#cat-other" data-cat="기타">기타</a><a href="#guide">주문안내</a></nav>
 <div id="top" class="notice"><b>하나은행 225-910100-54404</b><br>예금주 호종건<br>주문자와 동일한 입금자명으로 입금하셔야 확인이 빠릅니다. 합배송은 주문서 품목 칸에 여러 품목을 같이 적어 주세요.</div>
 <div id="catalog"><p class="loading">품목을 불러오는 중입니다.</p></div>
-<section id="lookup" class="section"><h2>주문내역 확인</h2><div class="notice">
-<label>주문번호</label><input id="lookup-order" placeholder="예: MG-20260702-0001">
-<label>전화번호</label><input id="lookup-phone" placeholder="주문할 때 입력한 전화번호">
-<button id="lookup-btn" type="button" style="margin-top:12px">주문내역 확인</button>
-<div id="lookup-result" class="small" style="margin-top:12px"></div>
-</div></section>
 <section id="guide" class="section"><h2>주문안내</h2><div class="notice">전화 주문: 010-7701-1586<br>사업자: 베라카주식회사 / 698-86-02906<br>주소: 경기도 용인시 구성로 279번길 19 1층</div></section>
 </main>
 <div id="modal" class="modal"><div class="panel">
@@ -43,7 +37,6 @@
 const CATEGORY_ORDER=["과일", "견과/건과", "수산/건어물", "채소/농산", "기타"];
 const CATEGORY_IDS={"과일": "cat-fruit", "견과/건과": "cat-nuts-dried", "수산/건어물": "cat-dried-seafood", "채소/농산": "cat-vegetable", "기타": "cat-other"};
 const CATALOG_URL='data/matgadeuk_catalog_V1.1_20260702.json?v=20260702-strawberry-note-clean';
-const ORDER_API='https://script.google.com/macros/s/AKfycbxGWr7jU0OUZOQyyYvBVxLUs2OXwRoJ54iSo8DPxHL-x9Xuhvu6QBwWX-hIA2tRRZDHDQ/exec';
 let products=[], currentProduct=null;
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function categoryId(v){return CATEGORY_IDS[v]||('cat-'+String(v).replace(/[^0-9A-Za-z가-힣]+/g,'-'));}
@@ -56,7 +49,6 @@ function bindFilters(){document.querySelectorAll('.filter').forEach(input=>input
 function openOrder(p){currentProduct=p;document.getElementById('product').value=p.name;const weightBox=document.getElementById('weight-options'),select=document.getElementById('weight-select');select.innerHTML='';if(p.options&&p.options.length){p.options.forEach(opt=>{const el=document.createElement('option');el.value=opt.value;el.textContent=opt.label;select.appendChild(el);});document.getElementById('weight-label').textContent=(p.name||'')+' 중량 선택';weightBox.style.display='block';}else{weightBox.style.display='none';}document.getElementById('modal').style.display='flex';}
 fetch(CATALOG_URL).then(r=>r.json()).then(data=>{products=data.products||[];renderCatalog();}).catch(()=>{document.getElementById('catalog').innerHTML='<p class="loading">품목 목록을 불러오지 못했습니다. 새로고침 후 다시 확인해 주세요.</p>';}); 
 document.getElementById('close').onclick=function(){document.getElementById('modal').style.display='none'};
-document.getElementById('lookup-btn').onclick=function(){const orderNo=document.getElementById('lookup-order').value.trim();const phone=document.getElementById('lookup-phone').value.trim();const out=document.getElementById('lookup-result');if(!orderNo||!phone){alert('주문번호와 전화번호를 입력해 주세요.');return;}out.textContent='조회 중입니다.';fetch(ORDER_API+'?action=lookup&order_no='+encodeURIComponent(orderNo)+'&phone='+encodeURIComponent(phone)).then(r=>r.json()).then(res=>{if(!res.ok||!res.order){out.textContent=res.message||'주문 내역을 찾을 수 없습니다.';return;}const o=res.order;out.innerHTML='<b>주문번호</b> '+esc(o.order_no)+'<br><b>주문일시</b> '+esc(o.date)+' '+esc(o.time)+'<br><b>품목</b> '+esc(o.product)+'<br><b>수량</b> '+esc(o.qty)+'<br><b>입금상태</b> '+esc(o.deposit_status)+'<br><b>주문상태</b> '+esc(o.order_status)+'<br><b>배송상태</b> '+esc(o.shipping_status);}).catch(()=>{out.textContent='조회가 지연되고 있습니다. 잠시 후 다시 확인해 주세요.';});};
 document.getElementById('complete').onclick=function(){let product=document.getElementById('product').value, qty=document.getElementById('qty').value, name=document.getElementById('name').value, phone=document.getElementById('phone').value, payer=document.getElementById('payer').value, addr=document.getElementById('addr').value, memo=document.getElementById('memo').value;if(currentProduct&&currentProduct.options&&currentProduct.options.length&&document.getElementById('weight-options').style.display!=='none'){product=product+' / '+document.getElementById('weight-select').value;}if(!product||!qty||!name||!phone||!payer||!addr){alert('품목, 수량, 주문자명, 전화번호, 입금자명, 주소를 입력해 주세요.');return;}if(name.trim()!==payer.trim()){alert('입금자명은 주문자명과 동일해야 합니다.');return;}if(!confirm('입금 완료하셨나요?\n하나은행 225-910100-54404\n예금주 호종건')) return;const payload={product,qty,customer_name:name,phone,depositor:payer,address:addr,memo,source:'github-pages'};const btn=document.getElementById('complete');btn.disabled=true;btn.textContent='주문 접수 중...';fetch('https://script.google.com/macros/s/AKfycbxGWr7jU0OUZOQyyYvBVxLUs2OXwRoJ54iSo8DPxHL-x9Xuhvu6QBwWX-hIA2tRRZDHDQ/exec',{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}).then(r=>r.json()).then(res=>{if(res&&res.ok){alert('주문이 접수되었습니다.\n주문번호: '+res.order_no);document.getElementById('modal').style.display='none';}else{throw new Error((res&&res.message)||'주문 접수 실패');}}).catch(()=>{const body='맛가득 주문%0A품목: '+encodeURIComponent(product)+'%0A수량: '+encodeURIComponent(qty)+'%0A주문자: '+encodeURIComponent(name)+'%0A전화: '+encodeURIComponent(phone)+'%0A입금자: '+encodeURIComponent(payer)+'%0A주소: '+encodeURIComponent(addr)+'%0A요청: '+encodeURIComponent(memo);alert('자동 접수가 지연되어 문자 주문 화면을 엽니다. 전송해 주세요.');location.href='sms:01077011586?body='+body;}).finally(()=>{btn.disabled=false;btn.textContent='입금 완료 후 주문하기';});};
 </script>
 </body>
