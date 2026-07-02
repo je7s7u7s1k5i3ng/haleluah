@@ -562,12 +562,12 @@
       "rank": "30",
       "name": "한라봉 9Kg",
       "category": "과일",
-      "price": "한라봉 9Kg 59,500원",
-      "note": "",
+      "price": "품절",
+      "note": "현재 품절입니다. 재입고 시 주문 가능합니다.",
       "image": "assets/9kg-9g5qo0ymn8b.jpg",
       "options": [],
       "bulk_list": false,
-      "sold_out": false
+      "sold_out": true
     },
     {
       "rank": "31",
@@ -654,8 +654,8 @@
       "name": "레드키위 5.8Kg",
       "category": "과일",
       "price": "레드키위 5.8Kg 79,500원",
-      "note": "",
-      "image": "assets/5-8kg-o37xu9ppy1b8du.jpg",
+      "note": "레드키위 썸네일 사진 적용",
+      "image": "assets/red-kiwi-zespri-20260702.jpg",
       "options": [],
       "bulk_list": false,
       "sold_out": false
@@ -687,8 +687,8 @@
       "name": "하우스복숭아 6-8과 1.5kg",
       "category": "과일",
       "price": "하우스복숭아 6-8과 1.5kg 38,000원",
-      "note": "",
-      "image": "assets/6-8-1-5kg-zr01b278iigotqbcwtk0fnw6e.jpg",
+      "note": "하우스복숭아 썸네일 사진 적용",
+      "image": "assets/house-peach-20260702.jpg",
       "options": [],
       "bulk_list": false,
       "sold_out": false
@@ -698,8 +698,8 @@
       "name": "하우스복숭아 10-12과 1.5kg",
       "category": "과일",
       "price": "하우스복숭아 10-12과 1.5kg 34,500원",
-      "note": "",
-      "image": "assets/10-12-1-5kg-8u28boz9iumqmwbq0udng1l5f.jpg",
+      "note": "하우스복숭아 썸네일 사진 적용",
+      "image": "assets/house-peach-20260702.jpg",
       "options": [],
       "bulk_list": false,
       "sold_out": false
