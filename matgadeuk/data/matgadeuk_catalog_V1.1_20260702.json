@@ -60,6 +60,23 @@
       "sold_out": false
     },
     {
+      "rank": "4",
+      "name": "망고참외",
+      "category": "과일",
+      "price": "망고참외 2kg 38,000원",
+      "note": "2kg 기준",
+      "image": "assets/mango-chamoe-20260703.jpg",
+      "options": [
+        {
+          "label": "2kg / 38,000원",
+          "value": "2kg / 38,000원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false,
+      "sold_out": false
+    },
+    {
       "rank": "62",
       "name": "체리 5Kg",
       "category": "과일",
