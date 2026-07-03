@@ -53,7 +53,7 @@
       "name": "영업용 배",
       "category": "과일",
       "price": "영업용 기스배 15kg 32-40과 45,000원 / 15Kg 16-26과 49,000원",
-      "note": "32-40과 / 16-26과 옵션 선택 가능",
+      "note": "",
       "image": "assets/pear-naju-20260702.jpg",
       "options": [
         {
@@ -952,7 +952,7 @@
       "name": "배 큰과수 15Kg 16-26과",
       "category": "과일",
       "price": "배 큰과수 15Kg 16-26과 51,000원",
-      "note": "16-26과 기준",
+      "note": "",
       "image": "assets/pear-naju-20260702.jpg",
       "options": [],
       "bulk_list": false,
