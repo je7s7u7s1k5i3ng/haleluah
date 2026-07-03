@@ -52,10 +52,21 @@
       "rank": "3",
       "name": "영업용 배",
       "category": "과일",
-      "price": "영업용 기스배 15kg 45,000원",
-      "note": "영업용 기스배",
+      "price": "영업용 기스배 15kg 45,000원 / 15Kg 16-26과 49,000원",
+      "note": "??? ??? / ?? ?? ??",
       "image": "assets/pear-naju-20260702.jpg",
-      "options": [],
+      "options": [
+        {
+          "label": "15kg / 45,000원",
+          "value": "15kg / 45,000원",
+          "title": "옵션 선택"
+        },
+        {
+          "label": "15Kg 16-26과 / 49,000원",
+          "value": "15Kg 16-26과 / 49,000원",
+          "title": "옵션 선택"
+        }
+      ],
       "bulk_list": false,
       "sold_out": false
     },
