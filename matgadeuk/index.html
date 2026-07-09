@@ -39,6 +39,7 @@
 <div id="modal" class="modal"><div class="panel">
 <h2 style="margin:0 0 8px">주문서 작성</h2>
 <p class="small">로그인 없이 주문 가능합니다. 선택한 품목과 중량은 주문서에 자동으로 들어갑니다.</p>
+<div id="order-preview" style="display:none;margin:10px 0 12px"><img id="order-preview-img" src="" alt="" style="display:block;width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;border:1px solid #eadfce;border-radius:8px"></div>
 <label>품목</label><textarea id="product" rows="3"></textarea>
 <div id="weight-options" style="display:none">
 <label id="weight-label">중량 선택</label>
@@ -56,7 +57,7 @@
 <script>
 const CATEGORY_ORDER=["과일", "수산물", "건어물", "견과류", "건과류", "채소/농산", "기타"];
 const CATEGORY_IDS={"과일": "cat-fruit", "수산물": "cat-seafood", "건어물": "cat-dried-seafood", "견과류": "cat-nuts", "건과류": "cat-dried-fruit", "채소/농산": "cat-vegetable", "기타": "cat-other"};
-const CATALOG_URL='data/matgadeuk_catalog_V1.1_20260702.json?v=20260709-strawberry-500g-v23';
+const CATALOG_URL='data/matgadeuk_catalog_V1.1_20260702.json?v=20260709-option-image-v24';
 let products=[], currentProduct=null;
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function categoryId(v){return CATEGORY_IDS[v]||('cat-'+String(v).replace(/[^0-9A-Za-z가-힣]+/g,'-'));}
@@ -68,7 +69,8 @@ function renderCategory(cat){const root=document.getElementById('catalog');const
 function renderCatalog(){const cat=hashCategory();if(cat){renderCategory(cat);}else{renderHome();}}
 window.addEventListener('hashchange',renderCatalog);
 function bindFilters(){document.querySelectorAll('.filter').forEach(input=>input.addEventListener('input',function(){const q=this.value.trim().toLowerCase();this.closest('.bulk-section').querySelectorAll('.item-row').forEach(row=>row.style.display=row.textContent.toLowerCase().includes(q)?'grid':'none');}));}
-function openOrder(p){currentProduct=p;document.getElementById('product').value=p.name;const weightBox=document.getElementById('weight-options'),select=document.getElementById('weight-select');select.innerHTML='';if(p.options&&p.options.length){p.options.forEach(opt=>{const el=document.createElement('option');el.value=opt.value;el.textContent=opt.label;select.appendChild(el);});document.getElementById('weight-label').textContent=(p.name||'')+' 중량 선택';weightBox.style.display='block';}else{weightBox.style.display='none';}document.getElementById('modal').style.display='flex';}
+function updateOrderImage(){const box=document.getElementById('order-preview'),img=document.getElementById('order-preview-img'),select=document.getElementById('weight-select');let src=(currentProduct&&currentProduct.image)||'assets/logo.jpg';if(select&&select.selectedOptions&&select.selectedOptions[0]&&select.selectedOptions[0].dataset.image){src=select.selectedOptions[0].dataset.image;}img.src=src;img.alt=(currentProduct&&currentProduct.name)||'선택 품목';box.style.display=src?'block':'none';}
+function openOrder(p){currentProduct=p;document.getElementById('product').value=p.name;const weightBox=document.getElementById('weight-options'),select=document.getElementById('weight-select');select.innerHTML='';if(p.options&&p.options.length){p.options.forEach(opt=>{const el=document.createElement('option');el.value=opt.value;el.textContent=opt.label;el.dataset.image=opt.image||p.image||'assets/logo.jpg';select.appendChild(el);});document.getElementById('weight-label').textContent=(p.name||'')+' 중량 선택';weightBox.style.display='block';select.onchange=updateOrderImage;}else{weightBox.style.display='none';select.onchange=null;}updateOrderImage();document.getElementById('modal').style.display='flex';}
 fetch(CATALOG_URL).then(r=>r.json()).then(data=>{products=data.products||[];renderCatalog();}).catch(()=>{document.getElementById('catalog').innerHTML='<p class="loading">품목 목록을 불러오지 못했습니다. 새로고침 후 다시 확인해 주세요.</p>';}); 
 
 const ORDER_LOOKUP_ENDPOINT='https://script.google.com/macros/s/AKfycbxGWr7jU0OUZOQyyYvBVxLUs2OXwRoJ54iSo8DPxHL-x9Xuhvu6QBwWX-hIA2tRRZDHDQ/exec';
