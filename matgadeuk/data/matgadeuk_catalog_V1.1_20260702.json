@@ -41,13 +41,13 @@
       "rank": "2",
       "name": "여름딸기",
       "category": "과일",
-      "price": "여름딸기 500g 21,000원 / 1kg 37,000원",
+      "price": "여름딸기 500g 24,000원 / 1kg 37,000원",
       "note": "난좌 포장",
       "image": "assets/ok0b96kjwd76p.jpg",
       "options": [
         {
-          "label": "500g / 21,000원",
-          "value": "500g / 21,000원",
+          "label": "500g / 24,000원",
+          "value": "500g / 24,000원",
           "title": "중량 선택"
         },
         {
