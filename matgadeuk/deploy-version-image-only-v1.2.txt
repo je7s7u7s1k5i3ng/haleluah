@@ -1,4 +1,0 @@
-MATGADEUK_IMAGE_BACKED_PRODUCTS_ONLY_V1.2_20260710
-
-Only products with a verified product or option image are visible.
-Products without a verified image are excluded from the catalog and category navigation.
