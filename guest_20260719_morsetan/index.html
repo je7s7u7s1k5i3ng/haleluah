@@ -189,6 +189,35 @@ body.study .en{display:block}
   .pl-note{display:none}
   .tb-btn{font-size:.68rem;padding:5px 9px}
 }
+.bgm-toggle{position:fixed;bottom:16px;right:16px;z-index:400;
+  width:50px;height:50px;border-radius:50%;
+  background:rgba(216,176,103,.14);border:1px solid var(--gold-2);
+  color:var(--gold-1);cursor:pointer;display:grid;place-items:center;
+  backdrop-filter:blur(6px);
+  box-shadow:0 4px 18px rgba(0,0,0,.5),0 0 18px rgba(216,176,103,.15);
+  transition:background .3s,transform .3s,opacity .3s}
+.bgm-toggle:hover{background:rgba(216,176,103,.3);transform:scale(1.08)}
+.bgm-toggle .bgm-ico{font-size:1.4rem;line-height:1}
+.bgm-toggle.playing .bgm-ico{animation:bgmPulse 1.6s ease-in-out infinite}
+.bgm-toggle.paused{opacity:1;background:rgba(216,176,103,.30);animation:bgmAttract 1.25s ease-in-out infinite}
+.bgm-toggle.paused .bgm-ico{animation:bgmIcoBlink 1.25s ease-in-out infinite}
+@keyframes bgmPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes bgmAttract{0%{transform:scale(1);box-shadow:0 4px 18px rgba(0,0,0,.5),0 0 0 0 rgba(216,176,103,.6)}
+  70%{transform:scale(1.14);box-shadow:0 4px 22px rgba(0,0,0,.55),0 0 0 16px rgba(216,176,103,0)}
+  100%{transform:scale(1);box-shadow:0 4px 18px rgba(0,0,0,.5),0 0 0 0 rgba(216,176,103,0)}}
+@keyframes bgmIcoBlink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(1.18)}}
+.bgm-hint{position:fixed;bottom:28px;right:74px;z-index:400;
+  padding:5px 12px;border-radius:14px;background:var(--gold-1);color:#2a1c08;
+  font-size:.76rem;font-weight:800;white-space:nowrap;pointer-events:none;
+  box-shadow:0 3px 12px rgba(0,0,0,.45);animation:bgmHint 3.6s ease-in-out forwards}
+.bgm-hint::after{content:'';position:absolute;right:-6px;top:50%;transform:translateY(-50%);
+  border:6px solid transparent;border-left-color:var(--gold-1)}
+@keyframes bgmHint{0%{opacity:0;transform:translateX(8px)}5%{opacity:1;transform:translateX(0)}
+  13%{opacity:.12}21%{opacity:1}29%{opacity:.12}37%{opacity:1}45%{opacity:.12}53%{opacity:1}
+  61%{opacity:.12}69%{opacity:1}77%{opacity:.12}85%{opacity:1}100%{opacity:0}}
+@media(max-width:760px){.bgm-toggle{width:44px;height:44px;bottom:12px;right:12px}
+  .bgm-hint{bottom:22px;right:64px}}
+
 </style>
 </head>
 <body>
@@ -251,6 +280,12 @@ body.study .en{display:block}
     <span class="pl-note" id="plNote"></span>
   </div>
 </div>
+
+<audio id="bgm" loop autoplay playsinline preload="auto" src="https://raw.githubusercontent.com/je7s7u7s1k5i3ng/haleluah/claude/python-news-collector-SNH16/images_20260711/bgm_0711v3.mp3"></audio>
+<span class="bgm-hint" id="bgmHint">클릭</span>
+<button class="bgm-toggle paused" id="bgmToggle" aria-label="배경음악 켜기/끄기" title="배경음악 · BGM">
+  <span class="bgm-ico">&#9834;</span>
+</button>
 <template id="tpl-1"><div class="para"><p class="ko">이토록 힘든 싸움을 계속해 온 여러분을 만나게 되어 참으로 반갑습니다.</p><p class="en">It is wonderful to see so many of you who have continued fighting this difficult fight.</p></div>
 <div class="para"><p class="ko">여러분 모두가 하나님을 사랑하고 또한 조국을 사랑한다고 믿습니다.</p><p class="en">I believe that all of you love God and also love your country.</p></div>
 <div class="para"><p class="ko">이것이 의롭고 정당한 싸움이기에 주님의 이름으로 여러분을 축복합니다.</p><p class="en">I bless you in the name of the Lord because this is a just and righteous fight.</p></div>
@@ -854,6 +889,27 @@ try{if(localStorage.getItem('mt0719_study')==='1')applyStudy(true);}catch(e){}
 cBody.addEventListener('click',function(e){
   var en=e.target.closest('.en');
   if(en){e.preventDefault();TTS.playEl(en);}});
+})();
+
+/* ── 배경음악(BGM) ── */
+(function(){
+  var bgm=document.getElementById('bgm'), btn=document.getElementById('bgmToggle');
+  if(!bgm||!btn) return;
+  bgm.volume=1.0;
+  var EVTS=['mousemove','mousedown','click','wheel','touchstart','touchend','keydown','pointerdown'];
+  function showPlaying(){btn.classList.add('playing');btn.classList.remove('paused');
+    var h=document.getElementById('bgmHint'); if(h) h.style.display='none';}
+  function showPaused(){btn.classList.add('paused');btn.classList.remove('playing');}
+  function play(){bgm.play().then(showPlaying).catch(function(){});}
+  play();
+  window.addEventListener('load',play);
+  document.addEventListener('visibilitychange',function(){ if(!document.hidden&&bgm.paused) play(); });
+  var armed=true;
+  function firstPlay(){ if(!armed) return; armed=false; play();
+    EVTS.forEach(function(e){document.removeEventListener(e,firstPlay);}); }
+  EVTS.forEach(function(e){document.addEventListener(e,firstPlay,{passive:true});});
+  btn.addEventListener('click',function(ev){ ev.stopPropagation(); armed=false;
+    if(bgm.paused) play(); else { bgm.pause(); showPaused(); } });
 })();
 
 </script>
