@@ -806,7 +806,7 @@ var btnEn=document.getElementById('btnEn');
 function applyEn(on){document.body.classList.toggle('show-en',on);btnEn.classList.toggle('on',on);
   try{localStorage.setItem('mt0719_en',on?'1':'0');}catch(e){}}
 btnEn.addEventListener('click',function(){applyEn(!document.body.classList.contains('show-en'));});
-try{if(localStorage.getItem('mt0719_en')==='1')applyEn(true);}catch(e){}
+try{ applyEn(localStorage.getItem('mt0719_en')!=='0'); }catch(e){ applyEn(true); }
 
 /* ── TTS ── */
 var TTS=(function(){
@@ -834,18 +834,25 @@ var TTS=(function(){
     for(var i=0;i<starts.length;i++){if(starts[i]<=ci)idx=i;else break;}
     words.forEach(function(w,i){w.classList.toggle('on',i===idx);});}
   function clearEl(){if(curEl){curEl.classList.remove('playing');curEl=null;}}
+  function duckBgm(down){
+    var bgm=document.getElementById('bgm'); if(!bgm) return;
+    if(down){ if(bgm._duckPrev==null) bgm._duckPrev=bgm.volume; bgm.volume=Math.min(bgm.volume,0.08); }
+    else { if(bgm._duckPrev!=null){ bgm.volume=bgm._duckPrev; bgm._duckPrev=null; } }
+  }
   function speak(item,onend){if(!synth||!item)return;
+    pick(); /* 매 재생 직전 최신 음성 목록 재조회 — voiceschanged 타이밍 놓친 경우 대비 */
     var g=++gen;lastItem=item;
     renderSent(item.en);koEl.textContent=item.ko||'';
     player.classList.add('show');clearEl();
     if(item.el){curEl=item.el;curEl.classList.add('playing');
       try{item.el.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}}
     var u=new SpeechSynthesisUtterance(item.en);
-    if(voice)u.voice=voice;u.lang='en-US';u.rate=rate;
+    if(voice)u.voice=voice;u.lang='en-US';u.rate=rate;u.volume=1;
+    u.onstart=function(){if(g===gen)duckBgm(true);};
     u.onboundary=function(e){if(g===gen&&e.charIndex!=null)hi(e.charIndex);};
-    u.onend=function(){if(g!==gen)return;
+    u.onend=function(){duckBgm(false); if(g!==gen)return;
       words.forEach(function(w){w.classList.remove('on');});clearEl();if(onend)onend();};
-    u.onerror=function(){if(g===gen)clearEl();};
+    u.onerror=function(){duckBgm(false); if(g===gen)clearEl();};
     synth.cancel();btnPause.textContent='⏸ 일시정지';
     setTimeout(function(){if(g===gen)synth.speak(u);},60);}
   function koOf(en){var wrap=en.closest('.para')||en.closest('.verse');
@@ -868,7 +875,7 @@ var TTS=(function(){
       if(synth.speaking&&!synth.paused){synth.pause();btnPause.textContent='▶ 이어 듣기';}
       else if(synth.paused){synth.resume();btnPause.textContent='⏸ 일시정지';}},
     repeat:function(){if(lastItem){queue=[];speak(lastItem);}},
-    stop:function(){gen++;if(synth)synth.cancel();queue=[];clearEl();player.classList.remove('show');},
+    stop:function(){gen++;if(synth)synth.cancel();queue=[];clearEl();duckBgm(false);player.classList.remove('show');},
     cycleRate:function(){ri=(ri+1)%rates.length;rate=rates[ri];
       document.getElementById('plRate').textContent='속도 '+rate+'×';}
   };
