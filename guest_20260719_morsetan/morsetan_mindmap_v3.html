@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>하나 됨으로 서라 — 말씀 마인드맵 | 모스 탄 대사 설교 | 2026.07.19</title>
+<meta name="description" content="에베소서 4:3 — 성령의 하나 되게 하신 것을 힘써 지키라. 22말씀 마인드맵: 궁금한 노드를 클릭하면 그 내용만 열리고, 드래그·휠로 지도를 자유롭게 탐색합니다. 영어 발음 학습 포함.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#07050a; --ink-2:#110b04; --ink-3:#1b1208;
+  --cream:#fff4d8; --gold-1:#fff0bd; --gold-2:#d8aa54; --gold-3:#b3863a; --gold-4:#6a4d1f;
+  --halo:rgba(246,221,154,.55);
+  --text:#fff4d8; --text-soft:#ddc999; --text-mute:rgba(244,232,200,.7);
+  --line:rgba(216,176,103,.32); --line-soft:rgba(216,176,103,.15);
+  --body:clamp(1.05rem,1.7vw,1.16rem); --quote:clamp(1.12rem,2vw,1.28rem);
+  --shadow-text:0 1px 14px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:"Apple SD Gothic Neo","Noto Sans CJK KR","Noto Sans KR","Malgun Gothic","맑은 고딕",system-ui,sans-serif;
+  background:var(--ink);color:var(--text);font-weight:600;overflow:hidden;
+  -webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;word-break:keep-all}
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(1100px 700px at 50% -10%,rgba(216,176,103,.22),transparent 70%),
+  radial-gradient(800px 600px at 50% 30%,rgba(246,221,154,.06),transparent 65%),
+  radial-gradient(1400px 900px at 50% 100%,rgba(179,134,58,.10),transparent 70%),
+  linear-gradient(180deg,var(--ink-2) 0%,var(--ink) 40%,var(--ink) 60%,var(--ink-2) 100%)}
+.rays{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;background:
+  conic-gradient(from 200deg at 50% -10%,transparent 0deg,transparent 80deg,
+  rgba(246,221,154,.08) 90deg,rgba(246,221,154,.18) 100deg,transparent 110deg,transparent 120deg,
+  rgba(246,221,154,.10) 130deg,rgba(246,221,154,.20) 140deg,transparent 150deg,transparent 160deg);
+  mix-blend-mode:screen;filter:blur(20px);animation:rayShift 22s ease-in-out infinite alternate}
+@keyframes rayShift{from{opacity:.3}to{opacity:.65}}
+.particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.particles span{position:absolute;width:4px;height:4px;border-radius:50%;
+  background:radial-gradient(circle,rgba(246,221,154,.95),rgba(246,221,154,0));
+  filter:blur(.3px);animation:rise linear infinite;opacity:.7}
+@keyframes rise{0%{transform:translateY(20vh) translateX(0);opacity:0}10%{opacity:.9}90%{opacity:.6}
+  100%{transform:translateY(-110vh) translateX(var(--drift,0px));opacity:0}}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;
+  background:linear-gradient(180deg,rgba(7,5,10,.93),rgba(7,5,10,.8));
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft)}
+.topbar-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:9px 14px}
+.tb-title{font-family:"Cinzel",serif;font-size:.7rem;letter-spacing:.24em;color:var(--gold-1);
+  text-transform:uppercase;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.tb-btn{border:1px solid var(--line);background:rgba(216,176,103,.07);color:var(--gold-1);
+  font-family:inherit;font-weight:700;font-size:.76rem;padding:6px 12px;border-radius:999px;
+  cursor:pointer;transition:.25s;white-space:nowrap}
+.tb-btn:hover{background:rgba(216,176,103,.22)}
+.tb-btn.on{background:radial-gradient(circle at 30% 30%,#fff5cc,var(--gold-2) 55%,var(--gold-3));color:#2d1f08;border-color:var(--gold-1)}
+#viewport{position:fixed;inset:0;z-index:1;cursor:grab;touch-action:none;overflow:hidden}
+#viewport.dragging{cursor:grabbing}
+#world{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+#edges{position:absolute;pointer-events:none;overflow:visible}
+.edge{fill:none;stroke:var(--gold-3);stroke-opacity:.4;stroke-width:1.6;transition:opacity .45s}
+.edge.main{stroke:var(--gold-2);stroke-opacity:.65;stroke-width:2.6;
+  filter:drop-shadow(0 0 6px rgba(246,221,154,.35))}
+.edge.hidden{opacity:0}
+.node{position:absolute;transform:translate(-50%,-50%);cursor:pointer;user-select:none;
+  transition:opacity .45s ease,filter .3s,transform .5s cubic-bezier(.22,1,.36,1)}
+.node.hidden{opacity:0;pointer-events:none}
+.n-sec.hidden{transform:translate(calc(-50% + var(--dx,0px)),calc(-50% + var(--dy,0px))) scale(.15)}
+.n-center{width:232px;text-align:center;padding:22px 18px 18px;border:1px solid var(--gold-2);
+  background:radial-gradient(ellipse at 50% 0%,rgba(216,176,103,.16),transparent 65%),
+  linear-gradient(135deg,rgba(27,18,8,.97),rgba(7,5,10,.97));
+  box-shadow:0 0 0 1px rgba(246,221,154,.25),0 24px 60px rgba(0,0,0,.6),0 0 40px rgba(216,176,103,.22)}
+.n-center .cx{font-size:2rem;color:var(--gold-1);line-height:1;
+  filter:drop-shadow(0 0 12px rgba(246,221,154,.8))}
+.n-center h1{font-size:1.28rem;font-weight:900;color:var(--cream);margin-top:10px;line-height:1.35;
+  text-shadow:0 2px 20px rgba(0,0,0,.6)}
+.n-center .sub{font-family:"Cinzel",serif;font-size:.56rem;letter-spacing:.24em;color:var(--gold-2);
+  text-transform:uppercase;margin-top:7px}
+.n-center .vv{font-size:.78rem;color:var(--text-soft);margin-top:9px;font-weight:500;line-height:1.6}
+.n-part{width:172px;text-align:center;padding:14px 12px;border:1px solid var(--gold-2);border-radius:12px;
+  background:linear-gradient(160deg,rgba(216,176,103,.16),rgba(17,11,4,.94));
+  box-shadow:0 14px 36px rgba(0,0,0,.55),0 0 22px rgba(216,176,103,.14)}
+.n-part:hover{filter:brightness(1.15)}
+.n-part.folded{border-style:dashed;opacity:.93}
+.n-part.folded .cnt{background:rgba(216,176,103,.16);color:var(--gold-1)}
+.n-part .pe{font-family:"Cinzel",serif;font-size:.56rem;letter-spacing:.2em;color:var(--gold-1);text-transform:uppercase}
+.n-part h2{font-size:1.02rem;color:var(--cream);font-weight:800;margin-top:4px}
+.n-part .cnt{display:inline-block;margin-top:6px;font-size:.62rem;color:var(--gold-2);
+  border:1px solid var(--line);border-radius:999px;padding:1px 9px}
+.n-sec{width:196px;display:flex;gap:10px;align-items:center;text-align:left;
+  padding:11px 13px;border:1px solid var(--line);border-radius:10px;
+  background:linear-gradient(180deg,rgba(216,176,103,.07),rgba(11,7,3,.92));
+  box-shadow:0 10px 26px rgba(0,0,0,.5)}
+.n-sec:not(.hidden):hover{border-color:var(--gold-2);transform:translate(-50%,-50%) scale(1.05);
+  box-shadow:0 14px 34px rgba(0,0,0,.6),0 0 22px rgba(216,176,103,.22)}
+.n-sec .rn{flex-shrink:0;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  font-family:"Cinzel",serif;font-weight:700;font-size:.62rem;color:#2d1f08;
+  background:radial-gradient(circle at 30% 30%,#fff5cc,var(--gold-2) 45%,var(--gold-4) 100%);
+  box-shadow:0 0 0 1px rgba(246,221,154,.55),0 0 10px rgba(246,221,154,.28)}
+.n-sec .tt{font-size:.82rem;font-weight:700;color:var(--cream);line-height:1.35}
+.n-sec.read:not(.hidden){opacity:.62}
+.n-sec.read:not(.hidden)::after{content:'✓';position:absolute;top:-7px;right:-7px;width:20px;height:20px;
+  border-radius:50%;display:grid;place-items:center;font-size:.66rem;font-weight:900;color:#2d1f08;
+  background:var(--gold-1);box-shadow:0 0 10px rgba(246,221,154,.5)}
+.mapctl{position:fixed;right:16px;bottom:16px;z-index:100;display:flex;flex-direction:column;gap:8px}
+.mc-btn{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);cursor:pointer;
+  background:rgba(7,5,10,.85);backdrop-filter:blur(8px);color:var(--gold-1);
+  font-size:1.05rem;font-weight:800;font-family:inherit;transition:.25s}
+.mc-btn:hover{background:rgba(216,176,103,.22)}
+.legend{position:fixed;left:16px;bottom:16px;z-index:100;font-size:.72rem;color:var(--text-mute);
+  background:rgba(7,5,10,.8);border:1px solid var(--line-soft);border-radius:10px;
+  padding:9px 13px;backdrop-filter:blur(8px);line-height:1.7;max-width:310px}
+.legend b{color:var(--gold-1)}
+.sheet{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;
+  padding:clamp(8px,3vw,40px)}
+.sheet.open{display:flex}
+.sheet-bg{position:absolute;inset:0;background:rgba(4,3,6,.72);backdrop-filter:blur(6px)}
+.card{position:relative;width:min(96vw,780px);max-height:calc(100vh - clamp(56px,9vh,90px));
+  display:flex;flex-direction:column;border:1px solid var(--gold-2);
+  background:linear-gradient(135deg,rgba(27,18,8,.985),rgba(7,5,10,.985));
+  box-shadow:0 40px 100px rgba(0,0,0,.8),0 0 60px rgba(216,176,103,.16);
+  animation:cardIn .4s cubic-bezier(.22,1,.36,1)}
+@keyframes cardIn{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+.card::before{content:'';position:absolute;inset:9px;border:1px solid var(--line-soft);pointer-events:none}
+.card-head{display:flex;align-items:center;gap:13px;padding:18px 20px 14px;border-bottom:1px solid var(--line-soft)}
+.card-head .rn{flex-shrink:0;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  font-family:"Cinzel",serif;font-weight:700;font-size:.85rem;color:#2d1f08;
+  background:radial-gradient(circle at 30% 30%,#fff5cc,var(--gold-2) 45%,var(--gold-4) 100%);
+  box-shadow:0 0 0 1px rgba(246,221,154,.6),0 0 18px rgba(246,221,154,.35)}
+.card-head .ts{flex:1;min-width:0}
+.card-head .tko{font-size:clamp(1.05rem,2.4vw,1.3rem);font-weight:800;color:var(--cream);line-height:1.3}
+.card-head .ten{font-family:"Cinzel",serif;font-size:.58rem;letter-spacing:.16em;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
+.x-btn{flex-shrink:0;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);cursor:pointer;
+  background:rgba(216,176,103,.1);color:var(--gold-1);font-size:1.1rem;font-family:"Cinzel",serif;transition:.3s}
+.x-btn:hover{background:rgba(216,176,103,.3);transform:rotate(90deg)}
+.card-body{overflow-y:auto;padding:20px clamp(18px,3.4vw,34px) 8px;line-height:1.82;overscroll-behavior:contain}
+.card-body::-webkit-scrollbar{width:8px}
+.card-body::-webkit-scrollbar-thumb{background:var(--gold-4);border-radius:4px}
+.para{margin:0 0 14px}
+.para .ko{font-size:var(--body);line-height:1.85;text-shadow:var(--shadow-text)}
+.pref{font-size:.8rem;color:var(--gold-1);white-space:nowrap}
+.en{display:none;font-size:.9rem;line-height:1.75;color:var(--text-soft);font-weight:500;
+  font-style:italic;margin-top:5px;padding-left:14px;border-left:1px solid var(--line-soft);
+  cursor:pointer;position:relative;padding-right:34px;border-radius:4px;transition:.25s}
+body.show-en .en{display:block}
+.verse{position:relative;margin:20px 0;padding:clamp(16px,2.4vw,24px) clamp(16px,2.8vw,28px);
+  background:linear-gradient(180deg,rgba(246,221,154,.08),rgba(216,176,103,.02));
+  border-left:2px solid var(--gold-2);font-size:var(--quote);font-weight:700;line-height:1.85;
+  color:var(--cream);text-shadow:var(--shadow-text)}
+.verse::before{content:'“';position:absolute;top:-4px;left:10px;color:var(--gold-2);opacity:.55;
+  font-size:2.4rem;line-height:1;font-weight:600}
+.verse::after{content:'';position:absolute;left:-2px;top:0;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--gold-1) 30%,var(--gold-1) 70%,transparent);
+  filter:drop-shadow(0 0 6px var(--halo))}
+.vref{font-family:"Cinzel",serif;font-size:.74rem;color:var(--gold-1);margin-top:11px;letter-spacing:.18em;font-weight:600}
+.vref::before{content:'';display:inline-block;width:14px;height:1px;background:var(--gold-2);
+  vertical-align:middle;margin-right:10px}
+.verse .en{font-weight:500;font-size:.88rem}
+.card-nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:13px 16px 17px;border-top:1px solid var(--line-soft)}
+.cn-btn{border:1px solid var(--line);background:rgba(216,176,103,.06);color:var(--gold-1);
+  font-family:inherit;font-weight:700;font-size:.84rem;padding:8px 16px;border-radius:999px;cursor:pointer;transition:.25s}
+.cn-btn:hover{background:rgba(216,176,103,.2)}
+.cn-map{background:rgba(216,176,103,.14);color:var(--cream)}
+body.study .en{display:block}
+.en:hover{color:var(--gold-1);border-left-color:var(--gold-2);background:rgba(216,176,103,.05)}
+.en::after{content:'▶ 발음';position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  font-style:normal;font-size:.6rem;letter-spacing:.08em;color:var(--gold-2);
+  border:1px solid var(--line);border-radius:999px;padding:2px 8px;opacity:0;transition:.25s;white-space:nowrap}
+.en:hover::after{opacity:1}
+.en.playing{color:var(--gold-1);border-left-color:var(--gold-1);background:rgba(216,176,103,.09)}
+.en.playing::after{content:'♪ 재생중';opacity:1;color:#2d1f08;background:var(--gold-1);border-color:var(--gold-1)}
+.player{position:fixed;left:50%;transform:translateX(-50%) translateY(24px);bottom:16px;width:min(94vw,760px);z-index:300;
+  background:linear-gradient(180deg,rgba(17,11,4,.97),rgba(7,5,10,.97));
+  border:1px solid var(--gold-2);border-radius:16px;padding:14px 18px 12px;
+  box-shadow:0 18px 55px rgba(0,0,0,.75),0 0 34px rgba(216,176,103,.16);backdrop-filter:blur(14px);
+  opacity:0;pointer-events:none;transition:.35s}
+.player.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.pl-label{font-family:"Cinzel",serif;font-size:.58rem;letter-spacing:.26em;color:var(--gold-2);text-transform:uppercase;margin-bottom:5px}
+.pl-sent{font-size:clamp(.95rem,1.6vw,1.06rem);line-height:1.7;color:var(--cream);font-weight:600;font-style:italic;min-height:1.7em}
+.pl-sent .w{transition:.12s;border-radius:3px;padding:0 1px}
+.pl-sent .w.on{color:#2d1f08;background:var(--gold-1);box-shadow:0 0 10px rgba(246,221,154,.5)}
+.pl-ko{font-size:.8rem;color:var(--text-mute);margin-top:4px;font-weight:500}
+.pl-ctl{display:flex;gap:7px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.pl-btn{border:1px solid var(--line);background:rgba(216,176,103,.08);color:var(--gold-1);
+  font-family:inherit;font-weight:700;font-size:.78rem;padding:6px 13px;border-radius:999px;cursor:pointer;transition:.25s}
+.pl-btn:hover{background:rgba(216,176,103,.24)}
+.pl-btn.main{background:radial-gradient(circle at 30% 30%,#fff5cc,var(--gold-2) 55%,var(--gold-3));color:#2d1f08;border-color:var(--gold-1)}
+.pl-note{margin-left:auto;font-size:.66rem;color:var(--text-mute)}
+@media(max-width:760px){
+  .legend{display:none}
+  .n-sec{width:180px}
+  .pl-note{display:none}
+  .tb-btn{font-size:.68rem;padding:5px 9px}
+}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div class="rays" aria-hidden="true"></div>
+<div class="particles" id="particles" aria-hidden="true"></div>
+
+<nav class="topbar">
+  <div class="topbar-in">
+    <span class="tb-title" id="tbTitle">☩ 하나 됨으로 서라 · 말씀 마인드맵 · 2026.07.19</span>
+    <button class="tb-btn" id="btnFit">⟳ 처음 화면</button>
+    <button class="tb-btn" id="btnEn">EN</button>
+    <button class="tb-btn" id="btnStudy">🎧 영어 학습</button>
+  </div>
+</nav>
+
+<div id="viewport">
+  <div id="world">
+    <svg id="edges"></svg>
+  </div>
+</div>
+
+<div class="mapctl">
+  <button class="mc-btn" id="zIn" title="확대">＋</button>
+  <button class="mc-btn" id="zOut" title="축소">－</button>
+  <button class="mc-btn" id="zFit" title="전체 보기">⛶</button>
+</div>
+<div class="legend">
+  <b>말씀 노드를 클릭</b>하면 그 내용만 열립니다 · <b>드래그</b>로 상하좌우 이동 · <b>휠/＋－</b>로 확대축소<br>
+  갈래(Part)를 누르면 가지가 접히고 펼쳐집니다 · 읽은 말씀엔 <b>✓</b> · 카드에서 <b>◀ ▶</b>로 이어 보기
+</div>
+
+<div class="sheet" id="sheet">
+  <div class="sheet-bg" id="sheetBg"></div>
+  <article class="card" role="dialog" aria-modal="true">
+    <div class="card-head">
+      <span class="rn" id="cRn">I</span>
+      <div class="ts"><div class="tko" id="cKo"></div><div class="ten" id="cEn"></div></div>
+      <button class="x-btn" id="cClose" title="지도로 돌아가기">×</button>
+    </div>
+    <div class="card-body" id="cBody"></div>
+    <div class="card-nav">
+      <button class="cn-btn" id="cPrev">◀ 이전 말씀</button>
+      <button class="cn-btn cn-map" id="cMap">🗺 지도로</button>
+      <button class="cn-btn" id="cListen">🎧 영어로 듣기</button>
+      <button class="cn-btn" id="cNext">다음 말씀 ▶</button>
+    </div>
+  </article>
+</div>
+
+<div class="player" id="player">
+  <div class="pl-label">Pronunciation · 영어 발음</div>
+  <div class="pl-sent" id="plSent">문장을 클릭하면 여기서 발음이 재생됩니다</div>
+  <div class="pl-ko" id="plKo"></div>
+  <div class="pl-ctl">
+    <button class="pl-btn main" id="plPause">⏸ 일시정지</button>
+    <button class="pl-btn" id="plRepeat">↻ 다시</button>
+    <button class="pl-btn" id="plRate">속도 0.9×</button>
+    <button class="pl-btn" id="plStop">✕ 닫기</button>
+    <span class="pl-note" id="plNote"></span>
+  </div>
+</div>
+<template id="tpl-1"><div class="para"><p class="ko">이토록 힘든 싸움을 계속해 온 여러분을 만나게 되어 참으로 반갑습니다.</p><p class="en">It is wonderful to see so many of you who have continued fighting this difficult fight.</p></div>
+<div class="para"><p class="ko">여러분 모두가 하나님을 사랑하고 또한 조국을 사랑한다고 믿습니다.</p><p class="en">I believe that all of you love God and also love your country.</p></div>
+<div class="para"><p class="ko">이것이 의롭고 정당한 싸움이기에 주님의 이름으로 여러분을 축복합니다.</p><p class="en">I bless you in the name of the Lord because this is a just and righteous fight.</p></div>
+<blockquote class="verse">성경은 “평안의 매는 줄로 성령의 하나 되게 하신 것을 힘써 지키라”고 말씀합니다.<div class="vref">에베소서 4:3 · 개역한글</div><p class="en">Scripture says, “Make every effort to keep the unity of the Spirit in the bond of peace.”</p></blockquote>
+<div class="para"><p class="ko">믿는 우리에게는 하나님께서 주신 성령의 하나 되게 하시는 띠가 있습니다.</p><p class="en">As believers, we have a bond of unity in the Holy Spirit that God has given us.</p></div>
+<div class="para"><p class="ko">동시에 말씀은 그 하나 됨을 힘써 지키라고 명령합니다.</p><p class="en">At the same time, the verse commands us to make every effort to maintain that unity.</p></div>
+<div class="para"><p class="ko">그 띠를 손상하고 심지어 끊어 버릴 수 있는 일들이 너무나 많기 때문입니다.</p><p class="en">There are many things that can damage that bond and even break it.</p></div>
+<div class="para"><p class="ko">미국 독립전쟁 당시 벤저민 프랭클린은 우리가 함께 매달리지 않으면 틀림없이 따로 매달리게 될 것이라고 말했습니다.</p><p class="en">During the American Revolution, Benjamin Franklin famously said that if we do not hang together, we will surely hang separately.</p></div>
+<div class="para"><p class="ko">주 예수 그리스도께서는 요한복음 17장의 마지막 대제사장적 기도에서 장차 믿을 사람들까지 모두 하나 되게 해 달라고 기도하셨습니다.</p><p class="en">In His final high-priestly prayer in John 17, our Lord Jesus Christ prayed that all believers, including those who would come later, might be one.</p></div>
+<blockquote class="verse">주님은 “아버지께서 내 안에, 내가 아버지 안에 있는 것 같이 저희도 다 하나가 되어”라고 기도하셨습니다.<div class="vref">요한복음 17:21 · 개역한글</div><p class="en">The Lord prayed, “That they all may be one, as You, Father, are in Me, and I in You.”</p></blockquote>
+<div class="para"><p class="ko">그러므로 우리는 하나 된 마음으로 서로 협력해야 합니다.</p><p class="en">Therefore, we must cooperate with one another in a united spirit.</p></div></template>
+<template id="tpl-2"><div class="para"><p class="ko">그런데 때로는 하나 됨이 아니라 서로 경쟁하는 마음을 봅니다.</p><p class="en">Yet sometimes I see a spirit of competition instead of unity.</p></div>
+<div class="para"><p class="ko">그때 사람들은 하나님의 뜻보다 자기 이익과 자기 단체의 이익을 먼저 구합니다.</p><p class="en">At such times, people seek their own interests and the interests of their group before the will of God.</p></div>
+<blockquote class="verse">예수님께서는 “너희는 먼저 그의 나라와 그의 의를 구하라 그리하면 이 모든 것을 너희에게 더하시리라”고 말씀하셨습니다.<div class="vref">마태복음 6:33 · 개역한글</div><p class="en">Jesus said, “Seek first the kingdom of God and His righteousness, and all these things shall be added to you.”</p></blockquote>
+<div class="para"><p class="ko">우리는 위대한 지휘자이신 하나님 아래에서 각자의 소리를 함께 내는 오케스트라와 같아야 합니다.</p><p class="en">We should be like an orchestra in which each person plays his part under God, the great Conductor.</p></div>
+<div class="para"><p class="ko">연주해야 할 활로 서로를 때리고 있다면 그것은 결코 바른 모습이 아닙니다.</p><p class="en">If we use the bows meant for playing to strike one another, that is not the right picture.</p></div>
+<div class="para"><p class="ko">우리는 하나님께서 주신 음악을 충실히 연주해야 하며, 그러면 하나님께서 모든 소리를 조화롭게 하실 것입니다.</p><p class="en">We must faithfully play the music God has given us, and He will bring every part into harmony.</p></div>
+<div class="para"><p class="ko">하나님은 지휘자이시며 동시에 그 음악을 지으신 작곡가이십니다.</p><p class="en">God is both the Conductor and the Composer.</p></div>
+<div class="para"><p class="ko">우리 각 사람은 서로 조화를 이루며 맡겨진 부분을 충실히 연주해야 합니다.</p><p class="en">Each of us must faithfully play our assigned part in harmony with one another.</p></div></template>
+<template id="tpl-3"><div class="para"><p class="ko">사람들 사이에 질투가 생기면 하나 됨이 무너지기 시작합니다.</p><p class="en">Unity begins to break down when jealousy arises between people.</p></div>
+<blockquote class="verse">잠언은 “분은 잔인하고 노는 창수 같거니와 투기 앞에야 누가 서리요”라고 말씀합니다.<div class="vref">잠언 27:4 · 개역한글</div><p class="en">Proverbs says, “Wrath is cruel and anger is overwhelming, but who can stand before jealousy?”</p></blockquote>
+<div class="para"><p class="ko">분노는 진실한 사과와 화해를 통해 누그러질 수 있지만 질투는 그렇지 않은 경우가 많습니다.</p><p class="en">Anger may be calmed by a sincere apology and reconciliation, but jealousy often works differently.</p></div>
+<div class="para"><p class="ko">다른 사람이 잘될수록 질투는 오히려 더 커질 수 있기 때문에 질투가 더 위험합니다.</p><p class="en">Jealousy is more dangerous because it can grow stronger as another person prospers.</p></div>
+<div class="para"><p class="ko">바울이 감옥에 있을 때 어떤 사람들은 투기와 분쟁으로 그리스도를 전했습니다.</p><p class="en">While Paul was in prison, some people preached Christ out of envy and strife.</p></div>
+<blockquote class="verse">성경은 “어떤 이들은 투기와 분쟁으로, 어떤 이들은 착한 뜻으로 그리스도를 전파하나니”라고 기록합니다.<div class="vref">빌립보서 1:15 · 개역한글</div><p class="en">Scripture records, “Some indeed preach Christ even from envy and strife, and some also from goodwill.”</p></blockquote>
+<div class="para"><p class="ko">그러나 바울은 동기가 잘못되었더라도 그리스도가 전파되는 것을 기뻐한다고 말했습니다.</p><p class="en">Yet Paul said that he rejoiced because Christ was being preached, even when the motives were wrong.</p></div>
+<blockquote class="verse">그는 “무슨 방도로 하든지 전파되는 것은 그리스도니 이로써 내가 기뻐하고 또한 기뻐하리라”고 고백했습니다.<div class="vref">빌립보서 1:18 · 개역한글</div><p class="en">He declared, “Whether in pretense or in truth, Christ is preached; and in this I rejoice, and will rejoice.”</p></blockquote>
+<div class="para"><p class="ko">우리는 자신을 평가할 때는 의도를 보면서 다른 사람을 평가할 때는 행동만 보는 경향이 있습니다.</p><p class="en">We tend to judge ourselves by our intentions while judging other people only by their actions.</p></div>
+<div class="para"><p class="ko">내 의도는 좋다고 말하면서도 다른 사람의 행동은 쉽게 정죄합니다.</p><p class="en">We say that our own intentions are good while quickly condemning another person's actions.</p></div>
+<div class="para"><p class="ko">그러나 우리는 다른 사람의 실제 의도가 무엇이었는지 모르는 경우가 많습니다.</p><p class="en">Yet in many cases we do not know what the other person's true intention was.</p></div>
+<div class="para"><p class="ko">그러므로 특별히 믿음의 형제자매가 악한 의도를 가졌다고 성급히 단정하지 마십시오.</p><p class="en">Therefore, do not be quick to assume evil motives, especially in a fellow believer.</p></div>
+<div class="para"><p class="ko">서로를 향하여 부드러운 마음과 넓은 마음을 품고 용서해야 합니다.</p><p class="en">We must be tenderhearted, largehearted, and forgiving toward one another.</p></div></template>
+<template id="tpl-4"><div class="para"><p class="ko">원수의 전략은 우리를 갈라놓는 것입니다.</p><p class="en">The enemy's strategy is to divide us.</p></div>
+<div class="para"><p class="ko">우리가 하나로 연합할 때 훨씬 강해진다는 사실을 원수가 알기 때문입니다.</p><p class="en">The enemy knows that we become far stronger when we are united.</p></div>
+<div class="para"><p class="ko">적군이 자기들끼리 싸우게 만들면 그 군대는 약해지지만 하나로 뭉친 군대는 무너뜨리기 어렵습니다.</p><p class="en">An army becomes weak when it fights itself, but an army united as one is difficult to defeat.</p></div>
+<div class="para"><p class="ko">그러므로 우리는 머리 되시는 주 예수 그리스도 아래에서 하나로 연합해야 합니다.</p><p class="en">Therefore, we must unite under our Head, the Lord Jesus Christ.</p></div>
+<div class="para"><p class="ko">우상숭배가 들어오면 또 다른 문제가 시작됩니다.</p><p class="en">Another problem begins when idolatry enters among us.</p></div>
+<div class="para"><p class="ko">모든 일에서 첫째 자리를 받으실 분은 오직 하나님 한 분뿐이십니다.</p><p class="en">God alone deserves first place in everything.</p></div>
+<div class="para"><p class="ko">재물과 능력과 권세를 하나님보다 앞세우면 그것들이 우상이 됩니다.</p><p class="en">Wealth, ability, and authority become idols when we place them ahead of God.</p></div>
+<div class="para"><p class="ko">참되신 하나님은 오직 한 분이시며, 그분은 모든 것 위에 으뜸이 되셔야 합니다.</p><p class="en">There is only one true God, and He must be preeminent over everything.</p></div>
+<div class="para"><p class="ko">다른 모든 것은 하나님을 섬겨야 하며, 하나님께서 다른 것들을 섬기시는 분이 되어서는 안 됩니다.</p><p class="en">Everything else must serve God, and God must never be made to serve those other things.</p></div>
+<div class="para"><p class="ko">그리스도만 교회의 머리가 되시고 우리 모두가 그분을 머리로 높일 때 서로의 관계도 바르게 세워집니다.</p><p class="en">When Christ alone is the Head of the church and we all honor Him as Head, our relationships with one another are also made right.</p></div>
+<div class="para"><p class="ko">이 원리는 지금 대한민국이 겪는 위기의 때에 더욱 중요합니다.</p><p class="en">This principle is especially important during the present crisis in Korea.</p></div>
+<div class="para"><p class="ko">하나님께서 주신 이 부르심을 따르는 동안 저는 누구와도, 어느 단체와도 함께 일하지 말라는 말을 수없이 들었습니다.</p><p class="en">While following this calling from God, I have repeatedly been told not to work with this person or that group.</p></div>
+<div class="para"><p class="ko">그 조언을 모두 따랐다면 저는 아무하고도, 어느 단체와도 함께 일할 수 없었을 것입니다.</p><p class="en">Had I followed all that advice, I could have worked with no one and no group at all.</p></div>
+<div class="para"><p class="ko">저는 그 대신 이 운동과 그리스도의 몸 안에 더 큰 연합이 이루어지도록 힘써 왔습니다.</p><p class="en">Instead, I have tried to encourage greater unity in this movement and in the body of Christ.</p></div>
+<div class="para"><p class="ko">우리가 함께 매달리지 않으면 결국 따로 매달리게 될 것이기 때문입니다.</p><p class="en">If we do not hang together, we will hang separately.</p></div></template>
+<template id="tpl-5"><div class="para"><p class="ko">어거스틴의 말로 알려진 한 문장은 우리가 충실히 따른다면 큰 도움이 될 것입니다.</p><p class="en">A saying attributed to Augustine can help us greatly if we follow it faithfully.</p></div>
+<div class="para"><p class="ko">본질적인 것에는 일치를, 비본질적인 것에는 자유를, 모든 것에는 사랑을 가지십시오.</p><p class="en">In essentials, unity; in non-essentials, liberty; and in all things, love.</p></div>
+<div class="para"><p class="ko">사람들이 다투는 일의 대부분은 신앙의 본질에 관한 것이 아닙니다.</p><p class="en">Most of the things people fight about are not essential matters of faith.</p></div>
+<div class="para"><p class="ko">때로는 여러 사람이 제 양팔과 양다리를 하나씩 붙들고 서로 다른 방향으로 끌어당기는 것처럼 느껴집니다.</p><p class="en">At times I feel as though different people have taken hold of each arm and leg and are pulling me in opposite directions.</p></div>
+<div class="para"><p class="ko">그러나 한 사람은 한 시간에 한 장소에만 있을 수 있습니다.</p><p class="en">Yet one person can only be in one place at one time.</p></div>
+<div class="para"><p class="ko">분명히 본질적인 것들이 있지만 대부분의 일은 본질이 아닙니다.</p><p class="en">There are certainly essential matters, but most matters are not essential.</p></div>
+<div class="para"><p class="ko">본질적인 진리 앞에서는 반드시 함께 서야 합니다.</p><p class="en">We must stand together firmly on essential truth.</p></div>
+<div class="para"><p class="ko">비본질적인 문제 때문에 서로 싸워서는 안 됩니다.</p><p class="en">We must not fight one another over non-essential matters.</p></div>
+<div class="para"><p class="ko">그리고 모든 때에 모든 사람을 향하여 사랑을 품어야 합니다.</p><p class="en">Above all, we must have love for every person at all times.</p></div>
+<blockquote class="verse">예수님께서는 “너희 원수를 사랑하며 너희를 핍박하는 자를 위하여 기도하라”고 말씀하셨습니다.<div class="vref">마태복음 5:44 · 개역한글</div><p class="en">Jesus said, “Love your enemies and pray for those who persecute you.”</p></blockquote>
+<div class="para"><p class="ko">우리는 원수까지 사랑해야 하며 우리를 저주하는 자까지 축복해야 합니다.</p><p class="en">We are called to love even our enemies and to bless even those who curse us.</p></div>
+<div class="para"><p class="ko">더욱이 그리스도의 몸과 하나님의 가족 안에서는 서로 사랑해야 합니다.</p><p class="en">All the more, we must love one another within Christ's body and God's family.</p></div></template>
+<template id="tpl-6"><div class="para"><p class="ko">가장 가까운 사람을 사랑하는 일이 오히려 더 어려울 때가 있습니다.</p><p class="en">Sometimes it is harder to love the people who are closest to us.</p></div>
+<div class="para"><p class="ko">가까운 관계에서는 서로의 허물과 약함과 실패를 더 많이 보기 때문입니다.</p><p class="en">In close relationships, we see more of one another's faults, weaknesses, and failures.</p></div>
+<div class="para"><p class="ko">그래서 가까운 관계 안에서 연합을 지키는 일이 더 어려워질 수 있습니다.</p><p class="en">That is why maintaining unity can become more difficult in close relationships.</p></div>
+<div class="para"><p class="ko">누군가의 이익이 곧 나의 손해라는 제로섬 사고방식은 연합을 더욱 어렵게 만듭니다.</p><p class="en">A zero-sum mentality, which sees another person's gain as my loss, makes unity even harder.</p></div>
+<div class="para"><p class="ko">내 형제자매가 얻는 것이 곧 내가 잃는 것이라는 생각은 잘못된 생각입니다.</p><p class="en">It is wrong to think that whatever my brother or sister gains must be a loss to me.</p></div>
+<div class="para"><p class="ko">우리는 서로에게 주어진 성공과 복을 함께 기뻐하고 축하해야 합니다.</p><p class="en">We are called to rejoice in and celebrate one another's success and blessing.</p></div>
+<div class="para"><p class="ko">또한 형제자매가 어려움과 손실을 당할 때 함께 슬퍼해야 합니다.</p><p class="en">We are also called to mourn together when a brother or sister suffers difficulty and loss.</p></div>
+<blockquote class="verse">성경은 “즐거워하는 자들로 함께 즐거워하고 우는 자들로 함께 울라”고 말씀합니다.<div class="vref">로마서 12:15 · 개역한글</div><p class="en">Scripture says, “Rejoice with those who rejoice, and weep with those who weep.”</p></blockquote>
+<div class="para"><p class="ko">형제의 손실을 기뻐하거나 형제의 성공을 슬퍼해서는 안 됩니다.</p><p class="en">We must not rejoice over a brother's loss or grieve over a sister's success.</p></div>
+<div class="para"><p class="ko">고린도전서는 서로 싸워 그리스도의 이름을 가리느니 차라리 손해를 당하는 편이 낫다고 가르칩니다.</p><p class="en">First Corinthians teaches that it is better to suffer loss than to fight in a way that brings reproach upon the name of Christ.</p></div>
+<blockquote class="verse">성경은 “차라리 불의를 당하는 것이 낫지 아니하며 차라리 속는 것이 낫지 아니하냐”고 묻습니다.<div class="vref">고린도전서 6:7 · 개역한글</div><p class="en">Scripture asks, “Why do you not rather accept wrong, and why do you not rather allow yourselves to be defrauded?”</p></blockquote>
+<div class="para"><p class="ko">이 죄악 된 세상에는 그리스도의 몸 안에서 서로 싸우지 않아도 맞서 싸울 일이 충분히 많습니다.</p><p class="en">There is more than enough to fight in this sinful world without fighting one another within the body of Christ.</p></div></template>
+<template id="tpl-7"><div class="para"><p class="ko">예수 그리스도께서 길이요 진리요 생명이시라는 사실은 우리가 함께 서야 할 본질입니다.</p><p class="en">The truth that Jesus Christ is the way, the truth, and the life is an essential on which we must stand together.</p></div>
+<blockquote class="verse">예수님께서는 “내가 곧 길이요 진리요 생명이니 나로 말미암지 않고는 아버지께로 올 자가 없느니라”고 말씀하셨습니다.<div class="vref">요한복음 14:6 · 개역한글</div><p class="en">Jesus said, “I am the way, the truth, and the life; no one comes to the Father except through Me.”</p></blockquote>
+<div class="para"><p class="ko">이 진리는 양보할 수 없는 본질입니다.</p><p class="en">This truth is an essential that cannot be surrendered.</p></div>
+<div class="para"><p class="ko">그러나 사람들이 다투는 문제의 대부분은 이와 같은 본질이 아닙니다.</p><p class="en">Most disputes among people, however, are not about essentials like this.</p></div>
+<blockquote class="verse">예수님께서는 “화평케 하는 자는 복이 있나니”라고 말씀하셨습니다.<div class="vref">마태복음 5:9 · 개역한글</div><p class="en">Jesus said, “Blessed are the peacemakers.”</p></blockquote>
+<div class="para"><p class="ko">우리는 화평케 하는 사람이 되어야 하지만 동시에 바울이 말한 선한 싸움도 싸워야 합니다.</p><p class="en">We must be peacemakers, yet we must also fight the good fight spoken of by Paul.</p></div>
+<blockquote class="verse">성경은 “할 수 있거든 너희로서는 모든 사람으로 더불어 평화하라”고 말씀합니다.<div class="vref">로마서 12:18 · 개역한글</div><p class="en">Scripture says, “If it is possible, as much as depends on you, live peaceably with all men.”</p></blockquote>
+<div class="para"><p class="ko">우리가 평화를 위해 할 수 있는 모든 일을 해도 상대가 평화를 거부할 때가 있습니다.</p><p class="en">There are times when we do everything we can for peace and the other party still refuses peace.</p></div>
+<div class="para"><p class="ko">그럴 때 평강의 왕이신 예수님께 사람들이 어떻게 행했는지를 바라보아야 합니다.</p><p class="en">At such times, we must look at what people did to Jesus, the Prince of Peace.</p></div>
+<div class="para"><p class="ko">예수님께서는 모든 사람을 완전하게 사랑하셨지만 사람들은 그분께 엄청난 폭력을 행했습니다.</p><p class="en">Jesus loved everyone perfectly, yet people committed terrible violence against Him.</p></div>
+<blockquote class="verse">십자가 위에서도 예수님은 “아버지여 저희를 사하여 주옵소서 자기의 하는 것을 알지 못함이니이다”라고 기도하셨습니다.<div class="vref">누가복음 23:34 · 개역한글</div><p class="en">Even on the cross, Jesus prayed, “Father, forgive them, for they do not know what they do.”</p></blockquote>
+<blockquote class="verse">최초의 순교자 스데반도 돌에 맞으면서 “주여 이 죄를 저들에게 돌리지 마옵소서”라고 기도했습니다.<div class="vref">사도행전 7:60 · 개역한글</div><p class="en">Stephen, the first martyr, likewise prayed while being stoned, “Lord, do not charge them with this sin.”</p></blockquote>
+<div class="para"><p class="ko">사람들은 예수님의 진리와 스데반의 증언을 이길 수 없자 그들을 죽여 없애려 했습니다.</p><p class="en">When people could not defeat the truth of Jesus or the testimony of Stephen, they tried to kill and remove them.</p></div>
+<div class="para"><p class="ko">그러나 악과 폭력이 행해질 때에도 하나님께서 모든 것을 다스리시며 악한 일에서도 선을 이루실 수 있음을 믿으십시오.</p><p class="en">Even when evil and violence are committed, trust that God is sovereign over all things and can bring good even out of evil.</p></div>
+<div class="para"><p class="ko">가장 불의한 사건이었던 그리스도의 십자가에서 믿는 모든 사람을 위한 구원이 나왔습니다.</p><p class="en">From the cross of Christ, the greatest injustice ever committed, came salvation for everyone who believes.</p></div>
+<div class="para"><p class="ko">십자가는 하나님께서 악한 일에서도 구원의 선을 이루시는 궁극적인 본보기입니다.</p><p class="en">The cross is the ultimate example of God bringing the good of salvation even out of evil.</p></div></template>
+<template id="tpl-8"><div class="para"><p class="ko">스데반이 돌에 맞을 때 다소 사람 사울은 그를 죽이는 자들의 옷을 지키며 그 일을 옳다고 여겼습니다.</p><p class="en">When Stephen was stoned, Saul of Tarsus guarded the garments of his killers and approved what they were doing.</p></div>
+<div class="para"><p class="ko">그러나 하나님은 핍박자 사울을 위대한 사도 바울로 바꾸실 수 있습니다.</p><p class="en">But God can turn Saul the persecutor into Paul the great apostle.</p></div>
+<div class="para"><p class="ko">하나님은 가말리엘 문하의 그 사람을 사용하여 신약성경의 많은 서신을 기록하게 하셨습니다.</p><p class="en">God used that student of Gamaliel to write many of the epistles of the New Testament.</p></div>
+<div class="para"><p class="ko">사울이 바울이 된 뒤에도 많은 그리스도인은 그를 믿지 못했습니다.</p><p class="en">Even after Saul became Paul, many Christians still did not trust him.</p></div>
+<div class="para"><p class="ko">그들이 그를 의심한 것은 그가 실제로 교회를 핍박했던 사람이었기 때문입니다.</p><p class="en">They doubted him because he truly had been a persecutor of the church.</p></div>
+<div class="para"><p class="ko">그러나 하나님은 그를 길에서 쓰러뜨리시고 보지 못하게 하신 뒤 완전히 변화시키셨습니다.</p><p class="en">Yet God struck him down on the road, blinded him, and then transformed him completely.</p></div>
+<div class="para"><p class="ko">하나님께서는 아나니아에게 사울을 찾아가 기도하라고 명령하셨습니다.</p><p class="en">God commanded Ananias to go to Saul and pray for him.</p></div>
+<div class="para"><p class="ko">여러분이 아나니아였다면 그 핍박자를 찾아갈 수 있었겠습니까?</p><p class="en">If you had been Ananias, would you have gone to meet that persecutor?</p></div>
+<div class="para"><p class="ko">아나니아는 순종하여 사울을 찾아갔고 그를 형제라고 불렀습니다.</p><p class="en">Ananias obeyed, went to Saul, and called him his brother.</p></div>
+<blockquote class="verse">그는 “형제 사울아”라고 말하며 사울에게 안수했고, 사울은 다시 보게 되었습니다.<div class="vref">사도행전 9:17 · 개역한글</div><p class="en">He laid hands on Saul and said, “Brother Saul,” and Saul received his sight again.</p></blockquote>
+<div class="para"><p class="ko">그래도 많은 믿는 사람이 이전의 핍박자였던 바울을 계속 의심했습니다.</p><p class="en">Even then, many believers continued to distrust Paul because he had once persecuted them.</p></div>
+<div class="para"><p class="ko">그때 바나바가 바울을 믿음의 공동체 안으로 받아들이는 데 결정적인 역할을 했습니다.</p><p class="en">At that moment, Barnabas played a decisive role in welcoming Paul into the fellowship of believers.</p></div>
+<div class="para"><p class="ko">바나바라는 이름은 위로와 격려의 아들이라는 뜻입니다.</p><p class="en">The name Barnabas means son of encouragement or consolation.</p></div>
+<div class="para"><p class="ko">바나바는 다소의 사울이 사도 바울로 변화되었다는 사실을 믿고 그를 받아들였습니다.</p><p class="en">Barnabas believed that Saul of Tarsus had become Paul the apostle, and he welcomed him.</p></div></template>
+<template id="tpl-9"><div class="para"><p class="ko">훗날 위대한 사도 바울과 위대한 바나바도 요한 마가를 두고 심하게 다투었습니다.</p><p class="en">Later, even the great apostle Paul and the great Barnabas sharply disagreed over John Mark.</p></div>
+<div class="para"><p class="ko">바울은 마가가 자신들을 버리고 떠났기 때문에 다시 데려가서는 안 된다고 보았습니다.</p><p class="en">Paul believed that Mark should not be taken again because he had deserted them.</p></div>
+<div class="para"><p class="ko">바나바는 마가가 아직 배우고 성장하는 중이니 다시 기회를 주자고 보았습니다.</p><p class="en">Barnabas believed that Mark was still learning and growing and should be given another chance.</p></div>
+<div class="para"><p class="ko">그들의 의견 충돌은 너무나 날카로워서 결국 서로 갈라져 각기 다른 길로 갔습니다.</p><p class="en">Their disagreement became so sharp that they separated and went in different directions.</p></div>
+<div class="para"><p class="ko">그러나 하나님은 바울의 선교 여행도 복 주셨고 바나바의 선교 여행도 복 주셨습니다.</p><p class="en">Yet God blessed the missionary journey of Paul and also blessed the missionary journey of Barnabas.</p></div>
+<div class="para"><p class="ko">바울은 생애 마지막에 마가를 데려오라고 하면서 그가 자신의 일에 유익하다고 말했습니다.</p><p class="en">Near the end of his life, Paul asked for Mark to be brought to him because Mark was useful to his ministry.</p></div>
+<blockquote class="verse">성경은 “마가를 데리고 오라 저가 나의 일에 유익하니라”고 기록합니다.<div class="vref">디모데후서 4:11 · 개역한글</div><p class="en">Scripture records, “Bring Mark with you, for he is useful to me for ministry.”</p></blockquote>
+<div class="para"><p class="ko">바울과 마가는 결국 화해했습니다.</p><p class="en">Paul and Mark were eventually reconciled.</p></div>
+<div class="para"><p class="ko">존 웨슬리와 조지 휫필드도 당대의 위대한 복음 전도자들이었지만 서로 의견이 달랐습니다.</p><p class="en">John Wesley and George Whitefield were also great evangelists of their day, yet they disagreed with each other.</p></div>
+<div class="para"><p class="ko">그들은 서로 다른 길을 갔지만 생애가 다하기 전에 다시 화해했습니다.</p><p class="en">They went separate ways, but they were reconciled before the end of their lives.</p></div>
+<div class="para"><p class="ko">저는 여러분에게 늦기 전에 먼저 화해하라고 권하고 싶습니다.</p><p class="en">I want to urge you to reconcile sooner rather than later.</p></div></template>
+<template id="tpl-10"><div class="para"><p class="ko">성경은 제단에 예물을 드리다가 형제에게 원망들을 일이 생각나거든 예물을 두고 먼저 화목하라고 말씀합니다.</p><p class="en">Scripture says that if you remember at the altar that your brother has something against you, leave your gift and first be reconciled.</p></div>
+<blockquote class="verse">“예물을 제단 앞에 두고 먼저 가서 형제와 화목하고 그 후에 와서 예물을 드리라”고 하셨습니다.<div class="vref">마태복음 5:24 · 개역한글</div><p class="en">Jesus said, “Leave your gift there before the altar, and go your way; first be reconciled to your brother, and then come and offer your gift.”</p></blockquote>
+<div class="para"><p class="ko">내가 상처를 받았다고 느끼든 상대가 내게 상처를 받았다고 느끼든 하나님은 양쪽 모두에게 가서 화해하라고 하십니다.</p><p class="en">Whether I feel injured or the other person feels injured by me, God tells both sides to go and seek reconciliation.</p></div>
+<div class="para"><p class="ko">예수님께서는 이 일이 예물을 드리는 것보다 먼저라고 하셨을 만큼 화해를 중요하게 여기십니다.</p><p class="en">Jesus considered reconciliation so important that He placed it before offering a gift at the altar.</p></div>
+<div class="para"><p class="ko">우리는 자신의 생명이 언제 끝날지 알지 못합니다.</p><p class="en">We do not know when our own life will end.</p></div>
+<div class="para"><p class="ko">사랑하는 사람의 생명이 언제 끝날지도 알지 못합니다.</p><p class="en">We do not know when the life of someone we love will end either.</p></div>
+<div class="para"><p class="ko">어떤 사람들은 완고하게 버티며 저 사람과 절대로 화해하지 않겠다고 말합니다.</p><p class="en">Some people stubbornly insist that they will never reconcile with a certain person.</p></div>
+<div class="para"><p class="ko">그러나 그 사람이 먼저 세상을 떠나면 남은 사람의 마음에는 깊은 후회가 남습니다.</p><p class="en">But if that person dies first, deep regret remains in the heart of the one left behind.</p></div>
+<div class="para"><p class="ko">왜 내가 먼저 나아가 화해하지 않았을까 하고 후회하는 삶을 살지 마십시오.</p><p class="en">Do not live with the regret of asking why you did not step forward and reconcile.</p></div>
+<div class="para"><p class="ko">늦기 전에 먼저 화해하십시오.</p><p class="en">Reconcile sooner rather than later.</p></div>
+<div class="para"><p class="ko">마태복음 18장은 갈등과 의견 차이를 해결하는 순서를 우리에게 보여 줍니다.</p><p class="en">Matthew 18 gives us a clear order for resolving conflict and disagreement.</p></div>
+<div class="para"><p class="ko">첫 단계는 사람들 앞에 공개하는 것이 아니라 그 형제를 개인적으로 만나는 것입니다.</p><p class="en">The first step is not public exposure but a private meeting with the brother.</p></div>
+<blockquote class="verse">예수님께서는 “가서 너와 그 사람과만 상대하여 권고하라”고 말씀하셨습니다.<div class="vref">마태복음 18:15 · 개역한글</div><p class="en">Jesus said, “Go and tell him his fault between you and him alone.”</p></blockquote>
+<div class="para"><p class="ko">그가 듣지 않으면 한두 사람을 데리고 가고, 그래도 듣지 않으면 교회에 말해야 합니다. <span class="pref">(마태복음 18:16-17)</span></p><p class="en">If he will not hear, take one or two others with you, and if he still refuses to hear, tell it to the church. (Matthew 18:16-17)</p></div>
+<div class="para"><p class="ko">하나님께서 주신 순서를 거꾸로 뒤집으면 해결될 일까지 공개되어 불필요하게 커집니다.</p><p class="en">When we reverse God's order, a matter that could have been resolved grows unnecessarily through public exposure.</p></div>
+<div class="para"><p class="ko">그런 행동은 믿는 사람 사이의 신뢰와 연합을 깨뜨립니다.</p><p class="en">Such conduct breaks trust and unity among believers.</p></div>
+<blockquote class="verse">하나님께서 미워하시는 것 가운데 하나는 “형제 사이를 이간하는 자”입니다.<div class="vref">잠언 6:19 · 개역한글</div><p class="en">Among the things God hates is “one who sows discord among brethren.”</p></blockquote></template>
+<template id="tpl-11"><blockquote class="verse">시편은 “형제가 연합하여 동거함이 어찌 그리 선하고 아름다운고”라고 노래합니다.<div class="vref">시편 133:1 · 개역한글</div><p class="en">The Psalms declare, “Behold, how good and how pleasant it is for brethren to dwell together in unity.”</p></blockquote>
+<div class="para"><p class="ko">연합은 하나님의 가족 안에서 누리는 달고 아름다운 복입니다.</p><p class="en">Unity is a sweet and beautiful blessing within the family of God.</p></div>
+<div class="para"><p class="ko">그 연합이 산산이 깨지면 우리는 서로 상처를 입고 함께 싸워야 할 전쟁에서 약해집니다.</p><p class="en">When that unity is shattered, we wound one another and become weak in the battle we should be fighting together.</p></div>
+<blockquote class="verse">전도서는 “두 사람이 한 사람보다 나음은 저희가 수고함으로 좋은 상을 얻을 것임이라”고 말씀합니다.<div class="vref">전도서 4:9 · 개역한글</div><p class="en">Ecclesiastes says, “Two are better than one, because they have a good reward for their labor.”</p></blockquote>
+<div class="para"><p class="ko">한 사람이 넘어질 때 다른 한 사람이 붙들어 일으킬 수 있습니다.</p><p class="en">When one person falls, the other can lift him up.</p></div>
+<div class="para"><p class="ko">두 사람이 함께 누우면 따뜻하지만 혼자서는 따뜻해지기 어렵습니다.</p><p class="en">Two people lying together can keep warm, but one alone cannot do so easily.</p></div>
+<blockquote class="verse">“한 사람이면 패하겠거니와 두 사람이면 능히 당하나니 삼겹 줄은 쉽게 끊어지지 아니하느니라”고 하셨습니다.<div class="vref">전도서 4:12 · 개역한글</div><p class="en">Scripture says, “Though one may be overpowered, two can withstand him, and a threefold cord is not quickly broken.”</p></blockquote>
+<div class="para"><p class="ko">하나님께서 관계의 중심에 계시면 그 관계는 쉽게 끊어지지 않는 삼겹 줄과 같습니다.</p><p class="en">When God is at the center of a relationship, that relationship becomes like a threefold cord that is not easily broken.</p></div>
+<blockquote class="verse">성경은 “어찌 한 사람이 천을 쫓으며 두 사람이 만을 도망케 하였을까”라고 말씀합니다.<div class="vref">신명기 32:30 · 개역한글</div><p class="en">Scripture says, “How could one chase a thousand, and two put ten thousand to flight?”</p></blockquote>
+<div class="para"><p class="ko">연합의 열매는 단순히 두 배가 아니라 열 배로 커지는 능력입니다.</p><p class="en">The fruit of unity is not merely a doubling of strength but a multiplying power.</p></div>
+<div class="para"><p class="ko">하나님과 함께 선 한 사람은 이 세상의 가장 악한 통치자보다도 강합니다.</p><p class="en">Even one person standing with God is stronger than the most wicked rulers of this world.</p></div>
+<div class="para"><p class="ko">모순처럼 들릴지 모르지만 우리는 평화와 연합 안에서 함께 서서 싸워야 합니다.</p><p class="en">It may sound like a contradiction, but we must stand and fight together in peace and unity.</p></div></template>
+<template id="tpl-12"><div class="para"><p class="ko">사향소는 공격을 받으면 등을 원의 안쪽으로 두고 뿔을 바깥쪽으로 향한 채 원형 대형을 만듭니다.</p><p class="en">When musk oxen are attacked, they form a circle with their backs toward the center and their horns pointing outward.</p></div>
+<div class="para"><p class="ko">그들이 하나로 뭉쳐 그 대형을 지키면 포식자도 쉽게 무너뜨릴 수 없습니다.</p><p class="en">When they stand united in that formation, predators cannot easily break through.</p></div>
+<div class="para"><p class="ko">그러나 서로를 향해 돌아서서 뿔을 겨눈다면 자기들끼리 상처를 입힐 것입니다.</p><p class="en">But if they turn and point their horns at one another, they will wound themselves.</p></div>
+<div class="para"><p class="ko">그 모습을 본 포식자는 바로 지금이 공격할 기회라고 생각할 것입니다.</p><p class="en">Predators who see that will say that now is the time to attack.</p></div>
+<div class="para"><p class="ko">우리도 서로에게 등을 맡기고 바깥의 원수를 향해 함께 서야 합니다.</p><p class="en">We too must stand back to back, facing the enemy outside rather than one another.</p></div>
+<div class="para"><p class="ko">그렇게 할 때 평화와 연합 안에서 선한 싸움을 함께 싸울 수 있습니다.</p><p class="en">Then we can fight the good fight together in peace and unity.</p></div>
+<div class="para"><p class="ko">정치적인 대적들이 보수 그리스도인을 반대하는 일에는 잘 뭉친다는 말을 듣습니다.</p><p class="en">It is often said that political opponents unite effectively against conservative Christians.</p></div>
+<div class="para"><p class="ko">그 말이 사실인 만큼 그것은 그들의 힘이 됩니다.</p><p class="en">To the extent that this is true, it becomes their strength.</p></div>
+<div class="para"><p class="ko">그렇다면 같은 믿음을 가진 우리는 왜 더 깊이 연합하지 못합니까?</p><p class="en">Why, then, should fellow believers fail to unite even more deeply?</p></div>
+<div class="para"><p class="ko">우리에게는 성령께서 주신 특별한 하나 됨의 띠가 있습니다.</p><p class="en">We have a special bond of unity given by the Holy Spirit.</p></div>
+<div class="para"><p class="ko">그러므로 우리는 서로를 향해 총을 쏘아서는 안 됩니다.</p><p class="en">Therefore, we must not shoot at one another.</p></div>
+<div class="para"><p class="ko">우리는 서로를 대적하여 싸우는 사람이 아니라 서로를 위해 함께 싸우는 사람이 되어야 합니다.</p><p class="en">We must not fight against one another but fight together for one another.</p></div></template>
+<template id="tpl-13"><div class="para"><p class="ko">하나님은 우리의 영광이시며 우리의 머리를 드시는 분이십니다.</p><p class="en">God is our glory and the One who lifts up our heads.</p></div>
+<blockquote class="verse">다윗은 “주는 나의 방패시요 나의 영광이시요 나의 머리를 드시는 자니이다”라고 고백했습니다.<div class="vref">시편 3:3 · 개역한글</div><p class="en">David confessed, “You, O Lord, are a shield for me, my glory, and the One who lifts up my head.”</p></blockquote>
+<div class="para"><p class="ko">하나님은 우리의 요새이시며 높은 망대이십니다.</p><p class="en">God is our fortress and our high tower.</p></div>
+<div class="para"><p class="ko">그분과 함께 있다는 것은 온 우주에서 가장 강하고 지혜롭고 사랑이 충만한 분과 함께 있다는 뜻입니다.</p><p class="en">To be with Him is to be with the most powerful, wisest, and most loving Being in the universe.</p></div>
+<div class="para"><p class="ko">하나님께 받은 모든 것은 다른 사람과 아낌없이 나누어야 합니다.</p><p class="en">Everything we receive from God should be freely shared with others.</p></div>
+<div class="para"><p class="ko">하나님께서 우리에게 모든 것을 주셨고 그분의 은혜가 족하기 때문입니다.</p><p class="en">God has given us everything, and His grace is sufficient.</p></div>
+<div class="para"><p class="ko">내 몫을 채우려고 다른 사람의 것을 빼앗을 필요가 없습니다.</p><p class="en">I do not need to take from someone else in order to have enough.</p></div>
+<blockquote class="verse">주님은 “내 은혜가 네게 족하도다 이는 내 능력이 약한 데서 온전하여짐이라”고 말씀하셨습니다.<div class="vref">고린도후서 12:9 · 개역한글</div><p class="en">The Lord said, “My grace is sufficient for you, for My strength is made perfect in weakness.”</p></blockquote>
+<div class="para"><p class="ko">그러므로 약하고 부족할 때일수록 서로에게 은혜롭고 관대하며 넓은 마음을 품어야 합니다.</p><p class="en">Therefore, especially in weakness and need, we should be gracious, generous, and largehearted toward one another.</p></div>
+<div class="para"><p class="ko">한 아이가 보리떡 다섯 개와 물고기 두 마리를 예수님께 모두 드렸을 때 그 아이가 그날 굶었습니까?</p><p class="en">When a boy gave Jesus all five loaves and two fish, did that boy go hungry that day?</p></div>
+<div class="para"><p class="ko">그 아이도 먹었고 오천 명의 남자와 여자와 아이들이 먹었으며 열두 바구니가 남았습니다.</p><p class="en">The boy ate, five thousand men ate, women and children ate, and twelve baskets were left over.</p></div>
+<blockquote class="verse">개역한글은 “보리떡 다섯 개로 먹고 남은 조각이 열두 바구니에 찼더라”고 기록합니다.<div class="vref">요한복음 6:13 · 개역한글</div><p class="en">The Bible records that twelve baskets were filled with the fragments left from the five barley loaves.</p></blockquote>
+<div class="para"><p class="ko">우리가 가진 모든 것을 하나님께 드릴 때 이런 일이 일어납니다.</p><p class="en">This is what happens when we give everything we have to God.</p></div>
+<div class="para"><p class="ko">우리는 덧셈과 뺄셈으로 생각하지만 하나님은 곱셈으로 역사하십니다.</p><p class="en">We think in terms of addition and subtraction, but God works by multiplication.</p></div>
+<div class="para"><p class="ko">우리가 작은 것을 주님께 드리면 하나님은 우리의 상상을 넘어 그것을 크게 사용하실 수 있습니다.</p><p class="en">When we offer our little to the Lord, God can multiply and use it beyond our imagination.</p></div>
+<div class="para"><p class="ko">하나님께서 우리에게 그분의 모든 것을 주셨으니 우리도 우리의 전부를 그분께 드려야 합니다.</p><p class="en">Because God has given Himself wholly to us, we should give our whole selves back to Him.</p></div></template>
+<template id="tpl-14"><div class="para"><p class="ko">하나님께 모든 것을 드리는 삶은 서로의 관계도 바르게 세워 줍니다.</p><p class="en">A life wholly given to God also sets our relationships with one another in order.</p></div>
+<blockquote class="verse">“사랑은 오래 참고 사랑은 온유하며 투기하는 자가 되지 아니”합니다.<div class="vref">고린도전서 13:4 · 개역한글</div><p class="en">“Love suffers long and is kind; love does not envy.”</p></blockquote>
+<blockquote class="verse">사랑은 “자랑하지 아니하며 교만하지 아니”합니다.<div class="vref">고린도전서 13:4 · 개역한글</div><p class="en">Love “does not parade itself and is not puffed up.”</p></blockquote>
+<blockquote class="verse">사랑은 “무례히 행치 아니하며 자기의 유익을 구치 아니하며 성내지 아니하며 악한 것을 생각지 아니”합니다.<div class="vref">고린도전서 13:5 · 개역한글</div><p class="en">Love “does not behave rudely, does not seek its own, is not provoked, and thinks no evil.”</p></blockquote>
+<blockquote class="verse">사랑은 “불의를 기뻐하지 아니하며 진리와 함께 기뻐”합니다.<div class="vref">고린도전서 13:6 · 개역한글</div><p class="en">Love “does not rejoice in iniquity, but rejoices in the truth.”</p></blockquote>
+<blockquote class="verse">사랑은 “모든 것을 참으며 모든 것을 믿으며 모든 것을 바라며 모든 것을 견디느니라”고 하셨습니다.<div class="vref">고린도전서 13:7 · 개역한글</div><p class="en">Love “bears all things, believes all things, hopes all things, and endures all things.”</p></blockquote>
+<div class="para"><p class="ko">모든 것을 믿는다는 말은 분별력을 잃고 순진하게 속으라는 뜻이 아닙니다.</p><p class="en">To believe all things does not mean that we should become naive or abandon discernment.</p></div>
+<div class="para"><p class="ko">그러나 그것은 다른 사람을 끊임없이 의심하는 태도도 사랑이 아니라는 뜻입니다.</p><p class="en">It does mean, however, that constant suspicion of others is not love.</p></div>
+<div class="para"><p class="ko">분명한 이유가 드러나기 전에는 상대의 말을 선의로 받아들이고 신뢰하십시오.</p><p class="en">Until a clear reason proves otherwise, give the other person the benefit of the doubt and choose trust.</p></div>
+<div class="para"><p class="ko">이것이 고린도전서 13장이 가르치는 사랑의 한 모습입니다.</p><p class="en">This is one expression of the love taught in 1 Corinthians 13.</p></div>
+<div class="para"><p class="ko">우리가 이 한 장만이라도 삶에 적용한다면 수많은 문제가 해결될 것입니다.</p><p class="en">If we applied even this one chapter to our lives, many problems would be resolved.</p></div>
+<blockquote class="verse">“하나님은 사랑이심이라”고 성경은 말씀합니다.<div class="vref">요한일서 4:8 · 개역한글</div><p class="en">Scripture declares, “God is love.”</p></blockquote>
+<div class="para"><p class="ko">사랑은 하나님의 중심적이고 결정적인 성품입니다.</p><p class="en">Love is a central and defining attribute of God.</p></div>
+<blockquote class="verse">믿음과 소망과 사랑 가운데 “그 중에 제일은 사랑이라”고 하셨습니다.<div class="vref">고린도전서 13:13 · 개역한글</div><p class="en">Of faith, hope, and love, Scripture says that “the greatest of these is love.”</p></blockquote>
+<div class="para"><p class="ko">사랑은 온 우주에서 가장 강력한 힘입니다.</p><p class="en">Love is the most powerful force in the universe.</p></div></template>
+<template id="tpl-15"><div class="para"><p class="ko">저는 하나님께서 우리에게 자유 의지를 주신 이유가 사랑과 관계되어 있다고 믿습니다.</p><p class="en">I believe God's gift of free will is deeply connected to love.</p></div>
+<div class="para"><p class="ko">선택할 수 있는 존재만이 진실로 사랑하기를 선택할 수 있기 때문입니다.</p><p class="en">Only a being with the ability to choose can truly choose to love.</p></div>
+<div class="para"><p class="ko">기계도, 알고리즘도, 수학 공식도, 인공지능도 사랑할 수 없습니다.</p><p class="en">Machines, algorithms, mathematical formulas, and artificial intelligence cannot love.</p></div>
+<div class="para"><p class="ko">그러나 하나님은 우리에게 사랑을 선택할 수 있는 위대하고도 두려운 특권을 주셨습니다.</p><p class="en">God has given us the great and awesome privilege of being able to choose love.</p></div>
+<div class="para"><p class="ko">그 자유에는 사랑을 거부할 수 있는 가능성까지 포함됩니다.</p><p class="en">That freedom even includes the possibility of rejecting love.</p></div>
+<div class="para"><p class="ko">그럼에도 하나님은 우리가 그분의 사랑을 받아 다른 사람과 나누도록 초대하십니다.</p><p class="en">Even so, God invites us to receive His love and share it with others.</p></div>
+<div class="para"><p class="ko">사랑은 온 우주에서 가장 강력한 힘이며 가장 높은 선입니다.</p><p class="en">Love is the most powerful force and the highest good in the universe.</p></div>
+<blockquote class="verse">예수님께서는 “사람이 친구를 위하여 자기 목숨을 버리면 이에서 더 큰 사랑이 없나니”라고 말씀하셨습니다.<div class="vref">요한복음 15:13 · 개역한글</div><p class="en">Jesus said, “Greater love has no one than this, than to lay down one's life for his friends.”</p></blockquote>
+<div class="para"><p class="ko">예수님은 실제로 우리를 위해 자기 목숨을 내어 주셨습니다.</p><p class="en">Jesus truly laid down His life for us.</p></div>
+<div class="para"><p class="ko">그리고 우리에게 자신을 따라오라고 초대하셨습니다.</p><p class="en">Then He invited us to follow Him.</p></div>
+<blockquote class="verse">바울은 “내가 그리스도를 본받는 자 된 것 같이 너희는 나를 본받는 자 되라”고 말할 수 있었습니다.<div class="vref">고린도전서 11:1 · 개역한글</div><p class="en">Paul was able to say, “Imitate me, just as I also imitate Christ.”</p></blockquote>
+<div class="para"><p class="ko">우리도 삶으로 같은 고백을 할 수 있어야 합니다.</p><p class="en">We too should be able to make the same confession through our lives.</p></div>
+<div class="para"><p class="ko">우리 가운데 누구도 예수님을 완전하게 따르지는 못합니다.</p><p class="en">None of us follows Jesus perfectly.</p></div>
+<div class="para"><p class="ko">그러므로 우리는 언제나 그분의 은혜와 자비를 필요로 합니다.</p><p class="en">Therefore, we always need His grace and mercy.</p></div>
+<div class="para"><p class="ko">우리가 그 은혜와 자비를 필요로 하는 것처럼 다른 사람에게도 그것을 나누어야 합니다.</p><p class="en">Just as we need that grace and mercy, we must extend it to others.</p></div></template>
+<template id="tpl-16"><div class="para"><p class="ko">예수님은 왕에게 헤아릴 수 없이 큰 빚을 탕감받은 종의 비유를 들려주셨습니다.</p><p class="en">Jesus told a parable about a servant whose immeasurable debt was forgiven by a king.</p></div>
+<div class="para"><p class="ko">그 종에게 빚진 다른 동관의 빚도 작은 돈은 아니었지만 왕이 탕감해 준 빚과는 비교할 수 없었습니다.</p><p class="en">The debt owed by a fellow servant was not insignificant, but it could not compare with the debt the king had forgiven.</p></div>
+<blockquote class="verse">개역한글은 그 동관의 빚을 삼백 데나리온이 아니라 “백 데나리온”이라고 기록합니다.<div class="vref">마태복음 18:28 · 개역한글</div><p class="en">The biblical text records the fellow servant's debt as one hundred denarii, not three hundred.</p></blockquote>
+<div class="para"><p class="ko">그러나 용서받은 종은 동관의 목을 붙들고 빚을 갚으라고 몰아붙였습니다.</p><p class="en">Yet the forgiven servant seized his fellow servant by the throat and demanded repayment.</p></div>
+<div class="para"><p class="ko">왕은 그 소식을 듣고 자신에게 큰 빚을 탕감받은 종이 왜 동관을 불쌍히 여기지 않았느냐고 꾸짖었습니다.</p><p class="en">When the king heard of it, he rebuked the servant for refusing mercy after receiving forgiveness for such a great debt.</p></div>
+<blockquote class="verse">“내가 너를 불쌍히 여김과 같이 너도 네 동관을 불쌍히 여김이 마땅치 아니하냐”고 하셨습니다.<div class="vref">마태복음 18:33 · 개역한글</div><p class="en">He said, “Should you not also have had compassion on your fellow servant, just as I had pity on you?”</p></blockquote>
+<blockquote class="verse">주기도문도 “우리가 우리에게 죄 지은 자를 사하여 준 것 같이 우리 죄를 사하여 주옵시고”라고 가르칩니다.<div class="vref">마태복음 6:12 · 개역한글</div><p class="en">The Lord's Prayer teaches us to pray, “Forgive us our debts, as we forgive our debtors.”</p></blockquote>
+<div class="para"><p class="ko">우리는 하나님께 먼저 받은 크나큰 용서와 자비 때문에 다른 사람도 용서하고 긍휼히 여길 수 있습니다.</p><p class="en">We can forgive and show mercy to others because of the great forgiveness and mercy we first received from God.</p></div>
+<div class="para"><p class="ko">먼저 하나님께 받아 충만함을 누릴 때 다른 사람에게 나누어 줄 것이 넉넉해집니다.</p><p class="en">When we first receive from God and rest in His sufficiency, we have more than enough to give to others.</p></div>
+<div class="para"><p class="ko">그렇게 할 때 하나님의 은혜와 자비가 이 세상에 더욱 널리 퍼집니다.</p><p class="en">In this way, God's grace and mercy multiply throughout the world.</p></div></template>
+<template id="tpl-17"><div class="para"><p class="ko">한국전쟁이 일어나기 전 공산주의자들이 남쪽으로 내려와 한 목사님의 두 아들에게 예수 그리스도를 믿느냐고 물었습니다.</p><p class="en">Before the Korean War, communists came south and asked a pastor's two sons whether they believed in Jesus Christ.</p></div>
+<div class="para"><p class="ko">두 아들은 모두 그렇다고 담대하게 대답했습니다.</p><p class="en">Both sons boldly answered that they did.</p></div>
+<div class="para"><p class="ko">형은 자신이 나이가 많으니 먼저 죽이라고 했고 동생은 자신이 어리니 먼저 죽이라고 했습니다.</p><p class="en">The older brother said that he should be killed first because he was older, while the younger said that he should be killed first because he was younger.</p></div>
+<div class="para"><p class="ko">공산주의자는 결국 두 아들을 모두 죽였습니다.</p><p class="en">The communist eventually killed both sons.</p></div>
+<div class="para"><p class="ko">범인이 붙잡혀 재판을 받을 때 그 아버지 목사는 재판을 멈춰 달라고 요청했습니다.</p><p class="en">When the killer was captured and brought to trial, the boys' father, a pastor, asked that the trial be stopped.</p></div>
+<div class="para"><p class="ko">그 목사는 자기 아들들을 죽인 사람을 양자로 삼겠다고 선언했습니다.</p><p class="en">The pastor declared that he would adopt the man who had murdered his sons.</p></div>
+<div class="para"><p class="ko">그 살인자는 목사의 아들이 되었고 마침내 그리스도인이 되었습니다.</p><p class="en">The murderer became the pastor's son and ultimately became a Christian.</p></div>
+<div class="para"><p class="ko">하나님의 사랑은 이처럼 원수를 가족으로 바꿀 만큼 충격적이고 강력합니다.</p><p class="en">God's love is so shocking and powerful that it can turn an enemy into a member of the family.</p></div>
+<div class="para"><p class="ko">온 우주의 다른 어떤 힘도 이런 일을 이룰 수 없습니다.</p><p class="en">No other force in the universe can accomplish such a thing.</p></div>
+<div class="para"><p class="ko">오직 하나님의 사랑만이 이것을 가능하게 합니다.</p><p class="en">Only the love of God can make this possible.</p></div></template>
+<template id="tpl-18"><div class="para"><p class="ko">밤하늘의 달은 밝게 보이지만 스스로 빛을 내는 것이 아닙니다.</p><p class="en">The moon looks bright in the night sky, but it produces no light of its own.</p></div>
+<div class="para"><p class="ko">달 자체는 어둡고 먼지가 많으며 수많은 구덩이로 덮여 있습니다.</p><p class="en">The moon itself is dark, dusty, and covered with craters.</p></div>
+<div class="para"><p class="ko">달은 태양의 빛을 받아 반사할 때만 밤을 밝힐 수 있습니다.</p><p class="en">The moon can brighten the night only by receiving and reflecting the light of the sun.</p></div>
+<div class="para"><p class="ko">우리도 달과 같아서 하나님께서 먼저 비추어 주신 빛만을 반사할 수 있습니다.</p><p class="en">We are like the moon because we can only reflect the light that God first shines upon us.</p></div>
+<div class="para"><p class="ko">하나님의 빛이 우리에게 비치면 우리는 어두운 밤을 밝게 비출 수 있습니다.</p><p class="en">When God's light shines upon us, we can shine brightly in the darkness of night.</p></div>
+<blockquote class="verse">예수님께서는 “나는 세상의 빛이니 나를 따르는 자는 어두움에 다니지 아니하고 생명의 빛을 얻으리라”고 말씀하셨습니다.<div class="vref">요한복음 8:12 · 개역한글</div><p class="en">Jesus said, “I am the light of the world; he who follows Me shall not walk in darkness, but have the light of life.”</p></blockquote>
+<blockquote class="verse">예수님은 또한 자기 백성에게 “너희는 세상의 빛이라”고 말씀하셨습니다.<div class="vref">마태복음 5:14 · 개역한글</div><p class="en">Jesus also said to His people, “You are the light of the world.”</p></blockquote>
+<div class="para"><p class="ko">우리는 그분의 빛을 받을 때 세상에 그 빛을 비출 수 있습니다.</p><p class="en">We can shine His light into the world only as we receive His light.</p></div>
+<div class="para"><p class="ko">성경은 우리가 어그러지고 거스리는 세대 가운데서 세상의 빛들로 나타나야 한다고 말씀합니다. <span class="pref">(빌립보서 2:15)</span></p><p class="en">Scripture says that we are to shine as lights in the world amid a crooked and perverse generation. (Philippians 2:15)</p></div></template>
+<template id="tpl-19"><div class="para"><p class="ko">과학자들은 오랫동안 빛이 파동인지 입자인지를 물었습니다.</p><p class="en">For many years, scientists asked whether light is a wave or a particle.</p></div>
+<div class="para"><p class="ko">과학의 대답은 빛이 파동이면서 동시에 입자라는 것입니다.</p><p class="en">The scientific answer is that light is both a wave and a particle.</p></div>
+<div class="para"><p class="ko">예수님께서 세상의 빛이라고 하셨을 때 사람들은 그분이 사람이신지 하나님이신지를 묻습니다.</p><p class="en">When Jesus says that He is the light of the world, people ask whether He is human or God.</p></div>
+<div class="para"><p class="ko">그 질문에 대한 대답도 예수님께서 참 사람이시며 동시에 참 하나님이시라는 것입니다.</p><p class="en">The answer is likewise that Jesus is fully human and fully God.</p></div>
+<div class="para"><p class="ko">빛이 파동이면서 입자인 것처럼 예수님은 완전한 사람이시며 완전한 하나님이십니다.</p><p class="en">Just as light is both wave and particle, Jesus is fully man and fully God.</p></div>
+<div class="para"><p class="ko">그분은 세상의 위대한 빛이십니다.</p><p class="en">He is the great Light of the world.</p></div>
+<div class="para"><p class="ko">예수님은 완전한 사람이 되셔서 우리의 고통을 아시고 우리의 죄를 담당하셨습니다.</p><p class="en">Jesus became fully human so that He could identify with our suffering and bear our sin.</p></div>
+<div class="para"><p class="ko">동시에 완전한 하나님이시기에 우리를 용서하고 긍휼을 베풀며 하나님의 공의를 만족시키실 수 있습니다.</p><p class="en">At the same time, because He is fully God, He can forgive us, grant mercy, and satisfy divine justice.</p></div>
+<div class="para"><p class="ko">그분의 빛을 힘입어 우리도 세상을 밝힐 수 있습니다.</p><p class="en">By His light, we too can illuminate the world.</p></div></template>
+<template id="tpl-20"><div class="para"><p class="ko">얼마 전 저는 올림픽공원 장미정원 옆에서 사람들에게 연설했습니다.</p><p class="en">Not long ago, I spoke to a group of people beside the Rose Garden at Olympic Park.</p></div>
+<div class="para"><p class="ko">길 건너편에서는 한 사람이 여덟 개의 확성기를 사용해 큰 소리로 집회를 방해했습니다.</p><p class="en">Across the street, a man used eight loudspeakers and shouted in an attempt to disrupt the gathering.</p></div>
+<div class="para"><p class="ko">그 소리를 넘어 말하려면 저도 매우 큰 소리로 말해야 했습니다.</p><p class="en">I had to speak very loudly in order to be heard over that noise.</p></div>
+<div class="para"><p class="ko">그날 저는 어둠이 짙어질수록 빛은 더 밝게 빛난다고 말했습니다.</p><p class="en">That day I said that the darker it becomes, the brighter the light shines.</p></div>
+<div class="para"><p class="ko">세상이 어두워질수록 사람들은 하나님의 빛을 더욱 분명하게 볼 수 있습니다.</p><p class="en">The darker the world becomes, the more clearly people can see the light of God.</p></div>
+<div class="para"><p class="ko">궁극적으로 하나님은 결코 패배하지 않으십니다.</p><p class="en">Ultimately, God can never be defeated.</p></div>
+<div class="para"><p class="ko">하나님은 절대로 실패하지 않으시는 분입니다.</p><p class="en">God is the One who never fails.</p></div>
+<div class="para"><p class="ko">하늘과 땅의 모든 권세와 능력이 그분께 있습니다.</p><p class="en">All authority and power in heaven and on earth belong to Him.</p></div>
+<div class="para"><p class="ko">모든 지식과 모든 지혜도 그분께 있습니다.</p><p class="en">All knowledge and all wisdom belong to Him.</p></div>
+<blockquote class="verse">골로새서는 “그 안에는 지혜와 지식의 모든 보화가 감취어 있느니라”고 말씀합니다.<div class="vref">골로새서 2:3 · 개역한글</div><p class="en">Colossians says, “In Him are hidden all the treasures of wisdom and knowledge.”</p></blockquote>
+<div class="para"><p class="ko">또한 만물이 그로 말미암고 그를 위하여 창조되었다고 말씀합니다. <span class="pref">(골로새서 1:16)</span></p><p class="en">It also says that all things were created through Him and for Him. (Colossians 1:16)</p></div></template>
+<template id="tpl-21"><blockquote class="verse">“만일 하나님이 우리를 위하시면 누가 우리를 대적하리요”라고 성경은 묻습니다.<div class="vref">로마서 8:31 · 개역한글</div><p class="en">Scripture asks, “If God is for us, who can be against us?”</p></blockquote>
+<div class="para"><p class="ko">위대하고 전능하신 하나님께서 우리와 함께하십니다.</p><p class="en">Our great and almighty God is with us.</p></div>
+<div class="para"><p class="ko">그분은 우리를 단순한 정복자가 아니라 넉넉히 이기는 자로 세우셨습니다.</p><p class="en">He has made us not merely conquerors, but more than conquerors.</p></div>
+<blockquote class="verse">성경은 “우리를 사랑하시는 이로 말미암아 우리가 넉넉히 이기느니라”고 말씀합니다.<div class="vref">로마서 8:37 · 개역한글</div><p class="en">Scripture says, “In all these things we are more than conquerors through Him who loved us.”</p></blockquote>
+<div class="para"><p class="ko">그러므로 우리는 하나님을 믿고 의지할 수 있습니다.</p><p class="en">Therefore, we can trust God and rely upon Him.</p></div>
+<div class="para"><p class="ko">하나님은 언제나 신실하시고 언제나 믿을 만한 분이십니다.</p><p class="en">God is always faithful and always trustworthy.</p></div>
+<div class="para"><p class="ko">우리가 그분께 가까이 나아가면 그분도 우리를 가까이하십니다.</p><p class="en">As we draw near to Him, He draws near to us.</p></div>
+<blockquote class="verse">“하나님을 가까이 하라 그리하면 너희를 가까이 하시리라”고 말씀하셨습니다.<div class="vref">야고보서 4:8 · 개역한글</div><p class="en">Scripture says, “Draw near to God, and He will draw near to you.”</p></blockquote>
+<div class="para"><p class="ko">하나님은 변하지 않으시므로 중요한 것은 그분의 자리가 아니라 우리가 어디에 서 있느냐입니다.</p><p class="en">Because God never moves or changes, the question is not where He stands but where we stand.</p></div>
+<div class="para"><p class="ko">그러므로 우리는 은혜의 보좌 앞에 담대히 나아가야 합니다.</p><p class="en">Therefore, we must approach the throne of grace with boldness.</p></div>
+<blockquote class="verse">“긍휼하심을 받고 때를 따라 돕는 은혜를 얻기 위하여 은혜의 보좌 앞에 담대히 나아갈 것이니라”고 하셨습니다.<div class="vref">히브리서 4:16 · 개역한글</div><p class="en">Scripture says, “Let us come boldly to the throne of grace, that we may obtain mercy and find grace to help in time of need.”</p></blockquote></template>
+<template id="tpl-22"><div class="para"><p class="ko">요한계시록은 우리의 기도가 향이 되어 하나님 앞에 올라간다고 말씀합니다.</p><p class="en">Revelation tells us that our prayers rise like incense before God.</p></div>
+<div class="para"><p class="ko">금대접에 가득한 향은 성도들의 기도라고 하셨습니다. <span class="pref">(요한계시록 5:8)</span></p><p class="en">The golden bowls full of incense are the prayers of the saints. (Revelation 5:8)</p></div>
+<blockquote class="verse">“향연이 성도의 기도와 함께 천사의 손으로부터 하나님 앞으로 올라가는지라”고 기록되어 있습니다.<div class="vref">요한계시록 8:4 · 개역한글</div><p class="en">It is written that “the smoke of the incense, with the prayers of the saints, ascended before God from the angel's hand.”</p></blockquote>
+<div class="para"><p class="ko">이어 천사가 제단의 불을 땅에 쏟자 뇌성과 음성과 번개와 지진이 일어났습니다. <span class="pref">(요한계시록 8:5)</span></p><p class="en">Then the angel poured the fire of the altar upon the earth, and there were thunderings, voices, lightning, and an earthquake. (Revelation 8:5)</p></div>
+<div class="para"><p class="ko">그러므로 믿음으로 드리는 기도에는 능력이 있습니다.</p><p class="en">Therefore, there is power in faithful prayer.</p></div>
+<div class="para"><p class="ko">우리의 기도에 능력이 있는 것은 하나님께서 전능하시기 때문입니다.</p><p class="en">Our prayers have power because God is all-powerful.</p></div>
+<div class="para"><p class="ko">그분은 전능하신 하나님이십니다.</p><p class="en">He is almighty God.</p></div>
+<div class="para"><p class="ko">그분은 만왕의 왕이시며 만주의 주이십니다.</p><p class="en">He is King of kings and Lord of lords.</p></div>
+<blockquote class="verse">요한계시록은 그 이름을 “만왕의 왕이요 만주의 주라”고 선포합니다.<div class="vref">요한계시록 19:16 · 개역한글</div><p class="en">Revelation proclaims His name as “King of kings and Lord of lords.”</p></blockquote>
+<div class="para"><p class="ko">이 세상의 모든 통치자는 그분과 비교하면 저울 위의 작은 티끌과 같습니다.</p><p class="en">All the rulers of this world are like fine dust on the scales compared with Him.</p></div>
+<blockquote class="verse">성경은 열방이 하나님 앞에서 “통의 한 방울 물 같고 저울의 적은 티끌 같”다고 말씀합니다.<div class="vref">이사야 40:15 · 개역한글</div><p class="en">Scripture says that the nations are before God “as a drop in a bucket” and “as the small dust on the scales.”</p></blockquote>
+<div class="para"><p class="ko">이 진리를 믿으면 누구도 빼앗을 수 없는 힘과 담대함을 얻게 됩니다.</p><p class="en">When we believe this truth, we receive strength and courage that no one can take away.</p></div>
+<div class="para"><p class="ko">계속 기도하십시오.</p><p class="en">Keep praying.</p></div>
+<div class="para"><p class="ko">하나님을 향한 믿음을 지키십시오.</p><p class="en">Keep your faith in God.</p></div>
+<div class="para"><p class="ko">하나님 안에서 소망을 지키십시오.</p><p class="en">Keep your hope in God.</p></div>
+<div class="para"><p class="ko">하나님의 사랑을 세상과 나누십시오.</p><p class="en">Share God's love with the world.</p></div>
+<div class="para"><p class="ko">그러면 이 땅에 위대한 승리가 임할 것입니다.</p><p class="en">Then a great victory will come to this land.</p></div></template>
+<script>
+
+(function(){
+'use strict';
+var DATA={"title": "하나 됨으로 서라", "parts": [{"id": "I", "ko": "하나 됨의 부르심", "en": "The Call to Unity", "secs": [{"n": 1, "rn": "I", "ko": "성령의 하나 되게 하심", "en": "The Unity of the Spirit"}, {"n": 2, "rn": "II", "ko": "하나님의 나라를 먼저 구하라", "en": "Seek First the Kingdom of God"}, {"n": 3, "rn": "III", "ko": "질투를 이기고 선한 뜻을 믿으라", "en": "Overcome Jealousy and Believe the Best"}, {"n": 4, "rn": "IV", "ko": "오직 그리스도를 머리로 삼으라", "en": "Make Christ Alone the Head"}, {"n": 5, "rn": "V", "ko": "본질에는 일치, 비본질에는 자유, 모든 일에는 사랑", "en": "Unity in Essentials, Liberty in Non-Essentials, Love in All Things"}, {"n": 6, "rn": "VI", "ko": "형제의 기쁨을 함께 기뻐하라", "en": "Rejoice in Your Brother's Joy"}]}, {"id": "II", "ko": "화해의 길", "en": "The Way of Reconciliation", "secs": [{"n": 7, "rn": "VII", "ko": "화평케 하되 선한 싸움을 싸우라", "en": "Make Peace and Fight the Good Fight"}, {"n": 8, "rn": "VIII", "ko": "사울을 바울로 바꾸시는 하나님", "en": "The God Who Turns Saul into Paul"}, {"n": 9, "rn": "IX", "ko": "바울과 바나바, 그리고 화해", "en": "Paul, Barnabas, and Reconciliation"}, {"n": 10, "rn": "X", "ko": "먼저 가서 형제와 화목하라", "en": "First Go and Be Reconciled"}, {"n": 11, "rn": "XI", "ko": "연합의 능력", "en": "The Power of Unity"}, {"n": 12, "rn": "XII", "ko": "서로를 향해 무기를 겨누지 말라", "en": "Do Not Turn Your Weapons on One Another"}]}, {"id": "III", "ko": "은혜와 사랑", "en": "Grace and Love", "secs": [{"n": 13, "rn": "XIII", "ko": "하나님의 은혜는 족하다", "en": "God's Grace Is Sufficient"}, {"n": 14, "rn": "XIV", "ko": "사랑은 모든 것을 믿으며 견딘다", "en": "Love Believes and Endures All Things"}, {"n": 15, "rn": "XV", "ko": "사랑을 선택하도록 부르심을 받았다", "en": "We Are Called to Choose Love"}, {"n": 16, "rn": "XVI", "ko": "용서받은 만큼 용서하라", "en": "Forgive as You Have Been Forgiven"}, {"n": 17, "rn": "XVII", "ko": "원수를 가족으로 바꾸는 사랑", "en": "Love That Turns an Enemy into Family"}]}, {"id": "IV", "ko": "빛과 승리", "en": "Light and Victory", "secs": [{"n": 18, "rn": "XVIII", "ko": "세상의 빛이신 그리스도", "en": "Christ, the Light of the World"}, {"n": 19, "rn": "XIX", "ko": "참 하나님이시며 참 사람이신 예수", "en": "Jesus, Fully God and Fully Man"}, {"n": 20, "rn": "XX", "ko": "어두울수록 더 밝게 빛나라", "en": "Shine Brighter as the Darkness Deepens"}, {"n": 21, "rn": "XXI", "ko": "하나님이 우리를 위하시면", "en": "If God Is for Us"}, {"n": 22, "rn": "XXII", "ko": "믿음의 기도에는 능력이 있다", "en": "Faithful Prayer Has Power"}]}]};
+var N=22;
+
+/* 입자 */
+(function(){var host=document.getElementById('particles');if(!host)return;
+var n=window.matchMedia('(max-width:760px)').matches?12:26;
+for(var i=0;i<n;i++){var s=document.createElement('span');
+var size=2+Math.random()*4,dur=18+Math.random()*22;
+s.style.left=(Math.random()*100)+'vw';s.style.width=size+'px';s.style.height=size+'px';
+s.style.animationDuration=dur+'s';s.style.animationDelay=(-Math.random()*dur)+'s';
+s.style.setProperty('--drift',(Math.random()*80-40)+'px');
+s.style.opacity=(0.35+Math.random()*0.55).toFixed(2);host.appendChild(s);}})();
+
+/* ── 안전 DOM 헬퍼 ── */
+function el(tag, cls, text){
+  var d=document.createElement(tag);
+  if(cls) d.className=cls;
+  if(text!=null) d.textContent=text;
+  return d;
+}
+
+/* ── 레이아웃 ── */
+var world=document.getElementById('world'), edgesSvg=document.getElementById('edges'),
+    viewport=document.getElementById('viewport');
+var PART_R=340, SEC_R=700, PART_ANG=[-45,45,135,225];
+function rad(d){return d*Math.PI/180}
+function place(node,x,y){node.style.left=x+'px';node.style.top=y+'px';world.appendChild(node);}
+
+/* 중앙 노드 */
+var center=el('div','node n-center');
+center.appendChild(el('div','cx','☩'));
+center.appendChild(el('h1',null,'하나 됨으로 서라'));
+center.appendChild(el('div','sub','Stand United · Morse Tan'));
+var vv=el('div','vv');
+vv.appendChild(document.createTextNode('“평안의 매는 줄로 성령의 하나 되게'));
+vv.appendChild(document.createElement('br'));
+vv.appendChild(document.createTextNode('하신 것을 힘써 지키라” — 엡 4:3'));
+center.appendChild(vv);
+place(center,0,0);
+
+var secNodes={}, partState={}, edgeEls={}, allNodes=[], partEls={}, cntEls={};
+DATA.parts.forEach(function(p,pi){
+  var a=rad(PART_ANG[pi]);
+  var px=Math.cos(a)*PART_R, py=Math.sin(a)*PART_R;
+  var pel=el('div','node n-part');
+  pel.appendChild(el('div','pe','Part '+p.id+' · '+p.en));
+  pel.appendChild(el('h2',null,p.ko));
+  var cnt=el('span','cnt',p.secs.length+' 말씀 · 접기/펼치기');
+  pel.appendChild(cnt);
+  place(pel,px,py);
+  partState[p.id]=true; partEls[p.id]=pel; cntEls[p.id]={cnt:cnt,total:p.secs.length};
+  pel.addEventListener('click',function(){ if(moved>6)return; togglePart(p.id); });
+  var m=p.secs.length, span=(m-1)*15;
+  p.secs.forEach(function(s,si){
+    var sa=rad(PART_ANG[pi]-span/2+si*15);
+    var sx=Math.cos(sa)*SEC_R, sy=Math.sin(sa)*SEC_R;
+    var sel=el('div','node n-sec');
+    sel.appendChild(el('span','rn',s.rn));
+    sel.appendChild(el('span','tt',s.ko));
+    sel.dataset.n=s.n;
+    sel.style.setProperty('--dx',(px-sx)+'px');
+    sel.style.setProperty('--dy',(py-sy)+'px');
+    place(sel,sx,sy);
+    secNodes[s.n]={el:sel,x:sx,y:sy,part:p.id,px:px,py:py};
+    allNodes.push({el:sel,part:p.id,sec:s.n});
+  });
+});
+
+/* 간선 */
+var EXT=SEC_R+260;
+edgesSvg.setAttribute('viewBox',(-EXT)+' '+(-EXT)+' '+(EXT*2)+' '+(EXT*2));
+edgesSvg.style.left=(-EXT)+'px'; edgesSvg.style.top=(-EXT)+'px';
+edgesSvg.style.width=(EXT*2)+'px'; edgesSvg.style.height=(EXT*2)+'px';
+function curve(x1,y1,x2,y2){
+  var mx=(x1+x2)/2,my=(y1+y2)/2;
+  return 'M'+x1+' '+y1+' Q '+mx+' '+my+' '+x2+' '+y2;
+}
+DATA.parts.forEach(function(p,pi){
+  var a=rad(PART_ANG[pi]);
+  var px=Math.cos(a)*PART_R,py=Math.sin(a)*PART_R;
+  var e=document.createElementNS('http://www.w3.org/2000/svg','path');
+  e.setAttribute('class','edge main');
+  e.setAttribute('d',curve(0,0,px,py));
+  edgesSvg.appendChild(e);
+  p.secs.forEach(function(s){
+    var sn=secNodes[s.n];
+    var e2=document.createElementNS('http://www.w3.org/2000/svg','path');
+    e2.setAttribute('class','edge');
+    e2.setAttribute('d',curve(px,py,sn.x,sn.y));
+    edgesSvg.appendChild(e2);
+    edgeEls[s.n]=e2;
+  });
+});
+function togglePart(pid){
+  partState[pid]=!partState[pid];
+  var on=partState[pid];
+  allNodes.forEach(function(nd){
+    if(nd.part===pid){
+      nd.el.classList.toggle('hidden',!on);
+      edgeEls[nd.sec].classList.toggle('hidden',!on);
+    }
+  });
+  if(partEls[pid]){
+    partEls[pid].classList.toggle('folded',!on);
+    var c=cntEls[pid];
+    c.cnt.textContent = on ? (c.total+' 말씀 · 접기/펼치기') : ('＋ '+c.total+' 말씀 펼치기');
+  }
+}
+
+/* ── 팬/줌 ── */
+var tx=0,ty=0,scale=1;
+function apply(){world.style.transform='translate('+tx+'px,'+ty+'px) scale('+scale+')';}
+function fit(){
+  var vw=viewport.clientWidth,vh=viewport.clientHeight-52;
+  var need=(SEC_R+240)*2;
+  scale=Math.min(vw/need,vh/need); scale=Math.max(.25,Math.min(scale,1.4));
+  tx=vw/2; ty=52+vh/2; apply();
+}
+fit(); window.addEventListener('resize',fit);
+/* 한 손가락=이동 · 두 손가락=핀치 확대축소(+이동) */
+var dragging=false,moved=0,lx=0,ly=0;
+var touches=new Map(), pinchD=0, pinchMid=null;
+function tvals(){ return Array.from(touches.values()); }
+viewport.addEventListener('pointerdown',function(e){
+  try{viewport.setPointerCapture(e.pointerId);}catch(err){}
+  touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(touches.size===1){
+    dragging=true;moved=0;lx=e.clientX;ly=e.clientY;
+    viewport.classList.add('dragging');
+  } else if(touches.size===2){
+    dragging=false; moved=99; /* 핀치는 클릭 아님 */
+    var ps=tvals();
+    pinchD=Math.hypot(ps[0].x-ps[1].x,ps[0].y-ps[1].y);
+    pinchMid={x:(ps[0].x+ps[1].x)/2,y:(ps[0].y+ps[1].y)/2};
+  }
+});
+viewport.addEventListener('pointermove',function(e){
+  if(!touches.has(e.pointerId))return;
+  touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(touches.size>=2){
+    var ps=tvals();
+    var d=Math.hypot(ps[0].x-ps[1].x,ps[0].y-ps[1].y);
+    var mid={x:(ps[0].x+ps[1].x)/2,y:(ps[0].y+ps[1].y)/2};
+    if(pinchD>0 && d>0){
+      var ns=Math.max(.22,Math.min(scale*(d/pinchD),2.4));
+      /* 핀치 중심 고정 줌 + 중심 이동만큼 팬 */
+      tx=mid.x-(pinchMid.x-tx)*(ns/scale);
+      ty=mid.y-(pinchMid.y-ty)*(ns/scale);
+      scale=ns; apply();
+    }
+    pinchD=d; pinchMid=mid;
+    return;
+  }
+  if(!dragging)return;
+  var dx=e.clientX-lx,dy=e.clientY-ly;
+  moved+=Math.abs(dx)+Math.abs(dy);
+  tx+=dx;ty+=dy;lx=e.clientX;ly=e.clientY;apply();});
+function endPointer(e){
+  touches.delete(e.pointerId);
+  if(touches.size<2){ pinchD=0; pinchMid=null; }
+  if(touches.size===1){
+    var p=tvals()[0]; lx=p.x; ly=p.y; dragging=true; /* 남은 손가락으로 이어서 이동 */
+  } else if(touches.size===0){
+    dragging=false;viewport.classList.remove('dragging');
+  }
+}
+viewport.addEventListener('pointerup',endPointer);
+viewport.addEventListener('pointercancel',endPointer);
+viewport.addEventListener('wheel',function(e){
+  e.preventDefault();
+  var f=e.deltaY<0?1.12:0.89;
+  var ns=Math.max(.22,Math.min(scale*f,2.4));
+  var rx=e.clientX, ry=e.clientY;
+  tx=rx-(rx-tx)*(ns/scale); ty=ry-(ry-ty)*(ns/scale);
+  scale=ns; apply();
+},{passive:false});
+function zoom(f){
+  var vw=viewport.clientWidth/2,vh=viewport.clientHeight/2;
+  var ns=Math.max(.22,Math.min(scale*f,2.4));
+  tx=vw-(vw-tx)*(ns/scale); ty=vh-(vh-ty)*(ns/scale); scale=ns; apply();
+}
+document.getElementById('zIn').addEventListener('click',function(){zoom(1.25);});
+document.getElementById('zOut').addEventListener('click',function(){zoom(0.8);});
+document.getElementById('zFit').addEventListener('click',fit);
+document.getElementById('btnFit').addEventListener('click',fit);
+document.getElementById('tbTitle').addEventListener('click',fit);
+
+/* 노드 클릭(드래그와 구분) */
+world.addEventListener('click',function(e){
+  if(moved>6)return;
+  var sec=e.target.closest('.n-sec');
+  if(sec){openCard(parseInt(sec.dataset.n,10));return;}
+  if(e.target.closest('.n-center')){fit();}
+});
+
+/* ── 읽기 카드 ── */
+var sheet=document.getElementById('sheet'),cBody=document.getElementById('cBody');
+var curN=0;
+var META={};
+DATA.parts.forEach(function(p){p.secs.forEach(function(s){META[s.n]=s;});});
+var visited={};
+try{visited=JSON.parse(localStorage.getItem('mt0719_v3_read')||'{}');}catch(e){}
+function markRead(n){
+  visited[n]=1;
+  try{localStorage.setItem('mt0719_v3_read',JSON.stringify(visited));}catch(e){}
+  if(secNodes[n])secNodes[n].el.classList.add('read');
+}
+Object.keys(visited).forEach(function(n){ if(secNodes[n])secNodes[n].el.classList.add('read'); });
+function openCard(n){
+  if(n<1)n=1; if(n>N)n=N;
+  curN=n;
+  var meta=META[n];
+  document.getElementById('cRn').textContent=meta.rn;
+  document.getElementById('cKo').textContent=meta.ko;
+  document.getElementById('cEn').textContent=meta.en;
+  while(cBody.firstChild) cBody.removeChild(cBody.firstChild);
+  var tpl=document.getElementById('tpl-'+n);
+  cBody.appendChild(tpl.content.cloneNode(true));
+  cBody.scrollTop=0;
+  sheet.classList.add('open');
+  markRead(n);
+}
+function closeCard(){sheet.classList.remove('open');TTS.stop();}
+document.getElementById('cClose').addEventListener('click',closeCard);
+document.getElementById('cMap').addEventListener('click',closeCard);
+document.getElementById('sheetBg').addEventListener('click',closeCard);
+document.getElementById('cPrev').addEventListener('click',function(){openCard(curN-1);});
+document.getElementById('cNext').addEventListener('click',function(){openCard(curN+1);});
+document.addEventListener('keydown',function(e){
+  if(!sheet.classList.contains('open'))return;
+  if(e.key==='Escape')closeCard();
+  else if(e.key==='ArrowLeft'){e.preventDefault();openCard(curN-1);}
+  else if(e.key==='ArrowRight'){e.preventDefault();openCard(curN+1);}
+});
+
+/* ── EN / 학습 ── */
+var btnEn=document.getElementById('btnEn');
+function applyEn(on){document.body.classList.toggle('show-en',on);btnEn.classList.toggle('on',on);
+  try{localStorage.setItem('mt0719_en',on?'1':'0');}catch(e){}}
+btnEn.addEventListener('click',function(){applyEn(!document.body.classList.contains('show-en'));});
+try{if(localStorage.getItem('mt0719_en')==='1')applyEn(true);}catch(e){}
+
+/* ── TTS ── */
+var TTS=(function(){
+  var synth=window.speechSynthesis||null;
+  var voice=null,rate=0.9,rates=[0.7,0.9,1.1],ri=1,gen=0;
+  var queue=[],qi=0,curEl=null,lastItem=null,words=[],starts=[];
+  var player=document.getElementById('player'),sentEl=document.getElementById('plSent'),
+      koEl=document.getElementById('plKo'),note=document.getElementById('plNote'),
+      btnPause=document.getElementById('plPause');
+  function pick(){if(!synth)return;
+    var vs=synth.getVoices().filter(function(v){return /^en[-_]/i.test(v.lang);});
+    var nat=vs.filter(function(v){return /natural|neural|online/i.test(v.name)&&/en[-_]US/i.test(v.lang);});
+    voice=nat[0]||vs.filter(function(v){return /en[-_]US/i.test(v.lang);})[0]||vs[0]||null;
+    if(note)note.textContent=voice?('음성: '+voice.name.replace(/Microsoft |Online |\(Natural\)/g,'').trim()):'영어 음성 없음';}
+  if(synth){pick();synth.onvoiceschanged=pick;}
+  function renderSent(t){
+    while(sentEl.firstChild)sentEl.removeChild(sentEl.firstChild);
+    words=[];starts=[];var pos=0;
+    t.split(/(\s+)/).forEach(function(tok){if(!tok)return;
+      if(/^\s+$/.test(tok)){sentEl.appendChild(document.createTextNode(tok));}
+      else{var sp=document.createElement('span');sp.className='w';sp.textContent=tok;
+        sentEl.appendChild(sp);words.push(sp);starts.push(pos);}
+      pos+=tok.length;});}
+  function hi(ci){var idx=-1;
+    for(var i=0;i<starts.length;i++){if(starts[i]<=ci)idx=i;else break;}
+    words.forEach(function(w,i){w.classList.toggle('on',i===idx);});}
+  function clearEl(){if(curEl){curEl.classList.remove('playing');curEl=null;}}
+  function speak(item,onend){if(!synth||!item)return;
+    var g=++gen;lastItem=item;
+    renderSent(item.en);koEl.textContent=item.ko||'';
+    player.classList.add('show');clearEl();
+    if(item.el){curEl=item.el;curEl.classList.add('playing');
+      try{item.el.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}}
+    var u=new SpeechSynthesisUtterance(item.en);
+    if(voice)u.voice=voice;u.lang='en-US';u.rate=rate;
+    u.onboundary=function(e){if(g===gen&&e.charIndex!=null)hi(e.charIndex);};
+    u.onend=function(){if(g!==gen)return;
+      words.forEach(function(w){w.classList.remove('on');});clearEl();if(onend)onend();};
+    u.onerror=function(){if(g===gen)clearEl();};
+    synth.cancel();btnPause.textContent='⏸ 일시정지';
+    setTimeout(function(){if(g===gen)synth.speak(u);},60);}
+  function koOf(en){var wrap=en.closest('.para')||en.closest('.verse');
+    if(!wrap)return '';
+    var k=wrap.querySelector('.ko');if(k)return k.textContent.trim();
+    var c=wrap.cloneNode(true);var e2=c.querySelector('.en');if(e2)e2.remove();
+    var v=c.querySelector('.vref');if(v)v.remove();return c.textContent.trim();}
+  return{
+    playEl:function(en){var t=en.textContent.trim();if(!t)return;
+      queue=[];speak({en:t,ko:koOf(en),el:en});},
+    playScope:function(scope){
+      var items=[];
+      scope.querySelectorAll('.en').forEach(function(en){
+        var t=en.textContent.trim();if(t)items.push({en:t,ko:koOf(en),el:en});});
+      if(!items.length)return;
+      queue=items;qi=0;
+      (function next(){if(qi>=queue.length)return;
+        speak(queue[qi],function(){qi++;next();});})();},
+    pause:function(){if(!synth)return;
+      if(synth.speaking&&!synth.paused){synth.pause();btnPause.textContent='▶ 이어 듣기';}
+      else if(synth.paused){synth.resume();btnPause.textContent='⏸ 일시정지';}},
+    repeat:function(){if(lastItem){queue=[];speak(lastItem);}},
+    stop:function(){gen++;if(synth)synth.cancel();queue=[];clearEl();player.classList.remove('show');},
+    cycleRate:function(){ri=(ri+1)%rates.length;rate=rates[ri];
+      document.getElementById('plRate').textContent='속도 '+rate+'×';}
+  };
+})();
+document.getElementById('plPause').addEventListener('click',TTS.pause);
+document.getElementById('plRepeat').addEventListener('click',TTS.repeat);
+document.getElementById('plStop').addEventListener('click',TTS.stop);
+document.getElementById('plRate').addEventListener('click',TTS.cycleRate);
+document.getElementById('cListen').addEventListener('click',function(){
+  applyStudy(true);TTS.playScope(cBody);});
+var btnStudy=document.getElementById('btnStudy');
+function applyStudy(on){document.body.classList.toggle('study',on);
+  btnStudy.classList.toggle('on',on);
+  if(on)applyEn(true); if(!on)TTS.stop();
+  try{localStorage.setItem('mt0719_study',on?'1':'0');}catch(e){}}
+btnStudy.addEventListener('click',function(){applyStudy(!document.body.classList.contains('study'));});
+try{if(localStorage.getItem('mt0719_study')==='1')applyStudy(true);}catch(e){}
+cBody.addEventListener('click',function(e){
+  var en=e.target.closest('.en');
+  if(en){e.preventDefault();TTS.playEl(en);}});
+})();
+
+</script>
+</body>
+</html>
