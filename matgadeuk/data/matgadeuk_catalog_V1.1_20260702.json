@@ -1,6 +1,30 @@
 {
   "products": [
     {
+          "rank": "1",
+          "name": "제주 청귤",
+          "category": "과일",
+          "price": "제주 청귤 1kg 7,600원 / 10kg 26,100원",
+          "note": "현금입금 테스트가 / 수수료 0원 기준",
+          "image": "assets/green-tangerine-darkstone-20260723.png",
+          "options": [
+                {
+                      "label": "1kg / 7,600원",
+                      "value": "1kg / 7,600원",
+                      "title": "중량 선택",
+                      "image": "assets/green-tangerine-darkstone-20260723.png"
+                },
+                {
+                      "label": "10kg / 26,100원",
+                      "value": "10kg / 26,100원",
+                      "title": "중량 선택",
+                      "image": "assets/green-tangerine-wood-closeup-20260723.png"
+                }
+          ],
+          "bulk_list": false,
+          "sold_out": false
+    },
+    {
       "rank": "1",
       "name": "샤인머스켓",
       "category": "과일",
@@ -7810,7 +7834,7 @@
     }
   ],
   "category_counts": {
-    "과일": 47,
+    "과일": 49,
     "건어물": 183,
     "건과류": 22,
     "기타": 5,
