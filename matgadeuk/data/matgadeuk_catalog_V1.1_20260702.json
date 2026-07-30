@@ -179,12 +179,38 @@
     },
     {
       "rank": "9",
-      "name": "설향멜론 정품 1.5kg",
+      "name": "오렌지 17Kg",
       "category": "과일",
-      "price": "설향멜론 정품 1.5kg 19,000원",
-      "note": "2-6수 내외 / 경북 고령",
-      "image": "assets/seolhyang-melon-20260702.jpg",
-      "options": [],
+      "price": "오렌지 17Kg 2kg / 15,600원 / 4kg / 28,100원 / 6kg / 39,700원 / 12kg / 75,500원 / 17kg / 104,400원",
+      "note": "중량별 선택",
+      "image": "assets/orange-blacklabel-20260702.jpg",
+      "options": [
+        {
+          "label": "2kg / 15,600원",
+          "value": "2kg / 15,600원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 28,100원",
+          "value": "4kg / 28,100원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "6kg / 39,700원",
+          "value": "6kg / 39,700원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "12kg / 75,500원",
+          "value": "12kg / 75,500원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "17kg / 104,400원",
+          "value": "17kg / 104,400원",
+          "title": "중량 선택"
+        }
+      ],
       "bulk_list": false,
       "sold_out": false
     },
@@ -707,11 +733,11 @@
     },
     {
       "rank": "16",
-      "name": "오렌지 17Kg",
+      "name": "설향멜론 정품 1.5kg",
       "category": "과일",
-      "price": "오렌지 17Kg 82,000원",
-      "note": "",
-      "image": "assets/orange-blacklabel-20260702.jpg",
+      "price": "설향멜론 정품 1.5kg 19,000원",
+      "note": "2-6수 내외 / 경북 고령",
+      "image": "assets/seolhyang-melon-20260702.jpg",
       "options": [],
       "bulk_list": false,
       "sold_out": false
