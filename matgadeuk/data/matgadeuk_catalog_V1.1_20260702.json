@@ -1,6 +1,43 @@
 {
   "products": [
         {
+      "rank": "62",
+      "name": "체리 5Kg",
+      "category": "과일",
+      "price": "체리 5Kg 1kg / 19,200원 / 2kg / 37,600원 / 3kg / 56,000원 / 4kg / 74,300원 / 5kg / 92,700원",
+      "note": "",
+      "image": "assets/cherry-california-2026.jpg",
+      "options": [
+        {
+          "label": "1kg / 19,200원",
+          "value": "1kg / 19,200원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "2kg / 37,600원",
+          "value": "2kg / 37,600원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "3kg / 56,000원",
+          "value": "3kg / 56,000원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "4kg / 74,300원",
+          "value": "4kg / 74,300원",
+          "title": "중량 선택"
+        },
+        {
+          "label": "5kg / 92,700원",
+          "value": "5kg / 92,700원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false,
+      "sold_out": false
+    },
+    {
           "rank": "1",
           "name": "제주 청귤",
           "category": "과일",
@@ -134,43 +171,6 @@
         {
           "label": "2kg / 38,000원",
           "value": "2kg / 38,000원",
-          "title": "중량 선택"
-        }
-      ],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
-      "rank": "62",
-      "name": "체리 5Kg",
-      "category": "과일",
-      "price": "체리 5Kg 1kg / 19,200원 / 2kg / 37,600원 / 3kg / 56,000원 / 4kg / 74,300원 / 5kg / 92,700원",
-      "note": "",
-      "image": "assets/cherry-california-2026.jpg",
-      "options": [
-        {
-          "label": "1kg / 19,200원",
-          "value": "1kg / 19,200원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "2kg / 37,600원",
-          "value": "2kg / 37,600원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "3kg / 56,000원",
-          "value": "3kg / 56,000원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "4kg / 74,300원",
-          "value": "4kg / 74,300원",
-          "title": "중량 선택"
-        },
-        {
-          "label": "5kg / 92,700원",
-          "value": "5kg / 92,700원",
           "title": "중량 선택"
         }
       ],
