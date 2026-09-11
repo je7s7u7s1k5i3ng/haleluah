@@ -217,6 +217,23 @@
       "sold_out": false
     },
     {
+      "rank": "6",
+      "name": "골드키위",
+      "category": "과일",
+      "price": "골드키위 2kg 21,100원",
+      "note": "",
+      "image": "assets/bb0bw4moxpu7i.jpg",
+      "options": [
+        {
+          "label": "2kg / 21,100원",
+          "value": "2kg / 21,100원",
+          "title": "중량 선택"
+        }
+      ],
+      "bulk_list": false,
+      "sold_out": false
+    },
+    {
       "rank": "7",
       "name": "신비복숭아",
       "category": "과일",
@@ -980,17 +997,6 @@
       "price": "천혜향 9Kg 76,000원",
       "note": "",
       "image": "assets/9kg-uj7ss43b1xa.jpg",
-      "options": [],
-      "bulk_list": false,
-      "sold_out": false
-    },
-    {
-      "rank": "6",
-      "name": "골드키위",
-      "category": "과일",
-      "price": "가격 문의",
-      "note": "",
-      "image": "assets/bb0bw4moxpu7i.jpg",
       "options": [],
       "bulk_list": false,
       "sold_out": false
