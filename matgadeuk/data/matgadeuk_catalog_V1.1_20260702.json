@@ -375,28 +375,6 @@
    "rank": "1"
   },
   {
-   "rank": "2",
-   "name": "여름딸기",
-   "category": "과일",
-   "price": "여름딸기 500g 24,000원 / 1kg 37,000원",
-   "note": "난좌 포장",
-   "image": "assets/ok0b96kjwd76p.jpg",
-   "options": [
-    {
-     "label": "500g / 24,000원",
-     "value": "500g / 24,000원",
-     "title": "중량 선택"
-    },
-    {
-     "label": "1kg / 37,000원",
-     "value": "1kg / 37,000원",
-     "title": "중량 선택"
-    }
-   ],
-   "bulk_list": false,
-   "sold_out": false
-  },
-  {
    "category": "과일",
    "name": "서촌단감 가정용 랜덤과",
    "price": "서촌단감 가정용 랜덤과 1kg 8,200원 / 2kg 10,500원 / 3kg 12,700원",
@@ -422,6 +400,28 @@
    "bulk_list": false,
    "sold_out": false,
    "rank": "1"
+  },
+  {
+   "rank": "2",
+   "name": "여름딸기",
+   "category": "과일",
+   "price": "여름딸기 500g 24,000원 / 1kg 37,000원",
+   "note": "난좌 포장",
+   "image": "assets/ok0b96kjwd76p.jpg",
+   "options": [
+    {
+     "label": "500g / 24,000원",
+     "value": "500g / 24,000원",
+     "title": "중량 선택"
+    },
+    {
+     "label": "1kg / 37,000원",
+     "value": "1kg / 37,000원",
+     "title": "중량 선택"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false
   },
   {
    "rank": "1",
