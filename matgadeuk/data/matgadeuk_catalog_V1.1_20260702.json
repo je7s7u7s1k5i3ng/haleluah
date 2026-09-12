@@ -77,6 +77,189 @@
    "rank": "3"
   },
   {
+   "category": "선물세트",
+   "name": "곶감 실속 선물세트",
+   "price": "곶감 실속 선물세트 2호 1.5kg 36입 55,600원 / 3호 1kg 28입 44,000원",
+   "note": "행복예감 · 2호 1.5kg 36입 / 3호 1kg 28입",
+   "image": "assets/gift-gotgam-silsok-2ho.jpg",
+   "options": [
+    {
+     "title": "선택",
+     "label": "2호 1.5kg 36입 / 55,600원",
+     "value": "2호 1.5kg 36입 / 55,600원"
+    },
+    {
+     "title": "선택",
+     "label": "3호 1kg 28입 / 44,000원",
+     "value": "3호 1kg 28입 / 44,000원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false,
+   "rank": "1"
+  },
+  {
+   "category": "선물세트",
+   "name": "곶감 대과 선물세트",
+   "price": "곶감 대과 선물세트 2호 1.2kg 27입 53,500원 / 3호 800g 18입 41,900원",
+   "note": "행복예감 · 2호 1.2kg 27입 / 3호 800g 18입",
+   "image": "assets/gift-gotgam-daegwa-2ho.jpg",
+   "options": [
+    {
+     "title": "선택",
+     "label": "2호 1.2kg 27입 / 53,500원",
+     "value": "2호 1.2kg 27입 / 53,500원"
+    },
+    {
+     "title": "선택",
+     "label": "3호 800g 18입 / 41,900원",
+     "value": "3호 800g 18입 / 41,900원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false,
+   "rank": "1"
+  },
+  {
+   "category": "선물세트",
+   "name": "곶감 호두말이 선물세트",
+   "price": "곶감 호두말이 선물세트 46,200원",
+   "note": "상주 곶감 호두말이 1호 400g 18입",
+   "image": "assets/gift-gotgam-hodu-1ho.jpg",
+   "options": [
+    {
+     "title": "선택",
+     "label": "곶감 호두말이 선물세트 / 46,200원",
+     "value": "곶감 호두말이 선물세트 / 46,200원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false,
+   "rank": "1"
+  },
+  {
+   "category": "선물세트",
+   "name": "송화버섯 선물세트",
+   "price": "송화버섯 선물세트 57,300원",
+   "note": "국내산 저온건조 슬라이스 400g x 3팩 총 1.2kg",
+   "image": "assets/gift-songhwa.jpg",
+   "options": [
+    {
+     "title": "선택",
+     "label": "송화버섯 선물세트 / 57,300원",
+     "value": "송화버섯 선물세트 / 57,300원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false,
+   "rank": "1"
+  },
+  {
+   "category": "선물세트",
+   "name": "머스크멜론 선물세트",
+   "price": "머스크멜론 선물세트 2수 총4kg 21,600원 / 3수 총6kg 27,300원 / 4수 총8kg 35,200원",
+   "note": "국내산 · 통당 2kg 내외",
+   "image": "assets/gift-melon-2su.jpg",
+   "options": [
+    {
+     "title": "선택",
+     "label": "2수 총4kg / 21,600원",
+     "value": "2수 총4kg / 21,600원"
+    },
+    {
+     "title": "선택",
+     "label": "3수 총6kg / 27,300원",
+     "value": "3수 총6kg / 27,300원"
+    },
+    {
+     "title": "선택",
+     "label": "4수 총8kg / 35,200원",
+     "value": "4수 총8kg / 35,200원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false,
+   "rank": "1"
+  },
+  {
+   "category": "선물세트",
+   "name": "멜론 샤인머스캣 혼합세트",
+   "price": "멜론 샤인머스캣 혼합세트 42,600원",
+   "note": "머스크멜론 2수 총4kg + 샤인머스켓 2kg",
+   "image": "assets/gift-melon-shine.jpg",
+   "options": [
+    {
+     "title": "선택",
+     "label": "멜론 샤인머스캣 혼합세트 / 42,600원",
+     "value": "멜론 샤인머스캣 혼합세트 / 42,600원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false,
+   "rank": "1"
+  },
+  {
+   "category": "선물세트",
+   "name": "샤인머스켓 선물세트",
+   "price": "샤인머스켓 선물세트 34,800원",
+   "note": "국내산 2kg 2-3수",
+   "image": "assets/gift-shine.jpg",
+   "options": [
+    {
+     "title": "선택",
+     "label": "샤인머스켓 선물세트 / 34,800원",
+     "value": "샤인머스켓 선물세트 / 34,800원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false,
+   "rank": "1"
+  },
+  {
+   "category": "선물세트",
+   "name": "전통 떡 선물세트",
+   "price": "전통 떡 선물세트 찹쌀떡 840g+840g 36,600원 / 콩쑥개떡 840g+840g 36,600원 / 쑥두텁떡 840g+840g 36,600원",
+   "note": "3종 1.68kg · 찹쌀떡 / 콩쑥개떡 / 쑥두텁떡",
+   "image": "assets/gift-tteok.jpg",
+   "options": [
+    {
+     "title": "선택",
+     "label": "찹쌀떡 840g+840g / 36,600원",
+     "value": "찹쌀떡 840g+840g / 36,600원"
+    },
+    {
+     "title": "선택",
+     "label": "콩쑥개떡 840g+840g / 36,600원",
+     "value": "콩쑥개떡 840g+840g / 36,600원"
+    },
+    {
+     "title": "선택",
+     "label": "쑥두텁떡 840g+840g / 36,600원",
+     "value": "쑥두텁떡 840g+840g / 36,600원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false,
+   "rank": "1"
+  },
+  {
+   "category": "선물세트",
+   "name": "멸치 선물세트",
+   "price": "멸치 선물세트 28,100원",
+   "note": "국내산 500g x 2",
+   "image": "assets/gift-myeolchi.jpg",
+   "options": [
+    {
+     "title": "선택",
+     "label": "멸치 선물세트 / 28,100원",
+     "value": "멸치 선물세트 / 28,100원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false,
+   "rank": "1"
+  },
+  {
    "rank": "1",
    "name": "체리 4Kg",
    "category": "과일",
@@ -8059,6 +8242,6 @@
   "기타": 5,
   "수산물": 15,
   "견과류": 58,
-  "선물세트": 3
+  "선물세트": 12
  }
 }
