@@ -103,7 +103,7 @@
    "name": "곶감 대과 선물세트",
    "price": "곶감 대과 선물세트 2호 1.2kg 27입 53,500원 / 3호 800g 18입 41,900원",
    "note": "행복예감 · 2호 1.2kg 27입 / 3호 800g 18입",
-   "image": "assets/gift-gotgam-daegwa-2ho.jpg",
+   "image": "assets/gotgam-daegwa-1.jpg",
    "options": [
     {
      "title": "선택",
@@ -118,7 +118,13 @@
    ],
    "bulk_list": false,
    "sold_out": false,
-   "rank": "1"
+   "rank": "1",
+   "images": [
+    "assets/gotgam-daegwa-1.jpg",
+    "assets/gotgam-daegwa-2.jpg",
+    "assets/gotgam-daegwa-3.jpg",
+    "assets/gotgam-daegwa-4.jpg"
+   ]
   },
   {
    "category": "선물세트",
@@ -220,7 +226,7 @@
    "name": "전통 떡 선물세트",
    "price": "전통 떡 선물세트 찹쌀떡 840g+840g 36,600원 / 콩쑥개떡 840g+840g 36,600원 / 쑥두텁떡 840g+840g 36,600원",
    "note": "3종 1.68kg · 찹쌀떡 / 콩쑥개떡 / 쑥두텁떡",
-   "image": "assets/gift-tteok.jpg",
+   "image": "assets/tteok-1-box.jpg",
    "options": [
     {
      "title": "선택",
@@ -240,7 +246,13 @@
    ],
    "bulk_list": false,
    "sold_out": false,
-   "rank": "1"
+   "rank": "1",
+   "images": [
+    "assets/tteok-1-box.jpg",
+    "assets/tteok-2-chapssal.jpg",
+    "assets/tteok-3-ssukgae.jpg",
+    "assets/tteok-4-dutteop.jpg"
+   ]
   },
   {
    "category": "선물세트",
@@ -281,7 +293,7 @@
    "name": "태추단감 2kg",
    "price": "태추단감 2kg 소과 11-12과 25,500원 / 중과 10과 29,200원 / 대과 9과 33,800원 / 특대과 7-8과 35,200원",
    "note": "과수별 선택 · 배송비 무료",
-   "image": "assets/logo.jpg",
+   "image": "assets/taechu-thumb.jpg",
    "options": [
     {
      "title": "선택",
