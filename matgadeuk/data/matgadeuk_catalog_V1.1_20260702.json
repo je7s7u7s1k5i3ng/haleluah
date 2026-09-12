@@ -272,23 +272,6 @@
    "rank": "1"
   },
   {
-   "rank": "1",
-   "name": "체리 4Kg",
-   "category": "과일",
-   "price": "체리 4Kg 89,000원",
-   "note": "4kg 단일 판매",
-   "image": "assets/cherry-california-2026.jpg",
-   "options": [
-    {
-     "label": "4kg / 89,000원",
-     "value": "4kg / 89,000원",
-     "title": "중량 선택"
-    }
-   ],
-   "bulk_list": false,
-   "sold_out": false
-  },
-  {
    "category": "과일",
    "name": "태추단감 2kg",
    "price": "태추단감 2kg 소과 11-12과 25,500원 / 중과 10과 29,200원 / 대과 9과 33,800원 / 특대과 7-8과 35,200원",
@@ -319,6 +302,23 @@
    "bulk_list": false,
    "sold_out": false,
    "rank": "1"
+  },
+  {
+   "rank": "1",
+   "name": "체리 4Kg",
+   "category": "과일",
+   "price": "체리 4Kg 89,000원",
+   "note": "4kg 단일 판매",
+   "image": "assets/cherry-california-2026.jpg",
+   "options": [
+    {
+     "label": "4kg / 89,000원",
+     "value": "4kg / 89,000원",
+     "title": "중량 선택"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false
   },
   {
    "category": "과일",
