@@ -321,85 +321,61 @@
    "sold_out": false
   },
   {
+   "rank": "1",
    "category": "과일",
-   "name": "부유단감(서촌단감) 중과",
-   "price": "부유단감(서촌단감) 중과 1kg 11,000원 / 2kg 16,300원 / 3kg 21,700원",
-   "note": "중량별 선택 · 배송비 무료 · 부유단감 품종입니다",
-   "image": "assets/logo.jpg",
+   "name": "부유단감(서촌단감)",
+   "price": "부유단감(서촌단감) 중과 1kg 11,000원부터 · 대과 / 가정용 랜덤과 선택",
+   "note": "중과 · 대과 · 가정용 랜덤과 / 1kg · 2kg · 3kg · ★배송비 무료",
+   "image": "assets/seochon-danggam.jpg",
    "options": [
     {
-     "title": "선택",
-     "label": "1kg / 11,000원",
-     "value": "1kg / 11,000원"
+     "title": "과수 · 중량 선택",
+     "label": "중과 1kg / 11,000원",
+     "value": "중과 1kg / 11,000원"
     },
     {
-     "title": "선택",
-     "label": "2kg / 16,300원",
-     "value": "2kg / 16,300원"
+     "title": "과수 · 중량 선택",
+     "label": "중과 2kg / 16,300원",
+     "value": "중과 2kg / 16,300원"
     },
     {
-     "title": "선택",
-     "label": "3kg / 21,700원",
-     "value": "3kg / 21,700원"
+     "title": "과수 · 중량 선택",
+     "label": "중과 3kg / 21,700원",
+     "value": "중과 3kg / 21,700원"
+    },
+    {
+     "title": "과수 · 중량 선택",
+     "label": "대과 1kg / 12,700원",
+     "value": "대과 1kg / 12,700원"
+    },
+    {
+     "title": "과수 · 중량 선택",
+     "label": "대과 2kg / 19,900원",
+     "value": "대과 2kg / 19,900원"
+    },
+    {
+     "title": "과수 · 중량 선택",
+     "label": "대과 3kg / 27,200원",
+     "value": "대과 3kg / 27,200원"
+    },
+    {
+     "title": "과수 · 중량 선택",
+     "label": "가정용 랜덤과 1kg / 8,200원",
+     "value": "가정용 랜덤과 1kg / 8,200원"
+    },
+    {
+     "title": "과수 · 중량 선택",
+     "label": "가정용 랜덤과 2kg / 10,500원",
+     "value": "가정용 랜덤과 2kg / 10,500원"
+    },
+    {
+     "title": "과수 · 중량 선택",
+     "label": "가정용 랜덤과 3kg / 12,700원",
+     "value": "가정용 랜덤과 3kg / 12,700원"
     }
    ],
    "bulk_list": false,
-   "sold_out": false,
-   "rank": "1"
-  },
-  {
-   "category": "과일",
-   "name": "부유단감(서촌단감) 대과",
-   "price": "부유단감(서촌단감) 대과 1kg 12,700원 / 2kg 19,900원 / 3kg 27,200원",
-   "note": "중량별 선택 · 배송비 무료 · 부유단감 품종입니다",
-   "image": "assets/logo.jpg",
-   "options": [
-    {
-     "title": "선택",
-     "label": "1kg / 12,700원",
-     "value": "1kg / 12,700원"
-    },
-    {
-     "title": "선택",
-     "label": "2kg / 19,900원",
-     "value": "2kg / 19,900원"
-    },
-    {
-     "title": "선택",
-     "label": "3kg / 27,200원",
-     "value": "3kg / 27,200원"
-    }
-   ],
-   "bulk_list": false,
-   "sold_out": false,
-   "rank": "1"
-  },
-  {
-   "category": "과일",
-   "name": "부유단감(서촌단감) 가정용 랜덤과",
-   "price": "부유단감(서촌단감) 가정용 랜덤과 1kg 8,200원 / 2kg 10,500원 / 3kg 12,700원",
-   "note": "랜덤 과수 · 중량별 선택 · 배송비 무료 · 부유단감 품종입니다",
-   "image": "assets/logo.jpg",
-   "options": [
-    {
-     "title": "선택",
-     "label": "1kg / 8,200원",
-     "value": "1kg / 8,200원"
-    },
-    {
-     "title": "선택",
-     "label": "2kg / 10,500원",
-     "value": "2kg / 10,500원"
-    },
-    {
-     "title": "선택",
-     "label": "3kg / 12,700원",
-     "value": "3kg / 12,700원"
-    }
-   ],
-   "bulk_list": false,
-   "sold_out": false,
-   "rank": "1"
+   "sold_out": false
   },
   {
    "rank": "2",
@@ -8248,7 +8224,7 @@
   }
  ],
  "category_counts": {
-  "과일": 53,
+  "과일": 51,
   "건어물": 183,
   "건과류": 22,
   "기타": 5,
