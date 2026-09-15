@@ -40,7 +40,7 @@
   {
    "category": "선물세트",
    "name": "사과 배 혼합 선물세트",
-   "price": "가격 문의",
+   "price": "사과 6 + 배 6 혼합 선물세트 66,000원",
    "note": "사과 6 + 배 6 / 명품 스티커",
    "image": "assets/giftset-apple-pear-mix.jpg",
    "options": [
@@ -57,8 +57,8 @@
   {
    "category": "선물세트",
    "name": "홍로 사과 선물세트",
-   "price": "가격 문의",
-   "note": "11과 · 12과 / 지금 나오는 품종은 홍로입니다",
+   "price": "홍로 사과 선물세트 11과 선물용 85,000원 / 10kg 26과 95,000원",
+   "note": "11과 선물용 · 10kg 26과 가성비 / 지금 나오는 품종은 홍로입니다",
    "image": "assets/giftset-hongro.jpg",
    "options": [
     {
