@@ -57,7 +57,7 @@
 <script>
 const CATEGORY_ORDER=["선물세트", "과일", "수산물", "건어물", "견과류", "건과류", "채소/농산", "기타"];
 const CATEGORY_IDS={"선물세트": "cat-gift", "과일": "cat-fruit", "수산물": "cat-seafood", "건어물": "cat-dried-seafood", "견과류": "cat-nuts", "건과류": "cat-dried-fruit", "채소/농산": "cat-vegetable", "기타": "cat-other"};
-const CATALOG_URL='data/matgadeuk_catalog_V1.1_20260702.json?v=20260916-135040';
+const CATALOG_URL='data/matgadeuk_catalog_V1.1_20260702.json?v=20260916-141447';
 let products=[], currentProduct=null;
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 const DEFAULT_BANK={bank:'하나은행',account:'74391002381804',holder:'김명숙'};
@@ -79,7 +79,7 @@ function updateOrderImage(){const box=document.getElementById('order-preview'),i
 function openOrder(p){currentProduct=p;document.getElementById('product').value=p.name;updateOrderBank(p.name);const weightBox=document.getElementById('weight-options'),select=document.getElementById('weight-select');select.innerHTML='';if(p.options&&p.options.length){p.options.forEach(opt=>{const el=document.createElement('option');el.value=opt.value;el.textContent=opt.label;el.dataset.image=opt.image||p.image||'assets/logo.jpg';select.appendChild(el);});document.getElementById('weight-label').textContent=(p.name||'')+' 중량 선택';weightBox.style.display='block';select.onchange=updateOrderImage;}else{weightBox.style.display='none';select.onchange=null;}updateOrderImage();document.getElementById('modal').style.display='flex';}
 fetch(CATALOG_URL).then(r=>r.json()).then(data=>{products=data.products||[];renderCatalog();}).catch(()=>{document.getElementById('catalog').innerHTML='<p class="loading">품목 목록을 불러오지 못했습니다. 새로고침 후 다시 확인해 주세요.</p>';}); 
 
-const ORDER_LOOKUP_ENDPOINT='https://script.google.com/macros/s/AKfycbxGWr7jU0OUZOQyyYvBVxLUs2OXwRoJ54iSo8DPxHL-x9Xuhvu6QBwWX-hIA2tRRZDHDQ/exec';
+const ORDER_LOOKUP_ENDPOINT='https://script.google.com/macros/s/AKfycbxjIaAC3zZRlU4DM-DLYSYbObebvu9srOFXXUAc5cI4HpbDndbzFlcwN07SiRUiOWY/exec';
 let lookupState={name:'',phone4:'',token:'',orderNo:''};
 function normalizePhone(v){const digits=String(v||'').replace(/[^0-9]/g,'');if(digits.length===10&&digits.indexOf('10')===0)return '010-'+digits.slice(2,6)+'-'+digits.slice(6);if(digits.length===11&&digits.indexOf('010')===0)return '010-'+digits.slice(3,7)+'-'+digits.slice(7);return String(v||'').trim();}
 function showLookupMessage(html){const box=document.getElementById('lookup-result');box.style.display='block';box.innerHTML=html;}
