@@ -630,13 +630,19 @@
    "sold_out": false
   },
   {
-   "rank": "23",
-   "name": "블루베리 100g 10팩",
+   "rank": "6",
+   "name": "블루베리 125g 12팩",
    "category": "과일",
-   "price": "블루베리 1kg 44,500원",
-   "note": "",
+   "price": "블루베리 125g 12팩 1.5kg 86,500원",
+   "note": "수입산 · 125g 소포장 12팩 (총 1.5kg) · 스티로폼 아이스박스 + 쿠션 포장 · ★배송비 무료",
    "image": "assets/blueberry-20260702.jpg",
-   "options": [],
+   "options": [
+    {
+     "title": "중량 선택",
+     "label": "125g × 12팩 (총 1.5kg) / 86,500원",
+     "value": "125g × 12팩 (총 1.5kg) / 86,500원 / 원산지 수입산"
+    }
+   ],
    "bulk_list": false,
    "sold_out": false
   },
