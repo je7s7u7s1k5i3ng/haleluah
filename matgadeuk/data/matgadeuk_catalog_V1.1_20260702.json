@@ -646,6 +646,28 @@
    "sold_out": false
   },
   {
+   "category": "과일",
+   "name": "홍로 쥬스용·가정용 10Kg",
+   "price": "홍로 10Kg 38,000원",
+   "note": "쥬스·잼용 또는 가정에서 드실 용도 / 크기 제각각 · 선물용 아님",
+   "image": "assets/apple-10kg-20260702.jpg",
+   "options": [
+    {
+     "title": "용도 선택",
+     "label": "쥬스용 10Kg / 38,000원",
+     "value": "쥬스용 10Kg / 38,000원"
+    },
+    {
+     "title": "용도 선택",
+     "label": "가정용 10Kg / 38,000원",
+     "value": "가정용 10Kg / 38,000원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false,
+   "rank": "1"
+  },
+  {
    "rank": "9",
    "name": "멜론",
    "category": "과일",
@@ -8344,7 +8366,7 @@
   }
  ],
  "category_counts": {
-  "과일": 50,
+  "과일": 53,
   "건어물": 183,
   "건과류": 22,
   "기타": 5,
