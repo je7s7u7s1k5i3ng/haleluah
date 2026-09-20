@@ -646,6 +646,23 @@
    "sold_out": false
   },
   {
+   "rank": "12",
+   "name": "수입 석류 5Kg",
+   "category": "과일",
+   "price": "수입 석류 5Kg 77,300원",
+   "note": "가락시장 직접 선별 · 개별 그물망 포장 / 배송비 포함",
+   "image": "assets/fruit-seokryu-20260921.jpg",
+   "bulk_list": false,
+   "sold_out": false,
+   "options": [
+    {
+     "title": "중량 선택",
+     "label": "5Kg / 77,300원",
+     "value": "5Kg / 77,300원"
+    }
+   ]
+  },
+  {
    "category": "과일",
    "name": "홍로 쥬스용·가정용 10Kg",
    "price": "홍로 10Kg 38,000원",
