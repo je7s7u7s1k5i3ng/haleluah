@@ -1035,17 +1035,6 @@
    "sold_out": false
   },
   {
-   "rank": "13",
-   "name": "애플망고 4Kg 7수",
-   "category": "과일",
-   "price": "애플망고 4Kg 63,500원",
-   "note": "",
-   "image": "assets/apple-mango-brazil-20260702.jpg",
-   "options": [],
-   "bulk_list": false,
-   "sold_out": false
-  },
-  {
    "rank": "41",
    "name": "하우스자두 300g",
    "category": "과일",
@@ -8415,7 +8404,7 @@
   }
  ],
  "category_counts": {
-  "과일": 54,
+  "과일": 53,
   "건어물": 183,
   "건과류": 22,
   "기타": 5,
