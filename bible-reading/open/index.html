@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>성경 읽기</title>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#4a2c1c"/>
+<link rel="icon" href="icon-192.png"/>
+<link rel="apple-touch-icon" href="icon-192.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#f6f1e6; --card:#fffdf8; --ink:#33281f; --sub:#8a7563;
+  --accent:#7a3b2e; --accent-soft:#e9d9c8; --gold:#b98a4e;
+  --line:#e5dbca; --ok:#4c7a3f; --danger:#a33d2f;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;
+  padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+main{max-width:640px;margin:0 auto;padding:14px 14px 20px}
+h1,h2,h3{margin:0}
+h2{font-size:15px;font-weight:700;letter-spacing:-.2px;margin-bottom:10px}
+.sub{color:var(--sub);font-size:12px;line-height:1.5}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 1px 2px rgba(80,50,20,.04)}
+
+/* 헤더 */
+.top{max-width:640px;margin:0 auto;padding:14px 14px 4px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(160deg,#6b4530,#4a2c1c);
+  color:#f6f0e2;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;
+  font-family:'Nanum Myeongjo',serif;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+.brand h1{font-size:17px;font-family:'Nanum Myeongjo',serif}
+.brand p{margin:0;font-size:11px;color:var(--sub)}
+.badge{font-size:10px;padding:4px 8px;border-radius:20px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.badge.off{background:#e8e4dc;color:#77685a}
+
+/* 하단 탭 */
+.tabs{position:fixed;left:0;right:0;bottom:0;display:flex;background:#fffdf8;border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom);z-index:20}
+.tabs button{flex:1;border:0;background:none;padding:10px 0 12px;font-size:11px;font-weight:500;color:var(--sub);
+  display:flex;flex-direction:column;align-items:center;gap:3px;font-family:inherit}
+.tabs button .ico{font-size:18px;line-height:1}
+.tabs button.active{color:var(--accent);font-weight:700}
+
+/* 주 카드 */
+.week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.week-nav button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--card);
+  font-size:18px;color:var(--accent);cursor:pointer}
+.week-nav button:disabled{opacity:.3}
+.week-label{font-size:18px;font-weight:800;text-align:center;font-family:'Nanum Myeongjo',serif}
+.week-dates{font-size:11px;color:var(--sub);text-align:center}
+.prog-row{display:flex;align-items:center;gap:8px;font-size:12px;margin-top:8px}
+.prog-row span:first-child{width:36px;color:var(--sub)}
+.prog-row span:last-child{width:44px;text-align:right;font-weight:700}
+.bar{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--accent));border-radius:4px;width:0;transition:width .4s}
+.ghost-btn{margin-top:8px;border:1px solid var(--line);background:none;color:var(--accent);font-size:12px;
+  padding:6px 12px;border-radius:8px;font-family:inherit;cursor:pointer}
+
+/* 장 체크 리스트 */
+.chk{display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid #f0e8d8;cursor:pointer}
+.chk:last-child{border-bottom:0}
+.chk input{width:20px;height:20px;accent-color:var(--accent);flex-shrink:0}
+.chk span{flex:1;font-size:14px}
+.chk em{font-style:normal;font-size:10px;color:var(--ok)}
+.chk.read span{color:var(--sub);text-decoration:line-through}
+.read-link{font-size:11px;color:var(--accent);border:0;background:none;font-family:inherit;cursor:pointer;padding:4px}
+
+/* 읽기 화면 */
+.sel-row{display:flex;gap:8px;margin-bottom:10px}
+select{flex:1;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;
+  font-family:inherit;font-size:14px;color:var(--ink)}
+.primary{width:100%;padding:12px;border:0;border-radius:10px;background:var(--accent);color:#fff;
+  font-size:14px;font-weight:700;font-family:inherit;cursor:pointer}
+.primary:active{opacity:.85}
+.reader-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;
+  padding-bottom:10px;border-bottom:2px solid var(--accent-soft)}
+.reader-head h2{margin:0;font-family:'Nanum Myeongjo',serif;font-size:19px}
+.chk-inline{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--sub);white-space:nowrap}
+.chk-inline input{width:18px;height:18px;accent-color:var(--ok)}
+.verse{font-family:'Nanum Myeongjo',serif;font-size:17px;line-height:2.05;margin:0 0 10px;color:#2d2318}
+.verse sup{color:var(--gold);font-weight:700;font-size:12px;margin-right:6px;font-family:'Noto Sans KR'}
+.verse.here{background:linear-gradient(transparent 55%,rgba(185,138,78,.22) 55%);border-radius:4px}
+.resume{margin-top:10px;padding:10px 12px;background:#f3e9d7;border-radius:10px;font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.resume button{border:0;background:var(--accent);color:#fff;border-radius:8px;padding:7px 12px;font-size:12px;font-family:inherit;cursor:pointer;white-space:nowrap}
+.pos-hint{margin-top:8px;text-align:center;font-size:11px;color:var(--sub)}
+.no-bible{padding:30px 10px;text-align:center;color:var(--sub);font-size:13px;line-height:1.7}
+.no-bible code{background:#efe8da;padding:2px 6px;border-radius:6px}
+
+/* 현황 */
+.member{display:flex;align-items:center;gap:10px;padding:10px 2px;border-bottom:1px solid #f0e8d8}
+.member:last-child{border-bottom:0}
+.rank{width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent);
+  font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.member .info{flex:1;min-width:0}
+.member .info b{font-size:14px;display:flex;justify-content:space-between;gap:6px}
+.member .info b small{font-weight:400;font-size:10px;color:var(--sub);white-space:nowrap}
+.member .mbar{height:6px;background:var(--line);border-radius:3px;margin-top:5px;overflow:hidden}
+.member .mbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--accent));border-radius:3px}
+.member .meta{font-size:10px;color:var(--sub);margin-top:3px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.stat{background:#f7f1e4;border-radius:10px;padding:10px 6px;text-align:center}
+.stat b{font-size:18px;font-family:'Nanum Myeongjo',serif;color:var(--accent)}
+.stat span{display:block;font-size:10px;color:var(--sub);margin-top:2px}
+
+/* 설정 */
+.field{margin-bottom:10px}
+.field label{display:block;font-size:12px;color:var(--sub);margin-bottom:5px}
+.field input{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;font-size:14px;font-family:inherit;background:#fff}
+.btn-row{display:flex;gap:8px}
+.btn-row .primary{flex:1;width:auto}
+.ghost{border:1px solid var(--line);background:none;color:var(--ink);padding:11px 14px;border-radius:10px;font-size:13px;font-family:inherit;cursor:pointer}
+.danger{color:var(--danger);border-color:#e5c8c0}
+.link-like{font-size:11px;word-break:break-all;color:var(--accent)}
+code{background:#efe8da;padding:2px 7px;border-radius:6px;font-size:13px}
+
+/* 전체 보기 매트릭스 */
+.mx-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin-top:8px}
+.mx{border-collapse:collapse}
+.mx th,.mx td{border:1px solid #f0e7d7;width:24px;height:24px;padding:0;text-align:center;font-size:9px;line-height:24px}
+.mx th{background:#f7f1e4;color:var(--sub);font-size:9px}
+.mx td.name,.mx th.name{min-width:76px;max-width:96px;text-align:left;padding:0 6px;font-size:11px;line-height:24px;position:sticky;left:0;background:var(--card);z-index:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.mx td.total{font-weight:700;font-size:10px;background:#fff7ea;color:var(--accent);width:40px}
+
+.pill{display:inline-block;background:#f7f1e4;border:1px solid var(--line);border-radius:12px;padding:3px 10px;font-size:12px;margin:3px 4px 3px 0}
+
+/* 시작 오버레이 */
+.overlay{position:fixed;inset:0;background:linear-gradient(160deg,#4a2c1c,#7a3b2e);z-index:50;
+  display:flex;align-items:center;justify-content:center;padding:20px}
+.overlay.hidden{display:none}
+.setup-card{background:var(--card);border-radius:20px;padding:26px 22px;width:100%;max-width:360px;
+  box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.setup-card h1{font-family:'Nanum Myeongjo',serif;font-size:26px;color:var(--accent);text-align:center}
+.setup-card>p{text-align:center;color:var(--sub);font-size:13px;margin:6px 0 18px}
+.setup-card .field input{padding:13px}
+.setup-card .sub{text-align:center;margin-top:14px}
+
+.hidden{display:none!important}
+@media(min-width:640px){main{padding-top:4px}}
+</style>
+</head>
+<body>
+
+<!-- 시작 화면 (그룹 코드/이름) -->
+<div id="setup" class="overlay hidden">
+  <div class="setup-card">
+    <h1>성경 읽기</h1>
+    <p>함께 읽고, 함께 기록해요</p>
+    <div class="field"><label>이름</label><input id="suName" placeholder="이름 또는 닉네임" maxlength="12"/></div>
+    <div class="field"><label>그룹 코드</label><input id="suGroup" placeholder="예) AB12CD" autocomplete="off" maxlength="20" style="text-transform:uppercase"/></div>
+    <div class="field" id="pinField"><label id="pinLabel">비밀번호 (선택 · 프라이버시 모드)</label><input id="suPin" type="password" placeholder="4~8자리" maxlength="8"/></div>
+    <div class="btn-row">
+      <button id="suJoin" class="primary">참여하기</button>
+      <button id="suNew" class="ghost">새 코드 만들기</button>
+    </div>
+    <p class="sub" id="setupNote">초대받은 링크로 들어오면 코드가 자동으로 채워져요. 이름이 곧 계정이라 같은 이름으로 들어오면 어느 기기에서나 기록이 이어집니다.<br/><b>비밀번호를 넣으면 프라이버시 모드</b> — 목사님·다른 멤버에게는 가명(비공개#코드)으로만 보이고, 시트에 실명이 저장되지 않아요.</p>
+  </div>
+</div>
+
+<header class="top">
+  <div class="brand">
+    <span class="brand-mark">성</span>
+    <div><h1>성경 읽기</h1><p id="groupLabel">모임 이름</p></div>
+  </div>
+  <div id="connBadge" class="badge">연결 확인 중…</div>
+</header>
+
+<main>
+  <!-- 홈 -->
+  <section id="tab-home">
+    <div class="card">
+      <div class="week-nav">
+        <button id="wPrev">‹</button>
+        <div><div class="week-label" id="weekLabel">—주차</div><div class="week-dates" id="weekDates"></div></div>
+        <button id="wNext">›</button>
+      </div>
+      <div class="prog-row"><span>이번 주</span><div class="bar"><i id="weekBar"></i></div><span id="weekProgText">0/0</span></div>
+      <div class="prog-row"><span>전체</span><div class="bar"><i id="totalBar"></i></div><span id="totalProgText">0%</span></div>
+      <button id="wToday" class="ghost-btn hidden">이번 주로 이동</button>
+    </div>
+    <div class="card" id="todayCard"><h2 id="todayTitle">오늘 읽을 장</h2><div id="todayList"></div></div>
+    <div class="card"><h2>읽을 장</h2><div id="chapterList"></div></div>
+    <div class="card"><h2>우리 모두</h2><div id="groupStats"></div></div>
+  </section>
+
+  <!-- 읽기 -->
+  <section id="tab-read" class="hidden">
+    <div class="card">
+      <div class="sel-row">
+        <select id="bookSel"></select>
+        <select id="chapSel"></select>
+      </div>
+      <button id="openBtn" class="primary">본문 열기</button>
+      <div id="resumeChip" class="resume hidden"></div>
+    </div>
+    <div class="card">
+      <div class="reader-head"><h2 id="readerTitle"></h2>
+        <label class="chk-inline"><input type="checkbox" id="chapReadChk"/>다 읽음</label>
+      </div>
+      <div id="readerBody"></div>
+      <div id="posHint" class="pos-hint hidden"></div>
+    </div>
+  </section>
+
+  <!-- 현황 -->
+  <section id="tab-status" class="hidden">
+    <div class="card">
+      <h2>함께 읽는 사람들</h2>
+      <p class="sub" id="memberCount"></p>
+      <div id="memberList"></div>
+    </div>
+  </section>
+
+  <!-- 전체 보기 (목사님/관리자용) -->
+  <section id="tab-all" class="hidden">
+    <div class="card">
+      <h2>전체 진도 한눈에 보기</h2>
+      <p class="sub">행=사람, 열=주차 · 색이 진할수록 그 주를 많이 읽었어요. 맨 아래 줄은 주간 평균입니다.</p>
+      <div id="statsRow"></div>
+      <div class="mx-wrap"><table class="mx" id="matrix"></table></div>
+      <div class="btn-row" style="margin-top:10px"><button id="csvBtn" class="primary">명단 CSV 복사 (시트용)</button></div>
+    </div>
+    <div class="card"><h2>이번 주 통계</h2><div id="weekStats"></div></div>
+    <div class="card">
+      <h2>독려가 필요한 멤버</h2>
+      <p class="sub" id="inactiveNote"></p>
+      <div id="inactiveList"></div>
+    </div>
+  </section>
+
+  <!-- 설정 -->
+  <section id="tab-set" class="hidden">
+    <div class="card">
+      <h2>내 정보</h2>
+      <div class="field"><label>이름</label><input id="nameInput" maxlength="12"/></div>
+      <div class="btn-row"><button id="saveNameBtn" class="primary">이름 저장</button></div>
+      <p class="sub" id="privState" style="margin-top:8px"></p>
+    </div>
+    <div class="card">
+      <h2>모임 초대</h2>
+      <p style="font-size:13px;margin:0 0 8px">그룹 코드: <code id="groupCodeTxt">—</code></p>
+      <p class="sub" style="margin:0 0 8px">아래 링크를 공유하면 코드가 자동으로 입력된 채 열립니다.</p>
+      <p class="link-like" id="shareLink"></p>
+      <div class="btn-row"><button id="copyLinkBtn" class="primary">링크 복사</button><button id="leaveGroupBtn" class="ghost danger">모임 바꾸기</button></div>
+    </div>
+    <div class="card">
+      <h2>읽기 계획</h2>
+      <div class="field"><label>계획 시작일 (1주차 첫 날)</label><input type="date" id="startDateInput"/></div>
+      <div class="btn-row"><button id="saveDateBtn" class="primary">저장</button></div>
+      <p class="sub" id="planInfo" style="margin-top:8px"></p>
+    </div>
+    <div class="card">
+      <h2>연결 상태</h2>
+      <p id="connDetail" class="sub"></p>
+    </div>
+  </section>
+</main>
+
+<nav class="tabs">
+  <button data-tab="home" class="active"><span class="ico">🏠</span>홈</button>
+  <button data-tab="read"><span class="ico">📖</span>읽기</button>
+  <button data-tab="status"><span class="ico">👥</span>현황</button>
+  <button data-tab="all"><span class="ico">📊</span>전체</button>
+  <button data-tab="set"><span class="ico">⚙️</span>설정</button>
+</nav>
+
+<!-- Firebase (오프라인이거나 실패하면 로컬 모드로 자동 전환됨) -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+<script src="config.js"></script>
+<script>
+'use strict';
+
+/* ================= 데이터 ================= */
+const BOOKS=[["창세기","창",50],["출애굽기","출",40],["레위기","레",27],["민수기","민",36],
+["신명기","신",34],["여호수아","수",24],["사사기","삿",21],["룻기","룻",4],
+["사무엘상","삼상",31],["사무엘하","삼하",24],["열왕기상","왕상",22],["열왕기하","왕하",25],
+["역대상","대상",29],["역대하","대하",36],["에스라","스",10],["느헤미야","느",13],
+["에스더","에",10],["욥기","욥",42],["시편","시",150],["잠언","잠",31],
+["전도서","전",12],["아가","아",8],["이사야","사",66],["예레미야","렘",52],
+["예레미야애가","애",5],["에스겔","겔",48],["다니엘","단",12],["호세아","호",14],
+["요엘","욜",3],["아모스","암",9],["오바댜","옵",1],["요나","욘",4],
+["미가","미",7],["나훔","나",3],["하박국","합",3],["스바냐","습",3],
+["학개","학",2],["스가랴","슥",14],["말라기","말",4],
+["마태복음","마",28],["마가복음","막",16],["누가복음","눅",24],["요한복음","요",21],
+["사도행전","행",28],["로마서","롬",16],["고린도전서","고전",16],["고린도후서","고후",13],
+["갈라디아서","갈",6],["에베소서","엡",6],["빌립보서","빌",4],["골로새서","골",4],
+["데살로니가전서","살전",5],["데살로니가후서","살후",3],["디모데전서","딤전",6],
+["디모데후서","딤후",4],["디도서","딛",3],["빌레몬서","몬",1],["히브리서","히",13],
+["야고보서","약",5],["베드로전서","베전",5],["베드로후서","베후",3],
+["요한1서","요일",5],["요한2서","요이",1],["요한삼서","요삼",1],["유다서","유",1],
+["요한계시록","계",22]].map(a=>({n:a[0],s:a[1],c:a[2]}));
+const TOTAL=BOOKS.reduce((s,b)=>s+b.c,0);
+
+/* bible.json 이 없을 때 보여줄 데모 본문 (창세기 1:1-3) */
+const DEMO={books:[{n:"창세기",chapters:[
+ ["태초에 하나님이 천지를 창조하시니라",
+  "땅이 혼돈하고 허무하며 흑암이 깊음 위에 있고 하나님의 영은 수면 위에 운행하시니라",
+  "하나님이 이르시되 빛이 있으라 하시매 빛이 있었고"]]}]};
+
+const CFG=window.APP_CONFIG||{};
+
+/* ================= 상태 ================= */
+const LS=CFG.storageKey||'bibleApp.v1';   /* 두 버전이 같은 주소에서 돌아도 기록이 안 섞이게 */
+let state={name:'',group:'',uid:Math.random().toString(36).slice(2,12),readChapters:{},versePos:{},lastRead:null,planStart:''};
+try{Object.assign(state,JSON.parse(localStorage.getItem(LS)||'{}'))}catch(e){}
+const urlG=new URLSearchParams(location.search).get('g');
+if(urlG){state.group=urlG.trim().toUpperCase();persist();}
+function persist(){try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}}
+function save(){persist();scheduleSync();}
+
+/* ================= 계획 ================= */
+function planWeeks(){return CFG.planWeeks||40}
+function planStart(){
+  if(CFG.startDate)return CFG.startDate;
+  if(state.planStart)return state.planStart;
+  return new Date().toISOString().slice(0,10);
+}
+let PLAN=null;
+function getPlan(){
+  if(PLAN)return PLAN;
+  const seq=[];BOOKS.forEach((b,i)=>{for(let c=1;c<=b.c;c++)seq.push({b:i+1,c})});
+  const w=planWeeks(),out=[],base=Math.floor(seq.length/w);let extra=seq.length%w,idx=0;
+  for(let i=0;i<w;i++){const n=base+(i<extra?1:0);out.push(seq.slice(idx,idx+n));idx+=n}
+  PLAN=out;return out;
+}
+function todayWeek(){
+  const s=new Date(planStart()+'T00:00:00');const d=new Date();
+  const w=Math.floor((new Date(d.getFullYear(),d.getMonth(),d.getDate())-s)/(7*864e5));
+  return Math.max(0,Math.min(planWeeks()-1,w));
+}
+let viewWeek=todayWeek();
+
+const key=(b,c)=>b+'-'+c;
+function hashName(s){let h=5381;for(let i=0;i<s.length;i++){h=((h*33)^s.charCodeAt(i))>>>0}return h.toString(36)}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function refName(b,c){const B=BOOKS[b-1];return B?B.s+' '+c+'장':'?'}
+
+/* ================= 진도 계산 ================= */
+function weekProg(readMap,wi){
+  let done=0;getPlan()[wi].forEach(x=>{if(readMap[key(x.b,x.c)])done++});
+  return{done,total:getPlan()[wi].length};
+}
+function totalProg(readMap){let n=0;for(const k in readMap)if(readMap[k])n++;return{done:n,total:TOTAL}}
+function pct(x){return x.total?Math.round(x.done/x.total*100):0}
+function ago(ts){
+  if(!ts)return'—';
+  const s=(Date.now()-ts)/1e3;
+  if(s<60)return'방금';
+  if(s<3600)return Math.floor(s/60)+'분 전';
+  if(s<86400)return Math.floor(s/3600)+'시간 전';
+  return Math.floor(s/86400)+'일 전';
+}
+
+/* ================= 백엔드 어댑터 =================
+   config.js 의 backend 값으로 저장소를 고릅니다.
+   'firebase' 실시간(기본) / 'sheets' 구글 시트 / 'gist' 깃허브 Gist
+   설정이 없으면 로컬 모드(이 기기에만 저장)로 동작합니다. */
+
+let db=null,meRef=null,membersRef=null;  // firebase 용
+let MODE='local',MEMBERS={},pollT=null;
+
+function myObj(){
+  return {name:(state.privacy?state.alias:state.name),uid:state.uid,priv:!!state.privacy,
+    pinHash:state.pinHash||'',
+    readChapters:state.readChapters,versePos:state.versePos,
+    lastRead:(state.privacy?null:(state.lastRead||null)),lastActive:Date.now()};
+}
+function displayName(m){return m.priv?'🔒 '+(m.name||'비공개'):(m.name||'이름 없음')}
+function setBadge(t,off){const b=document.getElementById('connBadge');b.textContent=t;b.classList.toggle('off',!!off)}
+
+function initCloud(){
+  const b=CFG.backend||'firebase';
+  if(b==='firebase')initFirebase();
+  else if(b==='sheets')initSheets();
+  else if(b==='gist')initGist();
+  else setBadge('오프라인 모드',true);
+  renderConn();
+}
+function startPolling(fn,ms){if(pollT)clearInterval(pollT);pollT=setInterval(fn,ms)}
+
+/* --- Firebase: 실시간 공유 (플레이스토어 버전 권장) --- */
+function initFirebase(){
+  const f=CFG.firebase;
+  if(!f||!f.apiKey||String(f.apiKey).indexOf('여기')===0){setBadge('설정 필요(config.js)',true);return}
+  if(typeof firebase==='undefined'){setBadge('오프라인 모드',true);return}
+  try{
+    if(!firebase.apps.length)firebase.initializeApp(f);
+    setBadge('로그인 중…',false);
+    firebase.auth().signInAnonymously().then(()=>{
+      db=firebase.database();
+      meRef=db.ref('groups/'+state.group+'/members/'+state.uid);
+      membersRef=db.ref('groups/'+state.group+'/members');
+      membersRef.on('value',s=>{MEMBERS=s.val()||{};renderStatus();renderHome()});
+      MODE='cloud';setBadge('실시간 연결됨',false);renderConn();
+      pushMe();
+    }).catch(err=>{console.warn(err);MODE='local';setBadge('로그인 실패',true);renderConn()});
+  }catch(e){console.warn(e);setBadge('오프라인 모드',true)}
+}
+
+/* --- 구글 시트 + Apps Script: 관리자가 시트에서 이름·진도를 직접 관리 --- */
+let sheetsBusy=false;
+function initSheets(){
+  const u=CFG.sheets&&CFG.sheets.webAppUrl;
+  if(!u||String(u).indexOf('여기')===0){setBadge('시트 URL 설정 필요',true);return}
+  MODE='sheets';setBadge('시트 연결됨',false);
+  sheetsPull();startPolling(sheetsPull,15000);
+}
+function sheetsPull(){
+  if(sheetsBusy)return;
+  sheetsBusy=true;
+  const cb='bk'+Date.now()+Math.floor(Math.random()*1000);
+  const sc=document.createElement('script');
+  window[cb]=data=>{
+    sheetsBusy=false;
+    if(data&&data.members){MEMBERS=data.members;renderStatus();renderHome()}
+    try{delete window[cb]}catch(e){}
+    sc.remove();
+  };
+  sc.onerror=()=>{sheetsBusy=false;try{delete window[cb]}catch(e){}};
+  sc.src=CFG.sheets.webAppUrl+'?action=list&g='+encodeURIComponent(state.group)+'&callback='+cb;
+  document.body.appendChild(sc);
+  setTimeout(()=>{if(window[cb]){sheetsBusy=false;try{delete window[cb]}catch(e){}}},8000);
+}
+function sheetsPush(){
+  fetch(CFG.sheets.webAppUrl,{method:'POST',mode:'no-cors',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify({g:state.group,member:myObj()})}).catch(()=>{});
+}
+
+/* --- GitHub Gist: 깃허브만으로 무료 운영 --- */
+function gistHeaders(){
+  return {Authorization:'Bearer '+CFG.gist.token,Accept:'application/vnd.github+json'};
+}
+function initGist(){
+  const g=CFG.gist||{};
+  if(!g.token||!g.gistId||String(g.token).indexOf('여기')===0){setBadge('토큰 설정 필요',true);return}
+  MODE='gist';setBadge('Gist 연결됨',false);
+  gistPull();startPolling(gistPull,20000);
+}
+async function gistPull(){
+  try{
+    const r=await fetch('https://api.github.com/gists/'+CFG.gist.gistId,{headers:gistHeaders()});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const j=await r.json();
+    const out={};
+    Object.keys(j.files||{}).forEach(fn=>{
+      try{const o=JSON.parse(j.files[fn].content);if(o&&o.uid)out[o.uid]=o}catch(e){}
+    });
+    MEMBERS=out;renderStatus();renderHome();
+  }catch(e){console.warn(e);setBadge('Gist 오류',true)}
+}
+function gistPush(){
+  fetch('https://api.github.com/gists/'+CFG.gist.gistId,{method:'PATCH',headers:gistHeaders(),
+    body:JSON.stringify({files:{['m-'+state.uid+'.json']:JSON.stringify(myObj())}})}).catch(()=>{});
+}
+
+let syncT=null;
+function scheduleSync(){clearTimeout(syncT);syncT=setTimeout(pushMe,1200)}
+function pushMe(){
+  persist();
+  if(MODE==='cloud'&&meRef)meRef.set(myObj()).catch(e=>console.warn('sync fail',e));
+  else if(MODE==='sheets')sheetsPush();
+  else if(MODE==='gist')gistPush();
+}
+
+/* ================= 성경 본문 로딩 ================= */
+let BIBLE=null,bibleLoaded=false;
+function loadBible(){
+  if(bibleLoaded)return Promise.resolve(BIBLE);
+  bibleLoaded=true;
+  return fetch('bible.json').then(r=>{
+    if(!r.ok)throw 0;return r.json();
+  }).then(j=>{BIBLE=j;return j}).catch(()=>{BIBLE=null;return null});
+}
+function getChapterText(b,c){
+  if(!BIBLE)return null;
+  const bk=BIBLE.books[b-1];if(!bk)return null;
+  return bk.chapters[c-1]||null;
+}
+
+/* ================= 화면 전환 ================= */
+document.querySelectorAll('.tabs button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b===btn));
+    ['home','read','status','all','set'].forEach(t=>document.getElementById('tab-'+t).classList.toggle('hidden',t!==btn.dataset.tab));
+    if(btn.dataset.tab==='read')initReader();
+    if(btn.dataset.tab==='set')renderSet();
+    if(btn.dataset.tab==='all')renderAll();
+    window.scrollTo(0,0);
+  });
+});
+function goTab(t){document.querySelector('.tabs button[data-tab="'+t+'"]').click()}
+function goRead(b,c){curB=b;curC=c;openChapter();goTab('read')}
+
+/* ================= 홈 ================= */
+function renderHome(){
+  const plan=getPlan();
+  document.getElementById('weekLabel').textContent=(viewWeek+1)+'주차';
+  const s=new Date(planStart()+'T00:00:00');
+  const d1=new Date(s.getTime()+viewWeek*7*864e5),d2=new Date(d1.getTime()+6*864e5);
+  const f=d=>(d.getMonth()+1)+'/'+d.getDate();
+  document.getElementById('weekDates').textContent=f(d1)+' ~ '+f(d2);
+  document.getElementById('wPrev').disabled=viewWeek===0;
+  document.getElementById('wNext').disabled=viewWeek===planWeeks()-1;
+  document.getElementById('wToday').classList.toggle('hidden',viewWeek===todayWeek());
+  renderToday();
+
+  const mp=weekProg(state.readChapters,viewWeek),tp=totalProg(state.readChapters);
+  document.getElementById('weekBar').style.width=pct(mp)+'%';
+  document.getElementById('weekProgText').textContent=mp.done+'/'+mp.total;
+  document.getElementById('totalBar').style.width=pct(tp)+'%';
+  document.getElementById('totalProgText').textContent=pct(tp)+'%';
+
+  // 장 리스트: 연속된 같은 책 묶음으로 표기
+  const list=document.getElementById('chapterList');let html='',curBook=null;
+  plan[viewWeek].forEach(x=>{
+    const k=key(x.b,x.c),done=!!state.readChapters[k];
+    if(x.b!==curBook){curBook=x.b;html+='<div class="sub" style="margin:8px 0 2px;font-weight:700;color:var(--accent)">'+esc(BOOKS[x.b-1].n)+'</div>'}
+    const date=state.readChapters[k]?new Date(state.readChapters[k]).toLocaleDateString('ko-KR',{month:'numeric',day:'numeric'}):'';
+    html+='<div class="chk'+(done?' read':'')+'" data-k="'+k+'">'
+      +'<input type="checkbox"'+(done?' checked':'')+'/>'
+      +'<span>'+BOOKS[x.b-1].s+' '+x.c+'장</span>'
+      +(date?'<em>'+date+'</em>':'')
+      +'<button class="read-link" data-b="'+x.b+'" data-c="'+x.c+'">읽기 ›</button></div>';
+  });
+  list.innerHTML=html||'<p class="sub">이 주에는 읽을 장이 없어요.</p>';
+  bindChecks(list);
+
+  // 우리 모두
+  const gs=document.getElementById('groupStats');
+  const names=Object.values(MEMBERS);
+  if(!names.length){gs.innerHTML='<p class="sub">아직 함께하는 사람이 없어요. 설정 탭에서 초대 링크를 공유해 보세요.</p>';return}
+  const wk=names.filter(m=>{const p=weekProg(m.readChapters||{},viewWeek);return p.done>=p.total}).length;
+  const totalPct=Math.round(names.reduce((s,m)=>s+pct(totalProg(m.readChapters||{})),0)/names.length);
+  gs.innerHTML='<div class="stat-grid">'
+    +'<div class="stat"><b>'+names.length+'</b><span>참여 인원</span></div>'
+    +'<div class="stat"><b>'+wk+'</b><span>이번 주 완료</span></div>'
+    +'<div class="stat"><b>'+totalPct+'%</b><span>평균 진도</span></div></div>';
+}
+function bindChecks(list){
+  list.querySelectorAll('.chk').forEach(row=>{
+    row.querySelector('input').addEventListener('change',()=>{
+      const k=row.dataset.k;
+      if(row.querySelector('input').checked)state.readChapters[k]=Date.now();
+      else delete state.readChapters[k];
+      save();renderHome();
+    });
+    row.querySelector('.read-link').addEventListener('click',e=>{
+      e.preventDefault();goRead(+e.target.dataset.b,+e.target.dataset.c);
+    });
+  });
+}
+function dayChunks(wi){
+  const plan=getPlan()[wi];const out=[[],[],[],[],[],[],[]];
+  plan.forEach((x,i)=>out[Math.floor(i*7/plan.length)].push(x));
+  return out;
+}
+function renderToday(){
+  const days=['월','화','수','목','금','토','일'];
+  const di=(new Date().getDay()+6)%7;
+  document.getElementById('todayTitle').textContent='오늘 읽을 장 · '+days[di]+'요일 ('+(viewWeek+1)+'주차)';
+  const list=document.getElementById('todayList');let html='';
+  dayChunks(viewWeek)[di].forEach(x=>{
+    const k=key(x.b,x.c),done=!!state.readChapters[k];
+    html+='<div class="chk'+(done?' read':'')+'" data-k="'+k+'"><input type="checkbox"'+(done?' checked':'')+'/><span>'+BOOKS[x.b-1].s+' '+x.c+'장</span><button class="read-link" data-b="'+x.b+'" data-c="'+x.c+'">읽기 ›</button></div>';
+  });
+  list.innerHTML=html||'<p class="sub">오늘 배정된 장은 없어요. 천천히 읽어도 좋아요.</p>';
+  bindChecks(list);
+}
+function memberListForViews(){
+  const list=Object.values(MEMBERS).slice();
+  if(!list.some(m=>m.uid===state.uid))list.push(myObj());
+  list.sort((a,b)=>pct(totalProg(b.readChapters||{}))-pct(totalProg(a.readChapters||{})));
+  return list;
+}
+function cellStyle(p){
+  if(!p)return 'background:#f2ecdd';
+  return 'background:rgba(76,122,63,'+(0.18+0.72*p/100).toFixed(2)+');color:'+(p>=50?'#fff':'#4c6a42');
+}
+function renderAll(){
+  const list=memberListForViews();
+  const doneWeek=list.filter(m=>{const p=weekProg(m.readChapters||{},viewWeek);return p.done>=p.total}).length;
+  const avg=Math.round(list.reduce((s,m)=>s+pct(totalProg(m.readChapters||{})),0)/list.length);
+  document.getElementById('statsRow').innerHTML='<div class="stat-grid">'
+    +'<div class="stat"><b>'+list.length+'</b><span>참여 인원</span></div>'
+    +'<div class="stat"><b>'+doneWeek+'</b><span>이번 주 완료</span></div>'
+    +'<div class="stat"><b>'+avg+'%</b><span>평균 진도</span></div></div>';
+  const W=planWeeks();
+  let h='<tr><th class="name">이름</th>';
+  for(let w=0;w<W;w++)h+='<th>'+(w+1)+'</th>';
+  h+='<th>전체</th></tr>';
+  list.forEach(m=>{
+    h+='<tr><td class="name">'+esc(displayName(m))+(m.uid===state.uid?' (나)':'')+'</td>';
+    for(let w=0;w<W;w++){
+      const p=pct(weekProg(m.readChapters||{},w));
+      h+='<td style="'+cellStyle(p)+'" title="'+esc(displayName(m))+' '+(w+1)+'주차 '+p+'%">'+(p>0?p:'')+'</td>';
+    }
+    h+='<td class="total">'+pct(totalProg(m.readChapters||{}))+'%</td></tr>';
+  });
+  h+='<tr><td class="name" style="font-weight:700">주간 평균</td>';
+  for(let w=0;w<W;w++){
+    const aw=Math.round(list.reduce((s,m)=>s+pct(weekProg(m.readChapters||{},w)),0)/list.length);
+    h+='<td style="'+cellStyle(aw)+'" title="'+(w+1)+'주차 평균">'+aw+'</td>';
+  }
+  h+='<td class="total">'+Math.round(list.reduce((s,m)=>s+pct(totalProg(m.readChapters||{})),0)/list.length)+'%</td></tr>';
+  document.getElementById('matrix').innerHTML=h;
+
+  const wp=list.map(m=>pct(weekProg(m.readChapters||{},viewWeek)));
+  const avgW=Math.round(wp.reduce((a,b)=>a+b,0)/list.length);
+  const started=wp.filter(p=>p>0).length,finished=wp.filter(p=>p===100).length;
+  const others=list.filter(m=>m.uid!==state.uid);
+  document.getElementById('weekStats').innerHTML='<div class="stat-grid">'
+    +'<div class="stat"><b>'+avgW+'%</b><span>이번 주 평균</span></div>'
+    +'<div class="stat"><b>'+started+'</b><span>시작한 사람</span></div>'
+    +'<div class="stat"><b>'+finished+'</b><span>완주한 사람</span></div></div>'
+    +(MODE==='local'&&others.length===0?'<p class="sub">※ 지금은 로컬 모드 — 시트/클라우드에 연결하면 모든 멤버가 표시됩니다.</p>':'');
+
+  const notStarted=others.filter(m=>pct(weekProg(m.readChapters||{},viewWeek))===0);
+  const away=others.filter(m=>m.lastActive&&Date.now()-m.lastActive>3*864e5);
+  const mk=a=>a.map(m=>'<span class="pill">'+esc(displayName(m))+'</span>').join('')||'<span class="sub">없어요 🎉</span>';
+  document.getElementById('inactiveNote').textContent='이번 주 아직 0장인 사람과 3일 이상 접속하지 않은 사람입니다. 시트 버전에서는 시트에서 이름을 바로 고칠 수 있어요.';
+  document.getElementById('inactiveList').innerHTML=
+    '<p style="margin:6px 0 2px;font-size:12px;font-weight:700">이번 주 미시작 ('+notStarted.length+'명)</p><div>'+mk(notStarted)+'</div>'
+    +'<p style="margin:10px 0 2px;font-size:12px;font-weight:700">3일 이상 미접속 ('+away.length+'명)</p><div>'+mk(away)+'</div>';
+}
+document.getElementById('wPrev').addEventListener('click',()=>{viewWeek--;renderHome()});
+document.getElementById('wNext').addEventListener('click',()=>{viewWeek++;renderHome()});
+document.getElementById('wToday').addEventListener('click',()=>{viewWeek=todayWeek();renderHome()});
+
+/* ================= 읽기 ================= */
+let curB=1,curC=1,observer=null,maxVerse=0,dirtyVerse=false;
+function initReader(){
+  if(document.getElementById('bookSel').options.length)return;
+  const bs=document.getElementById('bookSel');
+  BOOKS.forEach((b,i)=>{const o=document.createElement('option');o.value=i+1;o.textContent=b.n+' ('+b.s+')';bs.appendChild(o)});
+  bs.addEventListener('change',fillChaps);
+  document.getElementById('openBtn').addEventListener('click',()=>{curB=+bs.value;curC=+document.getElementById('chapSel').value;openChapter()});
+  fillChaps();
+  if(state.lastRead){curB=state.lastRead.b;curC=state.lastRead.c;bs.value=curB;fillChaps();document.getElementById('chapSel').value=curC;openChapter(true)}
+}
+function fillChaps(){
+  const b=BOOKS[+document.getElementById('bookSel').value-1];
+  const cs=document.getElementById('chapSel');cs.innerHTML='';
+  for(let i=1;i<=b.c;i++){const o=document.createElement('option');o.value=i;o.textContent=i+'장';cs.appendChild(o)}
+}
+function openChapter(noScroll){
+  const title=document.getElementById('readerTitle');
+  const body=document.getElementById('readerBody');
+  const hint=document.getElementById('posHint');
+  const chip=document.getElementById('resumeChip');
+  const b=BOOKS[curB-1];
+  title.textContent=b.n+' '+curC+'장';
+  document.getElementById('chapReadChk').checked=!!state.readChapters[key(curB,curC)];
+  maxVerse=state.versePos[key(curB,curC)]||0;
+
+  loadBible().then(()=>{
+    const verses=getChapterText(curB,curC);
+    if(!verses||!verses.filter(Boolean).length){
+      if(curB===1&&curC===1){
+        body.innerHTML='<p class="sub" style="margin-bottom:8px">bible.json 이 아직 없어 데모 본문(창 1:1~3)을 보여드려요.</p>'+verseHTML(DEMO.books[0].chapters[0]);
+      }else{
+        body.innerHTML='<div class="no-bible">본문 파일(bible.json)이 없어 표시할 수 없어요.<br/>'
+          +'진도 체크는 그대로 동작합니다.<br/><br/><code>python3 convert_bible.py 개역한글.txt</code><br/>'
+          +'로 만든 bible.json 을 앱 폴더에 넣어주세요.</div>';
+      }
+    }else{
+      body.innerHTML=verseHTML(verses);
+      if(maxVerse&&!noScroll){
+        chip.classList.remove('hidden');
+        chip.innerHTML='<span>지난번 <b>'+maxVerse+'절</b>까지 읽으셨어요</span><button id="contBtn">이어서 읽기</button>';
+        chip.querySelector('#contBtn').addEventListener('click',()=>{
+          const el=document.getElementById('v'+maxVerse);
+          if(el)el.scrollIntoView({block:'center'});
+          chip.classList.add('hidden');
+        });
+      }else chip.classList.add('hidden');
+      watchVerses();
+      if(maxVerse&&!noScroll)setTimeout(()=>{const el=document.getElementById('v'+Math.max(1,maxVerse-2));if(el)el.scrollIntoView({block:'center'})},150);
+    }
+    renderPosHint();
+  });
+  window.scrollTo(0,0);
+}
+function verseHTML(vs){
+  return vs.map((t,i)=>t?'<p class="verse" id="v'+(i+1)+'" data-v="'+(i+1)+'"><sup>'+(i+1)+'</sup>'+esc(t)+'</p>':'').join('');
+}
+function watchVerses(){
+  if(observer)observer.disconnect();
+  const vs=document.querySelectorAll('.verse');
+  if(!vs.length||!('IntersectionObserver'in window))return;
+  observer=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        const v=+e.target.dataset.v;
+        if(v>maxVerse){maxVerse=v;dirtyVerse=true;markHere()}
+      }
+    });
+  },{rootMargin:'-35% 0px -35% 0px'});
+  vs.forEach(v=>observer.observe(v));
+  markHere();
+}
+function markHere(){
+  document.querySelectorAll('.verse.here').forEach(el=>el.classList.remove('here'));
+  const el=document.getElementById('v'+maxVerse);
+  if(el)el.classList.add('here');
+  renderPosHint();
+}
+function renderPosHint(){
+  const h=document.getElementById('posHint');
+  if(maxVerse){h.classList.remove('hidden');h.textContent=maxVerse+'절까지 읽음 · 자동 저장 중'}
+  else h.classList.add('hidden');
+}
+document.getElementById('chapReadChk').addEventListener('change',e=>{
+  const k=key(curB,curC);
+  if(e.target.checked)state.readChapters[k]=Date.now();
+  else delete state.readChapters[k];
+  state.lastRead={b:curB,c:curC,v:maxVerse||1};
+  save();renderHome();
+});
+setInterval(()=>{ // 읽는 위치 주기 저장
+  if(dirtyVerse){
+    dirtyVerse=false;
+    state.versePos[key(curB,curC)]=maxVerse;
+    state.lastRead={b:curB,c:curC,v:maxVerse};
+    save();
+  }
+},4000);
+function flushNow(){
+  if(dirtyVerse){
+    dirtyVerse=false;
+    state.versePos[key(curB,curC)]=maxVerse;
+    state.lastRead={b:curB,c:curC,v:maxVerse};
+  }
+  persist();pushMe();
+}
+window.addEventListener('pagehide',flushNow);
+window.addEventListener('visibilitychange',()=>{if(document.hidden)flushNow()});
+
+/* ================= 현황 ================= */
+function renderStatus(){
+  const list=document.getElementById('memberList');
+  const arr=Object.values(MEMBERS);
+  document.getElementById('memberCount').textContent=arr.length
+    ?'총 '+arr.length+'명 · 이번 주('+ (viewWeek+1) +'주차) 기준'
+    :'아직 아무도 없어요. 초대 링크를 공유해 보세요.';
+  arr.sort((a,b)=>{
+    const pa=weekProg(a.readChapters||{},viewWeek),pb=weekProg(b.readChapters||{},viewWeek);
+    return pb.done/pb.total-pa.done/pa.total||pct(totalProg(b.readChapters||{}))-pct(totalProg(a.readChapters||{}));
+  });
+  list.innerHTML=arr.map((m,i)=>{
+    const p=weekProg(m.readChapters||{},viewWeek),tp=pct(totalProg(m.readChapters||{}));
+    const lr=m.priv?'':(m.lastRead&&BOOKS[m.lastRead.b-1]?BOOKS[m.lastRead.b-1].s+' '+m.lastRead.c+':'+(m.lastRead.v||1):'');
+    const me=m.uid===state.uid?' (나)':'';
+    return '<div class="member"><div class="rank">'+(i+1)+'</div>'
+      +'<div class="info"><b>'+esc(displayName(m))+me+'<small>'+tp+'% · '+ago(m.lastActive)+'</small></b>'
+      +'<div class="mbar"><i style="width:'+pct(p)+'%"></i></div>'
+      +'<div class="meta">이번 주 '+p.done+'/'+p.total+'장'+(lr?' · 마지막 '+esc(lr):'')+'</div></div></div>';
+  }).join('');
+}
+
+/* ================= 설정 ================= */
+function renderSet(){
+  document.getElementById('nameInput').value=state.name;
+  document.getElementById('privState').textContent=PRIV_MODE==='off'?'👥 이름 공개 모임 — 모든 멤버가 서로의 이름과 진도를 볼 수 있어요.':state.privacy
+    ?'🔒 프라이버시 모드 켜짐 — 다른 사람(목사님 포함)에게는 "'+(state.alias||'비공개')+'"로만 보이고 시트에 실명이 저장되지 않습니다.'
+    :'프라이버시 모드 꺼짐 — 모임에 처음 등록할 때 비밀번호를 입력하면 켜집니다.';
+  document.getElementById('groupCodeTxt').textContent=state.group||'—';
+  const link=location.origin+location.pathname+'?g='+encodeURIComponent(state.group);
+  document.getElementById('shareLink').textContent=link;
+  document.getElementById('startDateInput').value=state.planStart||'';
+  document.getElementById('planInfo').textContent='전체 '+planWeeks()+'주 · 총 '+TOTAL+'장 → 주당 약 '+Math.ceil(TOTAL/planWeeks())+'장';
+  renderConn();
+}
+function renderConn(){
+  const el=document.getElementById('connDetail');
+  const t={
+    cloud:'Firebase 실시간 연결 — 모든 멤버의 진도가 즉시 공유됩니다.',
+    sheets:'구글 시트 연결 — 15초마다 갱신됩니다. 관리자는 시트의 기록 시트에서 이름·진도를 직접 고칠 수 있어요.',
+    gist:'GitHub Gist 연결 — 20초마다 갱신됩니다.',
+    local:'로컬 모드: 이 기기에만 저장됩니다. 공유하려면 config.js 에 backend 설정을 넣어주세요 (README 참고).'};
+  el.textContent=t[MODE]||t.local;
+}
+document.getElementById('saveNameBtn').addEventListener('click',()=>{
+  const v=document.getElementById('nameInput').value.trim();
+  if(v){
+    state.name=v;
+    state.uid='u-'+hashName(state.group+'\u00b7'+v);
+    state.alias=state.privacy?('비공개#'+hashName(state.uid+'x').slice(0,4)):'';
+    save();location.reload();
+  }
+});
+document.getElementById('saveDateBtn').addEventListener('click',()=>{
+  state.planStart=document.getElementById('startDateInput').value;
+  PLAN=null;viewWeek=todayWeek();save();renderSet();renderHome();alert('시작일을 저장했어요.');
+});
+document.getElementById('copyLinkBtn').addEventListener('click',()=>{
+  const link=location.origin+location.pathname+'?g='+encodeURIComponent(state.group);
+  (navigator.clipboard?navigator.clipboard.writeText(link):Promise.reject()).then(
+    ()=>alert('링크를 복사했어요.'),()=>prompt('아래 링크를 복사하세요',link));
+});
+document.getElementById('leaveGroupBtn').addEventListener('click',()=>{
+  if(confirm('다른 모임 코드로 다시 시작할까요? (이 기기의 진도 기록은 유지되지만 표시가 초기화됩니다)')){
+    state.group='';persist();location.href=location.pathname;
+  }
+});
+
+document.getElementById('csvBtn').addEventListener('click',()=>{
+  const list=memberListForViews();const W=planWeeks();
+  let csv='\uFEFF이름';
+  for(let w=0;w<W;w++)csv+=','+(w+1)+'주';
+  csv+=',전체\n';
+  list.forEach(m=>{
+    csv+='"'+displayName(m)+'"';
+    for(let w=0;w<W;w++)csv+=','+pct(weekProg(m.readChapters||{},w));
+    csv+=','+pct(totalProg(m.readChapters||{}))+'\n';
+  });
+  if(navigator.clipboard)navigator.clipboard.writeText(csv).then(()=>alert('복사했어요. 스프레드시트에 붙여넣으세요.'),()=>prompt('아래 내용을 복사하세요',csv));
+  else prompt('아래 내용을 복사하세요',csv);
+});
+
+/* ================= 시작 오버레이 ================= */
+function showSetup(prefill){
+  const o=document.getElementById('setup');o.classList.remove('hidden');
+  if(prefill)document.getElementById('suGroup').value=prefill;
+}
+/* ===== 모임 모드 (config.js 의 privacyMode) =====
+   optional  원본 — 비밀번호는 선택, 넣은 사람만 가명 처리
+   required  비밀번호 필수 — 모든 멤버가 가명(비공개#코드)으로 보인다 (목사님 포함 다른 사람에게 실명 안 보임)
+   off       비밀번호 없음 — 모든 멤버가 실명으로 서로를 본다 */
+const PRIV_MODE=CFG.privacyMode||'optional';
+(function applyPrivacyMode(){
+  const f=document.getElementById('pinField'),l=document.getElementById('pinLabel'),n=document.getElementById('setupNote');
+  const setNote=bold=>{
+    n.textContent='초대받은 링크로 들어오면 코드가 자동으로 채워져요. 이름이 곧 계정이라 같은 이름으로 들어오면 어느 기기에서나 기록이 이어집니다.';
+    n.appendChild(document.createElement('br'));
+    const b=document.createElement('b');b.textContent=bold;n.appendChild(b);
+  };
+  if(PRIV_MODE==='off'){
+    f.classList.add('hidden');
+    setNote('이 모임은 이름이 모두에게 공개됩니다 — 멤버 전원이 서로의 이름과 진도를 볼 수 있어요.');
+  }else if(PRIV_MODE==='required'){
+    l.textContent='비밀번호 (필수 · 4~8자리)';
+    setNote('비밀번호가 필수입니다 — 목사님·다른 멤버에게는 가명(비공개#코드)으로만 보이고 실명은 저장되지 않아요. 비밀번호를 잊으면 복구할 수 없습니다.');
+  }
+})();
+document.getElementById('suNew').addEventListener('click',()=>{
+  document.getElementById('suGroup').value=Math.random().toString(36).slice(2,8).toUpperCase();
+});
+document.getElementById('suJoin').addEventListener('click',()=>{
+  const n=document.getElementById('suName').value.trim();
+  const g=document.getElementById('suGroup').value.trim().toUpperCase();
+  const pin=(PRIV_MODE==='off')?'':document.getElementById('suPin').value.trim();
+  if(!n){alert('이름을 입력해주세요');return}
+  if(!g){alert('그룹 코드를 입력하거나 새로 만들어주세요');return}
+  if(PRIV_MODE==='required'&&!pin){alert('비밀번호를 입력해주세요 (4~8자리)');return}
+  if(pin&&(pin.length<4||pin.length>8)){alert('비밀번호는 4~8자리로 입력해주세요');return}
+  const uid='u-'+hashName(g+'\u00b7'+n);
+  const alias='비공개#'+hashName(uid+'x').slice(0,4);
+  const pinHash=pin?('p-'+hashName(pin+'::g:'+g)):'';
+  const finish=()=>{
+    state.name=n;state.group=g;state.uid=uid;
+    state.privacy=!!pin;state.alias=pin?alias:'';
+    state.pinHash=pinHash;
+    if(!state.planStart)state.planStart=new Date().toISOString().slice(0,10);
+    persist();
+    document.getElementById('setup').classList.add('hidden');
+    startApp();
+  };
+  const u=CFG.sheets&&CFG.sheets.webAppUrl;
+  if(CFG.backend==='sheets'&&u){ // 기존 등록분과 비밀번호가 일치하는지 서버에서 확인
+    const cb='chk'+Date.now();
+    const sc=document.createElement('script');
+    window[cb]=d=>{
+      try{delete window[cb]}catch(e){}
+      sc.remove();
+      if(d&&d.exists&&!d.pinOk){alert('이미 등록된 이름이에요. 비밀번호가 다릅니다.');return}
+      finish();
+    };
+    sc.onerror=()=>{try{delete window[cb]}catch(e){}finish()};
+    sc.src=u+'?action=check&g='+encodeURIComponent(g)+'&uid='+encodeURIComponent(uid)+'&ph='+encodeURIComponent(pinHash)+'&callback='+cb;
+    document.body.appendChild(sc);
+    setTimeout(()=>{if(window[cb]){try{delete window[cb]}catch(e){}}},8000);
+  }else finish();
+});
+
+/* ================= 초기화 ================= */
+function startApp(){
+  document.getElementById('groupLabel').textContent=CFG.groupName||'모임';
+  renderHome();renderStatus();
+  initCloud();
+  if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+(function boot(){
+  // 미리보기 모드: ?preview=1 이면 오버레이 생략 (테스트용)
+  const preview=new URLSearchParams(location.search).has('preview');
+  if(state.group&&state.name&&!preview){
+    startApp();
+  }else if(preview){
+    state.name=state.name||'나';state.group=state.group||'DEMO01';
+    if(!state.planStart)state.planStart=new Date().toISOString().slice(0,10);
+    startApp();
+  }else{
+    showSetup(urlG);
+  }
+})();
+</script>
+</body>
+</html>
