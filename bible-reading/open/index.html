@@ -10,6 +10,10 @@
 <link rel="apple-touch-icon" href="icon-192.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
 <style>
+@font-face{font-family:'SBAggroL';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');font-display:swap}
+@font-face{font-family:'SBAggroM';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');font-display:swap}
+@font-face{font-family:'SBAggroB';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');font-display:swap}
+
 :root{
   --bg:#f6f1e6; --card:#fffdf8; --ink:#33281f; --sub:#8a7563;
   --accent:#7a3b2e; --accent-soft:#e9d9c8; --gold:#b98a4e;
@@ -17,7 +21,7 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;
+body{background:var(--bg);color:var(--ink);font-family:'SBAggroM','Noto Sans KR',system-ui,sans-serif;
   padding-bottom:calc(76px + env(safe-area-inset-bottom))}
 main{max-width:640px;margin:0 auto;padding:14px 14px 20px}
 h1,h2,h3{margin:0}
@@ -30,8 +34,8 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.2px;margin-bottom:10px}
 .brand{display:flex;align-items:center;gap:10px}
 .brand-mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(160deg,#6b4530,#4a2c1c);
   color:#f6f0e2;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;
-  font-family:'Nanum Myeongjo',serif;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
-.brand h1{font-size:17px;font-family:'Nanum Myeongjo',serif}
+  font-family:'SBAggroB','Noto Sans KR',sans-serif;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+.brand h1{font-size:17px;font-family:'SBAggroB','Noto Sans KR',sans-serif}
 .brand p{margin:0;font-size:11px;color:var(--sub)}
 .badge{font-size:10px;padding:4px 8px;border-radius:20px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
 .badge.off{background:#e8e4dc;color:#77685a}
@@ -49,7 +53,7 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.2px;margin-bottom:10px}
 .week-nav button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--card);
   font-size:18px;color:var(--accent);cursor:pointer}
 .week-nav button:disabled{opacity:.3}
-.week-label{font-size:18px;font-weight:800;text-align:center;font-family:'Nanum Myeongjo',serif}
+.week-label{font-size:18px;font-weight:800;text-align:center;font-family:'SBAggroB','Noto Sans KR',sans-serif}
 .week-dates{font-size:11px;color:var(--sub);text-align:center}
 .prog-row{display:flex;align-items:center;gap:8px;font-size:12px;margin-top:8px}
 .prog-row span:first-child{width:36px;color:var(--sub)}
@@ -77,11 +81,14 @@ select{flex:1;padding:10px;border:1px solid var(--line);border-radius:10px;backg
 .primary:active{opacity:.85}
 .reader-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;
   padding-bottom:10px;border-bottom:2px solid var(--accent-soft)}
-.reader-head h2{margin:0;font-family:'Nanum Myeongjo',serif;font-size:19px}
+.reader-head h2{margin:0;font-family:'SBAggroB','Noto Sans KR',sans-serif;font-size:19px}
 .chk-inline{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--sub);white-space:nowrap}
 .chk-inline input{width:18px;height:18px;accent-color:var(--ok)}
-.verse{font-family:'Nanum Myeongjo',serif;font-size:17px;line-height:2.05;margin:0 0 10px;color:#2d2318}
-.verse sup{color:var(--gold);font-weight:700;font-size:12px;margin-right:6px;font-family:'Noto Sans KR'}
+.verse{font-family:'SBAggroL','Noto Sans KR',sans-serif;font-size:17px;line-height:2.0;letter-spacing:-.2px;margin:0 0 6px;padding:2px 4px;color:#2d2318;cursor:pointer;border-radius:6px;-webkit-tap-highlight-color:transparent}
+.verse:active{background:rgba(185,138,78,.12)}
+.verse.read{color:#3a2f24}
+.verse.read sup{background:var(--gold);color:#fff;border-radius:9px;padding:1px 6px}
+.verse sup{color:var(--gold);font-weight:700;font-size:12px;margin-right:6px;font-family:'SBAggroM','Noto Sans KR'}
 .verse.here{background:linear-gradient(transparent 55%,rgba(185,138,78,.22) 55%);border-radius:4px}
 .resume{margin-top:10px;padding:10px 12px;background:#f3e9d7;border-radius:10px;font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .resume button{border:0;background:var(--accent);color:#fff;border-radius:8px;padding:7px 12px;font-size:12px;font-family:inherit;cursor:pointer;white-space:nowrap}
@@ -102,7 +109,7 @@ select{flex:1;padding:10px;border:1px solid var(--line);border-radius:10px;backg
 .member .meta{font-size:10px;color:var(--sub);margin-top:3px}
 .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
 .stat{background:#f7f1e4;border-radius:10px;padding:10px 6px;text-align:center}
-.stat b{font-size:18px;font-family:'Nanum Myeongjo',serif;color:var(--accent)}
+.stat b{font-size:18px;font-family:'SBAggroB','Noto Sans KR',sans-serif;color:var(--accent)}
 .stat span{display:block;font-size:10px;color:var(--sub);margin-top:2px}
 
 /* 설정 */
@@ -132,7 +139,7 @@ code{background:#efe8da;padding:2px 7px;border-radius:6px;font-size:13px}
 .overlay.hidden{display:none}
 .setup-card{background:var(--card);border-radius:20px;padding:26px 22px;width:100%;max-width:360px;
   box-shadow:0 20px 60px rgba(0,0,0,.35)}
-.setup-card h1{font-family:'Nanum Myeongjo',serif;font-size:26px;color:var(--accent);text-align:center}
+.setup-card h1{font-family:'SBAggroB','Noto Sans KR',sans-serif;font-size:26px;color:var(--accent);text-align:center}
 .setup-card>p{text-align:center;color:var(--sub);font-size:13px;margin:6px 0 18px}
 .setup-card .field input{padding:13px}
 .setup-card .sub{text-align:center;margin-top:14px}
@@ -294,6 +301,9 @@ const BOOKS=[["창세기","창",50],["출애굽기","출",40],["레위기","레"
 ["요한1서","요일",5],["요한2서","요이",1],["요한삼서","요삼",1],["유다서","유",1],
 ["요한계시록","계",22]].map(a=>({n:a[0],s:a[1],c:a[2]}));
 const TOTAL=BOOKS.reduce((s,b)=>s+b.c,0);
+/* 장별 절 수 (개역한글 bible.json 기준 · 66권 31,101절) — 절 단위 진도율 계산용 */
+const VC=[[31,25,24,26,32,22,24,22,29,32,32,20,18,24,21,16,27,33,38,18,34,24,20,67,34,35,46,22,35,43,55,32,20,31,29,43,36,30,23,23,57,38,34,34,28,34,31,22,33,26],[22,25,22,31,23,30,25,32,35,29,10,51,22,31,27,36,16,27,25,26,36,31,33,18,40,37,21,43,46,38,18,35,23,35,35,38,29,31,43,38],[17,16,17,35,19,30,38,36,24,20,47,8,59,57,33,34,16,30,37,27,24,33,44,23,55,46,34],[54,34,51,49,31,27,89,26,23,36,35,16,33,45,41,50,13,32,22,29,35,41,30,25,18,65,23,31,40,16,54,42,56,29,34,13],[46,37,29,49,33,25,26,20,29,22,32,32,18,29,23,22,20,22,21,20,23,30,25,22,19,19,26,68,29,20,30,52,29,12],[18,24,17,24,15,27,26,35,27,43,23,24,33,15,63,10,18,28,51,9,45,34,16,33],[36,23,31,24,31,40,25,35,57,18,40,15,25,20,20,31,13,31,30,48,25],[22,23,18,22],[28,36,21,22,12,21,17,22,27,27,15,25,23,52,35,23,58,30,24,42,15,23,29,22,44,25,12,25,11,30,13],[27,32,39,12,25,23,29,18,13,19,27,31,39,33,37,23,29,33,43,26,22,51,39,25],[53,46,28,34,18,38,51,66,28,29,43,33,34,31,34,34,24,46,21,43,29,53],[18,25,27,44,27,33,20,29,37,36,21,21,25,29,38,20,41,37,37,21,26,20,37,20,30],[54,55,24,43,26,81,40,40,44,14,47,40,14,17,29,43,27,17,19,8,30,19,32,31,31,32,34,21,30],[17,18,17,22,14,42,22,18,31,19,23,16,22,15,19,14,19,34,11,37,20,12,21,27,28,23,9,27,36,27,21,33,25,33,27,23],[11,70,13,24,17,22,28,36,15,44],[11,20,32,23,19,19,73,18,38,39,36,47,31],[22,23,15,17,14,14,10,17,32,3],[22,13,26,21,27,30,21,22,35,22,20,25,28,22,35,22,16,21,29,29,34,30,17,25,6,14,23,28,25,31,40,22,33,37,16,33,24,41,30,24,34,17],[6,12,8,8,12,10,17,9,20,18,7,8,6,7,5,11,15,50,14,9,13,31,6,10,22,12,14,9,11,12,24,11,22,22,28,12,40,22,13,17,13,11,5,26,17,11,9,14,20,23,19,9,6,7,23,13,11,11,17,12,8,12,11,10,13,20,7,35,36,5,24,19,28,23,10,12,20,72,13,19,16,8,18,12,13,17,7,18,52,17,16,15,5,23,11,13,12,9,9,5,8,28,22,35,45,48,43,13,31,7,10,10,9,8,18,19,2,29,176,7,8,9,4,8,5,6,5,6,8,8,3,18,3,3,21,26,9,8,24,13,10,7,12,15,21,10,20,14,9,6],[33,22,35,27,23,35,27,36,18,32,31,28,25,35,33,33,28,24,29,30,31,29,35,34,28,28,27,28,27,33,31],[18,26,22,16,20,12,29,17,18,20,10,14],[17,17,11,16,16,14,13,14],[31,22,26,6,30,13,25,22,21,34,16,6,22,32,9,14,14,7,25,6,17,25,18,23,12,21,13,29,24,33,9,20,24,17,10,22,38,22,8,31,29,25,28,28,25,13,15,22,26,11,23,15,12,17,13,12,21,14,21,22,11,12,19,12,25,24],[19,37,25,31,31,30,34,22,26,25,23,17,27,22,21,21,27,23,15,18,14,30,40,10,38,24,22,17,32,24,40,44,26,22,19,32,21,28,18,16,18,22,13,30,5,28,7,47,39,46,64,34],[22,22,66,22,22],[28,10,27,17,17,14,27,18,11,22,25,28,23,23,8,63,24,32,14,49,32,31,49,27,17,21,36,26,21,26,18,32,33,31,15,38,28,23,29,49,26,20,27,31,25,24,23,35],[21,49,30,37,31,28,28,27,27,21,45,13],[11,23,5,19,15,11,16,14,17,15,12,14,16,9],[20,32,21],[15,16,15,13,27,14,17,14,15],[21],[17,10,10,11],[16,13,12,13,15,16,20],[15,13,19],[17,20,19],[18,15,20],[15,23],[21,13,10,14,11,15,14,23,17,12,17,14,9,21],[14,17,18,6],[25,23,17,25,48,34,29,34,38,42,30,50,58,36,39,28,27,35,30,34,46,46,39,51,46,75,66,20],[45,28,35,41,43,56,37,38,50,52,33,44,37,72,47,20],[80,52,38,44,39,49,50,56,62,42,54,59,35,35,32,31,37,43,48,47,38,71,56,53],[51,25,36,54,47,71,53,59,41,42,57,50,38,31,27,33,26,40,42,31,25],[26,47,26,37,42,15,60,40,43,48,30,25,52,28,41,40,34,28,41,38,40,30,35,27,27,32,44,31],[32,29,31,25,21,23,25,39,33,21,36,21,14,23,33,27],[31,16,23,21,13,20,40,13,27,33,34,31,13,40,58,24],[24,17,18,18,21,18,16,24,15,18,33,21,13],[24,21,29,31,26,18],[23,22,21,32,33,24],[30,30,21,23],[29,23,25,18],[10,20,13,18,28],[12,17,18],[20,15,16,16,25,21],[18,26,17,22],[16,15,15],[25],[14,18,19,16,14,20,28,13,28,39,40,29,25],[27,26,18,17,20],[25,25,22,19,14],[21,22,18],[10,29,24,21,21],[13],[15],[25],[20,29,22,11,14,17,17,13,21,11,19,17,18,20,8,21,18,24,21,15,27,21]];
+function verseCount(b,c){return (VC[b-1]||[])[c-1]||0}
 
 /* bible.json 이 없을 때 보여줄 데모 본문 (창세기 1:1-3) */
 const DEMO={books:[{n:"창세기",chapters:[
@@ -340,12 +350,21 @@ function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;',
 function refName(b,c){const B=BOOKS[b-1];return B?B.s+' '+c+'장':'?'}
 
 /* ================= 진도 계산 ================= */
-function weekProg(readMap,wi){
-  let done=0;getPlan()[wi].forEach(x=>{if(readMap[key(x.b,x.c)])done++});
-  return{done,total:getPlan()[wi].length};
+/* 진도 — o 는 멤버(또는 나 state). 다 읽은 장 = 1, 읽는 중인 장 = 읽은 절/전체 절 */
+function chapPart(o,b,c){
+  const k=key(b,c);if((o.readChapters||{})[k])return 1;
+  const v=(o.versePos||{})[k]||0,n=verseCount(b,c);return n?Math.min(1,v/n):0;
 }
-function totalProg(readMap){let n=0;for(const k in readMap)if(readMap[k])n++;return{done:n,total:TOTAL}}
-function pct(x){return x.total?Math.round(x.done/x.total*100):0}
+function weekProg(o,wi){
+  let done=0,part=0;getPlan()[wi].forEach(x=>{const p=chapPart(o,x.b,x.c);if(p>=1)done++;part+=p});
+  return{done,part,total:getPlan()[wi].length};
+}
+function totalProg(o){
+  let done=0,part=0;BOOKS.forEach((B,i)=>{for(let c=1;c<=B.c;c++){const p=chapPart(o,i+1,c);if(p>=1)done++;part+=p}});
+  return{done,part,total:TOTAL};
+}
+function pct(x){const d=(x.part!=null?x.part:x.done);return x.total?Math.round(d/x.total*100):0}
+function pct1(x){const d=(x.part!=null?x.part:x.done);return x.total?(Math.round(d/x.total*1000)/10):0}
 function ago(ts){
   if(!ts)return'—';
   const s=(Date.now()-ts)/1e3;
@@ -509,11 +528,11 @@ function renderHome(){
   document.getElementById('wToday').classList.toggle('hidden',viewWeek===todayWeek());
   renderToday();
 
-  const mp=weekProg(state.readChapters,viewWeek),tp=totalProg(state.readChapters);
+  const mp=weekProg(state,viewWeek),tp=totalProg(state);
   document.getElementById('weekBar').style.width=pct(mp)+'%';
   document.getElementById('weekProgText').textContent=mp.done+'/'+mp.total;
   document.getElementById('totalBar').style.width=pct(tp)+'%';
-  document.getElementById('totalProgText').textContent=pct(tp)+'%';
+  document.getElementById('totalProgText').textContent=pct1(tp)+'%';
 
   // 장 리스트: 연속된 같은 책 묶음으로 표기
   const list=document.getElementById('chapterList');let html='',curBook=null;
@@ -524,7 +543,7 @@ function renderHome(){
     html+='<div class="chk'+(done?' read':'')+'" data-k="'+k+'">'
       +'<input type="checkbox"'+(done?' checked':'')+'/>'
       +'<span>'+BOOKS[x.b-1].s+' '+x.c+'장</span>'
-      +(date?'<em>'+date+'</em>':'')
+      +(date?'<em>'+date+'</em>':((state.versePos||{})[k]?'<em>'+state.versePos[k]+'/'+verseCount(x.b,x.c)+'절</em>':''))
       +'<button class="read-link" data-b="'+x.b+'" data-c="'+x.c+'">읽기 ›</button></div>';
   });
   list.innerHTML=html||'<p class="sub">이 주에는 읽을 장이 없어요.</p>';
@@ -534,8 +553,8 @@ function renderHome(){
   const gs=document.getElementById('groupStats');
   const names=Object.values(MEMBERS);
   if(!names.length){gs.innerHTML='<p class="sub">아직 함께하는 사람이 없어요. 설정 탭에서 초대 링크를 공유해 보세요.</p>';return}
-  const wk=names.filter(m=>{const p=weekProg(m.readChapters||{},viewWeek);return p.done>=p.total}).length;
-  const totalPct=Math.round(names.reduce((s,m)=>s+pct(totalProg(m.readChapters||{})),0)/names.length);
+  const wk=names.filter(m=>{const p=weekProg(m,viewWeek);return p.done>=p.total}).length;
+  const totalPct=Math.round(names.reduce((s,m)=>s+pct(totalProg(m)),0)/names.length);
   gs.innerHTML='<div class="stat-grid">'
     +'<div class="stat"><b>'+names.length+'</b><span>참여 인원</span></div>'
     +'<div class="stat"><b>'+wk+'</b><span>이번 주 완료</span></div>'
@@ -574,7 +593,7 @@ function renderToday(){
 function memberListForViews(){
   const list=Object.values(MEMBERS).slice();
   if(!list.some(m=>m.uid===state.uid))list.push(myObj());
-  list.sort((a,b)=>pct(totalProg(b.readChapters||{}))-pct(totalProg(a.readChapters||{})));
+  list.sort((a,b)=>pct(totalProg(b))-pct(totalProg(a)));
   return list;
 }
 function cellStyle(p){
@@ -583,8 +602,8 @@ function cellStyle(p){
 }
 function renderAll(){
   const list=memberListForViews();
-  const doneWeek=list.filter(m=>{const p=weekProg(m.readChapters||{},viewWeek);return p.done>=p.total}).length;
-  const avg=Math.round(list.reduce((s,m)=>s+pct(totalProg(m.readChapters||{})),0)/list.length);
+  const doneWeek=list.filter(m=>{const p=weekProg(m,viewWeek);return p.done>=p.total}).length;
+  const avg=Math.round(list.reduce((s,m)=>s+pct(totalProg(m)),0)/list.length);
   document.getElementById('statsRow').innerHTML='<div class="stat-grid">'
     +'<div class="stat"><b>'+list.length+'</b><span>참여 인원</span></div>'
     +'<div class="stat"><b>'+doneWeek+'</b><span>이번 주 완료</span></div>'
@@ -596,20 +615,20 @@ function renderAll(){
   list.forEach(m=>{
     h+='<tr><td class="name">'+esc(displayName(m))+(m.uid===state.uid?' (나)':'')+'</td>';
     for(let w=0;w<W;w++){
-      const p=pct(weekProg(m.readChapters||{},w));
+      const p=pct(weekProg(m,w));
       h+='<td style="'+cellStyle(p)+'" title="'+esc(displayName(m))+' '+(w+1)+'주차 '+p+'%">'+(p>0?p:'')+'</td>';
     }
-    h+='<td class="total">'+pct(totalProg(m.readChapters||{}))+'%</td></tr>';
+    h+='<td class="total">'+pct(totalProg(m))+'%</td></tr>';
   });
   h+='<tr><td class="name" style="font-weight:700">주간 평균</td>';
   for(let w=0;w<W;w++){
-    const aw=Math.round(list.reduce((s,m)=>s+pct(weekProg(m.readChapters||{},w)),0)/list.length);
+    const aw=Math.round(list.reduce((s,m)=>s+pct(weekProg(m,w)),0)/list.length);
     h+='<td style="'+cellStyle(aw)+'" title="'+(w+1)+'주차 평균">'+aw+'</td>';
   }
-  h+='<td class="total">'+Math.round(list.reduce((s,m)=>s+pct(totalProg(m.readChapters||{})),0)/list.length)+'%</td></tr>';
+  h+='<td class="total">'+Math.round(list.reduce((s,m)=>s+pct(totalProg(m)),0)/list.length)+'%</td></tr>';
   document.getElementById('matrix').innerHTML=h;
 
-  const wp=list.map(m=>pct(weekProg(m.readChapters||{},viewWeek)));
+  const wp=list.map(m=>pct(weekProg(m,viewWeek)));
   const avgW=Math.round(wp.reduce((a,b)=>a+b,0)/list.length);
   const started=wp.filter(p=>p>0).length,finished=wp.filter(p=>p===100).length;
   const others=list.filter(m=>m.uid!==state.uid);
@@ -619,7 +638,7 @@ function renderAll(){
     +'<div class="stat"><b>'+finished+'</b><span>완주한 사람</span></div></div>'
     +(MODE==='local'&&others.length===0?'<p class="sub">※ 지금은 로컬 모드 — 시트/클라우드에 연결하면 모든 멤버가 표시됩니다.</p>':'');
 
-  const notStarted=others.filter(m=>pct(weekProg(m.readChapters||{},viewWeek))===0);
+  const notStarted=others.filter(m=>pct(weekProg(m,viewWeek))===0);
   const away=others.filter(m=>m.lastActive&&Date.now()-m.lastActive>3*864e5);
   const mk=a=>a.map(m=>'<span class="pill">'+esc(displayName(m))+'</span>').join('')||'<span class="sub">없어요 🎉</span>';
   document.getElementById('inactiveNote').textContent='이번 주 아직 0장인 사람과 3일 이상 접속하지 않은 사람입니다. 시트 버전에서는 시트에서 이름을 바로 고칠 수 있어요.';
@@ -704,15 +723,24 @@ function watchVerses(){
   markHere();
 }
 function markHere(){
-  document.querySelectorAll('.verse.here').forEach(el=>el.classList.remove('here'));
-  const el=document.getElementById('v'+maxVerse);
-  if(el)el.classList.add('here');
+  document.querySelectorAll('#readerBody .verse').forEach(el=>{const v=+el.dataset.v;el.classList.toggle('read',v<=maxVerse);el.classList.toggle('here',v===maxVerse)});
   renderPosHint();
 }
+/* 절을 누르면 「거기까지 읽음」 — 앞 절을 누르면 거기로 되돌린다 · 마지막 절이면 그 장 「다 읽음」 */
+document.getElementById('readerBody').addEventListener('click',e=>{
+  const p=e.target.closest('.verse');if(!p||!BIBLE)return;
+  const v=+p.dataset.v,k=key(curB,curC),n=verseCount(curB,curC);
+  maxVerse=v;dirtyVerse=false;
+  state.versePos[k]=v;state.lastRead={b:curB,c:curC,v};
+  if(n&&v>=n&&!state.readChapters[k]){state.readChapters[k]=Date.now();document.getElementById('chapReadChk').checked=true}
+  document.getElementById('resumeChip').classList.add('hidden');
+  markHere();save();renderHome();
+});
 function renderPosHint(){
   const h=document.getElementById('posHint');
-  if(maxVerse){h.classList.remove('hidden');h.textContent=maxVerse+'절까지 읽음 · 자동 저장 중'}
-  else h.classList.add('hidden');
+  const n=verseCount(curB,curC);h.classList.remove('hidden');
+  if(maxVerse)h.textContent=maxVerse+(n?' / '+n:'')+'절 읽음'+(n?' ('+Math.round(Math.min(1,maxVerse/n)*100)+'%)':'')+' · 절을 누르면 거기까지 저장';
+  else h.textContent='읽은 곳의 절을 누르면 거기까지 저장돼요';
 }
 document.getElementById('chapReadChk').addEventListener('change',e=>{
   const k=key(curB,curC);
@@ -748,11 +776,11 @@ function renderStatus(){
     ?'총 '+arr.length+'명 · 이번 주('+ (viewWeek+1) +'주차) 기준'
     :'아직 아무도 없어요. 초대 링크를 공유해 보세요.';
   arr.sort((a,b)=>{
-    const pa=weekProg(a.readChapters||{},viewWeek),pb=weekProg(b.readChapters||{},viewWeek);
-    return pb.done/pb.total-pa.done/pa.total||pct(totalProg(b.readChapters||{}))-pct(totalProg(a.readChapters||{}));
+    const pa=weekProg(a,viewWeek),pb=weekProg(b,viewWeek);
+    return pb.done/pb.total-pa.done/pa.total||pct(totalProg(b))-pct(totalProg(a));
   });
   list.innerHTML=arr.map((m,i)=>{
-    const p=weekProg(m.readChapters||{},viewWeek),tp=pct(totalProg(m.readChapters||{}));
+    const p=weekProg(m,viewWeek),tp=pct(totalProg(m));
     const lr=m.priv?'':(m.lastRead&&BOOKS[m.lastRead.b-1]?BOOKS[m.lastRead.b-1].s+' '+m.lastRead.c+':'+(m.lastRead.v||1):'');
     const me=m.uid===state.uid?' (나)':'';
     return '<div class="member"><div class="rank">'+(i+1)+'</div>'
@@ -815,8 +843,8 @@ document.getElementById('csvBtn').addEventListener('click',()=>{
   csv+=',전체\n';
   list.forEach(m=>{
     csv+='"'+displayName(m)+'"';
-    for(let w=0;w<W;w++)csv+=','+pct(weekProg(m.readChapters||{},w));
-    csv+=','+pct(totalProg(m.readChapters||{}))+'\n';
+    for(let w=0;w<W;w++)csv+=','+pct(weekProg(m,w));
+    csv+=','+pct(totalProg(m))+'\n';
   });
   if(navigator.clipboard)navigator.clipboard.writeText(csv).then(()=>alert('복사했어요. 스프레드시트에 붙여넣으세요.'),()=>prompt('아래 내용을 복사하세요',csv));
   else prompt('아래 내용을 복사하세요',csv);
