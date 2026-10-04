@@ -640,7 +640,7 @@ function initReader(){
   bs.addEventListener('change',fillChaps);
   document.getElementById('openBtn').addEventListener('click',()=>{curB=+bs.value;curC=+document.getElementById('chapSel').value;openChapter()});
   fillChaps();
-  if(state.lastRead){curB=state.lastRead.b;curC=state.lastRead.c;bs.value=curB;fillChaps();document.getElementById('chapSel').value=curC;openChapter(true)}
+  if(state.lastRead){curB=state.lastRead.b;curC=state.lastRead.c;bs.value=curB;fillChaps();document.getElementById('chapSel').value=curC;openChapter()}   /* 앱을 다시 켜면 ★마지막 읽던 절로 이동 + 「이어서 읽기」 */
 }
 function fillChaps(){
   const b=BOOKS[+document.getElementById('bookSel').value-1];
