@@ -7,7 +7,15 @@
 <link rel="manifest" href="manifest.json"/>
 <meta name="theme-color" content="#4a2c1c"/>
 <link rel="icon" href="icon-192.png"/>
-<link rel="apple-touch-icon" href="icon-192.png"/>
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png"/>
+<meta name="description" content="모임이 서로의 진도를 보며 함께 읽는 40주 성경 읽기"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="성경 읽기 · 서로 응원하며 함께 읽어요"/>
+<meta property="og:description" content="모임이 서로의 진도를 보며 함께 읽는 40주 성경 읽기"/>
+<meta property="og:image" content="https://je7s7u7s1k5i3ng.github.io/haleluah/bible-reading/open/img/og.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:url" content="https://je7s7u7s1k5i3ng.github.io/haleluah/bible-reading/open/"/>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
 <style>
 @font-face{font-family:'SBAggroL';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');font-display:swap}
@@ -144,6 +152,28 @@ code{background:#efe8da;padding:2px 7px;border-radius:6px;font-size:13px}
 .setup-card .field input{padding:13px}
 .setup-card .sub{text-align:center;margin-top:14px}
 
+/* ===== V1.2 이미지 적용 ===== */
+body{background:var(--bg) url(img/paper.jpg) repeat;background-size:600px}
+.topband{background:#4a2c1c url(img/header.jpg) center/cover no-repeat;margin-bottom:10px;box-shadow:0 2px 8px rgba(40,20,10,.18)}
+.topband .top{padding:14px 14px 14px}
+.topband .brand h1{color:#f6f0e2;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.topband .brand p{color:#e2cfb1}
+img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.overlay{background:#f6f1e6 url(img/splash.jpg) top center/cover no-repeat;align-items:flex-end;padding:20px 20px calc(24px + env(safe-area-inset-bottom))}
+.setup-card{background:rgba(255,253,248,.94);box-shadow:0 10px 40px rgba(60,35,15,.22)}
+.badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 8px}
+.bdg{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;color:var(--sub)}
+.bdg img{width:64px;height:64px;filter:grayscale(1) opacity(.35);transition:filter .4s}
+.bdg.on img{filter:none}
+.bdg.on span{color:var(--accent);font-weight:700}
+.cele{position:fixed;inset:0;z-index:60;background:rgba(40,24,12,.55);display:flex;align-items:center;justify-content:center;padding:20px}
+.cele-card{background:var(--card);border-radius:20px;overflow:hidden;width:100%;max-width:360px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.cele-card img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.cele-card h1{font-family:'SBAggroB','Noto Sans KR',sans-serif;color:var(--accent);font-size:24px;margin:16px 0 4px}
+.cele-card p{color:var(--sub);font-size:13px;margin:0 18px 16px;line-height:1.6}
+.cele-card .primary{width:auto;margin:0 18px 18px;display:block;width:calc(100% - 36px)}
+.empty-art{display:block;width:72%;max-width:260px;margin:10px auto 4px;border-radius:50%}
+
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
 </style>
@@ -166,13 +196,16 @@ code{background:#efe8da;padding:2px 7px;border-radius:6px;font-size:13px}
   </div>
 </div>
 
-<header class="top">
+<!-- 한 주 완독 축하 (V1.2) -->
+<div id="celebrate" class="cele hidden"><div class="cele-card"><img src="img/celebrate.jpg" alt=""/><h1>한 주 완독!</h1><p id="celeText"></p><button id="celeClose" class="primary">계속 읽기</button></div></div>
+
+<div class="topband"><header class="top">
   <div class="brand">
-    <span class="brand-mark">성</span>
+    <img class="brand-mark" src="img/icon-96.png" alt="성경 읽기"/>
     <div><h1>성경 읽기</h1><p id="groupLabel">모임 이름</p></div>
   </div>
   <div id="connBadge" class="badge">연결 확인 중…</div>
-</header>
+</header></div>
 
 <main>
   <!-- 홈 -->
@@ -190,6 +223,7 @@ code{background:#efe8da;padding:2px 7px;border-radius:6px;font-size:13px}
     <div class="card" id="todayCard"><h2 id="todayTitle">오늘 읽을 장</h2><div id="todayList"></div></div>
     <div class="card"><h2>읽을 장</h2><div id="chapterList"></div></div>
     <div class="card"><h2>우리 모두</h2><div id="groupStats"></div></div>
+    <div class="card"><h2>내 배지</h2><div id="badgeGrid" class="badge-grid"></div></div>
   </section>
 
   <!-- 읽기 -->
@@ -216,6 +250,7 @@ code{background:#efe8da;padding:2px 7px;border-radius:6px;font-size:13px}
     <div class="card">
       <h2>함께 읽는 사람들</h2>
       <p class="sub" id="memberCount"></p>
+      <img id="emptyArt" class="empty-art hidden" src="img/empty.jpg" alt=""/>
       <div id="memberList"></div>
     </div>
   </section>
@@ -516,7 +551,7 @@ function goTab(t){document.querySelector('.tabs button[data-tab="'+t+'"]').click
 function goRead(b,c){curB=b;curC=c;openChapter();goTab('read')}
 
 /* ================= 홈 ================= */
-function renderHome(){
+function renderHome(){renderBadges();checkCelebrate();
   const plan=getPlan();
   document.getElementById('weekLabel').textContent=(viewWeek+1)+'주차';
   const s=new Date(planStart()+'T00:00:00');
@@ -768,6 +803,41 @@ function flushNow(){
 window.addEventListener('pagehide',flushNow);
 window.addEventListener('visibilitychange',()=>{if(document.hidden)flushNow()});
 
+/* ===== 내 배지 · 한 주 완독 축하 (V1.2) ===== */
+const BADGE_NAMES=['첫 걸음','한 주 완독','4주 연속','구약 완독','신약 완독','성경 완독'];
+function weekDone(o,w){const p=weekProg(o,w);return p.total>0&&p.done>=p.total}
+function booksDone(o,from,to){for(let b=from;b<=to;b++)for(let c=1;c<=BOOKS[b-1].c;c++)if(chapPart(o,b,c)<1)return false;return true}
+function earnedBadges(o){
+  let any=false,run=0,best=0;
+  for(let w=0;w<planWeeks();w++){if(weekDone(o,w)){any=true;run++;if(run>best)best=run}else run=0}
+  const started=Object.keys(o.readChapters||{}).length>0||Object.values(o.versePos||{}).some(v=>v>0);
+  const ot=booksDone(o,1,39),nt=booksDone(o,40,66);
+  return[started,any,best>=4,ot,nt,ot&&nt];
+}
+function renderBadges(){
+  const g=document.getElementById('badgeGrid');if(!g)return;
+  const e=earnedBadges(state);g.textContent='';
+  BADGE_NAMES.forEach((n,i)=>{
+    const d=document.createElement('div');d.className='bdg'+(e[i]?' on':'');
+    const im=document.createElement('img');im.src='img/badge-'+(i+1)+'.png';im.alt=n;im.loading='lazy';
+    const s=document.createElement('span');s.textContent=(e[i]?'':'🔒 ')+n;
+    d.appendChild(im);d.appendChild(s);g.appendChild(d);
+  });
+}
+let celeReady=false;
+function checkCelebrate(){
+  state.celebrated=state.celebrated||{};
+  let hit=-1;
+  for(let w=0;w<planWeeks();w++){
+    if(weekDone(state,w)&&!state.celebrated[w]){state.celebrated[w]=Date.now();if(celeReady)hit=w}
+  }
+  if(!celeReady){celeReady=true;persist();return}   /* 앱을 켤 때 이미 끝난 주는 조용히 넘긴다 */
+  if(hit>=0){persist();
+    document.getElementById('celeText').textContent=(hit+1)+'주차에 읽을 장을 모두 읽으셨어요. 수고하셨습니다!';
+    document.getElementById('celebrate').classList.remove('hidden');}
+}
+document.getElementById('celeClose').addEventListener('click',()=>document.getElementById('celebrate').classList.add('hidden'));
+
 /* ================= 현황 ================= */
 function renderStatus(){
   const list=document.getElementById('memberList');
@@ -775,6 +845,7 @@ function renderStatus(){
   document.getElementById('memberCount').textContent=arr.length
     ?'총 '+arr.length+'명 · 이번 주('+ (viewWeek+1) +'주차) 기준'
     :'아직 아무도 없어요. 초대 링크를 공유해 보세요.';
+  document.getElementById('emptyArt').classList.toggle('hidden',arr.length>0);
   arr.sort((a,b)=>{
     const pa=weekProg(a,viewWeek),pb=weekProg(b,viewWeek);
     return pb.done/pb.total-pa.done/pa.total||pct(totalProg(b))-pct(totalProg(a));
