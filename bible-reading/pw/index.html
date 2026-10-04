@@ -173,6 +173,13 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
 .cele-card p{color:var(--sub);font-size:13px;margin:0 18px 16px;line-height:1.6}
 .cele-card .primary{width:auto;margin:0 18px 18px;display:block;width:calc(100% - 36px)}
 .empty-art{display:block;width:72%;max-width:260px;margin:10px auto 4px;border-radius:50%}
+/* 화면 확인 후 보정 (2026-10-05) — 화면이 짧아도 카드 위쪽이 잘리지 않게(스크롤 + auto 여백) · 글자 줄바꿈 */
+.overlay,.cele{overflow-y:auto;flex-direction:column}
+.setup-card{margin:auto auto 0;flex-shrink:0}
+.cele-card{margin:auto;flex-shrink:0}
+.btn-row button{white-space:nowrap}
+.bdg span{white-space:nowrap}
+.prog-row span:first-child{width:44px;white-space:nowrap}
 
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
