@@ -220,7 +220,7 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
   <div class="setup-card">
     <h1>성경 읽기</h1>
     <p>함께 읽고, 함께 기록해요</p>
-    <blockquote class="quote"><p>“시간이 지나면 말씀 읽는 것만 남는다”</p><cite>— 황선주 목사님</cite></blockquote>
+    <blockquote class="quote"><p>“지나고 되돌아 보면 말씀 읽는 것만 남는다”</p><cite>— 황선주 목사님</cite></blockquote>
     <div id="howtoSetup"></div>
     <div class="field"><label>① 이름</label><input id="suName" placeholder="이름 또는 닉네임" maxlength="12"/></div>
     <div class="field"><label>② 그룹 코드 (자동 · 그대로 두세요)</label><input id="suGroup" placeholder="예) AB12CD" autocomplete="off" maxlength="20" style="text-transform:uppercase"/></div>
@@ -247,7 +247,7 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
 <main>
   <!-- 홈 -->
   <section id="tab-home">
-    <div class="card quote-card"><blockquote class="quote"><p>“시간이 지나면 말씀 읽는 것만 남는다”</p><cite>— 황선주 목사님</cite></blockquote></div>
+    <div class="card quote-card"><blockquote class="quote"><p>“지나고 되돌아 보면 말씀 읽는 것만 남는다”</p><cite>— 황선주 목사님</cite></blockquote></div>
     <div class="card">
       <div class="week-nav">
         <button id="wPrev">‹</button>
@@ -462,7 +462,7 @@ function myObj(){
   return {name:(state.privacy?state.alias:state.name),uid:state.uid,priv:!!state.privacy,
     pinHash:state.pinHash||'',
     readChapters:state.readChapters,versePos:state.versePos,
-    lastRead:(state.privacy?null:(state.lastRead||null)),lastActive:Date.now()};
+    lastRead:(state.lastRead||null),   /* 비밀번호 버전도 시트에 남긴다 — 다른 폰에서 이어 읽기용 · 화면에는 가명이라 위치를 숨김 */lastActive:Date.now()};
 }
 function displayName(m){return m.priv?'🔒 '+(m.name||'비공개'):(m.name||'이름 없음')}
 function setBadge(t,off){const b=document.getElementById('connBadge');b.textContent=t;b.classList.toggle('off',!!off)}
