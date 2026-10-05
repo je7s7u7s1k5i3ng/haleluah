@@ -1036,7 +1036,7 @@ function renderFeed(){
     av.className='feed-av'+((Date.now()-(m.lastActive||0))<10*60e3?' on':'');
     av.textContent=m.priv?'🔒':String(m.name||'?').trim().slice(0,1);
     const main=document.createElement('div');main.className='feed-main';
-    const b=document.createElement('b');b.textContent=displayName(m)+(m.uid===state.uid?' (나)':'');
+    const b=document.createElement('b');b.textContent=(m.priv?(m.name||'비공개'):displayName(m))+(m.uid===state.uid?' (나)':'');   /* 자물쇠는 동그라미에만 */
     const s=document.createElement('span');s.textContent='이번 주 '+p.done+'/'+p.total+'장'+(lr?' · '+lr+'까지':'');
     main.appendChild(b);main.appendChild(s);
     const t=document.createElement('div');t.className='feed-time';t.textContent=ago(m.lastActive);
