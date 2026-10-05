@@ -341,7 +341,7 @@ input,select,textarea{font-size:16px!important}
         <li><b>🤝 함께 읽는 지체들</b> — 누가 이번 주 몇 장 읽었는지 · 혼자가 아니에요</li>
         <li><b>🏃 내 도전</b> — 1주 1권 · 1년 신약 1독 · 1년 구약 1독 중 골라 속도 확인</li>
         <li><b>🏅 배지 · 완독 축하</b> — 배지 8종 · 책 한 권을 끝내면 축하</li>
-        <li><b>📊 현황 · 전체</b> — 모임 전체 진도를 한눈에 (목사님·관리용)</li>
+        <li><b>👥 현황</b> — 함께 읽는 지체들을 한눈에 (개인별 전체 표는 목사님용)</li>
         <li><b>📱 홈 화면에 추가</b> — 앱처럼 아이콘으로 바로 열기</li>
       </ul>
       <a class="promo-btn alt blink" href="../feedback/">💬 이런 기능이 있었으면 좋겠어요 <span class="tap-hint">👆 여기 클릭</span></a>
@@ -1325,6 +1325,9 @@ document.getElementById('guestJoin').addEventListener('click',()=>{
   showSetup(CFG.groupId||'');document.getElementById('suName').value='';
   document.getElementById('suGuest').textContent='← 계속 둘러보기';
 });
+
+/* 「전체」 탭(개인별 표 · 명단 CSV)은 목사님·관리자용 — 지체 화면에서는 숨김 (state.admin 일 때만) */
+if(!state.admin){const t=document.querySelector('.tabs button[data-tab="all"]');if(t)t.classList.add('hidden')}
 
 /* 의견 모으는 기간이 끝나면 config.js 의 feedbackPhase:false 한 줄로 두 버튼 모두 숨김 */
 if(CFG.feedbackPhase===false)document.querySelectorAll('.promo').forEach(e=>e.classList.add('hidden'));
