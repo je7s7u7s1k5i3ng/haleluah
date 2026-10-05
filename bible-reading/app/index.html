@@ -329,6 +329,7 @@ body.admin-mode .tabs button[data-tab="home"],body.admin-mode .tabs button[data-
 .inst-box .ico{display:inline-block;padding:0 6px;border:1px solid var(--line);border-radius:6px;background:#f7f1e4;font-weight:700}
 .inst-box .primary{margin-top:6px}
 .inst-arrow{font-size:34px;line-height:1;margin-top:8px;color:#fff;animation:tapBlink 1s infinite}
+.me-chip{font-size:13px;line-height:1.2;padding:7px 12px;border-radius:16px;background:rgba(255,253,248,.94);color:var(--accent);font-family:'SBAggroB','Noto Sans KR',sans-serif;white-space:nowrap;max-width:46vw;overflow:hidden;text-overflow:ellipsis;box-shadow:0 1px 4px rgba(0,0,0,.25)}
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
 </style>
@@ -368,6 +369,7 @@ body.admin-mode .tabs button[data-tab="home"],body.admin-mode .tabs button[data-
     <img class="brand-mark" src="img/icon-96.png" alt="성경 읽기"/>
     <div><h1>성경 읽기</h1><p id="groupLabel">모임 이름</p></div>
   </div>
+  <div id="meChip" class="me-chip hidden"></div>
   <div id="connBadge" class="badge">연결 확인 중…</div>
 </header></div>
 
@@ -844,7 +846,7 @@ function renderAdminList(){
     const lr=(m.lastRead&&BOOKS[m.lastRead.b-1])?BOOKS[m.lastRead.b-1].n+' '+m.lastRead.c+'장 '+(m.lastRead.v||1)+'절':'아직 없음';
     const card=document.createElement('div');card.className='adm-card';
     const top=document.createElement('div');top.className='adm-top';
-    const nm=document.createElement('b');nm.textContent=m.name||'?';top.appendChild(nm);
+    const nm=document.createElement('b');nm.textContent=titled(m.name||'?');top.appendChild(nm);
     const chip=document.createElement('span');chip.className='chip '+(idle===0?'g':'r');chip.textContent=idle===0?'오늘 읽음 🟢':(idle>=999?'아직 안 읽음 🔴':idle+'일째 안 읽음 🔴');top.appendChild(chip);
     card.appendChild(top);
     const dotsRow=memberDotsRow(m,1);const dl=dotsRow.querySelector('.dots');if(dl)card.appendChild(dl);
@@ -877,7 +879,12 @@ let gridTest='nt',openBook=0;
 function statGrid(items){const g=document.createElement('div');g.className='stat-grid';
   items.forEach(([v,l])=>{const d=document.createElement('div');d.className='stat';const b=document.createElement('b');b.textContent=v;
     const s=document.createElement('span');s.textContent=l;d.appendChild(b);d.appendChild(s);g.appendChild(d)});return g}
-function renderHome(){renderBadges();checkCelebrate();renderFeed();renderGoals();renderTodayPlan();
+/* 로그인한 본인 이름 — 맨 위 오른쪽 (목사님은 「○○○ 목사님」) */
+function titled(n){n=String(n||'');return (CFG.adminName&&n===CFG.adminName)?n+' 목사님':n}
+function renderMe(){const c=document.getElementById('meChip');if(!c)return;
+  if(GUEST){c.textContent='👀 둘러보기';c.classList.remove('hidden');return}
+  if(state.name){const t=titled(state.name);c.textContent='👤 '+t+(t.endsWith('목사님')?'':' 님')+(ADMIN&&!t.endsWith('목사님')?' · 관리':'');c.classList.remove('hidden')}else c.classList.add('hidden')}
+function renderHome(){renderMe();renderBadges();checkCelebrate();renderFeed();renderGoals();renderTodayPlan();
   renderResume();renderMyProg();renderBookGrid();
   const gs=document.getElementById('groupStats');gs.textContent='';
   const list=memberListForViews(),tw=todayWeek();
@@ -1387,7 +1394,7 @@ function memberDotsRow(m,weeks){
   const row=document.createElement('div');row.className='feed-row';
   const av=document.createElement('div');av.className='feed-av';av.textContent=String(m.name||'?').trim().slice(0,1);
   const main=document.createElement('div');main.className='feed-main';
-  const b=document.createElement('b');b.textContent=(m.name||'이름 없음')+(m.uid===state.uid?' (나)':'');main.appendChild(b);
+  const b=document.createElement('b');b.textContent=titled(m.name||'이름 없음')+(m.uid===state.uid?' (나)':'');main.appendChild(b);
   const ds=daysOf(m),td=ymd(Date.now()),w0=todayWeek();
   let readW=0;
   for(let w=w0-weeks+1;w<=w0;w++){
@@ -1521,7 +1528,7 @@ showInstallButtons();
 function startApp(){
   document.getElementById('groupLabel').textContent=CFG.groupName||'모임';
   gridTest=(state.lastRead&&state.lastRead.b<=39)?'ot':'nt';
-  renderHome();renderStatus();
+  renderHome();renderStatus();renderMe();
   initCloud();
   if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
