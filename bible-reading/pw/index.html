@@ -262,6 +262,10 @@ input,select,textarea{font-size:16px!important}
 .fb-card{display:block;text-decoration:none;color:var(--ink);border:1px dashed var(--gold);background:#fffaf0}
 .fb-card b{display:block;font-size:15px;color:var(--accent);font-family:'SBAggroB','Noto Sans KR',sans-serif}
 .fb-card span{display:block;margin-top:4px;font-size:12.5px;color:var(--sub)}
+.guest-btn{width:100%;margin-top:8px;min-height:46px}
+.guest-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#fff5e0;border-color:#f0d9a8}
+.guest-bar span{font-size:12.5px;color:#8a5a12;line-height:1.5}
+.guest-bar .primary{width:auto;padding:10px 14px;white-space:nowrap}
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
 </style>
@@ -282,6 +286,7 @@ input,select,textarea{font-size:16px!important}
       <button id="suJoin" class="primary">참여하기</button>
       <button id="suNew" class="ghost">새 코드 만들기</button>
     </div>
+    <button id="suGuest" class="ghost guest-btn" type="button">👀 가입 없이 먼저 둘러보기</button>
     <p class="sub" id="setupNote">초대받은 링크로 들어오면 코드가 자동으로 채워져요. 이름이 곧 계정이라 같은 이름으로 들어오면 어느 기기에서나 기록이 이어집니다.<br/><b>비밀번호를 넣으면 프라이버시 모드</b> — 목사님·다른 멤버에게는 가명(비공개#코드)으로만 보이고, 시트에 실명이 저장되지 않아요.</p>
   </div>
 </div>
@@ -298,6 +303,7 @@ input,select,textarea{font-size:16px!important}
 </header></div>
 
 <main>
+  <div id="guestBar" class="card guest-bar hidden"><span>👀 둘러보기 중이에요<br/>읽은 기록은 저장되지 않아요</span><button id="guestJoin" class="primary" type="button">참여하기</button></div>
   <!-- 홈 -->
   <section id="tab-home">
     <div class="card quote-card"><blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀을 읽은 시간이다”</p><cite>— 황선주 목사님</cite></blockquote></div>
@@ -441,6 +447,7 @@ const DEMO={books:[{n:"창세기",chapters:[
   "하나님이 이르시되 빛이 있으라 하시매 빛이 있었고"]]}]};
 
 const CFG=window.APP_CONFIG||{};
+let GUEST=false;   /* 둘러보기 중이면 폰 저장·시트 올림 모두 하지 않는다 */
 
 /* ================= 상태 ================= */
 const LS=CFG.storageKey||'bibleApp.v1';   /* 두 버전이 같은 주소에서 돌아도 기록이 안 섞이게 */
@@ -449,9 +456,9 @@ try{Object.assign(state,JSON.parse(localStorage.getItem(LS)||'{}'))}catch(e){}
 const urlG=new URLSearchParams(location.search).get('g');
 /* 그룹 고정 (요한순교자) — 링크에 다른 코드가 붙어 와도 무시한다 · 예전에 다른 코드로 들어온 기기는 첫 화면에서 다시 참여 */
 let REJOIN_NAME='';
-if(CFG.groupId){if(state.group&&state.group!==CFG.groupId){REJOIN_NAME=state.name||'';state.name='';}state.group=CFG.groupId;persist();}
+if(CFG.groupId){if(state.group&&state.group!==CFG.groupId){REJOIN_NAME=state.name||'';state.name='';}state.group=CFG.groupId;if(state.name||REJOIN_NAME)persist();}   /* 처음 온 사람(둘러보기 포함)은 폰에 아무것도 남기지 않는다 */
 else if(urlG){state.group=urlG.trim().toUpperCase();persist();}
-function persist(){try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}}
+function persist(){if(GUEST)return;try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}}
 function save(){persist();scheduleSync();}
 
 /* ================= 주 (달력 · 월~일) — V2.0: 정해진 계획 없이 각자 원하는 성경을 읽는다 ================= */
@@ -627,6 +634,7 @@ function sheetsPull(force){
       GS_VER=parseFloat(data.v||'1.0')||1;GS_V11=GS_VER>=1.1;   /* 시트 스크립트 1.1 이상 */
       const M={};for(const u in data.members)M[u]=normMember(data.members[u]);
       MEMBERS=M;
+      if(GUEST){renderStatus();renderHome();return}   /* 둘러보기: 읽기만 · 합치기·올리기 없음 */
       const mine=MEMBERS[state.uid];
       const changed=mergeMine(mine);
       sheetsSynced=true;
@@ -679,6 +687,7 @@ let syncT=null;
 /* 올림 간격 최소 10초 (읽는 동안 4초마다 저장해도 시트·배터리 부담 없게) · 나갈 때는 즉시 */
 function scheduleSync(){clearTimeout(syncT);syncT=setTimeout(pushMe,Math.max(1500,10000-(Date.now()-lastPushAt)))}
 function pushMe(){
+  if(GUEST)return;
   persist();
   if(MODE==='cloud'&&meRef)meRef.set(myObj()).catch(e=>console.warn('sync fail',e));
   else if(MODE==='sheets'){if(sheetsSynced)sheetsPush();else pendingPush=true}
@@ -783,7 +792,7 @@ document.getElementById('testTabs').addEventListener('click',e=>{const b=e.targe
 document.getElementById('resumeBtn').addEventListener('click',()=>{const lr=state.lastRead;if(lr)goRead(lr.b,lr.c)});
 function memberListForViews(){
   const list=Object.values(MEMBERS).filter(m=>m.uid!==state.uid);
-  list.push(myView());
+  if(!GUEST)list.push(myView());
   list.sort((a,b)=>pct(totalProg(b))-pct(totalProg(a)));
   return list;
 }
@@ -1224,6 +1233,7 @@ document.getElementById('suJoin').addEventListener('click',()=>{
     state.privacy=!!pin;state.alias=pin?alias:'';
     state.pinHash=pinHash;
     if(!state.planStart)state.planStart=new Date().toISOString().slice(0,10);
+    if(GUEST){GUEST=false;persist();location.reload();return}   /* 둘러보다가 참여 → 새로 시작 */
     persist();
     document.getElementById('setup').classList.add('hidden');
     startApp();
@@ -1244,6 +1254,23 @@ document.getElementById('suJoin').addEventListener('click',()=>{
   }else finish();
 });
 
+/* ===== 둘러보기 (V2.1) — 가입 없이 앱을 미리 본다 · ★아무것도 저장·전송하지 않는다 ===== */
+function startGuest(){
+  GUEST=true;
+  state={name:'둘러보기',group:CFG.groupId||'',uid:'guest',readChapters:{},versePos:{},lastRead:null,un:{},vpAt:{},goals:{}};
+  document.getElementById('setup').classList.add('hidden');
+  document.getElementById('guestBar').classList.remove('hidden');
+  startApp();
+}
+document.getElementById('suGuest').addEventListener('click',()=>{
+  if(GUEST){document.getElementById('setup').classList.add('hidden');return}   /* 참여 화면에서 다시 둘러보기로 */
+  startGuest();
+});
+document.getElementById('guestJoin').addEventListener('click',()=>{
+  showSetup(CFG.groupId||'');document.getElementById('suName').value='';
+  document.getElementById('suGuest').textContent='← 계속 둘러보기';
+});
+
 /* ================= 초기화 ================= */
 function startApp(){
   document.getElementById('groupLabel').textContent=CFG.groupName||'모임';
@@ -1258,9 +1285,7 @@ function startApp(){
   if(state.group&&state.name&&!preview){
     startApp();
   }else if(preview){
-    state.name=state.name||'나';state.group=state.group||'DEMO01';
-    if(!state.planStart)state.planStart=new Date().toISOString().slice(0,10);
-    startApp();
+    startGuest();   /* 예전엔 「나」 로 진짜 모임에 올라갈 수 있었다 → 둘러보기로 */
   }else{
     showSetup(CFG.groupId||urlG||'');
     if(REJOIN_NAME)document.getElementById('suName').value=REJOIN_NAME;
