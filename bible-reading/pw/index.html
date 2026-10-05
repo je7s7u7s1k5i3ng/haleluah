@@ -209,6 +209,7 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
 .howto .tip button{margin-top:6px}
 #suGroup[readonly]{background:#f3ede1;color:var(--accent);font-weight:700}
 
+#connBadge{display:none!important}   /* 연결 상태 표시는 지체들에게 보이지 않게 (사장님 2026-10-05) */
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
 </style>
@@ -930,7 +931,7 @@ function renderConn(){
   const el=document.getElementById('connDetail');
   const t={
     cloud:'Firebase 실시간 연결 — 모든 멤버의 진도가 즉시 공유됩니다.',
-    sheets:'구글 시트 연결 — 15초마다 갱신됩니다. 관리자는 시트의 기록 시트에서 이름·진도를 직접 고칠 수 있어요.',
+    sheets:'읽은 기록은 자동으로 저장되고 함께 읽는 지체들과 나눠져요.',
     gist:'GitHub Gist 연결 — 20초마다 갱신됩니다.',
     local:'로컬 모드: 이 기기에만 저장됩니다. 공유하려면 config.js 에 backend 설정을 넣어주세요 (README 참고).'};
   el.textContent=t[MODE]||t.local;
