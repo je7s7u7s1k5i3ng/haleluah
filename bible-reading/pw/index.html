@@ -520,20 +520,16 @@ function initSheets(){
 function sheetsPull(){
   if(sheetsBusy)return;
   sheetsBusy=true;
-  const cb='bk'+Date.now()+Math.floor(Math.random()*1000);
-  const sc=document.createElement('script');
-  window[cb]=data=>{
-    sheetsBusy=false;
-    if(data&&data.members){MEMBERS=data.members;
-      if(!sheetsSynced){sheetsSynced=true;if(mergeMine(MEMBERS[state.uid])||pendingPush){pendingPush=false;persist();sheetsPush()}}
-      renderStatus();renderHome()}
-    try{delete window[cb]}catch(e){}
-    sc.remove();
-  };
-  sc.onerror=()=>{sheetsBusy=false;try{delete window[cb]}catch(e){}};
-  sc.src=CFG.sheets.webAppUrl+'?action=list&g='+encodeURIComponent(sheetGroup(state.group))+'&callback='+cb;
-  document.body.appendChild(sc);
-  setTimeout(()=>{if(window[cb]){sheetsBusy=false;try{delete window[cb]}catch(e){}}},8000);
+  /* fetch 로 읽는다 — JSONP(스크립트 태그)는 브라우저가 막는다 (2026-10-05 실측) */
+  fetch(CFG.sheets.webAppUrl+'?action=list&g='+encodeURIComponent(sheetGroup(state.group))+'&t='+Date.now(),{cache:'no-store'})
+    .then(r=>r.json())
+    .then(data=>{
+      if(data&&data.members){MEMBERS=data.members;
+        if(!sheetsSynced){sheetsSynced=true;if(mergeMine(MEMBERS[state.uid])||pendingPush){pendingPush=false;persist();sheetsPush()}}
+        setBadge('시트 연결됨',false);renderStatus();renderHome()}
+    })
+    .catch(()=>{setBadge('연결 재시도 중…',true)})
+    .finally(()=>{sheetsBusy=false});
 }
 function sheetsPush(){
   fetch(CFG.sheets.webAppUrl,{method:'POST',mode:'no-cors',
@@ -1101,18 +1097,13 @@ document.getElementById('suJoin').addEventListener('click',()=>{
   };
   const u=CFG.sheets&&CFG.sheets.webAppUrl;
   if(CFG.backend==='sheets'&&u){ // 기존 등록분과 비밀번호가 일치하는지 서버에서 확인
-    const cb='chk'+Date.now();
-    const sc=document.createElement('script');
-    window[cb]=d=>{
-      try{delete window[cb]}catch(e){}
-      sc.remove();
-      if(d&&d.exists&&!d.pinOk){alert('이미 등록된 이름이에요. 비밀번호가 다릅니다.');return}
-      finish();
-    };
-    sc.onerror=()=>{try{delete window[cb]}catch(e){}finish()};
-    sc.src=u+'?action=check&g='+encodeURIComponent(sheetGroup(g))+'&uid='+encodeURIComponent(uid)+'&ph='+encodeURIComponent(pinHash)+'&callback='+cb;
-    document.body.appendChild(sc);
-    setTimeout(()=>{if(window[cb]){try{delete window[cb]}catch(e){}}},8000);
+    fetch(u+'?action=check&g='+encodeURIComponent(sheetGroup(g))+'&uid='+encodeURIComponent(uid)+'&ph='+encodeURIComponent(pinHash)+'&t='+Date.now(),{cache:'no-store'})
+      .then(r=>r.json())
+      .then(d=>{
+        if(d&&d.exists&&!d.pinOk){alert('이미 등록된 이름이에요. 처음에 정한 비밀번호 4자리를 넣어주세요.\n(다른 분이면 이름 뒤에 구분을 붙여 주세요. 예: 김은혜2)');return}
+        finish();
+      })
+      .catch(()=>finish());   /* 연결이 안 되면 일단 들어간다 — 저장은 시트에서 내 기록을 받은 뒤에만 */
   }else finish();
 });
 
