@@ -742,6 +742,7 @@ function sheetsPull(force){
       {const t=document.querySelector('.tabs button[data-tab="all"]');if(t)t.classList.toggle('hidden',!ADMIN);state.admin=ADMIN;
        const was=document.body.classList.contains('admin-mode');document.body.classList.toggle('admin-mode',ADMIN&&ROLE!=='both');
        if(ADMIN&&ROLE!=='both'&&!was)goTab('all');
+       {const gl=document.getElementById('groupLabel');if(gl)gl.textContent=(ADMIN&&ROLE!=='both')?(CFG.groupId||'요한순교자')+' · 관리자 전용':(CFG.groupName||'모임');}   /* V3.7 목사님 페이지 제목 */
        const note=document.getElementById('bothNote');if(note)note.classList.toggle('hidden',ROLE!=='both');}   /* 목사님 = 관리자 모드 — 들어오면 바로 관리 화면 */
       if(GUEST){renderStatus();renderHome();return}   /* 둘러보기: 읽기만 · 합치기·올리기 없음 */
       const mine=data.me?normMember(data.me):null;   /* 내 기록 전체는 내 비번이 맞을 때만 온다 */
