@@ -330,6 +330,10 @@ body.admin-mode .tabs button[data-tab="home"],body.admin-mode .tabs button[data-
 .inst-box .primary{margin-top:6px}
 .inst-arrow{font-size:34px;line-height:1;margin-top:8px;color:#fff;animation:tapBlink 1s infinite}
 .me-chip{font-size:13px;line-height:1.2;padding:7px 12px;border-radius:16px;background:rgba(255,253,248,.94);color:var(--accent);font-family:'SBAggroB','Noto Sans KR',sans-serif;white-space:nowrap;max-width:46vw;overflow:hidden;text-overflow:ellipsis;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.stat-h{margin:8px 0 4px;font-size:12px;font-weight:700;color:var(--sub)}
+.vtab{width:100%;border-collapse:collapse;margin-top:8px;font-size:12.5px;text-align:center}
+.vtab th,.vtab td{border-bottom:1px solid #f0e8d8;padding:6px 2px}
+.vtab th{color:var(--sub);font-weight:700}
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
 </style>
@@ -452,6 +456,7 @@ body.admin-mode .tabs button[data-tab="home"],body.admin-mode .tabs button[data-
   <section id="tab-all" class="hidden">
     <div class="card admin-head"><h2>👨‍🏫 목사님 관리 화면</h2><p class="sub">지체들의 읽기 현황을 한눈에 봐요. 이 화면은 목사님(관리 계정)만 보여요.</p><p class="sub hidden" id="bothNote">👀 이 계정은 지체 화면(홈·읽기·현황)과 관리 화면을 함께 볼 수 있어요.</p><div id="statsRow"></div>
       <div class="seg" id="admSort"><button type="button" data-s="name" class="on">이름순</button><button type="button" data-s="idle">오래 안 읽은 순</button><button type="button" data-s="pct">진도순</button></div></div>
+    <div class="card"><h2>📊 링크 방문 통계</h2><div id="visitStats"></div></div>
     <div class="card"><h2>지체별 현황</h2><div id="adminList"></div></div>
     <div class="card"><h2>독려가 필요한 지체</h2><p class="sub" id="inactiveNote"></p><div id="inactiveList"></div></div>
     <div class="card"><h2>최근 8주 읽은 장</h2><p class="sub">칸의 숫자 = 그 주에 읽은 장 수 · 맨 아래 줄은 모두 합친 수</p><div class="mx-wrap"><table class="mx" id="matrix"></table></div></div>
@@ -725,7 +730,7 @@ function sheetsPull(force){
     .then(data=>{
       if(!data||!data.members)return;
       GS_VER=parseFloat(data.v||'1.0')||1;GS_V11=GS_VER>=1.1;   /* 시트 스크립트 1.1 이상 */
-      ADMIN=!GUEST&&!!data.admin&&!!data.full;ROLE=ADMIN?(data.role||'admin'):'';   /* both = 지체 화면 + 관리 화면 */
+      ADMIN=!GUEST&&!!data.admin&&!!data.full;STATS=ADMIN?(data.stats||null):null;ROLE=ADMIN?(data.role||'admin'):'';   /* both = 지체 화면 + 관리 화면 */
       const M={};const src=ADMIN?data.full:data.members;for(const u in src)M[u]=ADMIN?normMember(src[u]):lightMember(src[u]);
       MEMBERS=M;
       {const t=document.querySelector('.tabs button[data-tab="all"]');if(t)t.classList.toggle('hidden',!ADMIN);state.admin=ADMIN;
@@ -852,6 +857,7 @@ function renderAdminList(){
     const dotsRow=memberDotsRow(m,1);const dl=dotsRow.querySelector('.dots');if(dl)card.appendChild(dl);
     const l1=document.createElement('div');l1.className='adm-line';l1.textContent='이번 주 '+wp.done+'장 · 전체 '+pct1(tp)+'% (구약 '+pct1(ot)+'% · 신약 '+pct1(nt)+'%)';card.appendChild(l1);
     const l2=document.createElement('div');l2.className='adm-line sub2';l2.textContent='마지막 읽은 곳: '+lr+' · '+ago(m.lastActive);card.appendChild(l2);
+    const jd=String(m.joinedAt||'');const l3=document.createElement('div');l3.className='adm-line sub2';l3.textContent='가입: '+(jd?(+jd.slice(5,7))+'/'+(+jd.slice(8,10))+' '+jd.slice(11,16):'기록 전 (가입 시각 기능 이전 가입)');card.appendChild(l3);
     const gl=GOALS.filter(x=>(m.goals||{})[x.id]&&m.goals[x.id].on);
     if(gl.length){const plan=todayPlan(m);gl.forEach(x=>{const p=plan.find(q=>q.n===x.n);const l=document.createElement('div');l.className='adm-line';
       l.textContent=(p&&p.ok?'✅ ':'📌 ')+x.n+' — '+goalStatus(x,m.goals[x.id],m)+(p?' · '+p.t:'');card.appendChild(l)})}
@@ -984,7 +990,7 @@ function renderAll(){
     if(!arr.length){const s=document.createElement('span');s.className='sub';s.textContent='없어요 🎉';d.appendChild(s)}
     arr.forEach(m=>{const s=document.createElement('span');s.className='pill';s.textContent=displayName(m);d.appendChild(s)});il.appendChild(d)};
   sec('이번 주 아직 시작 전',notStarted);sec('3일 이상 미접속',away);
-  renderAdminList();
+  renderAdminList();renderVisitStats();
 }
 
 /* ================= 읽기 ================= */
@@ -1456,7 +1462,7 @@ document.getElementById('suJoin').addEventListener('click',()=>{
 
 /* ===== 둘러보기 (V2.1) — 가입 없이 앱을 미리 본다 · ★아무것도 저장·전송하지 않는다 ===== */
 function startGuest(){
-  GUEST=true;
+  GUEST=true;pingVisit('guest');
   state={name:'둘러보기',group:CFG.groupId||'',uid:'guest',readChapters:{},versePos:{},lastRead:null,un:{},vpAt:{},goals:{}};
   document.getElementById('setup').classList.add('hidden');
   document.getElementById('guestBar').classList.remove('hidden');
@@ -1524,6 +1530,30 @@ function installApp(){
 ['instTop','instHome'].forEach(id=>{const e=document.getElementById(id);if(e)e.addEventListener('click',installApp)});
 showInstallButtons();
 
+/* ===== 방문 통계 (V3.4) — 횟수만 · 누가인지 보내지 않음 ===== */
+let STATS=null;
+function pingVisit(kind){
+  try{const k='bv-'+kind;if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}
+  const u=CFG.sheets&&CFG.sheets.webAppUrl;if(!u||CFG.backend!=='sheets')return;
+  fetch(u+'?action=visit&kind='+kind+'&g='+encodeURIComponent(sheetGroup(CFG.groupId||state.group||''))+'&t='+Date.now(),{cache:'no-store',keepalive:true}).catch(()=>{});
+}
+function renderVisitStats(){
+  const box=document.getElementById('visitStats');if(!box)return;box.textContent='';
+  if(!STATS){const p=document.createElement('p');p.className='sub';p.textContent='통계를 불러오는 중이에요…';box.appendChild(p);return}
+  const td=new Date(),d=td.getFullYear()+'-'+String(td.getMonth()+1).padStart(2,'0')+'-'+String(td.getDate()).padStart(2,'0');
+  const today=(STATS.days||[]).find(x=>x.d===d)||{open:0,guest:0,join:0,fb:0},t=STATS.total||{};
+  const h=(txt)=>{const e=document.createElement('p');e.className='stat-h';e.textContent=txt;box.appendChild(e)};
+  h('오늘');box.appendChild(statGrid([[today.open,'링크 열어 봄'],[today.guest,'둘러보기'],[today.join,'새 가입']]));
+  h('누적 (통계 시작부터)');box.appendChild(statGrid([[t.open||0,'링크 열어 봄'],[t.guest||0,'둘러보기'],[t.join||0,'새 가입']]));
+  const fb=document.createElement('p');fb.className='sub';fb.textContent='💬 익명 의견: 오늘 '+(today.fb||0)+'건 · 누적 '+(t.fb||0)+'건 (시트 「의견」 탭에서 내용 확인)';box.appendChild(fb);
+  const rows=(STATS.days||[]).slice(-7).reverse();
+  if(rows.length){const tb=document.createElement('table');tb.className='vtab';
+    const tr=(cells,th)=>{const r=document.createElement('tr');cells.forEach(c=>{const e=document.createElement(th?'th':'td');e.textContent=c;r.appendChild(e)});tb.appendChild(r)};
+    tr(['날짜','열어 봄','둘러보기','가입','의견'],true);
+    rows.forEach(x=>tr([x.d.slice(5).replace('-','/'),x.open,x.guest,x.join,x.fb]));
+    box.appendChild(tb)}
+}
+
 /* ================= 초기화 ================= */
 function startApp(){
   document.getElementById('groupLabel').textContent=CFG.groupName||'모임';
@@ -1533,6 +1563,7 @@ function startApp(){
   if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
 (function boot(){
+  pingVisit('open');   /* 링크 열어 봄 — 횟수만 */
   // 미리보기 모드: ?preview=1 이면 오버레이 생략 (테스트용)
   const preview=new URLSearchParams(location.search).has('preview');
   if(state.group&&state.name&&!preview){
