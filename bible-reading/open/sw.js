@@ -1,10 +1,10 @@
 /* 성경 읽기 - 서비스 워커 (오프라인 지원) */
-const CACHE = 'bible-cache-open-20261005k';
+const CACHE = 'bible-cache-open-20261005l';
 const ASSETS = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE).then((c) => Promise.allSettled(ASSETS.map((u) => c.add(u))))
+    caches.open(CACHE).then((c) => Promise.allSettled(ASSETS.map((u) => c.add(new Request(u, { cache: 'reload' })))))   // ★브라우저 10분 캐시를 건너뛰고 새 파일을 받는다
   );
   self.skipWaiting();
 });
