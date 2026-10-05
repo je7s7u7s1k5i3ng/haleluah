@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <title>성경 읽기</title>
 <link rel="manifest" href="manifest.json"/>
-<meta name="theme-color" content="#4a2c1c"/>
+<meta name="theme-color" content="#1E2A55"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
@@ -342,6 +342,26 @@ body.admin-mode .tabs button[data-tab="home"],body.admin-mode .tabs button[data-
 .adm-read .ing{color:var(--accent);font-weight:600}
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
+/* ===== V3.8 창가빛 테마 (단어이음 남색·금·크림) — 위 색을 덮어쓴다 · 지우면 V3.7 색으로 돌아감 ===== */
+:root{--bg:#F2EDE1;--card:#FBF8F1;--ink:#1E2A55;--sub:#6B6F80;--accent:#1E2A55;--accent-soft:#E3E6EF;--gold:#C9963A;
+  --line:#E6DCC8;--ok:#4F7F3A;--danger:#9C4A2F}
+.card{box-shadow:0 1px 3px rgba(30,42,85,.06)}
+.brand-mark{background:linear-gradient(160deg,#2B3A6E,#1E2A55)}
+.topband{background-color:#1E2A55;box-shadow:0 2px 10px rgba(20,28,60,.25)}
+.topband .brand h1{color:#FBF8F1;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.topband .brand p{color:#E8B860;letter-spacing:.3px}
+.overlay{background-color:#F2EDE1}
+.setup-card{box-shadow:0 10px 40px rgba(20,28,60,.22)}
+.setup-card h1{color:#1E2A55}
+.cele{background:rgba(20,28,60,.55)}
+.verse:active{background:rgba(232,184,96,.16)}
+.verse.here{background:linear-gradient(transparent 55%,rgba(232,184,96,.32) 55%)}
+.dot.today{border-color:#C9963A}
+.tap-hint{color:#1E2A55}
+.intro-note{background:#FBF3E0;border-color:#EBD7A8;color:#5A4A1E}
+.plan-row span{color:#5A4A1E}
+.tabs{background:#FBF8F1}
+h2{color:#1E2A55}
 </style>
 </head>
 <body>
