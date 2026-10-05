@@ -5,7 +5,7 @@
    ★config.js 를 고쳐 다시 올릴 때는 sw.js 맨 위 CACHE 이름의 날짜를 올려야 이미 열어 본 기기에도 반영된다 */
 window.APP_CONFIG = {
   groupName: '성경 읽기 · 이름 공개 버전',
-  groupId: '',
+  groupId: '요한순교자',   // 그룹 코드 고정 — 지체는 이름(+비밀번호)만 넣는다
   planWeeks: 40,
   startDate: '',
   storageKey: 'bibleApp.v1.open',

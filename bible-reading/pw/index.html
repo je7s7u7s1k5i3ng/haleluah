@@ -199,6 +199,16 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
 .feed-more{margin-top:8px}
 .together{margin:0 0 10px;padding:8px 10px;border-radius:10px;background:#f3e9d7;color:var(--accent);font-size:12.5px;text-align:center}
 
+/* ===== V1.5 명언 · 팁 ===== */
+.quote{margin:4px 0 12px;padding:12px 14px;border-left:4px solid var(--gold);background:rgba(255,253,248,.92);border-radius:0 12px 12px 0;text-align:left}
+.quote p{margin:0;font-family:'SBAggroB','Noto Sans KR',sans-serif;font-size:15px;line-height:1.5;color:var(--accent)}
+.quote cite{display:block;margin-top:4px;font-style:normal;font-size:11.5px;color:var(--sub)}
+.card.quote-card{padding:0;border:0;background:none;box-shadow:none}
+.howto .tip{margin:2px 0 8px;padding:8px 10px;background:#fffdf8;border:1px dashed var(--gold);border-radius:10px}
+.howto .tip p{margin:2px 0}
+.howto .tip button{margin-top:6px}
+#suGroup[readonly]{background:#f3ede1;color:var(--accent);font-weight:700}
+
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
 </style>
@@ -210,9 +220,10 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
   <div class="setup-card">
     <h1>성경 읽기</h1>
     <p>함께 읽고, 함께 기록해요</p>
+    <blockquote class="quote"><p>“시간이 지나면 말씀 읽는 것만 남는다”</p><cite>— 황선주 목사님</cite></blockquote>
     <div id="howtoSetup"></div>
     <div class="field"><label>① 이름</label><input id="suName" placeholder="이름 또는 닉네임" maxlength="12"/></div>
-    <div class="field"><label>② 그룹 코드 (초대 링크면 자동)</label><input id="suGroup" placeholder="예) AB12CD" autocomplete="off" maxlength="20" style="text-transform:uppercase"/></div>
+    <div class="field"><label>② 그룹 코드 (자동 · 그대로 두세요)</label><input id="suGroup" placeholder="예) AB12CD" autocomplete="off" maxlength="20" style="text-transform:uppercase"/></div>
     <div class="field" id="pinField"><label id="pinLabel">비밀번호 (선택 · 프라이버시 모드)</label><input id="suPin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="숫자 4자리" maxlength="4"/></div>
     <div class="btn-row">
       <button id="suJoin" class="primary">참여하기</button>
@@ -236,6 +247,7 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
 <main>
   <!-- 홈 -->
   <section id="tab-home">
+    <div class="card quote-card"><blockquote class="quote"><p>“시간이 지나면 말씀 읽는 것만 남는다”</p><cite>— 황선주 목사님</cite></blockquote></div>
     <div class="card">
       <div class="week-nav">
         <button id="wPrev">‹</button>
@@ -485,6 +497,11 @@ function initFirebase(){
 }
 
 /* --- 구글 시트 + Apps Script: 관리자가 시트에서 이름·진도를 직접 관리 --- */
+/* 시트 저장용 모임 이름 — 두 버전이 같은 시트를 쓰므로 이름 공개 버전은 「·공개」 를 붙여 나눈다 (화면 표시는 그대로) */
+function sheetGroup(g){return String(g||'')+(PRIV_MODE==='off'?'·공개':'')}
+function cleanLink(){
+  return location.origin+location.pathname+((CFG.groupId&&state.group===CFG.groupId)?'':'?g='+encodeURIComponent(state.group));
+}
 let sheetsBusy=false,sheetsSynced=false,pendingPush=false;
 /* 시트에 있는 ★내 기록을 이 기기 기록에 합친다 (새 기기에서 빈 기록이 시트를 덮어쓰지 않게) */
 function mergeMine(m){
@@ -514,14 +531,14 @@ function sheetsPull(){
     sc.remove();
   };
   sc.onerror=()=>{sheetsBusy=false;try{delete window[cb]}catch(e){}};
-  sc.src=CFG.sheets.webAppUrl+'?action=list&g='+encodeURIComponent(state.group)+'&callback='+cb;
+  sc.src=CFG.sheets.webAppUrl+'?action=list&g='+encodeURIComponent(sheetGroup(state.group))+'&callback='+cb;
   document.body.appendChild(sc);
   setTimeout(()=>{if(window[cb]){sheetsBusy=false;try{delete window[cb]}catch(e){}}},8000);
 }
 function sheetsPush(){
   fetch(CFG.sheets.webAppUrl,{method:'POST',mode:'no-cors',
     headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body:JSON.stringify({g:state.group,member:myObj()})}).catch(()=>{});
+    body:JSON.stringify({g:sheetGroup(state.group),member:myObj()})}).catch(()=>{});
 }
 
 /* --- GitHub Gist: 깃허브만으로 무료 운영 --- */
@@ -907,7 +924,7 @@ function renderSet(){
     ?'🔒 프라이버시 모드 켜짐 — 다른 사람(목사님 포함)에게는 "'+(state.alias||'비공개')+'"로만 보이고 시트에 실명이 저장되지 않습니다.'
     :'프라이버시 모드 꺼짐 — 모임에 처음 등록할 때 비밀번호를 입력하면 켜집니다.';
   document.getElementById('groupCodeTxt').textContent=state.group||'—';
-  const link=location.origin+location.pathname+'?g='+encodeURIComponent(state.group);
+  const link=cleanLink();
   document.getElementById('shareLink').textContent=link;
   document.getElementById('startDateInput').value=state.planStart||'';
   document.getElementById('planInfo').textContent='전체 '+planWeeks()+'주 · 총 '+TOTAL+'장 → 주당 약 '+Math.ceil(TOTAL/planWeeks())+'장';
@@ -936,7 +953,7 @@ document.getElementById('saveDateBtn').addEventListener('click',()=>{
   PLAN=null;viewWeek=todayWeek();save();renderSet();renderHome();alert('시작일을 저장했어요.');
 });
 document.getElementById('copyLinkBtn').addEventListener('click',()=>{
-  const link=location.origin+location.pathname+'?g='+encodeURIComponent(state.group);
+  const link=cleanLink();
   (navigator.clipboard?navigator.clipboard.writeText(link):Promise.reject()).then(
     ()=>alert('링크를 복사했어요.'),()=>prompt('아래 링크를 복사하세요',link));
 });
@@ -963,7 +980,8 @@ document.getElementById('csvBtn').addEventListener('click',()=>{
 /* ================= 시작 오버레이 ================= */
 function showSetup(prefill){
   const o=document.getElementById('setup');o.classList.remove('hidden');
-  if(prefill){document.getElementById('suGroup').value=prefill;document.getElementById('suNew').classList.add('hidden')}
+  if(prefill){document.getElementById('suGroup').value=prefill;document.getElementById('suNew').classList.add('hidden');
+    if(CFG.groupId&&prefill===CFG.groupId)document.getElementById('suGroup').readOnly=true}
 }
 /* ===== 모임 모드 (config.js 의 privacyMode) =====
    optional  원본 — 비밀번호는 선택, 넣은 사람만 가명 처리
@@ -994,7 +1012,7 @@ function howtoBlock(withStart){
   if(withStart){
     h('📖 이렇게 시작해요');
     const s=[['이름','— 본인 이름을 넣어요. 같은 이름으로 들어오면 다른 폰에서도 기록이 이어져요.'],
-             ['그룹 코드','— 초대 링크로 들어오면 자동으로 채워져 있어요. 그대로 두세요.']];
+             ['그룹 코드','— 「'+(CFG.groupId||'초대 링크')+'」로 이미 채워져 있어요. 그대로 두세요.']];
     if(PRIV_MODE!=='off')s.push(['비밀번호 숫자 4자리','— 내가 직접 정해요. 다른 지체에게는 이름 대신 「비공개#」로 보여요. 잊으면 찾을 수 없으니 기억하기 쉬운 숫자로!']);
     s.push(['참여하기','를 누르면 끝!']);
     list('ol',s);
@@ -1005,6 +1023,16 @@ function howtoBlock(withStart){
              ['마지막 절','을 누르면 그 장은 「다 읽음」'],
              ['중간에 나가도','다음에 읽던 절부터 이어져요'],
              ['홈 · 현황','에서 함께 읽는 지체들을 볼 수 있어요']]);
+  /* 팁 (V1.5) */
+  const tip=document.createElement('div');tip.className='tip';
+  const tp=t=>{const e=document.createElement('p');e.textContent=t;tip.appendChild(e)};
+  tp('💡 다음에 들어올 때 — 같은 폰이면 링크만 누르면 바로 열려요. 다른 폰이면 같은 이름'+(PRIV_MODE!=='off'?' + 같은 비밀번호 4자리':'')+'를 넣으면 기록이 이어져요.');
+  tp('💡 이 링크를 카톡 「나와의 채팅」 등 내 채팅방에 복사해 두세요. 다음에 거기서 누르면 바로 들어와요.');
+  tp('💡 이름이 같은 분이 있으면 이름 뒤에 구분을 붙여 주세요 (예: 김은혜2).');
+  const cb=document.createElement('button');cb.className='ghost-btn';cb.type='button';cb.textContent='📋 이 링크 복사하기';
+  cb.addEventListener('click',()=>{const l=cleanLink();
+    (navigator.clipboard?navigator.clipboard.writeText(l):Promise.reject()).then(()=>alert('링크를 복사했어요. 내 채팅방에 붙여넣어 두세요.'),()=>prompt('아래 링크를 길게 눌러 복사하세요',l));});
+  tip.appendChild(cb);d.appendChild(tip);
   return d;
 }
 document.getElementById('howtoSetup').appendChild(howtoBlock(true));
@@ -1082,7 +1110,7 @@ document.getElementById('suJoin').addEventListener('click',()=>{
       finish();
     };
     sc.onerror=()=>{try{delete window[cb]}catch(e){}finish()};
-    sc.src=u+'?action=check&g='+encodeURIComponent(g)+'&uid='+encodeURIComponent(uid)+'&ph='+encodeURIComponent(pinHash)+'&callback='+cb;
+    sc.src=u+'?action=check&g='+encodeURIComponent(sheetGroup(g))+'&uid='+encodeURIComponent(uid)+'&ph='+encodeURIComponent(pinHash)+'&callback='+cb;
     document.body.appendChild(sc);
     setTimeout(()=>{if(window[cb]){try{delete window[cb]}catch(e){}}},8000);
   }else finish();
@@ -1105,7 +1133,7 @@ function startApp(){
     if(!state.planStart)state.planStart=new Date().toISOString().slice(0,10);
     startApp();
   }else{
-    showSetup(urlG);
+    showSetup(urlG||CFG.groupId||'');
   }
 })();
 </script>
