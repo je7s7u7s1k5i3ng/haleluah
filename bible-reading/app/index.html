@@ -334,6 +334,12 @@ body.admin-mode .tabs button[data-tab="home"],body.admin-mode .tabs button[data-
 .vtab{width:100%;border-collapse:collapse;margin-top:8px;font-size:12.5px;text-align:center}
 .vtab th,.vtab td{border-bottom:1px solid #f0e8d8;padding:6px 2px}
 .vtab th{color:var(--sub);font-weight:700}
+.adm-read{margin:8px 0 2px;border-top:1px dashed var(--line);padding-top:6px}
+.adm-read summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--ink);padding:4px 0}
+.adm-read ul{list-style:none;margin:4px 0 0;padding:0}
+.adm-read li{font-size:13px;line-height:1.55;padding:3px 0;border-bottom:1px solid #f3ece0}
+.adm-read li b{display:inline-block;min-width:4.5em}
+.adm-read .ing{color:var(--accent);font-weight:600}
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
 </style>
@@ -840,6 +846,29 @@ function lightMember(m){return {uid:m.uid,name:m.name,days:m.days||[],readChapte
 function authQS(){return '&uid='+encodeURIComponent(state.uid||'')+'&ph='+encodeURIComponent(state.pinHash||'')+'&aph='+encodeURIComponent(state.aph||'')}
 let admSort='name';
 function idleDays(m){const a=[...daysOf(m)].sort();if(!a.length)return 999;const l=a[a.length-1];const d=new Date(+l.slice(0,4),+l.slice(4,6)-1,+l.slice(6));const t=new Date();t.setHours(0,0,0,0);return Math.round((t-d)/864e5)}
+/* V3.6 관리 — 지체가 읽은 곳 전체 (권별: 다 읽은 장 범위 ✓ · 읽는 중인 장은 몇 절까지) */
+function chRanges(a){const r=[];a.forEach(c=>{const l=r[r.length-1];if(l&&c===l[1]+1)l[1]=c;else r.push([c,c])});return r.map(x=>x[0]===x[1]?x[0]+'':x[0]+'~'+x[1]).join(', ')}
+function readDetailLines(o){
+  const out=[];
+  BOOKS.forEach((B,i)=>{const b=i+1,done=[],ing=[];
+    for(let c=1;c<=B.c;c++){if(chapPart(o,b,c)>=1)done.push(c);else{const v=+(o.versePos||{})[key(b,c)]||0;if(v>0)ing.push(c+'장 '+v+'절까지 ('+verseCount(b,c)+'절 중)')}}
+    if(!done.length&&!ing.length)return;
+    out.push({n:B.n,doneN:done.length,all:done.length===B.c,
+      done:done.length===B.c?'전체 '+B.c+'장 ✓':(done.length?chRanges(done)+'장 ✓':''),ing})});
+  return out;
+}
+function readDetailBox(m){
+  const L=readDetailLines(m),det=document.createElement('details');det.className='adm-read';det.open=true;
+  const sm=document.createElement('summary');const ch=L.reduce((s,x)=>s+x.doneN,0);
+  sm.textContent='📖 읽은 곳 전체 — '+(L.length?L.length+'권 · 다 읽은 장 '+ch+'장':'아직 없음');det.appendChild(sm);
+  if(L.length){const ul=document.createElement('ul');
+    L.forEach(x=>{const li=document.createElement('li');const b=document.createElement('b');b.textContent=x.n;li.appendChild(b);
+      if(x.done)li.appendChild(document.createTextNode(' '+x.done));
+      x.ing.forEach(t=>{const s=document.createElement('span');s.className='ing';s.textContent=' · '+t;li.appendChild(s)});
+      ul.appendChild(li)});
+    det.appendChild(ul)}
+  return det;
+}
 function renderAdminList(){
   const box=document.getElementById('adminList');if(!box)return;box.textContent='';
   if(!ADMIN)return;
@@ -858,6 +887,7 @@ function renderAdminList(){
     const l1=document.createElement('div');l1.className='adm-line';l1.textContent='이번 주 '+wp.done+'장 · 전체 '+pct1(tp)+'% (구약 '+pct1(ot)+'% · 신약 '+pct1(nt)+'%)';card.appendChild(l1);
     const l2=document.createElement('div');l2.className='adm-line sub2';l2.textContent='마지막 읽은 곳: '+lr+' · '+ago(m.lastActive);card.appendChild(l2);
     const jd=String(m.joinedAt||'');const l3=document.createElement('div');l3.className='adm-line sub2';l3.textContent='가입: '+(jd?(+jd.slice(5,7))+'/'+(+jd.slice(8,10))+' '+jd.slice(11,16):'기록 전 (가입 시각 기능 이전 가입)');card.appendChild(l3);
+    card.appendChild(readDetailBox(m));   /* V3.6 읽은 곳 전체 */
     const gl=GOALS.filter(x=>(m.goals||{})[x.id]&&m.goals[x.id].on);
     if(gl.length){const plan=todayPlan(m);gl.forEach(x=>{const p=plan.find(q=>q.n===x.n);const l=document.createElement('div');l.className='adm-line';
       l.textContent=(p&&p.ok?'✅ ':'📌 ')+x.n+' — '+goalStatus(x,m.goals[x.id],m)+(p?' · '+p.t:'');card.appendChild(l)})}
