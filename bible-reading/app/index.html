@@ -756,7 +756,7 @@ function sheetsPull(force){
     .then(data=>{
       if(!data||!data.members)return;
       GS_VER=parseFloat(data.v||'1.0')||1;GS_V11=GS_VER>=1.1;   /* 시트 스크립트 1.1 이상 */
-      ADMIN=!GUEST&&!!data.admin&&!!data.full;STATS=ADMIN?(data.stats||null):null;ROLE=ADMIN?(data.role||'admin'):'';   /* both = 지체 화면 + 관리 화면 */
+      ADMIN=!GUEST&&!!data.admin&&!!data.full;STATS=ADMIN?(data.stats||null):null;CAP=ADMIN&&data.cap!=null?+data.cap:null;ROLE=ADMIN?(data.role||'admin'):'';   /* both = 지체 화면 + 관리 화면 */
       const M={};const src=ADMIN?data.full:data.members;for(const u in src)M[u]=ADMIN?normMember(src[u]):lightMember(src[u]);
       MEMBERS=M;
       {const t=document.querySelector('.tabs button[data-tab="all"]');if(t)t.classList.toggle('hidden',!ADMIN);state.admin=ADMIN;
@@ -1547,7 +1547,16 @@ function showInstallButtons(){
   ['instTop'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.toggle('hidden',isStandalone())});
   const c=document.getElementById('instCard');if(c)c.classList.toggle('hidden',isStandalone());
 }
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;showInstallButtons()});
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;showInstallButtons();instNowBtn()});
+/* V3.9 자동 설치 — 안내가 떠 있는 동안 크롬 설치창이 준비되면 「지금 바로 설치」 버튼이 저절로 나타난다 */
+function instNowBtn(){
+  const sh=document.getElementById('instSheet');if(!sh||sh.classList.contains('hidden')||!deferredPrompt)return;
+  let b=document.getElementById('instNow');
+  if(!b){b=document.createElement('button');b.id='instNow';b.type='button';b.className='primary';b.style.cssText='width:100%;margin:4px 0 10px;font-size:17px;padding:14px';
+    b.textContent='📲 지금 바로 설치';b.addEventListener('click',()=>{sh.classList.add('hidden');installApp()});
+    const cl=document.getElementById('instClose');cl.parentNode.insertBefore(b,cl)}
+  b.classList.remove('hidden');
+}
 window.addEventListener('appinstalled',()=>{deferredPrompt=null;showInstallButtons();alert('홈 화면에 설치됐어요! 이제 아이콘을 눌러 바로 열 수 있어요 🙏')});
 function instSheet(title,steps,opt){
   opt=opt||{};document.getElementById('instTitle').textContent=title;
@@ -1556,6 +1565,7 @@ function instSheet(title,steps,opt){
   document.getElementById('instCopy').classList.toggle('hidden',!opt.copy);
   document.getElementById('instArrow').classList.toggle('hidden',!opt.arrow);
   document.getElementById('instSheet').classList.remove('hidden');
+  {const b=document.getElementById('instNow');if(b)b.classList.add('hidden')}instNowBtn();
 }
 document.getElementById('instClose').addEventListener('click',()=>document.getElementById('instSheet').classList.add('hidden'));
 document.getElementById('instSheet').addEventListener('click',e=>{if(e.target.id==='instSheet')e.currentTarget.classList.add('hidden')});
@@ -1582,7 +1592,7 @@ function installApp(){
 showInstallButtons();
 
 /* ===== 방문 통계 (V3.4) — 횟수만 · 누가인지 보내지 않음 ===== */
-let STATS=null;
+let STATS=null,CAP=null;
 function pingVisit(kind){
   try{const k='bv-'+kind;if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}
   const u=CFG.sheets&&CFG.sheets.webAppUrl;if(!u||CFG.backend!=='sheets')return;
@@ -1596,6 +1606,7 @@ function renderVisitStats(){
   const h=(txt)=>{const e=document.createElement('p');e.className='stat-h';e.textContent=txt;box.appendChild(e)};
   h('오늘');box.appendChild(statGrid([[today.open,'링크 열어 봄'],[today.guest,'둘러보기'],[today.join,'새 가입']]));
   h('누적 (통계 시작부터)');box.appendChild(statGrid([[t.open||0,'링크 열어 봄'],[t.guest||0,'둘러보기'],[t.join||0,'새 가입']]));
+  if(CAP!=null){const cp=document.createElement('p');cp.className='sub';cp.textContent='💾 기록 용량 — 가장 긴 지체 기록이 '+CAP+'% 사용 중 (45,000자 넘으면 다음 칸에 자동으로 이어 저장 · 손실 없음)';box.appendChild(cp)}
   const fb=document.createElement('p');fb.className='sub';fb.textContent='💬 익명 의견: 오늘 '+(today.fb||0)+'건 · 누적 '+(t.fb||0)+'건 (시트 「의견」 탭에서 내용 확인)';box.appendChild(fb);
   const rows=(STATS.days||[]).slice(-7).reverse();
   if(rows.length){const tb=document.createElement('table');tb.className='vtab';
@@ -1612,6 +1623,12 @@ function startApp(){
   renderHome();renderStatus();renderMe();
   initCloud();
   if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+/* V3.9 — 서비스워커를 앱 열자마자 등록 (첫 화면에서도 설치 가능) · 새 버전이 깔리면 한 번 자동 새로고침 */
+if('serviceWorker'in navigator){
+  const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadCtl||reloaded)return;reloaded=true;location.reload()});
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
 (function boot(){
   pingVisit('open');   /* 링크 열어 봄 — 횟수만 */
