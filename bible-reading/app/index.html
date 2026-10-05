@@ -342,6 +342,23 @@ body.admin-mode .tabs button[data-tab="home"],body.admin-mode .tabs button[data-
 .adm-read .ing{color:var(--accent);font-weight:600}
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
+/* ===== V3.10 의자방 ===== */
+.room{position:relative;background:#F4E5D2 url(img/room.jpg) top center/100% auto no-repeat;border-radius:12px;padding:20% 4px 8px;margin:4px 0 8px;overflow:hidden}
+.room-head{position:absolute;left:0;right:0;top:4px;text-align:center;font-size:12.5px;font-weight:700;color:#1E2A55;text-shadow:0 1px 2px rgba(251,248,241,.9)}
+.seats{display:grid;grid-template-columns:repeat(6,1fr);gap:0 2px}
+.seat{position:relative;text-align:center;cursor:default}
+.seat img{width:100%;aspect-ratio:1;display:block;position:relative;z-index:1}
+.seat.empty img{opacity:.5}
+.seat .nm{display:block;font-size:10px;line-height:12px;height:12px;margin-top:-4px;color:#1E2A55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:relative;z-index:2}
+.seat.read::before{content:'';position:absolute;left:4%;right:4%;top:-34%;bottom:6%;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,214,120,0) 0%,rgba(255,206,110,.55) 35%,rgba(255,220,140,.85) 70%,rgba(255,200,90,.35) 100%);
+  clip-path:polygon(32% 0,68% 0,100% 100%,0 100%);filter:blur(2.5px)}
+.seat.read img{filter:drop-shadow(0 0 5px rgba(255,200,90,.95)) brightness(1.06)}
+.seat.me::after{content:'';position:absolute;left:12%;right:12%;top:6%;aspect-ratio:1;border:2px solid #E8B860;border-radius:50%;z-index:2;pointer-events:none;box-shadow:0 0 6px rgba(232,184,96,.6)}
+.seat.me .nm{color:#C9963A;font-weight:700}
+.seat.tap{cursor:pointer}
+.room-legend{font-size:11px;color:var(--sub);text-align:center;margin:2px 0 6px}
+.dots-more{margin-top:6px}.dots-more summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--ink);padding:6px 0}
 /* ===== V3.8 창가빛 테마 (단어이음 남색·금·크림) — 위 색을 덮어쓴다 · 지우면 V3.7 색으로 돌아감 ===== */
 :root{--bg:#F2EDE1;--card:#FBF8F1;--ink:#1E2A55;--sub:#6B6F80;--accent:#1E2A55;--accent-soft:#E3E6EF;--gold:#C9963A;
   --line:#E6DCC8;--ok:#4F7F3A;--danger:#9C4A2F}
@@ -483,6 +500,7 @@ h2{color:#1E2A55}
     <div class="card admin-head"><h2>👨‍🏫 목사님 관리 화면</h2><p class="sub">지체들의 읽기 현황을 한눈에 봐요. 이 화면은 목사님(관리 계정)만 보여요.</p><p class="sub hidden" id="bothNote">👀 이 계정은 지체 화면(홈·읽기·현황)과 관리 화면을 함께 볼 수 있어요.</p><div id="statsRow"></div>
       <div class="seg" id="admSort"><button type="button" data-s="name" class="on">이름순</button><button type="button" data-s="idle">오래 안 읽은 순</button><button type="button" data-s="pct">진도순</button></div></div>
     <div class="card"><h2>📊 링크 방문 통계</h2><div id="visitStats"></div></div>
+    <div class="card"><h2>🪑 함께 앉은 자리</h2><p class="sub">자리를 누르면 그 지체의 읽은 곳 전체로 가요.</p><div id="adminRoom"></div></div>
     <div class="card"><h2>지체별 현황</h2><div id="adminList"></div></div>
     <div class="card"><h2>독려가 필요한 지체</h2><p class="sub" id="inactiveNote"></p><div id="inactiveList"></div></div>
     <div class="card"><h2>최근 8주 읽은 장</h2><p class="sub">칸의 숫자 = 그 주에 읽은 장 수 · 맨 아래 줄은 모두 합친 수</p><div class="mx-wrap"><table class="mx" id="matrix"></table></div></div>
@@ -893,13 +911,14 @@ function readDetailBox(m){
 function renderAdminList(){
   const box=document.getElementById('adminList');if(!box)return;box.textContent='';
   if(!ADMIN)return;
+  {const ar=document.getElementById('adminRoom');if(ar){ar.textContent='';ar.appendChild(seatRoom({onTap:m=>{const c=document.querySelector('.adm-card[data-uid="'+String(m.uid).replace(/[^\w-]/g,'')+'"]');if(c){c.scrollIntoView({behavior:'smooth',block:'start'});c.style.boxShadow='0 0 0 3px #E8B860';setTimeout(()=>{c.style.boxShadow=''},1600)}}}))}}   /* V3.10 */
   const list=memberListForViews().filter(m=>m.uid!==state.uid);
   if(!list.length){const p=document.createElement('p');p.className='sub';p.textContent='아직 참여한 지체가 없어요.';box.appendChild(p);return}
   list.sort((a,b)=>admSort==='idle'?(idleDays(b)-idleDays(a)):admSort==='pct'?(pct(totalProg(b))-pct(totalProg(a))):String(a.name).localeCompare(String(b.name),'ko'));
   list.forEach(m=>{
     const tp=totalProg(m),ot=rangeProg(m,1,39),nt=rangeProg(m,40,66),wp=weekProg(m,todayWeek()),idle=idleDays(m);
     const lr=(m.lastRead&&BOOKS[m.lastRead.b-1])?BOOKS[m.lastRead.b-1].n+' '+m.lastRead.c+'장 '+(m.lastRead.v||1)+'절':'아직 없음';
-    const card=document.createElement('div');card.className='adm-card';
+    const card=document.createElement('div');card.className='adm-card';card.dataset.uid=m.uid;
     const top=document.createElement('div');top.className='adm-top';
     const nm=document.createElement('b');nm.textContent=titled(m.name||'?');top.appendChild(nm);
     const chip=document.createElement('span');chip.className='chip '+(idle===0?'g':'r');chip.textContent=idle===0?'오늘 읽음 🟢':(idle>=999?'아직 안 읽음 🔴':idle+'일째 안 읽음 🔴');top.appendChild(chip);
@@ -1295,6 +1314,7 @@ function renderStatus(){
   document.getElementById('emptyArt').classList.toggle('hidden',others>0);
   const wk=m=>{const ds=daysOf(m);let n=0;for(let i=0;i<7;i++)if(ds.has(ymd(weekStart(tw).getTime()+i*864e5+12*3600e3)))n++;return n};
   arr.sort((a,b)=>wk(b)-wk(a)||String(a.name).localeCompare(String(b.name)));
+  if(arr.length>0)list.appendChild(seatRoom());   /* V3.10 의자방 */
   arr.forEach(m=>list.appendChild(memberDotsRow(m,2)));
 }
 
@@ -1417,6 +1437,34 @@ document.getElementById('howtoSetup').appendChild(howtoBlock(true));
 document.getElementById('howtoSet').appendChild(howtoBlock(true));
 document.getElementById('setupNote').classList.add('hidden');   /* 사용법이 같은 내용을 더 쉽게 담는다 */
 
+/* ===== V3.10 의자방 — 함께 읽는 지체들 54석 ===== */
+const SEATS_MIN=54,SEAT_COLS=6;
+function seatOrder(){   /* 가입 순서 = 시트 줄 순서 (목록 응답 순서) · 나는 내 자리에 */
+  const arr=Object.values(MEMBERS).map(m=>(!GUEST&&m.uid===state.uid)?myView():m);
+  const adminOnly=ADMIN&&ROLE!=='both';   /* 목사님(관리 전용)은 읽는 지체가 아니므로 자리에 앉지 않는다 */
+  if(!GUEST&&!adminOnly&&state.uid&&!arr.some(m=>m.uid===state.uid))arr.push(myView());
+  return adminOnly?arr.filter(m=>m.uid!==state.uid):arr;
+}
+function seatRoom(opt){
+  opt=opt||{};const list=seatOrder(),td=ymd(Date.now());
+  const n=list.length,total=Math.max(SEATS_MIN,Math.ceil(n/SEAT_COLS)*SEAT_COLS),readN=list.filter(m=>daysOf(m).has(td)).length;
+  const room=document.createElement('div');room.className='room';
+  const hd=document.createElement('div');hd.className='room-head';hd.textContent=total+'석 중 '+n+'명 함께 앉았어요 · 오늘 '+readN+'명 읽었어요';room.appendChild(hd);
+  const g=document.createElement('div');g.className='seats';
+  for(let i=0;i<total;i++){
+    const m=list[i],s=document.createElement('div'),im=document.createElement('img'),nm=document.createElement('span');
+    im.alt='';im.loading='lazy';nm.className='nm';
+    if(m){const v=(mix32(String(m.uid))%6)+1;im.src='img/seat-'+v+'.png';nm.textContent=titled(m.name||'?');
+      s.className='seat'+(daysOf(m).has(td)?' read':'')+(!GUEST&&m.uid===state.uid?' me':'');
+      s.title=(m.name||'')+(daysOf(m).has(td)?' · 오늘 읽음':' · 오늘 아직');
+      if(opt.onTap){s.classList.add('tap');s.addEventListener('click',()=>opt.onTap(m))}}
+    else{im.src='img/seat-empty.png';s.className='seat empty';nm.textContent=''}
+    s.appendChild(im);s.appendChild(nm);g.appendChild(s)}
+  room.appendChild(g);
+  const wrap=document.createDocumentFragment();wrap.appendChild(room);
+  const lg=document.createElement('p');lg.className='room-legend';lg.textContent='✨ 금빛 = 오늘 읽은 지체 · 빈 의자 = 함께할 자리 · 무엇을 읽었는지는 본인과 목사님만';wrap.appendChild(lg);
+  return wrap;
+}
 /* ===== 함께 읽는 지체들 (V1.4) — 최근 활동 순 ===== */
 function renderFeed(){
   const box=document.getElementById('feedList');if(!box)return;
@@ -1430,16 +1478,19 @@ function renderFeed(){
     :(GUEST?'둘러보기 중이에요 — 참여하면 함께 읽는 지체들 사이에 내 이름도 보여요 (무엇을 읽었는지는 안 보여요).'
      :MODE==='local'?'모임 연결 준비 중이에요. 연결되면 함께 읽는 지체들이 여기에 보여요.'
                     :'아직 나 혼자예요. 링크를 모임 방에 올려 주세요.');
+  if(list.length>0)box.appendChild(seatRoom());   /* V3.10 의자방 */
+  const dm=document.createElement('details');dm.className='dots-more';const dsu=document.createElement('summary');dsu.textContent='📋 날짜별 🟢🔴 목록 보기';dm.appendChild(dsu);
   box.appendChild(head);
   const tg=document.getElementById('readerTogether');
   if(tg){tg.classList.toggle('hidden',list.length<2);tg.textContent='🤝 오늘 '+Math.max(today,1)+'명이 함께 말씀을 읽고 있어요 · 혼자가 아니에요';}
   const legend=document.createElement('p');legend.className='dot-legend';legend.textContent='🟢 읽은 날 · 🔴 안 읽은 날 · 무엇을 읽었는지는 본인과 목사님만 알아요';
-  box.appendChild(legend);
-  list.slice(0,10).forEach(m=>box.appendChild(memberDotsRow(m,1)));
+  dm.appendChild(legend);
+  list.slice(0,10).forEach(m=>dm.appendChild(memberDotsRow(m,1)));
   if(list.length>10){
     const more=document.createElement('button');more.className='ghost-btn feed-more';more.textContent='전체 '+list.length+'명 보기 ›';
-    more.addEventListener('click',()=>goTab('status'));box.appendChild(more);
+    more.addEventListener('click',()=>goTab('status'));dm.appendChild(more);
   }
+  if(list.length>0)box.appendChild(dm);else{box.appendChild(legend)}
 }
 /* ===== 날짜별 읽음 표시 (V3.0) — 지체끼리 보이는 것은 이것뿐 ===== */
 function ymd(t){const d=new Date(t);return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')}
