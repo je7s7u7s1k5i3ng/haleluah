@@ -266,6 +266,27 @@ input,select,textarea{font-size:16px!important}
 .guest-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#fff5e0;border-color:#f0d9a8}
 .guest-bar span{font-size:12.5px;color:#8a5a12;line-height:1.5}
 .guest-bar .primary{width:auto;padding:10px 14px;white-space:nowrap}
+/* ===== V2.4 의견 모으는 기간 — 맨 위 깜박이 버튼 (config.feedbackPhase=false 면 숨김) ===== */
+@keyframes promoPulse{0%,100%{box-shadow:0 0 0 0 rgba(185,138,78,.75),0 0 0 0 rgba(255,216,77,.0)}50%{box-shadow:0 0 0 6px rgba(185,138,78,.35),0 0 18px 4px rgba(255,216,77,.55)}}   /* 크기는 그대로 · 빛만 깜박 (누르기 쉬움) */
+.promo-top{display:flex;flex-direction:column;gap:10px;margin:12px 0 14px}
+.promo-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:54px;padding:12px;border:0;border-radius:14px;
+  font-family:'SBAggroB','Noto Sans KR',sans-serif;font-size:16.5px;line-height:1.3;text-decoration:none;color:#fff;background:var(--accent);cursor:pointer;touch-action:manipulation}
+.promo-btn.alt{background:#b07a3c}
+.blink{animation:promoPulse 1.8s ease-in-out infinite}
+.fb-card.blink{border:2px solid var(--gold)}
+@media (prefers-reduced-motion:reduce){.blink{animation:none;outline:3px solid var(--gold);outline-offset:2px}}
+@keyframes tapBlink{0%,49%{opacity:1}50%,100%{opacity:.15}}
+.tap-hint{display:inline-block;margin-left:6px;padding:3px 9px;border-radius:12px;background:#ffd84d;color:#4a2c1c;font-family:'SBAggroB','Noto Sans KR',sans-serif;font-size:12.5px;line-height:1.2;white-space:nowrap;animation:tapBlink 1s infinite}
+.fb-card .tap-hint{vertical-align:middle}
+.promo-btn{flex-direction:column;gap:6px}
+.promo-btn .tap-hint{margin-left:0}
+@media (prefers-reduced-motion:reduce){.tap-hint{animation:none}}
+.bdg-d{display:block;margin-top:1px;font-size:10.5px;line-height:1.35;color:var(--sub);text-align:center;word-break:keep-all}
+.intro-note{margin:0 0 10px;padding:10px 12px;background:#fff5e0;border:1px solid #f0d9a8;border-radius:10px;font-size:13px;line-height:1.6;color:#6b4a14;text-align:left}
+.feat{margin:0 0 12px;padding:0;list-style:none}
+.feat li{font-size:13px;line-height:1.55;padding:6px 0;border-bottom:1px dashed #efe4d1}
+.feat li:last-child{border-bottom:0}
+.feat b{color:var(--accent)}
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
 </style>
@@ -277,6 +298,11 @@ input,select,textarea{font-size:16px!important}
   <div class="setup-card">
     <h1>성경 읽기</h1>
     <p>함께 읽고, 함께 기록해요</p>
+    <div class="promo-top promo">
+      <button id="suGuest" class="promo-btn blink" type="button">👀 가입 없이 먼저 둘러보기 <span class="tap-hint">👆 여기 클릭</span></button>
+      <a class="promo-btn alt blink" href="../feedback/">💬 이런 기능이 있었으면 좋겠어요 <span class="tap-hint">👆 여기 클릭</span></a>
+    </div>
+    <p class="intro-note promo">📣 지금은 <b>시험판 웹앱</b>이에요. 함께 써 보고 잘 되면 <b>플레이스토어 설치용 앱</b>으로 업데이트할 예정입니다.</p>
     <blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀을 읽은 시간이다”</p><cite>— 황선주 목사님</cite></blockquote>
     <div id="howtoSetup"></div>
     <div class="field"><label>① 이름</label><input id="suName" placeholder="이름 또는 닉네임" maxlength="12"/></div>
@@ -286,7 +312,6 @@ input,select,textarea{font-size:16px!important}
       <button id="suJoin" class="primary">참여하기</button>
       <button id="suNew" class="ghost">새 코드 만들기</button>
     </div>
-    <button id="suGuest" class="ghost guest-btn" type="button">👀 가입 없이 먼저 둘러보기</button>
     <p class="sub" id="setupNote">초대받은 링크로 들어오면 코드가 자동으로 채워져요. 이름이 곧 계정이라 같은 이름으로 들어오면 어느 기기에서나 기록이 이어집니다.<br/><b>비밀번호를 넣으면 프라이버시 모드</b> — 목사님·다른 멤버에게는 가명(비공개#코드)으로만 보이고, 시트에 실명이 저장되지 않아요.</p>
   </div>
 </div>
@@ -306,6 +331,21 @@ input,select,textarea{font-size:16px!important}
   <div id="guestBar" class="card guest-bar hidden"><span>👀 둘러보기 중이에요<br/>읽은 기록은 저장되지 않아요</span><button id="guestJoin" class="primary" type="button">참여하기</button></div>
   <!-- 홈 -->
   <section id="tab-home">
+    <div class="card intro-card promo">
+      <p class="intro-note">📣 지금은 <b>시험판 웹앱</b>이에요. 함께 써 보고 잘 되면 <b>플레이스토어 설치용 앱</b>으로 업데이트할 예정입니다.</p>
+      <h2>이 앱에서 할 수 있는 것</h2>
+      <ul class="feat">
+        <li><b>📖 성경 고르기</b> — 읽고 싶은 책·장을 골라 바로 읽기 (개역한글)</li>
+        <li><b>👆 절 누르기</b> — 읽은 곳의 절을 누르면 거기까지 저장 · 마지막 절이면 그 장 완료</li>
+        <li><b>↩ 이어 읽기</b> — 중간에 나가도 다음에 읽던 절부터</li>
+        <li><b>🤝 함께 읽는 지체들</b> — 누가 이번 주 몇 장 읽었는지 · 혼자가 아니에요</li>
+        <li><b>🏃 내 도전</b> — 1주 1권 · 1년 신약 1독 · 1년 구약 1독 중 골라 속도 확인</li>
+        <li><b>🏅 배지 · 완독 축하</b> — 배지 8종 · 책 한 권을 끝내면 축하</li>
+        <li><b>📊 현황 · 전체</b> — 모임 전체 진도를 한눈에 (목사님·관리용)</li>
+        <li><b>📱 홈 화면에 추가</b> — 앱처럼 아이콘으로 바로 열기</li>
+      </ul>
+      <a class="promo-btn alt blink" href="../feedback/">💬 이런 기능이 있었으면 좋겠어요 <span class="tap-hint">👆 여기 클릭</span></a>
+    </div>
     <div class="card quote-card"><blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀을 읽은 시간이다”</p><cite>— 황선주 목사님</cite></blockquote></div>
     <div class="card resume-card hidden" id="resumeCard"><div><small>이어 읽기</small><b id="resumeText"></b></div><button id="resumeBtn" class="primary" type="button">이어서 읽기 ›</button></div>
     <div class="card">
@@ -324,9 +364,8 @@ input,select,textarea{font-size:16px!important}
     </div>
     <div class="card"><h2>함께 읽는 지체들</h2><div id="feedList"></div></div>
     <div class="card"><h2>🏃 내 도전</h2><p class="sub" style="margin:-4px 0 8px">내 속도에 맞는 도전을 골라요. 여러 개 골라도 돼요.</p><div id="goalList"></div></div>
-    <div class="card"><h2>내 배지</h2><div id="badgeGrid" class="badge-grid"></div></div>
+    <div class="card"><h2 id="badgeTitle">내 배지</h2><div id="badgeGrid" class="badge-grid"></div></div>
     <div class="card"><h2>우리 모두</h2><div id="groupStats"></div></div>
-    <a class="card fb-card" href="../feedback/"><b>💬 이런 기능이 있었으면 좋겠어요</b><span>이름 없이(익명) 적어 주세요 — 모아서 앱에 반영할게요 ›</span></a>
   </section>
 
   <!-- 읽기 -->
@@ -1009,9 +1048,9 @@ function renderGoals(){
   });
 }
 const BADGES=[
-  {id:'start',n:'첫 걸음',img:1},{id:'book1w',n:'1주 1권',img:2},{id:'streak4',n:'4주 연속',img:3},
-  {id:'ot',n:'구약 완독',img:4},{id:'nt',n:'신약 완독',img:5},{id:'all',n:'성경 완독',img:6},
-  {id:'ot1y',n:'1년 구약 1독',img:4,rib:'1년'},{id:'nt1y',n:'1년 신약 1독',img:5,rib:'1년'}];
+  {id:'start',n:'첫 걸음',img:1,d:'처음 한 장을 읽으면'},{id:'book1w',n:'1주 1권',img:2,d:'한 주 안에 한 권을 끝까지'},{id:'streak4',n:'4주 연속',img:3,d:'4주 동안 매주 읽으면'},
+  {id:'ot',n:'구약 완독',img:4,d:'구약 39권을 다 읽으면'},{id:'nt',n:'신약 완독',img:5,d:'신약 27권을 다 읽으면'},{id:'all',n:'성경 완독',img:6,d:'성경 66권을 다 읽으면'},
+  {id:'ot1y',n:'1년 구약 1독',img:4,rib:'1년',d:'도전 시작 1년 안에 구약 완독'},{id:'nt1y',n:'1년 신약 1독',img:5,rib:'1년',d:'도전 시작 1년 안에 신약 완독'}];
 function earnedBadges(o){
   const rc=o.readChapters||{};
   const started=Object.keys(rc).length>0||Object.values(o.versePos||{}).some(v=>v>0);
@@ -1029,12 +1068,15 @@ function earnedBadges(o){
 }
 function renderBadges(){
   const g=document.getElementById('badgeGrid');if(!g)return;
+  document.getElementById('badgeTitle').textContent=GUEST?'배지 미리보기 — 이렇게 모아요':'내 배지';
   const e=earnedBadges(state);g.textContent='';
   BADGES.forEach(x=>{
-    const d=document.createElement('div');d.className='bdg'+(e[x.id]?' on':'');
+    const on=e[x.id]||GUEST;   /* 둘러보기: 어떤 배지인지 보이게 색으로 · 잠금 표시 없이 */
+    const d=document.createElement('div');d.className='bdg'+(on?' on':'');
     const im=document.createElement('img');im.src='img/badge-'+x.img+'.png';im.alt=x.n;im.loading='lazy';d.appendChild(im);
     if(x.rib){const r=document.createElement('i');r.className='rib';r.textContent=x.rib;d.appendChild(r)}
-    const s=document.createElement('span');s.textContent=(e[x.id]?'':'🔒 ')+x.n;d.appendChild(s);
+    const s=document.createElement('span');s.textContent=(on?'':'🔒 ')+x.n;d.appendChild(s);
+    const ds=document.createElement('small');ds.className='bdg-d';ds.textContent=x.d;d.appendChild(ds);
     g.appendChild(d);
   });
 }
@@ -1283,6 +1325,9 @@ document.getElementById('guestJoin').addEventListener('click',()=>{
   showSetup(CFG.groupId||'');document.getElementById('suName').value='';
   document.getElementById('suGuest').textContent='← 계속 둘러보기';
 });
+
+/* 의견 모으는 기간이 끝나면 config.js 의 feedbackPhase:false 한 줄로 두 버튼 모두 숨김 */
+if(CFG.feedbackPhase===false)document.querySelectorAll('.promo').forEach(e=>e.classList.add('hidden'));
 
 /* ================= 초기화 ================= */
 function startApp(){
