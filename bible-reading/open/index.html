@@ -6,6 +6,11 @@
 <title>성경 읽기</title>
 <link rel="manifest" href="manifest.json"/>
 <meta name="theme-color" content="#4a2c1c"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="성경 읽기"/>
+<meta name="format-detection" content="telephone=no"/>
 <link rel="icon" href="icon-192.png"/>
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png"/>
 <meta name="description" content="모임이 서로의 진도를 보며 함께 읽는 40주 성경 읽기"/>
@@ -209,7 +214,54 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
 .howto .tip button{margin-top:6px}
 #suGroup[readonly]{background:#f3ede1;color:var(--accent);font-weight:700}
 
-#connBadge{display:none!important}   /* 연결 상태 표시는 지체들에게 보이지 않게 (사장님 2026-10-05) */
+/* ===== V2.0 자유 읽기 · 도전 · iOS/안드로이드 ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+button,select,input,a{touch-action:manipulation}
+input,select,textarea{font-size:16px!important}
+.topband{padding-top:env(safe-area-inset-top)}
+.tabs button{min-height:56px}
+#connBadge{display:none}
+.overlay,.cele{min-height:100vh;min-height:100dvh}
+.prog-row span:last-child{width:auto;min-width:44px;white-space:nowrap}
+.resume-card{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.resume-card small{display:block;font-size:11px;color:var(--sub)}
+.resume-card b{font-size:15px;color:var(--accent)}
+.resume-card .primary{width:auto;white-space:nowrap;padding:12px 14px}
+.seg{display:flex;background:#f3ede1;border-radius:10px;padding:3px;margin-bottom:10px}
+.seg button{flex:1;border:0;background:none;padding:11px 0;border-radius:8px;font-family:inherit;font-size:14px;color:var(--sub)}
+.seg button.on{background:var(--card);color:var(--accent);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.bk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.bk{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:9px 4px 7px;min-height:54px;font-family:inherit;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.bk::before{content:'';position:absolute;left:0;bottom:0;height:3px;width:var(--p,0%);background:var(--gold)}
+.bk b{font-size:13px;font-weight:700;white-space:nowrap;letter-spacing:-.3px}
+.bk small{font-size:10.5px;color:var(--sub)}
+.bk.done{background:#eef4ea;border-color:#cfe0c6}
+.bk.done small{color:var(--ok);font-weight:700}
+.bk.sel{outline:2px solid var(--accent);outline-offset:-1px}
+.chap-panel{margin-top:10px;padding:10px;background:#f7f1e4;border-radius:12px}
+.cp-head{margin:0 0 8px;font-size:13px;color:var(--accent);font-weight:700}
+.cp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(46px,1fr));gap:6px}
+.ch{min-height:46px;border:1px solid var(--line);background:var(--card);border-radius:10px;font-family:inherit;font-size:15px;color:var(--ink)}
+.ch.done{background:var(--ok);border-color:var(--ok);color:#fff;font-weight:700}
+.ch.ing{border-color:var(--gold);color:var(--accent);font-weight:700;box-shadow:inset 0 -3px 0 var(--gold)}
+.goal{display:flex;align-items:center;gap:10px;padding:10px 2px;border-bottom:1px solid #f0e8d8}
+.goal:last-child{border-bottom:0}
+.goal-main{flex:1;min-width:0}
+.goal-main b{display:block;font-size:14px}
+.goal-main span{display:block;font-size:11.5px;color:var(--sub)}
+.goal-main em{display:block;font-style:normal;font-size:12px;color:var(--accent);margin-top:3px}
+.goal.on .goal-main b::after{content:' · 도전 중';color:var(--ok);font-size:11px}
+.goal .primary,.goal .ghost{width:auto;padding:10px 12px;font-size:13px;white-space:nowrap}
+.bdg{position:relative}
+.bdg .rib{position:absolute;top:50px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:10px;padding:1px 7px;border-radius:8px;white-space:nowrap}
+.chap-nav{display:flex;gap:8px;margin-top:12px}
+.chap-nav button{flex:1;min-height:48px;width:auto}
+.inact-h{margin:8px 0 4px;font-size:12px;font-weight:700}
+.goal-tag{display:inline-block;margin-left:4px;padding:0 6px;border-radius:8px;background:#eef4ea;color:var(--ok);font-size:10px;font-weight:700}
+
+.fb-card{display:block;text-decoration:none;color:var(--ink);border:1px dashed var(--gold);background:#fffaf0}
+.fb-card b{display:block;font-size:15px;color:var(--accent);font-family:'SBAggroB','Noto Sans KR',sans-serif}
+.fb-card span{display:block;margin-top:4px;font-size:12.5px;color:var(--sub)}
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
 </style>
@@ -221,7 +273,7 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
   <div class="setup-card">
     <h1>성경 읽기</h1>
     <p>함께 읽고, 함께 기록해요</p>
-    <blockquote class="quote"><p>“지나고 되돌아 보면 말씀 읽는 것만 남는다”</p><cite>— 황선주 목사님</cite></blockquote>
+    <blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀을 읽은 시간이다”</p><cite>— 황선주 목사님</cite></blockquote>
     <div id="howtoSetup"></div>
     <div class="field"><label>① 이름</label><input id="suName" placeholder="이름 또는 닉네임" maxlength="12"/></div>
     <div class="field"><label>② 그룹 코드 (자동 · 그대로 두세요)</label><input id="suGroup" placeholder="예) AB12CD" autocomplete="off" maxlength="20" style="text-transform:uppercase"/></div>
@@ -235,7 +287,7 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
 </div>
 
 <!-- 한 주 완독 축하 (V1.2) -->
-<div id="celebrate" class="cele hidden"><div class="cele-card"><img src="img/celebrate.jpg" alt=""/><h1>한 주 완독!</h1><p id="celeText"></p><button id="celeClose" class="primary">계속 읽기</button></div></div>
+<div id="celebrate" class="cele hidden"><div class="cele-card"><img src="img/celebrate.jpg" alt=""/><h1 id="celeTitle">완독!</h1><p id="celeText"></p><button id="celeClose" class="primary">계속 읽기</button></div></div>
 
 <div class="topband"><header class="top">
   <div class="brand">
@@ -248,22 +300,27 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
 <main>
   <!-- 홈 -->
   <section id="tab-home">
-    <div class="card quote-card"><blockquote class="quote"><p>“지나고 되돌아 보면 말씀 읽는 것만 남는다”</p><cite>— 황선주 목사님</cite></blockquote></div>
+    <div class="card quote-card"><blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀을 읽은 시간이다”</p><cite>— 황선주 목사님</cite></blockquote></div>
+    <div class="card resume-card hidden" id="resumeCard"><div><small>이어 읽기</small><b id="resumeText"></b></div><button id="resumeBtn" class="primary" type="button">이어서 읽기 ›</button></div>
     <div class="card">
-      <div class="week-nav">
-        <button id="wPrev">‹</button>
-        <div><div class="week-label" id="weekLabel">—주차</div><div class="week-dates" id="weekDates"></div></div>
-        <button id="wNext">›</button>
-      </div>
-      <div class="prog-row"><span>이번 주</span><div class="bar"><i id="weekBar"></i></div><span id="weekProgText">0/0</span></div>
+      <h2>내 진도</h2>
+      <div class="prog-row"><span>이번 주</span><div class="bar"><i id="weekBar"></i></div><span id="weekProgText">0장</span></div>
+      <div class="prog-row"><span>구약</span><div class="bar"><i id="otBar"></i></div><span id="otProgText">0%</span></div>
+      <div class="prog-row"><span>신약</span><div class="bar"><i id="ntBar"></i></div><span id="ntProgText">0%</span></div>
       <div class="prog-row"><span>전체</span><div class="bar"><i id="totalBar"></i></div><span id="totalProgText">0%</span></div>
-      <button id="wToday" class="ghost-btn hidden">이번 주로 이동</button>
     </div>
-    <div class="card" id="todayCard"><h2 id="todayTitle">오늘 읽을 장</h2><div id="todayList"></div></div>
+    <div class="card">
+      <h2>📖 성경 고르기</h2>
+      <p class="sub" style="margin:-4px 0 8px">읽고 싶은 책을 고르고, 장을 누르면 바로 열려요.</p>
+      <div class="seg" id="testTabs"><button type="button" data-t="ot">구약 39권</button><button type="button" data-t="nt">신약 27권</button></div>
+      <div class="bk-grid" id="bookGrid"></div>
+      <div id="chapPanel" class="chap-panel hidden"></div>
+    </div>
     <div class="card"><h2>함께 읽는 지체들</h2><div id="feedList"></div></div>
-    <div class="card"><h2>읽을 장</h2><div id="chapterList"></div></div>
-    <div class="card"><h2>우리 모두</h2><div id="groupStats"></div></div>
+    <div class="card"><h2>🏃 내 도전</h2><p class="sub" style="margin:-4px 0 8px">내 속도에 맞는 도전을 골라요. 여러 개 골라도 돼요.</p><div id="goalList"></div></div>
     <div class="card"><h2>내 배지</h2><div id="badgeGrid" class="badge-grid"></div></div>
+    <div class="card"><h2>우리 모두</h2><div id="groupStats"></div></div>
+    <a class="card fb-card" href="../feedback/"><b>💬 이런 기능이 있었으면 좋겠어요</b><span>이름 없이(익명) 적어 주세요 — 모아서 앱에 반영할게요 ›</span></a>
   </section>
 
   <!-- 읽기 -->
@@ -283,6 +340,7 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
       <p id="readerTogether" class="together hidden"></p>
       <div id="readerBody"></div>
       <div id="posHint" class="pos-hint hidden"></div>
+      <div class="chap-nav"><button id="prevChap" class="ghost" type="button">‹ 이전 장</button><button id="nextChap" class="primary" type="button">다음 장 ›</button></div>
     </div>
   </section>
 
@@ -300,7 +358,7 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
   <section id="tab-all" class="hidden">
     <div class="card">
       <h2>전체 진도 한눈에 보기</h2>
-      <p class="sub">행=사람, 열=주차 · 색이 진할수록 그 주를 많이 읽었어요. 맨 아래 줄은 주간 평균입니다.</p>
+      <p class="sub">최근 8주 · 칸의 숫자 = 그 주에 읽은 장 수 · 맨 아래 줄은 모두 합친 수예요.</p>
       <div id="statsRow"></div>
       <div class="mx-wrap"><table class="mx" id="matrix"></table></div>
       <div class="btn-row" style="margin-top:10px"><button id="csvBtn" class="primary">명단 CSV 복사 (시트용)</button></div>
@@ -328,15 +386,9 @@ img.brand-mark{display:block;object-fit:cover;padding:0;background:none;box-shad
       <p class="link-like" id="shareLink"></p>
       <div class="btn-row"><button id="copyLinkBtn" class="primary">링크 복사</button><button id="leaveGroupBtn" class="ghost danger">모임 바꾸기</button></div>
     </div>
-    <div class="card">
-      <h2>읽기 계획</h2>
-      <div class="field"><label>계획 시작일 (1주차 첫 날)</label><input type="date" id="startDateInput"/></div>
-      <div class="btn-row"><button id="saveDateBtn" class="primary">저장</button></div>
-      <p class="sub" id="planInfo" style="margin-top:8px"></p>
-    </div>
     <div class="card"><h2>사용법</h2><div id="howtoSet"></div></div>
     <div class="card">
-      <h2>연결 상태</h2>
+      <h2>기록 저장</h2>
       <p id="connDetail" class="sub"></p>
     </div>
   </section>
@@ -395,30 +447,18 @@ const LS=CFG.storageKey||'bibleApp.v1';   /* 두 버전이 같은 주소에서 �
 let state={name:'',group:'',uid:Math.random().toString(36).slice(2,12),readChapters:{},versePos:{},lastRead:null,planStart:''};
 try{Object.assign(state,JSON.parse(localStorage.getItem(LS)||'{}'))}catch(e){}
 const urlG=new URLSearchParams(location.search).get('g');
-if(urlG){state.group=urlG.trim().toUpperCase();persist();}
+/* 그룹 고정 (요한순교자) — 링크에 다른 코드가 붙어 와도 무시한다 · 예전에 다른 코드로 들어온 기기는 첫 화면에서 다시 참여 */
+let REJOIN_NAME='';
+if(CFG.groupId){if(state.group&&state.group!==CFG.groupId){REJOIN_NAME=state.name||'';state.name='';}state.group=CFG.groupId;persist();}
+else if(urlG){state.group=urlG.trim().toUpperCase();persist();}
 function persist(){try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}}
 function save(){persist();scheduleSync();}
 
-/* ================= 계획 ================= */
-function planWeeks(){return CFG.planWeeks||40}
-function planStart(){
-  if(CFG.startDate)return CFG.startDate;
-  if(state.planStart)return state.planStart;
-  return new Date().toISOString().slice(0,10);
-}
-let PLAN=null;
-function getPlan(){
-  if(PLAN)return PLAN;
-  const seq=[];BOOKS.forEach((b,i)=>{for(let c=1;c<=b.c;c++)seq.push({b:i+1,c})});
-  const w=planWeeks(),out=[],base=Math.floor(seq.length/w);let extra=seq.length%w,idx=0;
-  for(let i=0;i<w;i++){const n=base+(i<extra?1:0);out.push(seq.slice(idx,idx+n));idx+=n}
-  PLAN=out;return out;
-}
-function todayWeek(){
-  const s=new Date(planStart()+'T00:00:00');const d=new Date();
-  const w=Math.floor((new Date(d.getFullYear(),d.getMonth(),d.getDate())-s)/(7*864e5));
-  return Math.max(0,Math.min(planWeeks()-1,w));
-}
+/* ================= 주 (달력 · 월~일) — V2.0: 정해진 계획 없이 각자 원하는 성경을 읽는다 ================= */
+const WEEK0=new Date(2026,9,5).getTime();   /* 기준 월요일 2026-10-05 */
+function weekOf(ts){const d=new Date(ts);d.setHours(0,0,0,0);return Math.floor((d.getTime()-WEEK0)/(7*864e5)+1e-6)}
+function todayWeek(){return weekOf(Date.now())}
+function weekStart(w){return new Date(WEEK0+w*7*864e5)}
 let viewWeek=todayWeek();
 
 const key=(b,c)=>b+'-'+c;
@@ -432,10 +472,18 @@ function chapPart(o,b,c){
   const k=key(b,c);if((o.readChapters||{})[k])return 1;
   const v=(o.versePos||{})[k]||0,n=verseCount(b,c);return n?Math.min(1,v/n):0;
 }
+/* 이번 주 = 이 달력 주(월~일)에 「다 읽음」 된 장 수 — 시각이 있는 장만 센다 */
 function weekProg(o,wi){
-  let done=0,part=0;getPlan()[wi].forEach(x=>{const p=chapPart(o,x.b,x.c);if(p>=1)done++;part+=p});
-  return{done,part,total:getPlan()[wi].length};
+  let done=0;const rc=o.readChapters||{};
+  for(const k in rc){const t=+rc[k]||0;if(t>1e12&&weekOf(t)===wi)done++}
+  return{done,part:done,total:weeklyTarget(o)};
 }
+function rangeProg(o,from,to){
+  let done=0,part=0,total=0;
+  for(let b=from;b<=to;b++)for(let c=1;c<=BOOKS[b-1].c;c++){total++;const p=chapPart(o,b,c);if(p>=1)done++;part+=p}
+  return{done,part,total};
+}
+const cmpKey=(a,b)=>{const x=a.split('-').map(Number),y=b.split('-').map(Number);return x[0]-y[0]||x[1]-y[1]};
 function totalProg(o){
   let done=0,part=0;BOOKS.forEach((B,i)=>{for(let c=1;c<=B.c;c++){const p=chapPart(o,i+1,c);if(p>=1)done++;part+=p}});
   return{done,part,total:TOTAL};
@@ -459,11 +507,33 @@ function ago(ts){
 let db=null,meRef=null,membersRef=null;  // firebase 용
 let MODE='local',MEMBERS={},pollT=null;
 
+/* ── 시트로 보내는 내 기록 · 받은 기록 풀기 (V2.0) ──
+   장마다 읽은 시각(rcz) · 체크 해제 시각(un) · 절 위치 시각(vpAt) · 마지막 위치 시각(lrAt) · 도전(goals)
+   → 여러 기기에서 「가장 최근 것이 이긴다」 */
+const TS36=t=>Math.floor((+t||0)/1000).toString(36), UN36=s=>(parseInt(s,36)||0)*1000;
+function encRC(rc){return Object.keys(rc).filter(k=>rc[k]).sort(cmpKey).map(k=>k+':'+TS36(rc[k])).join(',')}
+function decRC(s){const o={};String(s||'').split(',').forEach(p=>{const i=p.indexOf(':');if(i>0)o[p.slice(0,i)]=UN36(p.slice(i+1))||1});return o}
 function myObj(){
+  const lr=state.lastRead?{b:state.lastRead.b,c:state.lastRead.c,v:state.lastRead.v,t:state.lrAt||0}:null;
   return {name:(state.privacy?state.alias:state.name),uid:state.uid,priv:!!state.privacy,
     pinHash:state.pinHash||'',
     readChapters:state.readChapters,versePos:state.versePos,
-    lastRead:(state.lastRead||null),   /* 비밀번호 버전도 시트에 남긴다 — 다른 폰에서 이어 읽기용 · 화면에는 가명이라 위치를 숨김 */lastActive:Date.now()};
+    readList:Object.keys(state.readChapters).filter(k=>state.readChapters[k]).sort(cmpKey),
+    rcz:encRC(state.readChapters),
+    sync:{un:state.un||{},vpAt:state.vpAt||{},goals:state.goals||{},lrAt:state.lrAt||0},
+    lastRead:lr,lastActive:Date.now()};
+}
+function myView(){
+  return {name:(state.privacy?state.alias:state.name),uid:state.uid,priv:!!state.privacy,
+    readChapters:state.readChapters,versePos:state.versePos,goals:state.goals||{},lastRead:state.lastRead,lastActive:Date.now()};
+}
+function normMember(m){
+  if(!m||m.__n)return m;
+  const rc=m.rcz?decRC(m.rcz):{};
+  const legacy=m.readChapters||{};for(const k in legacy)if(legacy[k]&&!rc[k])rc[k]=(typeof legacy[k]==='number'?legacy[k]:1);
+  const s=m.sync||{};
+  return Object.assign({},m,{readChapters:rc,un:s.un||{},vpAt:s.vpAt||{},goals:s.goals||{},
+    lrAt:+s.lrAt||(m.lastRead&&+m.lastRead.t)||0,__n:1});
 }
 function displayName(m){return m.priv?'🔒 '+(m.name||'비공개'):(m.name||'이름 없음')}
 function setBadge(t,off){const b=document.getElementById('connBadge');b.textContent=t;b.classList.toggle('off',!!off)}
@@ -503,39 +573,79 @@ function sheetGroup(g){return String(g||'')+(PRIV_MODE==='off'?'·공개':'')}
 function cleanLink(){
   return location.origin+location.pathname+((CFG.groupId&&state.group===CFG.groupId)?'':'?g='+encodeURIComponent(state.group));
 }
-let sheetsBusy=false,sheetsSynced=false,pendingPush=false;
-/* 시트에 있는 ★내 기록을 이 기기 기록에 합친다 (새 기기에서 빈 기록이 시트를 덮어쓰지 않게) */
+let sheetsBusy=false,sheetsSynced=false,pendingPush=false,GS_V11=false,GS_VER=1,lastPushAt=0;
+/* 시트에 있는 ★내 기록과 이 기기 기록을 합친다 — 매번 받을 때마다 · 항목마다 더 최근 시각이 이긴다 */
 function mergeMine(m){
   if(!m)return false;let ch=false;
-  const rc=m.readChapters||{};for(const k in rc)if(rc[k]&&!state.readChapters[k]){state.readChapters[k]=m.lastActive||Date.now();ch=true}
-  const vp=m.versePos||{};for(const k in vp)if((+vp[k]||0)>(state.versePos[k]||0)){state.versePos[k]=+vp[k];ch=true}
-  if(!state.lastRead&&m.lastRead){state.lastRead=m.lastRead;ch=true}
+  state.un=state.un||{};state.vpAt=state.vpAt||{};state.goals=state.goals||{};
+  const rc=m.readChapters||{},un=m.un||{};
+  const keys=new Set(Object.keys(rc).concat(Object.keys(un),Object.keys(state.readChapters),Object.keys(state.un)));
+  keys.forEach(k=>{
+    const c=Math.max(+state.readChapters[k]||0,+rc[k]||0),u=Math.max(+state.un[k]||0,+un[k]||0);
+    if(c>u){if(state.readChapters[k]!==c){state.readChapters[k]=c;ch=true}if(state.un[k]){delete state.un[k];ch=true}}
+    else{if(state.readChapters[k]){delete state.readChapters[k];ch=true}if(u&&state.un[k]!==u){state.un[k]=u;ch=true}}
+  });
+  const vp=m.versePos||{},va=m.vpAt||{};
+  for(const k in vp){
+    const rt=+va[k]||0,lt=+state.vpAt[k]||0,rv=+vp[k]||0,lv=+state.versePos[k]||0;
+    if(rt>lt||(rt===lt&&rv>lv)){if(lv!==rv){state.versePos[k]=rv;ch=true}if(rt>lt)state.vpAt[k]=rt}
+  }
+  const rl=+m.lrAt||0;
+  if(m.lastRead&&m.lastRead.b&&(rl>(+state.lrAt||0)||!state.lastRead)){state.lastRead={b:m.lastRead.b,c:m.lastRead.c,v:m.lastRead.v||1};state.lrAt=rl;ch=true}
+  const rg=m.goals||{};
+  for(const g in rg){if(!state.goals[g]||(+rg[g].t||0)>(+state.goals[g].t||0)){state.goals[g]=rg[g];ch=true}}
+  if(ch){state.celebrated=state.celebrated||{};for(let b=1;b<=66;b++)if(!state.celebrated['b'+b]&&booksDone(state,b,b))state.celebrated['b'+b]=Date.now()}  /* 다른 기기에서 끝낸 책은 조용히 */
   return ch;
+}
+/* 시트가 이 기기보다 뒤처졌는가 — 그럴 때만 올린다 */
+function sheetBehind(m){
+  if(!m)return true;
+  const rc=m.readChapters||{},un=m.un||{},vp=m.versePos||{},va=m.vpAt||{},g=m.goals||{};
+  for(const k in state.readChapters)if((+rc[k]||0)<(+state.readChapters[k]||0))return true;
+  for(const k in (state.un||{}))if((+un[k]||0)<(+state.un[k]||0))return true;
+  for(const k in state.versePos)if((+vp[k]||0)!==(+state.versePos[k]||0)&&(+va[k]||0)<=(+(state.vpAt||{})[k]||0))return true;
+  if((+m.lrAt||0)<(+state.lrAt||0))return true;
+  for(const x in (state.goals||{}))if(!g[x]||(+g[x].t||0)<(+state.goals[x].t||0))return true;
+  if((m.name||'')!==(state.privacy?state.alias:state.name))return true;
+  return false;
 }
 function initSheets(){
   const u=CFG.sheets&&CFG.sheets.webAppUrl;
-  if(!u||String(u).indexOf('여기')===0){setBadge('시트 URL 설정 필요',true);return}
-  MODE='sheets';setBadge('시트 연결됨',false);
-  sheetsPull();startPolling(sheetsPull,15000);
+  if(!u||String(u).indexOf('여기')===0)return;
+  MODE='sheets';
+  sheetsPull(true);startPolling(()=>sheetsPull(false),20000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)sheetsPull(true)});
 }
-function sheetsPull(){
-  if(sheetsBusy)return;
+function sheetsPull(force){
+  if(sheetsBusy||(!force&&document.hidden))return;
   sheetsBusy=true;
   /* fetch 로 읽는다 — JSONP(스크립트 태그)는 브라우저가 막는다 (2026-10-05 실측) */
   fetch(CFG.sheets.webAppUrl+'?action=list&g='+encodeURIComponent(sheetGroup(state.group))+'&t='+Date.now(),{cache:'no-store'})
     .then(r=>r.json())
     .then(data=>{
-      if(data&&data.members){MEMBERS=data.members;
-        if(!sheetsSynced){sheetsSynced=true;if(mergeMine(MEMBERS[state.uid])||pendingPush){pendingPush=false;persist();sheetsPush()}}
-        setBadge('시트 연결됨',false);renderStatus();renderHome()}
+      if(!data||!data.members)return;
+      GS_VER=parseFloat(data.v||'1.0')||1;GS_V11=GS_VER>=1.1;   /* 시트 스크립트 1.1 이상 */
+      const M={};for(const u in data.members)M[u]=normMember(data.members[u]);
+      MEMBERS=M;
+      const mine=MEMBERS[state.uid];
+      const changed=mergeMine(mine);
+      sheetsSynced=true;
+      if(changed)persist();
+      if(pendingPush||sheetBehind(mine)){pendingPush=false;sheetsPush()}
+      if(changed&&openB){const k=key(openB,openC);document.getElementById('chapReadChk').checked=!!state.readChapters[k];
+        if((state.versePos[k]||0)>maxVerse&&!dirtyVerse){maxVerse=state.versePos[k];markHere()}}
+      renderStatus();renderHome();
     })
-    .catch(()=>{setBadge('연결 재시도 중…',true)})
+    .catch(()=>{})
     .finally(()=>{sheetsBusy=false});
 }
 function sheetsPush(){
-  fetch(CFG.sheets.webAppUrl,{method:'POST',mode:'no-cors',
-    headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body:JSON.stringify({g:sheetGroup(state.group),member:myObj()})}).catch(()=>{});
+  lastPushAt=Date.now();
+  const m=myObj();
+  if(GS_V11)delete m.readChapters;      /* 시트 V1.1 은 rcz 로 받는다 · V1.0 이면 예전 방식도 같이 보낸다 */
+  const body=JSON.stringify({g:sheetGroup(state.group),member:m});
+  fetch(CFG.sheets.webAppUrl,{method:'POST',mode:'no-cors',keepalive:body.length<60000,
+    headers:{'Content-Type':'text/plain;charset=utf-8'},body}).catch(()=>{pendingPush=true});
 }
 
 /* --- GitHub Gist: 깃허브만으로 무료 운영 --- */
@@ -566,22 +676,28 @@ function gistPush(){
 }
 
 let syncT=null;
-function scheduleSync(){clearTimeout(syncT);syncT=setTimeout(pushMe,1200)}
+/* 올림 간격 최소 10초 (읽는 동안 4초마다 저장해도 시트·배터리 부담 없게) · 나갈 때는 즉시 */
+function scheduleSync(){clearTimeout(syncT);syncT=setTimeout(pushMe,Math.max(1500,10000-(Date.now()-lastPushAt)))}
 function pushMe(){
   persist();
   if(MODE==='cloud'&&meRef)meRef.set(myObj()).catch(e=>console.warn('sync fail',e));
   else if(MODE==='sheets'){if(sheetsSynced)sheetsPush();else pendingPush=true}
   else if(MODE==='gist')gistPush();
 }
+/* 기록 바꾸는 곳은 모두 여기로 — 시각을 함께 남긴다 */
+function markRead(k,on){const t=Date.now();state.un=state.un||{};
+  if(on){state.readChapters[k]=t;delete state.un[k]}else{delete state.readChapters[k];state.un[k]=t}}
+function setVP(k,v){state.versePos[k]=v;(state.vpAt=state.vpAt||{})[k]=Date.now()}
+function setLR(b,c,v){state.lastRead={b,c,v};state.lrAt=Date.now()}
 
 /* ================= 성경 본문 로딩 ================= */
-let BIBLE=null,bibleLoaded=false;
+let BIBLE=null,biblePromise=null;
+/* 한 번만 받는다 — 동시에 두 번 부르면 두 번째가 빈 본문을 받던 문제 수정 */
 function loadBible(){
-  if(bibleLoaded)return Promise.resolve(BIBLE);
-  bibleLoaded=true;
-  return fetch('bible.json').then(r=>{
+  if(!biblePromise)biblePromise=fetch('bible.json').then(r=>{
     if(!r.ok)throw 0;return r.json();
-  }).then(j=>{BIBLE=j;return j}).catch(()=>{BIBLE=null;return null});
+  }).then(j=>{BIBLE=j;return j}).catch(()=>{BIBLE=null;biblePromise=null;return null});
+  return biblePromise;
 }
 function getChapterText(b,c){
   if(!BIBLE)return null;
@@ -601,86 +717,73 @@ document.querySelectorAll('.tabs button').forEach(btn=>{
   });
 });
 function goTab(t){document.querySelector('.tabs button[data-tab="'+t+'"]').click()}
-function goRead(b,c){curB=b;curC=c;openChapter();goTab('read')}
+function goRead(b,c){readReq=true;goTab('read');readReq=false;
+  curB=b;curC=c;const bs=document.getElementById('bookSel');bs.value=b;fillChaps();document.getElementById('chapSel').value=c;openChapter()}
 
-/* ================= 홈 ================= */
-function renderHome(){renderBadges();checkCelebrate();renderFeed();
-  const plan=getPlan();
-  document.getElementById('weekLabel').textContent=(viewWeek+1)+'주차';
-  const s=new Date(planStart()+'T00:00:00');
-  const d1=new Date(s.getTime()+viewWeek*7*864e5),d2=new Date(d1.getTime()+6*864e5);
-  const f=d=>(d.getMonth()+1)+'/'+d.getDate();
-  document.getElementById('weekDates').textContent=f(d1)+' ~ '+f(d2);
-  document.getElementById('wPrev').disabled=viewWeek===0;
-  document.getElementById('wNext').disabled=viewWeek===planWeeks()-1;
-  document.getElementById('wToday').classList.toggle('hidden',viewWeek===todayWeek());
-  renderToday();
-
-  const mp=weekProg(state,viewWeek),tp=totalProg(state);
-  document.getElementById('weekBar').style.width=pct(mp)+'%';
-  document.getElementById('weekProgText').textContent=mp.done+'/'+mp.total;
-  document.getElementById('totalBar').style.width=pct(tp)+'%';
-  document.getElementById('totalProgText').textContent=pct1(tp)+'%';
-
-  // 장 리스트: 연속된 같은 책 묶음으로 표기
-  const list=document.getElementById('chapterList');let html='',curBook=null;
-  plan[viewWeek].forEach(x=>{
-    const k=key(x.b,x.c),done=!!state.readChapters[k];
-    if(x.b!==curBook){curBook=x.b;html+='<div class="sub" style="margin:8px 0 2px;font-weight:700;color:var(--accent)">'+esc(BOOKS[x.b-1].n)+'</div>'}
-    const date=state.readChapters[k]?new Date(state.readChapters[k]).toLocaleDateString('ko-KR',{month:'numeric',day:'numeric'}):'';
-    html+='<div class="chk'+(done?' read':'')+'" data-k="'+k+'">'
-      +'<input type="checkbox"'+(done?' checked':'')+'/>'
-      +'<span>'+BOOKS[x.b-1].s+' '+x.c+'장</span>'
-      +(date?'<em>'+date+'</em>':((state.versePos||{})[k]?'<em>'+state.versePos[k]+'/'+verseCount(x.b,x.c)+'절</em>':''))
-      +'<button class="read-link" data-b="'+x.b+'" data-c="'+x.c+'">읽기 ›</button></div>';
-  });
-  list.innerHTML=html||'<p class="sub">이 주에는 읽을 장이 없어요.</p>';
-  bindChecks(list);
-
-  // 우리 모두
-  const gs=document.getElementById('groupStats');
-  const names=Object.values(MEMBERS);
-  if(!names.length){gs.innerHTML='<p class="sub">아직 함께하는 사람이 없어요. 설정 탭에서 초대 링크를 공유해 보세요.</p>';return}
-  const wk=names.filter(m=>{const p=weekProg(m,viewWeek);return p.done>=p.total}).length;
-  const totalPct=Math.round(names.reduce((s,m)=>s+pct(totalProg(m)),0)/names.length);
-  gs.innerHTML='<div class="stat-grid">'
-    +'<div class="stat"><b>'+names.length+'</b><span>참여 인원</span></div>'
-    +'<div class="stat"><b>'+wk+'</b><span>이번 주 완료</span></div>'
-    +'<div class="stat"><b>'+totalPct+'%</b><span>평균 진도</span></div></div>';
+/* ================= 홈 (V2.0) ================= */
+let gridTest='nt',openBook=0;
+function statGrid(items){const g=document.createElement('div');g.className='stat-grid';
+  items.forEach(([v,l])=>{const d=document.createElement('div');d.className='stat';const b=document.createElement('b');b.textContent=v;
+    const s=document.createElement('span');s.textContent=l;d.appendChild(b);d.appendChild(s);g.appendChild(d)});return g}
+function renderHome(){renderBadges();checkCelebrate();renderFeed();renderGoals();
+  renderResume();renderMyProg();renderBookGrid();
+  const gs=document.getElementById('groupStats');gs.textContent='';
+  const list=memberListForViews(),tw=todayWeek();
+  const readers=list.filter(m=>weekProg(m,tw).done>0).length;
+  const avg=Math.round(list.reduce((s,m)=>s+pct(totalProg(m)),0)/Math.max(1,list.length));
+  gs.appendChild(statGrid([[list.length,'함께하는 지체'],[readers,'이번 주 읽은 지체'],[avg+'%','평균 진도']]));
 }
-function bindChecks(list){
-  list.querySelectorAll('.chk').forEach(row=>{
-    row.querySelector('input').addEventListener('change',()=>{
-      const k=row.dataset.k;
-      if(row.querySelector('input').checked)state.readChapters[k]=Date.now();
-      else delete state.readChapters[k];
-      save();renderHome();
-    });
-    row.querySelector('.read-link').addEventListener('click',e=>{
-      e.preventDefault();goRead(+e.target.dataset.b,+e.target.dataset.c);
-    });
-  });
+function renderResume(){
+  const c=document.getElementById('resumeCard'),lr=state.lastRead;
+  if(!lr||!BOOKS[lr.b-1]){c.classList.add('hidden');return}
+  c.classList.remove('hidden');
+  document.getElementById('resumeText').textContent=BOOKS[lr.b-1].n+' '+lr.c+'장 '+(lr.v||1)+'절';
 }
-function dayChunks(wi){
-  const plan=getPlan()[wi];const out=[[],[],[],[],[],[],[]];
-  plan.forEach((x,i)=>out[Math.floor(i*7/plan.length)].push(x));
-  return out;
+function setBar(bar,txt,w,t){document.getElementById(bar).style.width=Math.max(0,Math.min(100,w))+'%';document.getElementById(txt).textContent=t}
+function renderMyProg(){
+  const wp=weekProg(state,todayWeek()),tp=totalProg(state),ot=rangeProg(state,1,39),nt=rangeProg(state,40,66);
+  setBar('weekBar','weekProgText',wp.total?Math.round(wp.done/wp.total*100):Math.min(100,wp.done*10),wp.done+'장'+(wp.total?' / 목표 '+wp.total:''));
+  setBar('otBar','otProgText',pct(ot),pct1(ot)+'%');
+  setBar('ntBar','ntProgText',pct(nt),pct1(nt)+'%');
+  setBar('totalBar','totalProgText',pct(tp),pct1(tp)+'%');
 }
-function renderToday(){
-  const days=['월','화','수','목','금','토','일'];
-  const di=(new Date().getDay()+6)%7;
-  document.getElementById('todayTitle').textContent='오늘 읽을 장 · '+days[di]+'요일 ('+(viewWeek+1)+'주차)';
-  const list=document.getElementById('todayList');let html='';
-  dayChunks(viewWeek)[di].forEach(x=>{
-    const k=key(x.b,x.c),done=!!state.readChapters[k];
-    html+='<div class="chk'+(done?' read':'')+'" data-k="'+k+'"><input type="checkbox"'+(done?' checked':'')+'/><span>'+BOOKS[x.b-1].s+' '+x.c+'장</span><button class="read-link" data-b="'+x.b+'" data-c="'+x.c+'">읽기 ›</button></div>';
-  });
-  list.innerHTML=html||'<p class="sub">오늘 배정된 장은 없어요. 천천히 읽어도 좋아요.</p>';
-  bindChecks(list);
+function renderBookGrid(){
+  document.querySelectorAll('#testTabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===gridTest));
+  const g=document.getElementById('bookGrid');g.textContent='';
+  const from=gridTest==='ot'?1:40,to=gridTest==='ot'?39:66;
+  for(let b=from;b<=to;b++){
+    const p=rangeProg(state,b,b),pc=Math.round(p.part/p.total*100),done=p.done===p.total;
+    const btn=document.createElement('button');btn.type='button';
+    btn.className='bk'+(done?' done':'')+(openBook===b?' sel':'');btn.style.setProperty('--p',pc+'%');
+    const n=document.createElement('b');n.textContent=BOOKS[b-1].n;
+    const s=document.createElement('small');s.textContent=done?'완독 ✓':(pc?pc+'%':BOOKS[b-1].c+'장');
+    btn.appendChild(n);btn.appendChild(s);
+    btn.addEventListener('click',()=>{openBook=(openBook===b?0:b);renderBookGrid();
+      if(openBook)document.getElementById('chapPanel').scrollIntoView({block:'nearest',behavior:'smooth'})});
+    g.appendChild(btn);
+  }
+  renderChapPanel();
 }
+function renderChapPanel(){
+  const cp=document.getElementById('chapPanel');cp.textContent='';
+  if(!openBook){cp.classList.add('hidden');return}
+  cp.classList.remove('hidden');
+  const B=BOOKS[openBook-1];
+  const h=document.createElement('p');h.className='cp-head';h.textContent=B.n+' — 읽을 장을 누르세요';cp.appendChild(h);
+  const g=document.createElement('div');g.className='cp-grid';
+  for(let c=1;c<=B.c;c++){
+    const k=key(openBook,c),done=!!state.readChapters[k],vp=state.versePos[k]||0;
+    const btn=document.createElement('button');btn.type='button';btn.className='ch'+(done?' done':(vp?' ing':''));btn.textContent=c;
+    const ob=openBook;btn.addEventListener('click',()=>goRead(ob,c));
+    g.appendChild(btn);
+  }
+  cp.appendChild(g);
+}
+document.getElementById('testTabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;gridTest=b.dataset.t;openBook=0;renderBookGrid()});
+document.getElementById('resumeBtn').addEventListener('click',()=>{const lr=state.lastRead;if(lr)goRead(lr.b,lr.c)});
 function memberListForViews(){
-  const list=Object.values(MEMBERS).slice();
-  if(!list.some(m=>m.uid===state.uid))list.push(myObj());
+  const list=Object.values(MEMBERS).filter(m=>m.uid!==state.uid);
+  list.push(myView());
   list.sort((a,b)=>pct(totalProg(b))-pct(totalProg(a)));
   return list;
 }
@@ -689,57 +792,41 @@ function cellStyle(p){
   return 'background:rgba(76,122,63,'+(0.18+0.72*p/100).toFixed(2)+');color:'+(p>=50?'#fff':'#4c6a42');
 }
 function renderAll(){
-  const list=memberListForViews();
-  const doneWeek=list.filter(m=>{const p=weekProg(m,viewWeek);return p.done>=p.total}).length;
+  const list=memberListForViews(),tw=todayWeek(),W=8,ws=[];
+  for(let i=W-1;i>=0;i--)ws.push(tw-i);
+  const thisW=list.map(m=>weekProg(m,tw).done);
   const avg=Math.round(list.reduce((s,m)=>s+pct(totalProg(m)),0)/list.length);
-  document.getElementById('statsRow').innerHTML='<div class="stat-grid">'
-    +'<div class="stat"><b>'+list.length+'</b><span>참여 인원</span></div>'
-    +'<div class="stat"><b>'+doneWeek+'</b><span>이번 주 완료</span></div>'
-    +'<div class="stat"><b>'+avg+'%</b><span>평균 진도</span></div></div>';
-  const W=planWeeks();
-  let h='<tr><th class="name">이름</th>';
-  for(let w=0;w<W;w++)h+='<th>'+(w+1)+'</th>';
-  h+='<th>전체</th></tr>';
+  const sr=document.getElementById('statsRow');sr.textContent='';
+  sr.appendChild(statGrid([[list.length,'함께하는 지체'],[thisW.filter(n=>n>0).length,'이번 주 읽은 지체'],[avg+'%','평균 진도']]));
+  const t=document.getElementById('matrix');t.textContent='';
+  const f=d=>(d.getMonth()+1)+'/'+d.getDate();
+  const cell=(tag,txt,cls,style,title)=>{const e=document.createElement(tag);e.textContent=txt;if(cls)e.className=cls;if(style)e.setAttribute('style',style);if(title)e.title=title;return e};
+  const tr=cells=>{const r=document.createElement('tr');cells.forEach(c=>r.appendChild(c));t.appendChild(r)};
+  tr([cell('th','이름','name')].concat(ws.map(w=>cell('th',f(weekStart(w))))).concat([cell('th','전체')]));
+  const maxN=Math.max(1,...list.map(m=>Math.max(...ws.map(w=>weekProg(m,w).done))));
   list.forEach(m=>{
-    h+='<tr><td class="name">'+esc(displayName(m))+(m.uid===state.uid?' (나)':'')+'</td>';
-    for(let w=0;w<W;w++){
-      const p=pct(weekProg(m,w));
-      h+='<td style="'+cellStyle(p)+'" title="'+esc(displayName(m))+' '+(w+1)+'주차 '+p+'%">'+(p>0?p:'')+'</td>';
-    }
-    h+='<td class="total">'+pct(totalProg(m))+'%</td></tr>';
+    tr([cell('td',displayName(m)+(m.uid===state.uid?' (나)':''),'name')]
+      .concat(ws.map(w=>{const n=weekProg(m,w).done;return cell('td',n?String(n):'',null,cellStyle(n?Math.max(15,Math.round(n/maxN*100)):0),f(weekStart(w))+' 주 '+n+'장')}))
+      .concat([cell('td',pct(totalProg(m))+'%','total')]));
   });
-  h+='<tr><td class="name" style="font-weight:700">주간 평균</td>';
-  for(let w=0;w<W;w++){
-    const aw=Math.round(list.reduce((s,m)=>s+pct(weekProg(m,w)),0)/list.length);
-    h+='<td style="'+cellStyle(aw)+'" title="'+(w+1)+'주차 평균">'+aw+'</td>';
-  }
-  h+='<td class="total">'+Math.round(list.reduce((s,m)=>s+pct(totalProg(m)),0)/list.length)+'%</td></tr>';
-  document.getElementById('matrix').innerHTML=h;
-
-  const wp=list.map(m=>pct(weekProg(m,viewWeek)));
-  const avgW=Math.round(wp.reduce((a,b)=>a+b,0)/list.length);
-  const started=wp.filter(p=>p>0).length,finished=wp.filter(p=>p===100).length;
+  tr([cell('td','모두 합계','name')].concat(ws.map(w=>{const s=list.reduce((a,m)=>a+weekProg(m,w).done,0);return cell('td',s?String(s):'',null,cellStyle(s?60:0))})).concat([cell('td',avg+'%','total')]));
+  const sum=thisW.reduce((a,b)=>a+b,0);
+  const wsEl=document.getElementById('weekStats');wsEl.textContent='';
+  wsEl.appendChild(statGrid([[sum+'장','이번 주 함께 읽은 장'],[thisW.filter(n=>n>0).length+'명','읽은 지체'],[(Math.round(sum/list.length*10)/10)+'장','1인 평균']]));
   const others=list.filter(m=>m.uid!==state.uid);
-  document.getElementById('weekStats').innerHTML='<div class="stat-grid">'
-    +'<div class="stat"><b>'+avgW+'%</b><span>이번 주 평균</span></div>'
-    +'<div class="stat"><b>'+started+'</b><span>시작한 사람</span></div>'
-    +'<div class="stat"><b>'+finished+'</b><span>완주한 사람</span></div></div>'
-    +(MODE==='local'&&others.length===0?'<p class="sub">※ 지금은 로컬 모드 — 시트/클라우드에 연결하면 모든 멤버가 표시됩니다.</p>':'');
-
-  const notStarted=others.filter(m=>pct(weekProg(m,viewWeek))===0);
+  const notStarted=others.filter(m=>weekProg(m,tw).done===0);
   const away=others.filter(m=>m.lastActive&&Date.now()-m.lastActive>3*864e5);
-  const mk=a=>a.map(m=>'<span class="pill">'+esc(displayName(m))+'</span>').join('')||'<span class="sub">없어요 🎉</span>';
-  document.getElementById('inactiveNote').textContent='이번 주 아직 0장인 사람과 3일 이상 접속하지 않은 사람입니다. 시트 버전에서는 시트에서 이름을 바로 고칠 수 있어요.';
-  document.getElementById('inactiveList').innerHTML=
-    '<p style="margin:6px 0 2px;font-size:12px;font-weight:700">이번 주 미시작 ('+notStarted.length+'명)</p><div>'+mk(notStarted)+'</div>'
-    +'<p style="margin:10px 0 2px;font-size:12px;font-weight:700">3일 이상 미접속 ('+away.length+'명)</p><div>'+mk(away)+'</div>';
+  document.getElementById('inactiveNote').textContent='이번 주 아직 0장인 지체와 3일 이상 들어오지 않은 지체예요. 따뜻한 한마디로 응원해 주세요.';
+  const il=document.getElementById('inactiveList');il.textContent='';
+  const sec=(title,arr)=>{const p=document.createElement('p');p.className='inact-h';p.textContent=title+' ('+arr.length+'명)';il.appendChild(p);
+    const d=document.createElement('div');
+    if(!arr.length){const s=document.createElement('span');s.className='sub';s.textContent='없어요 🎉';d.appendChild(s)}
+    arr.forEach(m=>{const s=document.createElement('span');s.className='pill';s.textContent=displayName(m);d.appendChild(s)});il.appendChild(d)};
+  sec('이번 주 아직 시작 전',notStarted);sec('3일 이상 미접속',away);
 }
-document.getElementById('wPrev').addEventListener('click',()=>{viewWeek--;renderHome()});
-document.getElementById('wNext').addEventListener('click',()=>{viewWeek++;renderHome()});
-document.getElementById('wToday').addEventListener('click',()=>{viewWeek=todayWeek();renderHome()});
 
 /* ================= 읽기 ================= */
-let curB=1,curC=1,observer=null,maxVerse=0,dirtyVerse=false;
+let curB=1,curC=1,observer=null,maxVerse=0,dirtyVerse=false,openB=0,openC=0,readReq=false;
 function initReader(){
   if(document.getElementById('bookSel').options.length)return;
   const bs=document.getElementById('bookSel');
@@ -747,7 +834,10 @@ function initReader(){
   bs.addEventListener('change',fillChaps);
   document.getElementById('openBtn').addEventListener('click',()=>{curB=+bs.value;curC=+document.getElementById('chapSel').value;openChapter()});
   fillChaps();
-  if(state.lastRead){curB=state.lastRead.b;curC=state.lastRead.c;bs.value=curB;fillChaps();document.getElementById('chapSel').value=curC;openChapter()}   /* 앱을 다시 켜면 ★마지막 읽던 절로 이동 + 「이어서 읽기」 */
+  if(readReq)return;
+  if(state.lastRead){curB=state.lastRead.b;curC=state.lastRead.c;bs.value=curB;fillChaps();document.getElementById('chapSel').value=curC;openChapter()}
+  else{document.getElementById('readerTitle').textContent='읽을 성경을 골라 주세요';const rb=document.getElementById('readerBody');rb.textContent='';
+    const p=document.createElement('p');p.className='no-bible';p.textContent='위에서 책과 장을 고르고 「본문 열기」를 누르거나, 홈의 「성경 고르기」에서 골라도 돼요.';rb.appendChild(p)}   /* 앱을 다시 켜면 ★마지막 읽던 절로 이동 + 「이어서 읽기」 */
 }
 function fillChaps(){
   const b=BOOKS[+document.getElementById('bookSel').value-1];
@@ -755,11 +845,12 @@ function fillChaps(){
   for(let i=1;i<=b.c;i++){const o=document.createElement('option');o.value=i;o.textContent=i+'장';cs.appendChild(o)}
 }
 function openChapter(noScroll){
+  if(dirtyVerse&&openB){dirtyVerse=false;setVP(key(openB,openC),maxVerse);setLR(openB,openC,maxVerse);save()}   /* 장을 바꿔도 읽던 절 저장 */
   const title=document.getElementById('readerTitle');
   const body=document.getElementById('readerBody');
   const hint=document.getElementById('posHint');
   const chip=document.getElementById('resumeChip');
-  const b=BOOKS[curB-1];
+  const b=BOOKS[curB-1];openB=curB;openC=curC;
   title.textContent=b.n+' '+curC+'장';
   document.getElementById('chapReadChk').checked=!!state.readChapters[key(curB,curC)];
   maxVerse=state.versePos[key(curB,curC)]||0;
@@ -819,8 +910,8 @@ document.getElementById('readerBody').addEventListener('click',e=>{
   const p=e.target.closest('.verse');if(!p||!BIBLE)return;
   const v=+p.dataset.v,k=key(curB,curC),n=verseCount(curB,curC);
   maxVerse=v;dirtyVerse=false;
-  state.versePos[k]=v;state.lastRead={b:curB,c:curC,v};
-  if(n&&v>=n&&!state.readChapters[k]){state.readChapters[k]=Date.now();document.getElementById('chapReadChk').checked=true}
+  setVP(k,v);setLR(curB,curC,v);
+  if(n&&v>=n&&!state.readChapters[k]){markRead(k,true);document.getElementById('chapReadChk').checked=true}
   document.getElementById('resumeChip').classList.add('hidden');
   markHere();save();renderHome();
 });
@@ -832,86 +923,134 @@ function renderPosHint(){
 }
 document.getElementById('chapReadChk').addEventListener('change',e=>{
   const k=key(curB,curC);
-  if(e.target.checked)state.readChapters[k]=Date.now();
-  else delete state.readChapters[k];
-  state.lastRead={b:curB,c:curC,v:maxVerse||1};
+  markRead(k,e.target.checked);
+  setLR(curB,curC,maxVerse||1);
   save();renderHome();
 });
+/* 이전 장 · 다음 장 */
+function stepChap(d){let b=curB,c=curC+d;
+  if(c<1){b--;if(b<1)return;c=BOOKS[b-1].c}else if(c>BOOKS[b-1].c){b++;if(b>66)return;c=1}
+  goRead(b,c)}
+document.getElementById('prevChap').addEventListener('click',()=>stepChap(-1));
+document.getElementById('nextChap').addEventListener('click',()=>stepChap(1));
 setInterval(()=>{ // 읽는 위치 주기 저장
   if(dirtyVerse){
     dirtyVerse=false;
-    state.versePos[key(curB,curC)]=maxVerse;
-    state.lastRead={b:curB,c:curC,v:maxVerse};
+    if(openB){setVP(key(openB,openC),maxVerse);setLR(openB,openC,maxVerse)}
     save();
   }
 },4000);
 function flushNow(){
   if(dirtyVerse){
     dirtyVerse=false;
-    state.versePos[key(curB,curC)]=maxVerse;
-    state.lastRead={b:curB,c:curC,v:maxVerse};
+    if(openB){setVP(key(openB,openC),maxVerse);setLR(openB,openC,maxVerse)}
   }
-  persist();pushMe();
+  persist();clearTimeout(syncT);pushMe();
 }
 window.addEventListener('pagehide',flushNow);
 window.addEventListener('visibilitychange',()=>{if(document.hidden)flushNow()});
 
-/* ===== 내 배지 · 한 주 완독 축하 (V1.2) ===== */
-const BADGE_NAMES=['첫 걸음','한 주 완독','4주 연속','구약 완독','신약 완독','성경 완독'];
-function weekDone(o,w){const p=weekProg(o,w);return p.total>0&&p.done>=p.total}
+/* ===== 내 도전 · 배지 · 책 완독 축하 (V2.0) ===== */
+const GOALS=[
+  {id:'book1w',n:'1주 1권',d:'한 주에 성경 한 권을 처음부터 끝까지',wk:0},
+  {id:'nt1y',n:'1년 신약 1독',d:'신약 260장 · 일주일에 5장 정도',wk:5,from:40,to:66},
+  {id:'ot1y',n:'1년 구약 1독',d:'구약 929장 · 일주일에 18장 정도',wk:18,from:1,to:39}];
+function weeklyTarget(o){const g=o.goals||{};return GOALS.reduce((s,x)=>s+((g[x.id]&&g[x.id].on)?x.wk:0),0)}
+function goalTxt(m){const g=m.goals||{};const on=GOALS.filter(x=>g[x.id]&&g[x.id].on).map(x=>x.n);return on.length?' · '+on.join(' · '):''}
 function booksDone(o,from,to){for(let b=from;b<=to;b++)for(let c=1;c<=BOOKS[b-1].c;c++)if(chapPart(o,b,c)<1)return false;return true}
+function bookDoneAt(o,b){let mx=0;for(let c=1;c<=BOOKS[b-1].c;c++){const t=+(o.readChapters||{})[key(b,c)]||0;if(!t)return 0;mx=Math.max(mx,t)}return mx}
+function goalStatus(x,gs){
+  const at=+gs.at||Date.now(),rc=state.readChapters;
+  if(x.id==='book1w'){const tw=todayWeek();let n=0;for(let b=1;b<=66;b++){const t=bookDoneAt(state,b);if(t>1e12&&weekOf(t)===tw)n++}
+    return n?'이번 주 '+n+'권 완독 ✓':'이번 주는 아직 — 짧은 책부터 도전해 보세요'}
+  let n=0,total=0;for(let b=x.from;b<=x.to;b++)for(let c=1;c<=BOOKS[b-1].c;c++){total++;if((+rc[key(b,c)]||0)>=at)n++}
+  const days=Math.max(0,(Date.now()-at)/864e5),expect=Math.min(total,Math.round(total*days/365)),diff=n-expect;
+  return n+' / '+total+'장 · '+(diff>=0?'예정보다 '+diff+'장 앞서요 👍':'예정보다 '+(-diff)+'장 늦어요 — 천천히 따라와요');
+}
+function renderGoals(){
+  const box=document.getElementById('goalList');if(!box)return;box.textContent='';
+  const g=state.goals||{};
+  GOALS.forEach(x=>{
+    const on=!!(g[x.id]&&g[x.id].on);
+    const row=document.createElement('div');row.className='goal'+(on?' on':'');
+    const main=document.createElement('div');main.className='goal-main';
+    const b=document.createElement('b');b.textContent=x.n;const d=document.createElement('span');d.textContent=x.d;
+    main.appendChild(b);main.appendChild(d);
+    if(on){const st=document.createElement('em');st.textContent=goalStatus(x,g[x.id]);main.appendChild(st)}
+    const btn=document.createElement('button');btn.type='button';btn.className=on?'ghost':'primary';btn.textContent=on?'그만하기':'도전하기';
+    btn.addEventListener('click',()=>{
+      if(on&&!confirm('「'+x.n+'」 도전을 그만할까요? (읽은 기록은 그대로 남아요)'))return;
+      state.goals=state.goals||{};const prev=state.goals[x.id]||{};
+      state.goals[x.id]={on:!on,at:on?(+prev.at||Date.now()):Date.now(),t:Date.now()};
+      save();renderHome();
+    });
+    row.appendChild(main);row.appendChild(btn);box.appendChild(row);
+  });
+}
+const BADGES=[
+  {id:'start',n:'첫 걸음',img:1},{id:'book1w',n:'1주 1권',img:2},{id:'streak4',n:'4주 연속',img:3},
+  {id:'ot',n:'구약 완독',img:4},{id:'nt',n:'신약 완독',img:5},{id:'all',n:'성경 완독',img:6},
+  {id:'ot1y',n:'1년 구약 1독',img:4,rib:'1년'},{id:'nt1y',n:'1년 신약 1독',img:5,rib:'1년'}];
 function earnedBadges(o){
-  let any=false,run=0,best=0;
-  for(let w=0;w<planWeeks();w++){if(weekDone(o,w)){any=true;run++;if(run>best)best=run}else run=0}
-  const started=Object.keys(o.readChapters||{}).length>0||Object.values(o.versePos||{}).some(v=>v>0);
+  const rc=o.readChapters||{};
+  const started=Object.keys(rc).length>0||Object.values(o.versePos||{}).some(v=>v>0);
+  let book1w=false;
+  for(let b=1;b<=66&&!book1w;b++){let mn=Infinity,mx=0,ok=true;
+    for(let c=1;c<=BOOKS[b-1].c;c++){const t=+rc[key(b,c)]||0;if(t<1e12){ok=false;break}mn=Math.min(mn,t);mx=Math.max(mx,t)}
+    if(ok&&weekOf(mn)===weekOf(mx))book1w=true}
+  const wks=new Set();for(const k in rc){const t=+rc[k]||0;if(t>1e12)wks.add(weekOf(t))}
+  let streak4=false;wks.forEach(w=>{if(wks.has(w+1)&&wks.has(w+2)&&wks.has(w+3))streak4=true});
   const ot=booksDone(o,1,39),nt=booksDone(o,40,66);
-  return[started,any,best>=4,ot,nt,ot&&nt];
+  const inYear=(from,to,id)=>{const g=(o.goals||{})[id];if(!g||!g.at||!booksDone(o,from,to))return false;let mx=0;
+    for(let b=from;b<=to;b++)for(let c=1;c<=BOOKS[b-1].c;c++){const t=+rc[key(b,c)]||0;if(t<+g.at)return false;mx=Math.max(mx,t)}
+    return mx-(+g.at)<=366*864e5};
+  return{start:started,book1w,streak4,ot,nt,all:ot&&nt,ot1y:inYear(1,39,'ot1y'),nt1y:inYear(40,66,'nt1y')};
 }
 function renderBadges(){
   const g=document.getElementById('badgeGrid');if(!g)return;
   const e=earnedBadges(state);g.textContent='';
-  BADGE_NAMES.forEach((n,i)=>{
-    const d=document.createElement('div');d.className='bdg'+(e[i]?' on':'');
-    const im=document.createElement('img');im.src='img/badge-'+(i+1)+'.png';im.alt=n;im.loading='lazy';
-    const s=document.createElement('span');s.textContent=(e[i]?'':'🔒 ')+n;
-    d.appendChild(im);d.appendChild(s);g.appendChild(d);
+  BADGES.forEach(x=>{
+    const d=document.createElement('div');d.className='bdg'+(e[x.id]?' on':'');
+    const im=document.createElement('img');im.src='img/badge-'+x.img+'.png';im.alt=x.n;im.loading='lazy';d.appendChild(im);
+    if(x.rib){const r=document.createElement('i');r.className='rib';r.textContent=x.rib;d.appendChild(r)}
+    const s=document.createElement('span');s.textContent=(e[x.id]?'':'🔒 ')+x.n;d.appendChild(s);
+    g.appendChild(d);
   });
 }
 let celeReady=false;
 function checkCelebrate(){
-  state.celebrated=state.celebrated||{};
-  let hit=-1;
-  for(let w=0;w<planWeeks();w++){
-    if(weekDone(state,w)&&!state.celebrated[w]){state.celebrated[w]=Date.now();if(celeReady)hit=w}
-  }
-  if(!celeReady){celeReady=true;persist();return}   /* 앱을 켤 때 이미 끝난 주는 조용히 넘긴다 */
-  if(hit>=0){persist();
-    document.getElementById('celeText').textContent=(hit+1)+'주차에 읽을 장을 모두 읽으셨어요. 수고하셨습니다!';
+  state.celebrated=state.celebrated||{};let hit=0;
+  for(let b=1;b<=66;b++){if(!state.celebrated['b'+b]&&booksDone(state,b,b)){state.celebrated['b'+b]=Date.now();if(celeReady)hit=b}}
+  if(!celeReady){celeReady=true;persist();return}   /* 앱을 켤 때 이미 끝난 책은 조용히 넘긴다 */
+  if(hit){persist();
+    document.getElementById('celeTitle').textContent=BOOKS[hit-1].n+' 완독!';
+    document.getElementById('celeText').textContent=BOOKS[hit-1].n+' '+BOOKS[hit-1].c+'장을 끝까지 읽으셨어요. 지나고 되돌아보면, 남는 것은 말씀을 읽은 시간입니다 🙏';
     document.getElementById('celebrate').classList.remove('hidden');}
 }
 document.getElementById('celeClose').addEventListener('click',()=>document.getElementById('celebrate').classList.add('hidden'));
 
 /* ================= 현황 ================= */
 function renderStatus(){
-  const list=document.getElementById('memberList');
-  const arr=Object.values(MEMBERS);
-  document.getElementById('memberCount').textContent=arr.length
-    ?'총 '+arr.length+'명 · 이번 주('+ (viewWeek+1) +'주차) 기준'
-    :'아직 아무도 없어요. 초대 링크를 공유해 보세요.';
-  document.getElementById('emptyArt').classList.toggle('hidden',arr.length>0);
-  arr.sort((a,b)=>{
-    const pa=weekProg(a,viewWeek),pb=weekProg(b,viewWeek);
-    return pb.done/pb.total-pa.done/pa.total||pct(totalProg(b))-pct(totalProg(a));
+  const list=document.getElementById('memberList');list.textContent='';
+  const arr=memberListForViews(),tw=todayWeek();
+  const others=arr.filter(m=>m.uid!==state.uid).length;
+  document.getElementById('memberCount').textContent=others
+    ?'우리 '+arr.length+'명이 함께 읽고 있어요 · 이번 주 읽은 장 순'
+    :'아직 나 혼자예요. 설정 탭의 초대 링크를 모임 방에 올려 주세요.';
+  document.getElementById('emptyArt').classList.toggle('hidden',others>0);
+  arr.sort((a,b)=>weekProg(b,tw).done-weekProg(a,tw).done||pct(totalProg(b))-pct(totalProg(a)));
+  arr.forEach((m,i)=>{
+    const wp=weekProg(m,tw),tp=totalProg(m);
+    const lr=(!m.priv&&m.lastRead&&BOOKS[m.lastRead.b-1])?BOOKS[m.lastRead.b-1].s+' '+m.lastRead.c+':'+(m.lastRead.v||1):'';
+    const row=document.createElement('div');row.className='member';
+    const rk=document.createElement('div');rk.className='rank';rk.textContent=i+1;
+    const info=document.createElement('div');info.className='info';
+    const b=document.createElement('b');b.textContent=displayName(m)+(m.uid===state.uid?' (나)':'');
+    const sm=document.createElement('small');sm.textContent=pct1(tp)+'% · '+ago(m.lastActive);b.appendChild(sm);
+    const bar=document.createElement('div');bar.className='mbar';const bi=document.createElement('i');bi.style.width=pct(tp)+'%';bar.appendChild(bi);
+    const meta=document.createElement('div');meta.className='meta';meta.textContent='이번 주 '+wp.done+'장'+goalTxt(m)+(lr?' · 마지막 '+lr:'');
+    info.appendChild(b);info.appendChild(bar);info.appendChild(meta);row.appendChild(rk);row.appendChild(info);list.appendChild(row);
   });
-  list.innerHTML=arr.map((m,i)=>{
-    const p=weekProg(m,viewWeek),tp=pct(totalProg(m));
-    const lr=m.priv?'':(m.lastRead&&BOOKS[m.lastRead.b-1]?BOOKS[m.lastRead.b-1].s+' '+m.lastRead.c+':'+(m.lastRead.v||1):'');
-    const me=m.uid===state.uid?' (나)':'';
-    return '<div class="member"><div class="rank">'+(i+1)+'</div>'
-      +'<div class="info"><b>'+esc(displayName(m))+me+'<small>'+tp+'% · '+ago(m.lastActive)+'</small></b>'
-      +'<div class="mbar"><i style="width:'+pct(p)+'%"></i></div>'
-      +'<div class="meta">이번 주 '+p.done+'/'+p.total+'장'+(lr?' · 마지막 '+esc(lr):'')+'</div></div></div>';
-  }).join('');
 }
 
 /* ================= 설정 ================= */
@@ -923,18 +1062,13 @@ function renderSet(){
   document.getElementById('groupCodeTxt').textContent=state.group||'—';
   const link=cleanLink();
   document.getElementById('shareLink').textContent=link;
-  document.getElementById('startDateInput').value=state.planStart||'';
-  document.getElementById('planInfo').textContent='전체 '+planWeeks()+'주 · 총 '+TOTAL+'장 → 주당 약 '+Math.ceil(TOTAL/planWeeks())+'장';
   renderConn();
 }
 function renderConn(){
   const el=document.getElementById('connDetail');
-  const t={
-    cloud:'Firebase 실시간 연결 — 모든 멤버의 진도가 즉시 공유됩니다.',
-    sheets:'읽은 기록은 자동으로 저장되고 함께 읽는 지체들과 나눠져요.',
-    gist:'GitHub Gist 연결 — 20초마다 갱신됩니다.',
-    local:'로컬 모드: 이 기기에만 저장됩니다. 공유하려면 config.js 에 backend 설정을 넣어주세요 (README 참고).'};
-  el.textContent=t[MODE]||t.local;
+  el.textContent=MODE==='local'
+    ?'지금은 이 폰에만 저장돼요.'
+    :'읽은 기록은 자동으로 저장되고 함께 읽는 지체들과 나눠져요. 다른 폰에서도 같은 이름'+(PRIV_MODE!=='off'?'과 비밀번호 4자리':'')+'로 들어오면 이어 읽을 수 있어요.';
 }
 document.getElementById('saveNameBtn').addEventListener('click',()=>{
   const v=document.getElementById('nameInput').value.trim();
@@ -944,10 +1078,6 @@ document.getElementById('saveNameBtn').addEventListener('click',()=>{
     state.alias=state.privacy?('비공개#'+hashName(state.uid+'x').slice(0,4)):'';
     save();location.reload();
   }
-});
-document.getElementById('saveDateBtn').addEventListener('click',()=>{
-  state.planStart=document.getElementById('startDateInput').value;
-  PLAN=null;viewWeek=todayWeek();save();renderSet();renderHome();alert('시작일을 저장했어요.');
 });
 document.getElementById('copyLinkBtn').addEventListener('click',()=>{
   const link=cleanLink();
@@ -961,14 +1091,14 @@ document.getElementById('leaveGroupBtn').addEventListener('click',()=>{
 });
 
 document.getElementById('csvBtn').addEventListener('click',()=>{
-  const list=memberListForViews();const W=planWeeks();
+  const list=memberListForViews(),tw=todayWeek(),W=8;
   let csv='\uFEFF이름';
-  for(let w=0;w<W;w++)csv+=','+(w+1)+'주';
-  csv+=',전체\n';
+  for(let i=W-1;i>=0;i--){const d=weekStart(tw-i);csv+=','+(d.getMonth()+1)+'/'+d.getDate()+'주(장)'}
+  csv+=',전체(%),구약(%),신약(%)\n';
   list.forEach(m=>{
     csv+='"'+displayName(m)+'"';
-    for(let w=0;w<W;w++)csv+=','+pct(weekProg(m,w));
-    csv+=','+pct(totalProg(m))+'\n';
+    for(let i=W-1;i>=0;i--)csv+=','+weekProg(m,tw-i).done;
+    csv+=','+pct(totalProg(m))+','+pct(rangeProg(m,1,39))+','+pct(rangeProg(m,40,66))+'\n';
   });
   if(navigator.clipboard)navigator.clipboard.writeText(csv).then(()=>alert('복사했어요. 스프레드시트에 붙여넣으세요.'),()=>prompt('아래 내용을 복사하세요',csv));
   else prompt('아래 내용을 복사하세요',csv);
@@ -1015,7 +1145,8 @@ function howtoBlock(withStart){
     list('ol',s);
   }
   h('✋ 읽는 법');
-  list('ul',[['홈','→ 오늘 읽을 장의 「읽기 ›」를 눌러요'],
+  list('ul',[['성경 고르기','— 홈에서 읽고 싶은 책 → 장을 눌러요'],
+             ['내 도전','— 1주 1권 · 1년 신약 · 1년 구약 중 내 속도에 맞게'],
              ['절을 톡','누르면 거기까지 읽음으로 저장돼요'],
              ['마지막 절','을 누르면 그 장은 「다 읽음」'],
              ['중간에 나가도','다음에 읽던 절부터 이어져요'],
@@ -1025,6 +1156,7 @@ function howtoBlock(withStart){
   const tp=t=>{const e=document.createElement('p');e.textContent=t;tip.appendChild(e)};
   tp('💡 다음에 들어올 때 — 같은 폰이면 링크만 누르면 바로 열려요. 다른 폰이면 같은 이름'+(PRIV_MODE!=='off'?' + 같은 비밀번호 4자리':'')+'를 넣으면 기록이 이어져요.');
   tp('💡 이 링크를 카톡 「나와의 채팅」 등 내 채팅방에 복사해 두세요. 다음에 거기서 누르면 바로 들어와요.');
+  tp('💡 홈 화면에 앱처럼 두기 — 아이폰: 사파리 아래 공유(□↑) → 「홈 화면에 추가」 · 안드로이드: 크롬 ⋮ → 「홈 화면에 추가」');
   tp('💡 이름이 같은 분이 있으면 이름 뒤에 구분을 붙여 주세요 (예: 김은혜2).');
   const cb=document.createElement('button');cb.className='ghost-btn';cb.type='button';cb.textContent='📋 이 링크 복사하기';
   cb.addEventListener('click',()=>{const l=cleanLink();
@@ -1062,7 +1194,7 @@ function renderFeed(){
     av.textContent=m.priv?'🔒':String(m.name||'?').trim().slice(0,1);
     const main=document.createElement('div');main.className='feed-main';
     const b=document.createElement('b');b.textContent=(m.priv?(m.name||'비공개'):displayName(m))+(m.uid===state.uid?' (나)':'');   /* 자물쇠는 동그라미에만 */
-    const s=document.createElement('span');s.textContent='이번 주 '+p.done+'/'+p.total+'장'+(lr?' · '+lr+'까지':'');
+    const s=document.createElement('span');s.textContent='이번 주 '+p.done+'장'+goalTxt(m)+(lr?' · '+lr+'까지':'');
     main.appendChild(b);main.appendChild(s);
     const t=document.createElement('div');t.className='feed-time';t.textContent=ago(m.lastActive);
     row.appendChild(av);row.appendChild(main);row.appendChild(t);box.appendChild(row);
@@ -1098,19 +1230,24 @@ document.getElementById('suJoin').addEventListener('click',()=>{
   };
   const u=CFG.sheets&&CFG.sheets.webAppUrl;
   if(CFG.backend==='sheets'&&u){ // 기존 등록분과 비밀번호가 일치하는지 서버에서 확인
-    fetch(u+'?action=check&g='+encodeURIComponent(sheetGroup(g))+'&uid='+encodeURIComponent(uid)+'&ph='+encodeURIComponent(pinHash)+'&t='+Date.now(),{cache:'no-store'})
-      .then(r=>r.json())
-      .then(d=>{
+    /* 가입 확인 (V2.0) — 확인 중에는 버튼을 잠그고, 연결이 안 되면 들어가지 않는다 (잘못된 비번이 남의 기록을 받아 가는 빈틈 차단) */
+    const jb=document.getElementById('suJoin');jb.disabled=true;jb.textContent='확인 중…';
+    const reset=()=>{jb.disabled=false;jb.textContent='참여하기'};
+    const curl=u+'?action=check&g='+encodeURIComponent(sheetGroup(g))+'&uid='+encodeURIComponent(uid)+'&ph='+encodeURIComponent(pinHash);
+    const tryCheck=n=>fetch(curl+'&t='+Date.now(),{cache:'no-store'}).then(r=>r.json())
+      .catch(e=>{if(n>0)return new Promise(r=>setTimeout(r,1500)).then(()=>tryCheck(n-1));throw e});
+    tryCheck(1).then(d=>{reset();
         if(d&&d.exists&&!d.pinOk){alert('이미 등록된 이름이에요. 처음에 정한 비밀번호 4자리를 넣어주세요.\n(다른 분이면 이름 뒤에 구분을 붙여 주세요. 예: 김은혜2)');return}
         finish();
       })
-      .catch(()=>finish());   /* 연결이 안 되면 일단 들어간다 — 저장은 시트에서 내 기록을 받은 뒤에만 */
+      .catch(()=>{reset();alert('인터넷 연결이 불안정해요. 잠깐 뒤에 다시 「참여하기」를 눌러 주세요.')});
   }else finish();
 });
 
 /* ================= 초기화 ================= */
 function startApp(){
   document.getElementById('groupLabel').textContent=CFG.groupName||'모임';
+  gridTest=(state.lastRead&&state.lastRead.b<=39)?'ot':'nt';
   renderHome();renderStatus();
   initCloud();
   if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
@@ -1125,7 +1262,8 @@ function startApp(){
     if(!state.planStart)state.planStart=new Date().toISOString().slice(0,10);
     startApp();
   }else{
-    showSetup(urlG||CFG.groupId||'');
+    showSetup(CFG.groupId||urlG||'');
+    if(REJOIN_NAME)document.getElementById('suName').value=REJOIN_NAME;
   }
 })();
 </script>

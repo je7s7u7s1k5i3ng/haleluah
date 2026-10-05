@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>이런 기능이 있었으면 좋겠어요 · 성경 읽기</title>
+<meta name="theme-color" content="#4a2c1c"/>
+<meta name="description" content="요한순교자 성경 읽기 앱 — 원하는 기능을 익명으로 적어 주세요"/>
+<meta property="og:title" content="이런 기능이 있었으면 좋겠어요 · 성경 읽기"/>
+<meta property="og:description" content="이름 없이(익명) 적어 주시면 모아서 앱에 반영할게요."/>
+<meta property="og:image" content="https://je7s7u7s1k5i3ng.github.io/haleluah/bible-reading/pw/img/og.jpg"/>
+<link rel="icon" href="../pw/icon-192.png"/>
+<link rel="apple-touch-icon" href="../pw/img/apple-touch-icon.png"/>
+<style>
+@font-face{font-family:'SBAggroL';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');font-display:swap}
+@font-face{font-family:'SBAggroM';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');font-display:swap}
+@font-face{font-family:'SBAggroB';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');font-display:swap}
+:root{--bg:#f6f1e6;--card:#fffdf8;--ink:#33281f;--sub:#8a7563;--accent:#7a3b2e;--gold:#b98a4e;--line:#e5dbca;--ok:#4c7a3f}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg) url(../pw/img/paper.jpg) repeat;background-size:600px;color:var(--ink);
+  font-family:'SBAggroM','Noto Sans KR',system-ui,sans-serif;padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+.topband{background:#4a2c1c url(../pw/img/header.jpg) center/cover no-repeat;padding-top:env(safe-area-inset-top);box-shadow:0 2px 8px rgba(40,20,10,.18)}
+.top{max-width:640px;margin:0 auto;padding:14px;display:flex;align-items:center;gap:10px}
+.top img{width:38px;height:38px;border-radius:11px;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.top h1{margin:0;font-size:17px;color:#f6f0e2;font-family:'SBAggroB','Noto Sans KR',sans-serif}
+.top p{margin:0;font-size:11px;color:#e2cfb1}
+main{max-width:640px;margin:0 auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.quote{margin:0 0 12px;padding:12px 14px;border-left:4px solid var(--gold);background:rgba(255,253,248,.92);border-radius:0 12px 12px 0}
+.quote p{margin:0;font-family:'SBAggroB','Noto Sans KR',sans-serif;font-size:15px;line-height:1.5;color:var(--accent)}
+.quote cite{display:block;margin-top:4px;font-style:normal;font-size:11.5px;color:var(--sub)}
+h2{margin:0 0 6px;font-size:18px;font-family:'SBAggroB','Noto Sans KR',sans-serif;color:var(--accent)}
+.sub{color:var(--sub);font-size:13px;line-height:1.6;margin:0 0 12px}
+.ex{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.ex button{border:1px solid var(--line);background:#f7f1e4;border-radius:16px;padding:8px 12px;font-family:inherit;font-size:13px;color:var(--ink);touch-action:manipulation}
+textarea{width:100%;min-height:140px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;
+  font-family:'SBAggroL','Noto Sans KR',sans-serif;font-size:16px;line-height:1.6;color:var(--ink);resize:vertical}
+.count{text-align:right;font-size:11px;color:var(--sub);margin:4px 2px 10px}
+.primary{width:100%;min-height:50px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:16px;font-weight:700;font-family:inherit;touch-action:manipulation}
+.primary:disabled{opacity:.6}
+.msg{margin:12px 0 0;padding:12px;border-radius:12px;font-size:14px;line-height:1.6;display:none}
+.msg.ok{display:block;background:#eef4ea;color:#3d6a32}
+.msg.wait{display:block;background:#fff5e0;color:#8a5a12}
+.back{display:block;text-align:center;margin-top:14px;color:var(--accent);font-size:14px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="topband"><div class="top">
+  <img src="../pw/img/icon-96.png" alt=""/>
+  <div><h1>성경 읽기</h1><p>요한순교자 · 함께 성경 읽기</p></div>
+</div></div>
+<main>
+  <blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀을 읽은 시간이다”</p><cite>— 황선주 목사님</cite></blockquote>
+  <div class="card">
+    <h2>💬 이런 기능이 있었으면 좋겠어요</h2>
+    <p class="sub">함께 쓰는 성경 읽기 앱을 더 좋게 만들려고 해요.<br/><b>이름 없이(익명)</b> 보내져요. 누가 썼는지는 저장되지 않아요.<br/>보내주신 의견을 모아서 앱에 반영할게요 🙏</p>
+    <div class="ex" id="ex">
+      <button type="button">글씨를 더 크게</button>
+      <button type="button">매일 읽기 알림</button>
+      <button type="button">말씀 듣기(음성)</button>
+      <button type="button">오늘 읽은 말씀 나누기</button>
+      <button type="button">기도 제목 함께 나누기</button>
+    </div>
+    <textarea id="t" maxlength="500" placeholder="자유롭게 적어 주세요. 위 예시를 눌러도 돼요."></textarea>
+    <div class="count" id="cnt">0 / 500</div>
+    <button class="primary" id="send" type="button">익명으로 보내기</button>
+    <div class="msg" id="msg"></div>
+    <a class="back" id="back" href="../pw/">← 성경 읽기로 돌아가기</a>
+  </div>
+</main>
+<script>
+'use strict';
+/* 익명 의견 보내기 — 이름·기기 정보 없이 글만. 시트 V1.2 의 action=feedback 로 저장하고 ★저장됐는지 확인한 뒤에만 「고맙습니다」
+   시트가 아직 준비 전이거나 연결이 끊기면 이 폰에 보관했다가 다음에 이 페이지를 열 때 다시 보낸다 */
+const GS='https://script.google.com/macros/s/AKfycbyQ2mflyh6BqfislEjV544FIGUY5jSZ7lgbbELI7zQoWKOid6XXixV65JkwsSD3CGJzYA/exec';
+const QK='bibleApp.feedbackQueue';
+const ver=(document.referrer.indexOf('/open/')>=0)?'공개':(document.referrer.indexOf('/pw/')>=0?'비번':'링크');
+if(document.referrer.indexOf('/open/')>=0)document.getElementById('back').href='../open/';
+if(!document.referrer)document.getElementById('back').classList.add('hidden');
+const t=document.getElementById('t'),cnt=document.getElementById('cnt'),btn=document.getElementById('send'),msg=document.getElementById('msg');
+const upd=()=>{cnt.textContent=t.value.length+' / 500'};
+t.addEventListener('input',upd);
+document.getElementById('ex').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  t.value=(t.value.trim()?t.value.trim()+'\n':'')+b.textContent+' — ';t.focus();upd()});
+function readQ(){try{return JSON.parse(localStorage.getItem(QK)||'[]')}catch(e){return[]}}
+function writeQ(q){try{localStorage.setItem(QK,JSON.stringify(q))}catch(e){}}
+function sendOne(text,v){
+  return fetch(GS+'?action=feedback&ver='+encodeURIComponent(v)+'&text='+encodeURIComponent(text)+'&t='+Date.now(),{cache:'no-store'})
+    .then(r=>r.json()).then(d=>{if(!d||!d.saved)throw new Error('not-ready');return true});
+}
+function show(cls,txt){msg.className='msg '+cls;msg.textContent=txt}
+function flushQ(){
+  const q=readQ();if(!q.length)return Promise.resolve(0);
+  return sendOne(q[0].text,q[0].ver).then(()=>{writeQ(readQ().slice(1));return flushQ().then(n=>n+1)}).catch(()=>0);
+}
+btn.addEventListener('click',()=>{
+  const text=t.value.trim();
+  if(text.length<2){show('wait','한두 마디라도 적어 주세요 🙂');return}
+  btn.disabled=true;btn.textContent='보내는 중…';
+  sendOne(text.slice(0,500),ver).then(()=>{
+    t.value='';upd();show('ok','고맙습니다! 익명으로 잘 전해졌어요 🙏 또 생각나면 언제든 적어 주세요.');
+  }).catch(()=>{
+    const q=readQ();q.push({text:text.slice(0,500),ver});writeQ(q);
+    t.value='';upd();show('wait','지금은 전송이 잠시 어려워 이 폰에 보관했어요. 다음에 이 페이지를 열면 자동으로 보내져요.');
+  }).finally(()=>{btn.disabled=false;btn.textContent='익명으로 보내기'});
+});
+flushQ().then(n=>{if(n)show('ok','지난번에 보관해 둔 의견 '+n+'개도 방금 전해졌어요 🙏')});
+</script>
+</body>
+</html>
