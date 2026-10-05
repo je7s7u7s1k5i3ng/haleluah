@@ -8,9 +8,9 @@
 <meta name="description" content="요한순교자 성경 읽기 앱 — 원하는 기능을 익명으로 적어 주세요"/>
 <meta property="og:title" content="이런 기능이 있었으면 좋겠어요 · 성경 읽기"/>
 <meta property="og:description" content="이름 없이(익명) 적어 주시면 모아서 앱에 반영할게요."/>
-<meta property="og:image" content="https://je7s7u7s1k5i3ng.github.io/haleluah/bible-reading/pw/img/og.jpg"/>
-<link rel="icon" href="../pw/icon-192.png"/>
-<link rel="apple-touch-icon" href="../pw/img/apple-touch-icon.png"/>
+<meta property="og:image" content="https://je7s7u7s1k5i3ng.github.io/haleluah/bible-reading/app/img/og.jpg"/>
+<link rel="icon" href="../app/icon-192.png"/>
+<link rel="apple-touch-icon" href="../app/img/apple-touch-icon.png"/>
 <style>
 @font-face{font-family:'SBAggroL';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');font-display:swap}
 @font-face{font-family:'SBAggroM';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');font-display:swap}
@@ -18,9 +18,9 @@
 :root{--bg:#f6f1e6;--card:#fffdf8;--ink:#33281f;--sub:#8a7563;--accent:#7a3b2e;--gold:#b98a4e;--line:#e5dbca;--ok:#4c7a3f}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;background:var(--bg) url(../pw/img/paper.jpg) repeat;background-size:600px;color:var(--ink);
+body{margin:0;background:var(--bg) url(../app/img/paper.jpg) repeat;background-size:600px;color:var(--ink);
   font-family:'SBAggroM','Noto Sans KR',system-ui,sans-serif;padding-bottom:calc(24px + env(safe-area-inset-bottom))}
-.topband{background:#4a2c1c url(../pw/img/header.jpg) center/cover no-repeat;padding-top:env(safe-area-inset-top);box-shadow:0 2px 8px rgba(40,20,10,.18)}
+.topband{background:#4a2c1c url(../app/img/header.jpg) center/cover no-repeat;padding-top:env(safe-area-inset-top);box-shadow:0 2px 8px rgba(40,20,10,.18)}
 .top{max-width:640px;margin:0 auto;padding:14px;display:flex;align-items:center;gap:10px}
 .top img{width:38px;height:38px;border-radius:11px;box-shadow:0 2px 6px rgba(0,0,0,.35)}
 .top h1{margin:0;font-size:17px;color:#f6f0e2;font-family:'SBAggroB','Noto Sans KR',sans-serif}
@@ -48,11 +48,11 @@ textarea{width:100%;min-height:140px;padding:12px;border:1px solid var(--line);b
 </head>
 <body>
 <div class="topband"><div class="top">
-  <img src="../pw/img/icon-96.png" alt=""/>
+  <img src="../app/img/icon-96.png" alt=""/>
   <div><h1>성경 읽기</h1><p>요한순교자 · 함께 성경 읽기</p></div>
 </div></div>
 <main>
-  <blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀을 읽은 시간이다”</p><cite>— 황선주 목사님</cite></blockquote>
+  <blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀이다”</p><cite>— 황선주 목사님</cite></blockquote>
   <div class="card">
     <h2>💬 이런 기능이 있었으면 좋겠어요</h2>
     <p class="sub" style="background:#fff5e0;border:1px solid #f0d9a8;border-radius:10px;padding:10px 12px;color:#6b4a14">📣 지금은 <b>시험판 웹앱</b>이에요. 함께 써 보고 잘 되면 <b>플레이스토어 설치용 앱</b>으로 업데이트할 예정입니다.</p>
@@ -68,7 +68,7 @@ textarea{width:100%;min-height:140px;padding:12px;border:1px solid var(--line);b
     <div class="count" id="cnt">0 / 500</div>
     <button class="primary" id="send" type="button">익명으로 보내기</button>
     <div class="msg" id="msg"></div>
-    <a class="back" id="back" href="../pw/">← 성경 읽기로 돌아가기</a>
+    <a class="back" id="back" href="../app/">← 성경 읽기로 돌아가기</a>
   </div>
 </main>
 <script>
@@ -78,7 +78,7 @@ textarea{width:100%;min-height:140px;padding:12px;border:1px solid var(--line);b
 const GS='https://script.google.com/macros/s/AKfycbyQ2mflyh6BqfislEjV544FIGUY5jSZ7lgbbELI7zQoWKOid6XXixV65JkwsSD3CGJzYA/exec';
 const QK='bibleApp.feedbackQueue';
 const ver=(document.referrer.indexOf('/open/')>=0)?'공개':(document.referrer.indexOf('/pw/')>=0?'비번':'링크');
-if(document.referrer.indexOf('/open/')>=0)document.getElementById('back').href='../open/';
+if(document.referrer.indexOf('/open/')>=0)document.getElementById('back').href='../app/';
 if(!document.referrer)document.getElementById('back').classList.add('hidden');
 const t=document.getElementById('t'),cnt=document.getElementById('cnt'),btn=document.getElementById('send'),msg=document.getElementById('msg');
 const upd=()=>{cnt.textContent=t.value.length+' / 500'};
