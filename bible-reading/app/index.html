@@ -342,6 +342,11 @@ body.admin-mode .tabs button[data-tab="home"],body.admin-mode .tabs button[data-
 .adm-read .ing{color:var(--accent);font-weight:600}
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
+/* ===== V3.12 관리 캐릭터 지정 ===== */
+.adm-seat{display:flex;align-items:center;gap:3px;flex-wrap:wrap;margin:6px 0 2px;font-size:12px;color:var(--sub)}
+.adm-seat span{margin-right:4px}
+.adm-sb{width:38px;height:38px;padding:0;border:1px solid var(--line);border-radius:8px;background:#FBF8F1;cursor:pointer}
+.adm-sb img{width:36px;height:36px;display:block}.adm-sb.on{border:2px solid #E8B860}
 /* ===== V3.11 자리 모습 고르기 ===== */
 .seat-pick{background:#FBF3E0;border:1px solid #EBD7A8;border-radius:12px;padding:10px;margin:2px 0 10px}
 .seat-pick .sp-t{margin:0;font-weight:700;color:#1E2A55;font-size:14px}.seat-pick .sp-s{margin:2px 0 8px;font-size:11.5px;color:var(--sub)}
@@ -945,6 +950,16 @@ function renderAdminList(){
     if(names.length)names.forEach(n=>{const s=document.createElement('span');s.textContent='🏅 '+n;bw.appendChild(s)});
     else{const s=document.createElement('span');s.textContent='배지 아직 없음';bw.appendChild(s)}
     card.appendChild(bw);
+    {/* V3.12 관리 캐릭터 지정 — 지체의 앉는 캐릭터만 (지체가 나중에 직접 고르면 그게 이김) */
+      const cur=+m.seat||((m.seatPick&&+m.seatPick.v)||0),row=document.createElement('div');row.className='adm-seat';
+      const lb=document.createElement('span');lb.textContent='🪑 캐릭터 '+(cur?cur+'번':'(자동)');row.appendChild(lb);
+      SEAT_LOOKS.forEach(([v,t])=>{const b=document.createElement('button');b.type='button';b.className='adm-sb'+(cur===v?' on':'');b.title=t;
+        const im=document.createElement('img');im.src='img/seat-'+v+'.png';im.alt=t;b.appendChild(im);
+        b.addEventListener('click',()=>{if(!confirm((m.name||'')+' 님의 앉는 캐릭터를 '+v+'번('+t+')으로 바꿀까요?\n(본인이 나중에 직접 고르면 그게 우선이에요)'))return;
+          fetch(CFG.sheets.webAppUrl+'?action=seat&g='+encodeURIComponent(sheetGroup(state.group))+authQS()+'&target='+encodeURIComponent(m.uid)+'&v='+v+'&t='+Date.now(),{cache:'no-store'})
+            .then(r=>r.json()).then(d=>{if(d&&d.ok){m.seat=v;if(MEMBERS[m.uid])MEMBERS[m.uid].seat=v;renderAdminList();sheetsPull(true)}else alert('바꾸지 못했어요. 잠시 뒤 다시 해 주세요.')})
+            .catch(()=>alert('인터넷 연결을 확인해 주세요.'))});row.appendChild(b)});
+      card.appendChild(row)}
     const btn=document.createElement('button');btn.type='button';btn.className='ghost adm-reset';btn.textContent='비번 초기화';
     btn.addEventListener('click',()=>{
       if(!confirm((m.name||'')+' 님의 비밀번호를 초기화할까요?\n읽은 기록은 그대로 남고, 다음에 들어올 때 새 비밀번호를 정하게 돼요.'))return;
