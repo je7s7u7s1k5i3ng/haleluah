@@ -327,6 +327,23 @@
    "sold_out": false
   },
   {
+   "rank": "3",
+   "name": "영업용 배",
+   "category": "과일",
+   "price": "영업용 배 15kg 43,000원",
+   "note": "",
+   "image": "assets/pear-naju-20260702.jpg",
+   "options": [
+    {
+     "label": "15kg / 43,000원",
+     "value": "15kg / 43,000원",
+     "title": "옵션 선택"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false
+  },
+  {
    "rank": "1",
    "name": "특대 애플망고",
    "category": "과일",
@@ -813,28 +830,6 @@
     {
      "label": "4kg / 31,600원",
      "value": "4kg / 31,600원",
-     "title": "옵션 선택"
-    }
-   ],
-   "bulk_list": false,
-   "sold_out": false
-  },
-  {
-   "rank": "3",
-   "name": "영업용 배",
-   "category": "과일",
-   "price": "영업용 기스배 15kg 32-40과 38,000원 / 15Kg 16-26과 43,000원",
-   "note": "",
-   "image": "assets/pear-naju-20260702.jpg",
-   "options": [
-    {
-     "label": "15kg 32-40과 / 38,000원",
-     "value": "15kg 32-40과 / 38,000원",
-     "title": "옵션 선택"
-    },
-    {
-     "label": "15Kg 16-26과 / 43,000원",
-     "value": "15Kg 16-26과 / 43,000원",
      "title": "옵션 선택"
     }
    ],
