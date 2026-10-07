@@ -1,5 +1,5 @@
 /* 성경 읽기 - 서비스 워커 (오프라인 지원) */
-const CACHE = 'bible-cache-app-20261005o';
+const CACHE = 'bible-cache-app-20261005q';
 const ASSETS = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {
@@ -22,6 +22,7 @@ self.addEventListener('fetch', (e) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;
+  if (url.pathname.indexOf('/audio/') >= 0 && url.pathname.endsWith('.m4a')) return;   // V3.13 소리 파일은 건드리지 않는다 (아이폰 구간 요청 그대로)
 
   // bible.json 은 한 번 받으면 캐시 우선 (용량이 큼)
   if (url.pathname.endsWith('bible.json')) {

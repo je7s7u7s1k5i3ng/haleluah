@@ -11,6 +11,7 @@ window.APP_CONFIG = {
   startDate: '',
   storageKey: 'bibleApp.v3',
   privacyMode: 'named',
+  audioBase: 'https://pub-f04ff4ec924944709d64e0b325a9cce9.r2.dev/audio/',   // 성경 듣기 소리 (Cloudflare R2 · 버킷 yohan · 2026-10-07)
   backend: 'sheets',
   sheets: { webAppUrl: 'https://script.google.com/macros/s/AKfycbyQ2mflyh6BqfislEjV544FIGUY5jSZ7lgbbELI7zQoWKOid6XXixV65JkwsSD3CGJzYA/exec' }
 };
