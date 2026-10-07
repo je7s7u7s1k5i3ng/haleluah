@@ -13,11 +13,11 @@
 <meta name="format-detection" content="telephone=no"/>
 <link rel="icon" href="icon-192.png"/>
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png"/>
-<meta name="description" content="비밀번호로 이름을 가리고 함께 읽는 40주 성경 읽기"/>
+<meta name="description" content="지나고 되돌아보면, 남는 것은 말씀이다 — 요한순교자 함께 읽고 듣는 성경"/>
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="성경 읽기 · 이름은 가리고, 진도는 함께"/>
-<meta property="og:description" content="비밀번호로 이름을 가리고 함께 읽는 40주 성경 읽기"/>
-<meta property="og:image" content="https://je7s7u7s1k5i3ng.github.io/haleluah/bible-reading/pw/img/og.jpg"/>
+<meta property="og:title" content="요한순교자 · 함께 성경 읽기"/>
+<meta property="og:description" content="지나고 되돌아보면, 남는 것은 말씀이다 · 매일 함께 읽고 듣는 성경"/>
+<meta property="og:image" content="https://je7s7u7s1k5i3ng.github.io/haleluah/bible-reading/app/img/og.jpg"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta property="og:url" content="https://je7s7u7s1k5i3ng.github.io/haleluah/bible-reading/pw/"/>
@@ -495,7 +495,7 @@ h2{color:#1E2A55}
         <select id="bookSel"></select>
         <select id="chapSel"></select>
       </div>
-      <button id="openBtn" class="primary">본문 열기</button>
+      <button id="openBtn" class="primary hidden">본문 열기</button>   <!-- V3.15 책·장 고르면 바로 열림 → 버튼 숨김 (기능은 그대로) -->
       <div id="resumeChip" class="resume hidden"></div>
     </div>
     <div class="card">
@@ -1112,7 +1112,9 @@ function initReader(){
   if(document.getElementById('bookSel').options.length)return;
   const bs=document.getElementById('bookSel');
   BOOKS.forEach((b,i)=>{const o=document.createElement('option');o.value=i+1;o.textContent=b.n+' ('+b.s+')';bs.appendChild(o)});
-  bs.addEventListener('change',fillChaps);
+  bs.addEventListener('change',()=>{fillChaps();const b=+bs.value,cs=document.getElementById('chapSel');   /* V3.15 책 고르면 바로 — 읽던 책이면 읽던 장, 아니면 1장 */
+    const c=(state.lastRead&&state.lastRead.b===b)?state.lastRead.c:1;cs.value=c;curB=b;curC=+cs.value||1;openChapter()});
+  document.getElementById('chapSel').addEventListener('change',()=>{curB=+bs.value;curC=+document.getElementById('chapSel').value;openChapter()});   /* V3.15 장 고르면 바로 */
   document.getElementById('openBtn').addEventListener('click',()=>{curB=+bs.value;curC=+document.getElementById('chapSel').value;openChapter()});
   fillChaps();
   if(readReq)return;
