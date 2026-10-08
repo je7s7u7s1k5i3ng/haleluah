@@ -153,6 +153,31 @@ button{font-family:inherit}
 .inst-arrow{font-size:34px;line-height:1;margin-top:8px;color:#fff;animation:tapBlink 1s infinite}
 .cap{position:fixed;left:8px;right:8px;z-index:18;max-width:664px;margin:0 auto;background:rgba(255,253,248,.98);border:2px solid var(--gold);border-radius:14px;padding:8px 12px;max-height:30vh;overflow:auto;box-shadow:0 4px 16px rgba(30,42,85,.25)}
 .cap .en{font-size:calc(17px*var(--fs));line-height:1.65;font-weight:700}
+.note{position:relative}
+.vq{margin-left:auto;flex:0 0 auto;align-self:flex-start;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--danger);font-size:11.5px;padding:3px 9px;cursor:pointer;white-space:nowrap}
+.vq.on{background:#fff0e0;border-color:#f0c9a0;color:#b5651d}
+.v-row{padding:10px 0;border-top:1px dashed var(--line)}
+.v-row:first-child{border-top:0}
+.v-row .term{font-size:calc(16px*var(--fs))}
+.v-row .mean{display:block;margin-top:2px}
+.v-hide .v-row .mean,.v-hide .v-row .memo{filter:blur(6px);cursor:pointer}
+.v-meta{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:11.5px;color:var(--sub);flex-wrap:wrap}
+.v-dots{letter-spacing:2px;color:var(--gold)}
+.v-btns{display:flex;gap:6px;margin-left:auto}
+.v-btns button{border:1px solid var(--line);border-radius:12px;background:#fff;padding:4px 10px;font-size:12px;cursor:pointer}
+.v-btns .no{color:var(--danger)}.v-btns .yes{color:var(--ok)}
+.rv{position:fixed;inset:0;z-index:80;background:rgba(20,28,60,.6);display:flex;align-items:center;justify-content:center;padding:14px}
+.rv-box{background:var(--card);width:100%;max-width:440px;border-radius:18px;padding:16px;box-shadow:0 12px 40px rgba(0,0,0,.4);max-height:92vh;overflow:auto}
+.rv-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;color:var(--accent)}
+.rv-card{background:#fffaf0;border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;margin-bottom:12px}
+.rv-term{font-family:Georgia,serif;font-weight:700;font-size:calc(26px*var(--fs));margin:8px 0 10px;color:var(--accent);word-break:break-word}
+.rv-sent{font-size:calc(15px*var(--fs));text-align:left;color:#3a3744;margin:6px 0 10px;line-height:1.7}
+.rv-mean{font-size:calc(18px*var(--fs));font-weight:700;margin-top:10px}
+.rv-ans{border-top:1px dashed var(--line);margin-top:10px;padding-top:6px;text-align:left}
+.rv-ans .ko{margin-top:8px}
+.rv-btns{display:flex;gap:10px}
+.rv-btns button{flex:1;padding:14px;border:0;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;color:#fff}
+.rv-no{background:#c0563f}.rv-yes{background:#3f7a4c}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tabh) + 150px + env(safe-area-inset-bottom));z-index:60;background:rgba(30,42,85,.94);color:#fff;padding:10px 16px;border-radius:20px;font-size:13px;max-width:88vw;text-align:center;pointer-events:none}
 </style>
 </head>
@@ -167,7 +192,8 @@ button{font-family:inherit}
     <div class="card hidden" id="instCard" style="padding:10px"><button id="instHome" class="promo-btn blink" type="button">📲 홈 화면에 설치 <span class="tap-hint">👆 여기 클릭</span></button><p class="sub" style="margin:8px 0 0;text-align:center">앱처럼 아이콘으로 바로 열려요 · 안드로이드·아이폰 모두</p></div>
     <div class="card" id="nameCard"><h2>👋 이름을 알려 주세요</h2><div class="row"><input type="text" id="nameIn" placeholder="이름" maxlength="12" autocomplete="off"/><button class="primary" id="nameGo" type="button" style="width:auto;padding:11px 18px">시작</button></div><p class="sub" style="margin-top:8px">이 폰에 공부 기록이 저장돼요.</p></div>
     <div class="card resume hidden" id="resumeCard"><small class="sub">이어서 공부</small><b id="resumeText"></b><button class="primary" id="resumeBtn" type="button">이어서 듣기 ›</button></div>
-    <div class="card"><h2>📖 요한복음 · 영어(NIV) 듣고 읽기</h2><div class="chap-grid" id="chapGrid"></div><p class="sub" style="margin-top:10px">장을 누르면 바로 열려요. 소리가 있는 장부터 차례로 늘어나요.</p></div>
+    <div class="card hidden" id="vocabCard"><h2>📝 오늘 복습할 어휘</h2><p class="sub" id="vocabCardText"></p><button class="primary" id="vocabCardGo" type="button" style="margin-top:10px">복습하러 가기 ›</button></div>
+    <div class="card"><h2 id="gridTitle">📖 영어(NIV) 듣고 읽기</h2><div class="chips" id="bookRow" style="margin:0 0 10px"></div><div class="chap-grid" id="chapGrid"></div><p class="sub" style="margin-top:10px">책을 고르고 장을 누르면 바로 열려요. 소리가 준비된 장부터 차례로 늘어나요.</p></div>
     <div class="card">
       <h2>이 앱에서 할 수 있는 것</h2>
       <ul class="feat">
@@ -175,6 +201,7 @@ button{font-family:inherit}
         <li>🔁 <b>한 문장 반복 · 한 장 반복 · 구간 반복</b> — 어려운 곳만 골라서 계속</li>
         <li>🎨 <b>색 번호 매치</b> — 영어와 우리말에 같은 색이 칠해져요 · 색을 누르면 설명이 켜져요</li>
         <li>📚 <b>어휘 · 숙어 · 구문 · 문법</b> — 문장마다 설명 · 종류별로 골라 보기 · <b>모아보기</b>에서 한꺼번에</li>
+        <li>📝 <b>어휘 공부</b> — 설명 줄의 ❓<b>몰라요</b>를 누르면 단어장 맨 위로 · 복습에서 <b>알아요</b>는 덜 나오고 <b>몰라요</b>는 바로 다시</li>
         <li>🐢 <b>속도 조절</b> — 느리게 · 보통 · 빠르게</li>
       </ul>
     </div>
@@ -188,6 +215,15 @@ button{font-family:inherit}
       <p class="hint" id="modeHint"></p>
     </div>
     <div id="setList"></div>
+  </section>
+
+  <!-- 어휘 공부 -->
+  <section id="vVocab" class="hidden">
+    <div class="card"><h2>📝 어휘 공부 · 단어장</h2><p class="sub" id="vStat"></p>
+      <button class="primary" id="vGo" type="button" style="margin-top:10px">▶ 오늘 복습 시작</button>
+      <p class="hint">공부 화면 설명 줄의 ❓ <b>몰라요</b>를 누르면 여기 <b>맨 위</b>로 와요. 복습에서 ✅ <b>알아요</b>를 누르면 1일 → 3일 → 7일 → 14일 → 30일 뒤에 다시 나와요 (기억나는 말은 덜 나와요). ❓ 몰라요는 바로 다시 나와요.</p>
+      <div class="chips" id="vChips"></div></div>
+    <div class="card" id="vList"></div>
   </section>
 
   <!-- 모아보기 -->
@@ -235,26 +271,36 @@ button{font-family:inherit}
 <nav class="tabs">
   <button data-tab="home" class="on" type="button"><span class="ico">🏠</span>홈</button>
   <button data-tab="study" type="button"><span class="ico">🎧</span>공부</button>
+  <button data-tab="vocab" type="button"><span class="ico">📝</span>단어장</button>
   <button data-tab="more" type="button"><span class="ico">📚</span>모아보기</button>
   <button data-tab="set" type="button"><span class="ico">⚙️</span>설정</button>
 </nav>
 <div id="instSheet" class="inst-sheet hidden"><div class="inst-box"><h3 id="instTitle">홈 화면에 설치</h3><ol id="instSteps"></ol><button id="instCopy" class="ghost hidden" type="button" style="width:100%;margin-bottom:6px">📋 주소 복사하기</button><button id="instClose" class="primary" type="button">알겠어요</button></div><div class="inst-arrow hidden" id="instArrow">⬇</div></div>
+<div class="rv hidden" id="rv"><div class="rv-box">
+  <div class="rv-top"><b id="rvProg"></b><button class="ghost" id="rvClose" type="button">닫기</button></div>
+  <div class="rv-card"><span class="tag t1" id="rvTag"></span><div class="rv-term" id="rvTerm"></div>
+    <div class="rv-sent en" id="rvSent"></div><button class="ghost" id="rvListen" type="button">🔊 이 문장 듣기</button>
+    <div class="rv-ans hidden" id="rvAns"><div class="rv-mean" id="rvMean"></div><div class="memo" id="rvMemo"></div><div class="ko" id="rvKo"></div></div></div>
+  <button class="primary" id="rvFlip" type="button">뜻 보기</button>
+  <div class="rv-btns hidden" id="rvBtns"><button class="rv-no" id="rvNo" type="button">❓ 몰라요</button><button class="rv-yes" id="rvYes" type="button">✅ 알아요</button></div>
+</div></div>
 <div class="toast hidden" id="toast"></div>
 
 <script src="config.js"></script>
 <script>
 'use strict';
 const CFG=window.APP_CONFIG||{};
-const BOOKS=[{b:43,n:'요한복음',en:'John'}];
+const BNAME={1:'창세기',2:'출애굽기',19:'시편',23:'이사야',24:'예레미야',26:'에스겔',40:'마태복음',41:'마가복음',42:'누가복음',43:'요한복음',44:'사도행전',45:'로마서',46:'고린도전서',49:'에베소서',50:'빌립보서',58:'히브리서',59:'야고보서',66:'요한계시록'};
+const chW=b=>+b===19?'편':'장';
 const TAGS=['어휘','숙어','구문','문법'],TAGN={'어휘':1,'숙어':2,'구문':3,'문법':4};
 const $=id=>document.getElementById(id);
 const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e};
 const pad=c=>String(c).padStart(2,'0');
-const bookName=b=>(BOOKS.find(x=>x.b===b)||{n:'?'}).n;
+const bookName=b=>BNAME[b]||('책 '+b);
 function toast(t,ms){const e=$('toast');e.textContent=t;e.classList.remove('hidden');clearTimeout(toast._t);toast._t=setTimeout(()=>e.classList.add('hidden'),ms||2200)}
 
 /* ===== 저장 (이 폰) ===== */
-const DEF={name:'',last:null,done:{},heard:{},prefs:{cap:false,ko:true,color:true,notes:true,tags:{'어휘':1,'숙어':1,'구문':1,'문법':1},rate:1,fs:1}};
+const DEF={name:'',last:null,done:{},heard:{},vocab:{},prefs:{cap:false,ko:true,color:true,notes:true,tags:{'어휘':1,'숙어':1,'구문':1,'문법':1},rate:1,fs:1}};
 let S=(()=>{try{const j=JSON.parse(localStorage.getItem(CFG.storageKey)||'{}');return Object.assign({},DEF,j,{prefs:Object.assign({},DEF.prefs,j.prefs||{},{tags:Object.assign({},DEF.prefs.tags,(j.prefs||{}).tags||{})})})}catch(e){return JSON.parse(JSON.stringify(DEF))}})();
 function save(){try{localStorage.setItem(CFG.storageKey,JSON.stringify(S))}catch(e){}}
 
@@ -266,24 +312,30 @@ const hasAudio=(b,c)=>!!(LIST&&LIST[b]&&LIST[b].indexOf(c)>=0);
 
 /* ===== 탭 ===== */
 let TAB='home';
-function goTab(t){TAB=t;const m={home:'vHome',study:'vStudy',more:'vMore',set:'vSet'};
+function goTab(t){TAB=t;const m={home:'vHome',study:'vStudy',vocab:'vVocab',more:'vMore',set:'vSet'};
   for(const k in m)$(m[k]).classList.toggle('hidden',k!==t);
   document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
-  if(t==='home')renderHome();if(t==='more')renderMore();if(t==='set')renderSet();
+  if(t==='home')renderHome();if(t==='vocab')renderVocab();if(t==='more')renderMore();if(t==='set')renderSet();
   if(t==='study'&&!P.d)renderEmptyStudy();
   window.scrollTo(0,0);updateCap();if(t==='study'&&P.cur>=0)setTimeout(()=>centerNow(true),50)}
 document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>goTab(b.dataset.tab)));
 
 /* ===== 홈 ===== */
+let HB=0;   /* 홈에서 고른 책 */
 function renderHome(){
   $('who').textContent=S.name?('👤 '+S.name):'';$('nameCard').classList.toggle('hidden',!!S.name);
   const rc=$('resumeCard'),lr=S.last;
-  if(lr&&hasAudio(lr.b,lr.c)){rc.classList.remove('hidden');$('resumeText').textContent=bookName(lr.b)+' '+lr.c+'장 · '+((lr.i||0)+1)+'번째 문장';}else rc.classList.add('hidden');
+  if(lr&&hasAudio(lr.b,lr.c)){rc.classList.remove('hidden');$('resumeText').textContent=bookName(lr.b)+' '+lr.c+chW(lr.b)+' · '+((lr.i||0)+1)+'번째 문장';}else rc.classList.add('hidden');
+  const nd=vDue().length,vc=$('vocabCard');vc.classList.toggle('hidden',!nd);if(nd)$('vocabCardText').textContent='오늘 다시 볼 말이 '+nd+'개 있어요. 모르는 말은 위쪽에 모여 있어요.';
+  const bs=Object.keys(LIST||{}).map(Number).sort((a,b)=>a-b);
+  if(!HB||bs.indexOf(HB)<0)HB=(lr&&bs.indexOf(lr.b)>=0)?lr.b:(bs.indexOf(43)>=0?43:(bs[0]||43));
+  const br=$('bookRow');br.textContent='';bs.forEach(b=>{const x=el('button','chip'+(b===HB?' on':''),bookName(b));x.type='button';x.addEventListener('click',()=>{HB=b;renderHome()});br.appendChild(x)});
+  $('gridTitle').textContent='📖 '+bookName(HB)+' · 영어(NIV) 듣고 읽기';
   const g=$('chapGrid');g.textContent='';
-  const nm=(BOOKS[0].n==='요한복음')?21:0;
-  for(let c=1;c<=nm;c++){const k=BOOKS[0].b+'-'+c,ok=hasAudio(BOOKS[0].b,c),b=el('button',(S.done[k]?'done ':'')+(ok?'':'off'),String(c));
-    const sm=el('small',null,!ok?'준비 중':S.done[k]?'✓ 들음':(S.heard[k]?S.heard[k]+'문장':'듣기'));b.appendChild(sm);
-    if(ok)b.addEventListener('click',()=>openChap(BOOKS[0].b,c,{play:false}));g.appendChild(b)}
+  const have=((LIST||{})[HB]||[]).slice().sort((a,b)=>a-b);const all=HB===43?Array.from({length:21},(_,i)=>i+1):have;   /* 요한복음은 21장 전체 · 안 된 장은 준비 중 */
+  all.forEach(c=>{const k=HB+'-'+c,ok=hasAudio(HB,c),b=el('button',(S.done[k]?'done ':'')+(ok?'':'off'),String(c)),
+    sm=el('small',null,!ok?'준비 중':S.done[k]?'✓ 들음':(S.heard[k]?S.heard[k]+'문장':'듣기'));b.appendChild(sm);
+    if(ok)b.addEventListener('click',()=>openChap(HB,c,{play:false}));g.appendChild(b)});
 }
 $('nameGo').addEventListener('click',()=>{const v=$('nameIn').value.trim();if(!v){toast('이름을 써 주세요');return}S.name=v;save();renderHome();toast(v+' 님 환영해요 🙏')});
 $('nameIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('nameGo').click()});
@@ -311,16 +363,16 @@ function applyPrefs(){const l=$('setList');l.classList.toggle('noko',!S.prefs.ko
 function renderChap(){
   const d=P.d,l=$('setList');l.textContent='';
   $('chTitle').textContent=d.title;
-  const sel=$('chSel');sel.textContent='';((LIST||{})[P.b]||[]).forEach(c=>{const o=el('option',null,c+'장');o.value=c;if(c===P.c)o.selected=true;sel.appendChild(o)});
+  const sel=$('chSel');sel.textContent='';((LIST||{})[P.b]||[]).forEach(c=>{const o=el('option',null,c+chW(P.b));o.value=c;if(c===P.c)o.selected=true;sel.appendChild(o)});
   d.sets.forEach((s,i)=>{
     const card=el('div','set');card.dataset.i=i;
     const h=el('div','set-h');const pl=el('button','pl','▶ 여기부터');pl.type='button';pl.dataset.go=i;h.appendChild(pl);h.appendChild(el('span','ref',s.ref));h.appendChild(el('span','idx',(i+1)+' / '+d.sets.length));card.appendChild(h);
     const en=el('div','en');spansTo(en,s.en);card.appendChild(en);
     const ko=el('div','ko');spansTo(ko,s.ko);card.appendChild(ko);
-    if(s.notes&&s.notes.length){const nt=el('div','notes');s.notes.forEach(n=>{
+    if(s.notes&&s.notes.length){const nt=el('div','notes');s.notes.forEach((n,ni)=>{
       const r=el('div','note t'+(TAGN[n.tag]||1));r.dataset.c=n.c;r.appendChild(el('span','dot d'+n.c,String(n.c)));
       const b=el('div');b.appendChild(el('span','tag t'+(TAGN[n.tag]||1),n.tag));b.appendChild(el('span','term',n.term));if(n.meaning)b.appendChild(el('span','mean','  '+n.meaning));if(n.memo)b.appendChild(el('span','memo','★ '+n.memo));
-      r.appendChild(b);nt.appendChild(r)});card.appendChild(nt)}
+      r.appendChild(b);r.dataset.si=i;r.dataset.ni=ni;const kk=(S.vocab||{})[vkey(n)];const vq=el('button','vq'+(kk?' on':''),kk?'📌 담김':'❓ 몰라요');vq.type='button';vq.title='단어장 맨 위에 담기';r.appendChild(vq);nt.appendChild(r)});card.appendChild(nt)}
     const exs=(s.extra||[]).filter(t=>!/^밀도\s/.test(t));   /* 「밀도 6/8」 은 만든 쪽 점검 지표 — 학습자에게는 숨김 */
     if(exs.length){const ex=el('div','extra');exs.forEach(t=>{const p=el('p');const m=t.match(/^(\S+)\s+([\s\S]*)$/);p.appendChild(document.createTextNode('★ '));
       if(m){p.appendChild(el('b',null,m[1]+' '));extraTo(p,m[2])}else extraTo(p,t);ex.appendChild(p)});card.appendChild(ex)}
@@ -329,6 +381,7 @@ function renderChap(){
 /* 카드·색·설명 누르기 */
 $('setList').addEventListener('click',e=>{
   const card=e.target.closest('.set');if(!card)return;const i=+card.dataset.i;
+  const vq=e.target.closest('.vq');if(vq){const r=vq.closest('.note'),sx=P.d.sets[+r.dataset.si],n=sx.notes[+r.dataset.ni];vAdd(n,P.b,P.c,+r.dataset.si,sx.ref);vq.classList.add('on');vq.textContent='📌 담김';toast('단어장 맨 위에 담았어요 · '+n.term);return}
   const cs=e.target.closest('.cs'),nt=e.target.closest('.note');
   if(cs||nt){const c=cs?cs.dataset.c:nt.dataset.c;card.dataset.hi=card.dataset.hi===String(c)?'':String(c);
     if(nt){const sp=card.querySelector('.cs.c'+c);if(sp&&card.dataset.hi)sp.scrollIntoView({block:'nearest',behavior:'smooth'})}return}
@@ -410,9 +463,10 @@ $('abRate').addEventListener('click',()=>{const i=RATES.indexOf(+S.prefs.rate);S
 audioEl.addEventListener('play',()=>{updateBar()});
 audioEl.addEventListener('pause',()=>{updateBar();saveLast()});
 function markDone(){const k=P.b+'-'+P.c;S.done[k]=Date.now();S.heard[k]=P.d.sets.length;save()}
-function nextChap(){const l=(LIST||{})[P.b]||[],i=l.indexOf(P.c),n=l[i+1]!=null?l[i+1]:l[0];
-  if(n==null||(n===P.c)){seekTo(0);audioEl.play().catch(()=>{});return}
-  openChap(P.b,n,{play:true})}
+function allChaps(){const r=[];Object.keys(LIST||{}).map(Number).sort((a,b)=>a-b).forEach(b=>((LIST[b]||[]).slice().sort((x,y)=>x-y)).forEach(c=>r.push([b,c])));return r}
+function nextChap(){const a=allChaps(),i=a.findIndex(x=>x[0]===P.b&&x[1]===P.c),n=a[i+1]||a[0];   /* 책을 넘어 쭉 · 맨 끝이면 처음으로 */
+  if(!n||(n[0]===P.b&&n[1]===P.c)){seekTo(0);audioEl.play().catch(()=>{});return}
+  openChap(n[0],n[1],{play:true})}
 audioEl.addEventListener('ended',()=>{if(!P.d)return;markDone();const s=P.d.sets;
   if(P.mode==='chap'||P.mode==='set'||P.mode==='range'){const st=P.mode==='set'&&s[P.lock]?s[P.lock].start:(P.mode==='range'&&P.rng.a>=0?s[P.rng.a].start:0);audioEl.currentTime=st;audioEl.play().catch(()=>{});return}
   nextChap()});
@@ -434,10 +488,9 @@ if('mediaSession'in navigator){const ms=navigator.mediaSession,h=(a,f)=>{try{ms.
 const MORE={scope:'chap',tags:{'어휘':1,'숙어':1,'구문':1,'문법':1},q:''};
 function renderMore(){
   const sc=$('moreScope');sc.textContent='';
-  [['chap','이 장'],['all','요한복음 전체']].forEach(a=>{const b=el('button','chip'+(MORE.scope===a[0]?' on':''),a[1]);b.type='button';b.addEventListener('click',()=>{MORE.scope=a[0];renderMore()});sc.appendChild(b)});
+  [['chap','이 장'],['all','이 책 전체']].forEach(a=>{const b=el('button','chip'+(MORE.scope===a[0]?' on':''),a[1]);b.type='button';b.addEventListener('click',()=>{MORE.scope=a[0];renderMore()});sc.appendChild(b)});
   const tg=$('moreTags');tg.textContent='';TAGS.forEach(t=>{const b=el('button','chip tg'+TAGN[t]+(MORE.tags[t]?' on':''),t);b.type='button';b.addEventListener('click',()=>{MORE.tags[t]=MORE.tags[t]?0:1;renderMore()});tg.appendChild(b)});
-  const need=MORE.scope==='all'?((LIST||{})[43]||[]):(P.d?[P.c]:[1]);
-  const b=P.d?P.b:43;
+  const b=P.d?P.b:43;const need=MORE.scope==='all'?((LIST||{})[b]||[]):(P.d?[P.c]:[1]);
   $('moreCount').textContent='불러오는 중…';
   Promise.all(need.map(c=>getChap(b,c).catch(()=>null))).then(ds=>{ds=ds.filter(Boolean);
     const map=new Map(),q=MORE.q.trim().toLowerCase();
@@ -447,13 +500,76 @@ function renderMore(){
       if(!it){it={n,locs:[]};map.set(key,it)}it.locs.push({b:d.b,c:d.c,i,ref:s.ref})})));
     const items=[...map.values()].sort((x,y)=>(TAGN[x.n.tag]-TAGN[y.n.tag]));
     const L=$('moreList');L.textContent='';
-    $('moreCount').textContent=items.length+'개 · '+(MORE.scope==='all'?'요한복음 '+ds.length+'장':(ds[0]?ds[0].title:''))+' · 위치를 누르면 그 문장으로 가요';
-    if(!items.length)L.appendChild(el('p','sub','찾은 것이 없어요.'));
+    $('moreCount').textContent=items.length+'개 · '+(MORE.scope==='all'?bookName(b)+' '+ds.length+chW(b):(ds[0]?ds[0].title:''))+' · 위치를 누르면 그 문장으로 가요';
+    if(!items.length)L.appendChild(el('p','sub',ds.some(d=>d.sets.some(x=>(x.notes||[]).length))?'찾은 것이 없어요.':'이 책은 어휘·숙어 설명이 아직 없어요 (지금은 요한복음에만 있어요).'));
     items.forEach(it=>{const r=el('div','more-row'),n=it.n;
       r.appendChild(el('span','tag t'+TAGN[n.tag],n.tag));r.appendChild(el('span','term',n.term));if(n.meaning)r.appendChild(el('span','mean','  '+n.meaning));if(n.memo)r.appendChild(el('span','memo','★ '+n.memo));
       const lc=el('div','locs');it.locs.slice(0,6).forEach(x=>{const bt=el('button',null,x.ref+' ▶');bt.type='button';bt.addEventListener('click',()=>openChap(x.b,x.c,{i:x.i,play:true}));lc.appendChild(bt)});
       if(it.locs.length>6)lc.appendChild(el('small','sub','외 '+(it.locs.length-6)+'곳'));r.appendChild(lc);L.appendChild(r)})})}
 $('moreQ').addEventListener('input',()=>{MORE.q=$('moreQ').value;clearTimeout(renderMore._t);renderMore._t=setTimeout(renderMore,200)});
+
+/* ===== 어휘 공부 (단어장 · 반복 학습) — 몰라요는 맨 위로 바로 다시 · 알아요는 1→3→7→14→30일 뒤에 (기억나는 말은 덜 나온다) ===== */
+const DAY=864e5,IV=[0,1,3,7,14,30];
+const vkey=n=>n.tag+'|'+String(n.term).toLowerCase();
+function vAdd(n,b,c,i,ref){const k=vkey(n),v=S.vocab[k]||{k,tag:n.tag,term:n.term,meaning:n.meaning||'',memo:n.memo||'',ok:0,miss:0,add:Date.now()};
+  v.b=b;v.c=c;v.i=i;v.ref=ref;v.c0=n.c;v.box=0;v.due=Date.now();v.last=Date.now();v.miss=(v.miss||0)+1;S.vocab[k]=v;save();return v}
+function vGrade(k,ok){const v=S.vocab[k];if(!v)return;
+  if(ok){v.ok=(v.ok||0)+1;v.box=Math.min(5,(v.box||0)+1);v.due=Date.now()+IV[v.box]*DAY}else{v.miss=(v.miss||0)+1;v.box=0;v.due=Date.now()}
+  v.last=Date.now();save()}
+function vSort(a,b){const now=Date.now(),da=a.due<=now?0:1,db=b.due<=now?0:1;return da-db||(da===0?((a.box-b.box)||(b.last-a.last)):(a.due-b.due))}
+const vAll=()=>Object.values(S.vocab||{}).sort(vSort),vDue=()=>Object.values(S.vocab||{}).filter(v=>v.due<=Date.now());
+const VF={f:'all',hide:false};
+function renderVocab(){
+  const all=vAll(),due=vDue().length,unk=all.filter(v=>v.box<=1).length,done=all.filter(v=>v.box>=3).length;
+  $('vStat').textContent='오늘 복습 '+due+'개 · 모르는 말 '+unk+'개 · 익힌 말 '+done+'개 · 담은 말 모두 '+all.length+'개';
+  const go=$('vGo');go.disabled=!due;go.style.opacity=due?1:.5;go.textContent=due?'▶ 오늘 복습 시작 ('+due+'개)':(all.length?'오늘 복습은 끝! 🎉':'아직 담은 말이 없어요');
+  const ch=$('vChips');ch.textContent='';
+  [['all','전체'],['unk','모르는 말'],['done','익힌 말']].forEach(a=>{const b=el('button','chip'+(VF.f===a[0]?' on':''),a[1]);b.type='button';b.addEventListener('click',()=>{VF.f=a[0];renderVocab()});ch.appendChild(b)});
+  {const b=el('button','chip'+(VF.hide?' on':''),'뜻 가리기');b.type='button';b.addEventListener('click',()=>{VF.hide=!VF.hide;renderVocab()});ch.appendChild(b)}
+  const L=$('vList');L.textContent='';L.classList.toggle('v-hide',VF.hide);
+  const rows=all.filter(v=>VF.f==='all'||(VF.f==='unk'&&v.box<=1)||(VF.f==='done'&&v.box>=3));
+  if(!rows.length)L.appendChild(el('p','sub',all.length?'이 칸에는 아직 없어요.':'공부 화면의 설명 줄에서 ❓ 몰라요를 누르면 여기에 담겨요.'));
+  rows.forEach(v=>{const r=el('div','v-row');r.dataset.k=v.k;
+    r.appendChild(el('span','tag t'+(TAGN[v.tag]||1),v.tag));r.appendChild(el('span','term',v.term));
+    if(v.meaning)r.appendChild(el('span','mean',v.meaning));if(v.memo)r.appendChild(el('span','memo','★ '+v.memo));
+    const m=el('div','v-meta');m.appendChild(el('span','v-dots','●'.repeat(Math.min(5,v.box))+'○'.repeat(5-Math.min(5,v.box))));
+    const dd=v.due<=Date.now()?'지금 복습':Math.max(1,Math.ceil((v.due-Date.now())/DAY))+'일 뒤';m.appendChild(el('span',null,dd));m.appendChild(el('span',null,v.ref||''));
+    const bt=el('div','v-btns');[['go','▶'],['no','❓ 몰라요'],['yes','✅ 알아요'],['del','🗑']].forEach(a=>{const b=el('button',a[0],a[1]);b.type='button';b.dataset.act=a[0];bt.appendChild(b)});
+    m.appendChild(bt);r.appendChild(m);L.appendChild(r)})}
+$('vList').addEventListener('click',e=>{const b=e.target.closest('button[data-act]'),r=e.target.closest('.v-row');if(!r)return;const k=r.dataset.k,v=S.vocab[k];if(!v)return;
+  if(!b){r.classList.toggle('peek');return}
+  const a=b.dataset.act;
+  if(a==='go'){openChap(v.b,v.c,{i:v.i,play:true});return}
+  if(a==='del'){if(confirm('단어장에서 뺄까요?')){delete S.vocab[k];save();renderVocab()}return}
+  vGrade(k,a==='yes');renderVocab();toast(a==='yes'?'알아요 · '+IV[S.vocab[k].box]+'일 뒤에 다시 나와요':'몰라요 · 맨 위로 올렸어요')});
+$('vGo').addEventListener('click',()=>rvStart());$('vocabCardGo').addEventListener('click',()=>{goTab('vocab');rvStart()});
+/* 복습 카드 */
+const RV={q:[],i:0,ok:0,no:0,again:{},cur:null,end:0};
+const rvAudio=new Audio();rvAudio.preload='none';
+rvAudio.addEventListener('timeupdate',()=>{if(RV.end&&rvAudio.currentTime>=RV.end){rvAudio.pause();RV.end=0}});
+function rvPlay(v){getChap(v.b,v.c).then(d=>{const s=d.sets[v.i];if(!s)return;audioEl.pause();P.want=false;rvAudio.pause();
+  rvAudio.src=(CFG.audioBase||'audio/')+v.b+'_'+pad(v.c)+'.m4a';RV.end=s.end;
+  const go=()=>{rvAudio.removeEventListener('loadedmetadata',go);rvAudio.currentTime=s.start;rvAudio.play().catch(()=>{})};rvAudio.addEventListener('loadedmetadata',go);rvAudio.load()})}
+function rvStart(){const q=vDue().sort(vSort).map(v=>v.k);if(!q.length){toast('오늘 복습할 말이 없어요');return}
+  RV.q=q;RV.i=0;RV.ok=0;RV.no=0;RV.again={};$('rv').classList.remove('hidden');rvShow()}
+function rvShow(){
+  if(RV.i>=RV.q.length){rvDone();return}
+  const v=S.vocab[RV.q[RV.i]];if(!v){RV.i++;rvShow();return}RV.cur=v;rvAudio.pause();
+  $('rvProg').textContent=(RV.i+1)+' / '+RV.q.length;$('rvTag').className='tag t'+(TAGN[v.tag]||1);$('rvTag').textContent=v.tag;$('rvTerm').textContent=v.term;
+  $('rvSent').textContent='';$('rvKo').textContent='';$('rvMean').textContent='';$('rvMemo').textContent='';
+  $('rvAns').classList.add('hidden');$('rvBtns').classList.add('hidden');$('rvFlip').classList.remove('hidden');
+  getChap(v.b,v.c).then(d=>{const s=d.sets[v.i];if(!s||RV.cur!==v)return;const e=$('rvSent');e.textContent='';
+    (s.en||[]).forEach(x=>{if(x.c&&x.c===v.c0){const sp=el('span','cs c'+x.c);sp.appendChild(document.createTextNode(x.t));e.appendChild(sp)}else e.appendChild(document.createTextNode(x.t))});
+    $('rvKo').textContent=(s.ko||[]).map(x=>x.t).join('')}).catch(()=>{})}
+$('rvFlip').addEventListener('click',()=>{const v=RV.cur;if(!v)return;$('rvMean').textContent=v.meaning||'';$('rvMemo').textContent=v.memo?'★ '+v.memo:'';
+  $('rvAns').classList.remove('hidden');$('rvBtns').classList.remove('hidden');$('rvFlip').classList.add('hidden')});
+function rvGrade(ok){const v=RV.cur;if(!v)return;vGrade(v.k,ok);
+  if(ok)RV.ok++;else{RV.no++;const n=RV.again[v.k]||0;if(n<2){RV.again[v.k]=n+1;RV.q.splice(Math.min(RV.q.length,RV.i+4),0,v.k)}}   /* 몰라요는 몇 장 뒤에 다시 (최대 2번) */
+  RV.i++;rvShow()}
+$('rvYes').addEventListener('click',()=>rvGrade(true));$('rvNo').addEventListener('click',()=>rvGrade(false));
+$('rvListen').addEventListener('click',()=>{if(RV.cur)rvPlay(RV.cur)});
+function rvDone(){rvAudio.pause();$('rv').classList.add('hidden');toast('복습 끝! 알아요 '+RV.ok+' · 몰라요 '+RV.no,3200);if(TAB==='vocab')renderVocab();else if(TAB==='home')renderHome()}
+$('rvClose').addEventListener('click',()=>{rvAudio.pause();$('rv').classList.add('hidden');if(TAB==='vocab')renderVocab()});
 
 /* ===== 설정 ===== */
 function renderSet(){$('setName').value=S.name;$('setFs').value=String(S.prefs.fs);$('setKo').checked=!!S.prefs.ko;$('setColor').checked=!!S.prefs.color;$('setNotes').checked=!!S.prefs.notes;
