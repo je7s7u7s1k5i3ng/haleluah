@@ -8,15 +8,20 @@
 <meta name="theme-color" content="#1E2A55"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="영어 공부"/>
 <meta name="format-detection" content="telephone=no"/>
 <link rel="icon" href="icon-192.png"/>
-<link rel="apple-touch-icon" href="icon-192.png"/>
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png"/>
 <meta name="description" content="영어 성경을 듣고 읽으며 어휘 · 숙어 · 구문 · 문법을 색으로 익히는 앱"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="영어 공부 · 함께 듣고 읽기"/>
 <meta property="og:description" content="듣고 따라 읽고, 색으로 어휘 · 숙어 · 구문 · 문법을 익혀요"/>
+<meta property="og:image" content="https://je7s7u7s1k5i3ng.github.io/haleluah/english-study/app/img/og.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:url" content="https://je7s7u7s1k5i3ng.github.io/haleluah/english-study/app/"/>
+<meta name="twitter:card" content="summary_large_image"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
 <style>
 @font-face{font-family:'SBAggroM';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');font-display:swap}
@@ -179,21 +184,58 @@ button{font-family:inherit}
 .rv-btns button{flex:1;padding:14px;border:0;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;color:#fff}
 .rv-no{background:#c0563f}.rv-yes{background:#3f7a4c}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tabh) + 150px + env(safe-area-inset-bottom));z-index:60;background:rgba(30,42,85,.94);color:#fff;padding:10px 16px;border-radius:20px;font-size:13px;max-width:88vw;text-align:center;pointer-events:none}
+/* ===== V0.4 색연필 그림 (성경 앱 V1.2 창가빛과 같은 그림체) ===== */
+:root{--tabh:64px}
+body{background:var(--bg) url(img/paper.jpg)}
+.top{max-width:none;margin:0 0 12px;padding:0;display:block;height:calc(118px + env(safe-area-inset-top));background:#1e2a55 url(img/header.jpg) center/cover no-repeat;position:relative}
+.top::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,30,70,.74) 0%,rgba(20,30,70,.36) 45%,rgba(20,30,70,0) 72%)}
+.top-in{position:relative;z-index:1;max-width:680px;height:100%;margin:0 auto;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.brand-mark-img{width:50px;height:50px;border-radius:13px;box-shadow:0 2px 8px rgba(0,0,0,.4);border:1px solid rgba(232,184,96,.7)}
+.top .brand h1{color:#fbf8f1;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.top .brand p{color:#e8b860;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.top .badge{background:rgba(251,248,241,.93)}
+.tabs button .tic{width:30px;height:30px;border-radius:50%;display:block}
+.tabs button:not(.on) .tic{opacity:.62;filter:saturate(.75)}
+.tabs button.on .tic{box-shadow:0 0 0 2px var(--gold)}
+.tag .tgi,.chip .tgi{width:14px;height:14px;border-radius:50%;vertical-align:-3px;margin-right:4px;background:#fff;display:inline-block}
+.splash{padding:0;overflow:hidden;position:relative;background:#f5ecd9}
+.splash-img{display:block;width:100%;height:auto}
+.splash-in{position:absolute;left:0;right:0;bottom:0;height:40%;padding:12px 16px 16px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(to bottom,rgba(245,236,217,0),rgba(245,236,217,.93) 28%)}
+.pen-wrap{position:relative}
+.pen-wrap img{display:block;width:100%;border-radius:10px}
+.pen-nums{position:relative;height:30px;margin-top:6px}
+.pen-nums .dot{position:absolute;top:2px;transform:translateX(-50%)}
+.cele{position:fixed;inset:0;z-index:85;background:rgba(20,28,60,.6);display:flex;align-items:center;justify-content:center;padding:16px}
+.cele-box{background:var(--card);width:100%;max-width:380px;border-radius:18px;overflow:hidden;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.cele-box img{display:block;width:100%;height:auto}
+.cele-box h3{margin:12px 12px 4px;font-family:'SBAggroB','Noto Sans KR',sans-serif;color:var(--accent)}
+.cele-box p{margin:0 14px 12px;color:var(--sub);font-size:13.5px}
+.cele-box .primary{width:calc(100% - 28px);margin:0 14px 14px}
+.empty-img{display:block;width:150px;height:150px;object-fit:cover;border-radius:16px;margin:4px auto 10px}
+/* ===== V0.5 앱처럼 — 홈 화면에서 열면 주소창 없이 화면만 ===== */
+html{background:#1e2a55;overscroll-behavior-y:none}
+body{min-height:100vh;min-height:100dvh;-webkit-touch-callout:none}
+.set .en,.set .ko,.note,.rv-card,.cap{-webkit-touch-callout:default}
+#vHome{display:flex;flex-direction:column}
+#vHome.hidden{display:none}
+#nameCard{order:-1}   /* 이름을 아직 안 썼으면 입력칸이 맨 위 (설치 카드 아래로 밀려 스크롤하지 않게) */
+.badge:empty{display:none}
 </style>
 </head>
 <body>
-<div class="top">
-  <div class="brand"><div class="brand-mark">EN</div><div><h1>영어 공부</h1><p>듣고 · 읽고 · 색으로 익히기</p></div></div>
+<div class="top"><div class="top-in">
+  <div class="brand"><img class="brand-mark-img" src="img/icon-96.png" alt=""/><div><h1>영어 공부</h1><p>듣고 · 읽고 · 색으로 익히기</p></div></div>
   <span class="badge" id="who"></span>
-</div>
+</div></div>
 <main>
   <!-- 홈 -->
   <section id="vHome">
     <div class="card hidden" id="instCard" style="padding:10px"><button id="instHome" class="promo-btn blink" type="button">📲 홈 화면에 설치 <span class="tap-hint">👆 여기 클릭</span></button><p class="sub" style="margin:8px 0 0;text-align:center">앱처럼 아이콘으로 바로 열려요 · 안드로이드·아이폰 모두</p></div>
-    <div class="card" id="nameCard"><h2>👋 이름을 알려 주세요</h2><div class="row"><input type="text" id="nameIn" placeholder="이름" maxlength="12" autocomplete="off"/><button class="primary" id="nameGo" type="button" style="width:auto;padding:11px 18px">시작</button></div><p class="sub" style="margin-top:8px">이 폰에 공부 기록이 저장돼요.</p></div>
+    <div class="card splash" id="nameCard"><img class="splash-img" src="img/splash.jpg" alt=""/><div class="splash-in"><h2>👋 이름을 알려 주세요</h2><div class="row"><input type="text" id="nameIn" placeholder="이름" maxlength="12" autocomplete="off"/><button class="primary" id="nameGo" type="button" style="width:auto;padding:11px 18px">시작</button></div><p class="sub" style="margin-top:8px">이 폰에 공부 기록이 저장돼요.</p></div></div>
     <div class="card resume hidden" id="resumeCard"><small class="sub">이어서 공부</small><b id="resumeText"></b><button class="primary" id="resumeBtn" type="button">이어서 듣기 ›</button></div>
     <div class="card hidden" id="vocabCard"><h2>📝 오늘 복습할 어휘</h2><p class="sub" id="vocabCardText"></p><button class="primary" id="vocabCardGo" type="button" style="margin-top:10px">복습하러 가기 ›</button></div>
     <div class="card"><h2 id="gridTitle">📖 영어(NIV) 듣고 읽기</h2><div class="chips" id="bookRow" style="margin:0 0 10px"></div><div class="chap-grid" id="chapGrid"></div><p class="sub" style="margin-top:10px">책을 고르고 장을 누르면 바로 열려요. 소리가 준비된 장부터 차례로 늘어나요.</p></div>
+    <div class="card"><h2>🎨 색 번호는 이렇게 칠해져요</h2><div class="pen-wrap"><img src="img/pencils.jpg" alt=""/><div class="pen-nums"><span class="dot d1" style="left:23.27%">1</span><span class="dot d2" style="left:30.43%">2</span><span class="dot d3" style="left:37.82%">3</span><span class="dot d4" style="left:44.61%">4</span><span class="dot d5" style="left:51.73%">5</span><span class="dot d6" style="left:58.86%">6</span><span class="dot d7" style="left:66.02%">7</span><span class="dot d8" style="left:73.09%">8</span></div></div><p class="sub">영어와 우리말에 <b>같은 번호는 같은 색</b>이에요. 색을 누르면 그 설명이 켜져요. (색 설명은 지금 요한복음에 있어요)</p></div>
     <div class="card">
       <h2>이 앱에서 할 수 있는 것</h2>
       <ul class="feat">
@@ -269,11 +311,11 @@ button{font-family:inherit}
 </div></div>
 
 <nav class="tabs">
-  <button data-tab="home" class="on" type="button"><span class="ico">🏠</span>홈</button>
-  <button data-tab="study" type="button"><span class="ico">🎧</span>공부</button>
-  <button data-tab="vocab" type="button"><span class="ico">📝</span>단어장</button>
-  <button data-tab="more" type="button"><span class="ico">📚</span>모아보기</button>
-  <button data-tab="set" type="button"><span class="ico">⚙️</span>설정</button>
+  <button data-tab="home" class="on" type="button"><img class="tic" src="img/tab-1.png" alt=""/>홈</button>
+  <button data-tab="study" type="button"><img class="tic" src="img/tab-2.png" alt=""/>공부</button>
+  <button data-tab="vocab" type="button"><img class="tic" src="img/tag-1.png" alt=""/>단어장</button>
+  <button data-tab="more" type="button"><img class="tic" src="img/tab-3.png" alt=""/>모아보기</button>
+  <button data-tab="set" type="button"><img class="tic" src="img/tab-4.png" alt=""/>설정</button>
 </nav>
 <div id="instSheet" class="inst-sheet hidden"><div class="inst-box"><h3 id="instTitle">홈 화면에 설치</h3><ol id="instSteps"></ol><button id="instCopy" class="ghost hidden" type="button" style="width:100%;margin-bottom:6px">📋 주소 복사하기</button><button id="instClose" class="primary" type="button">알겠어요</button></div><div class="inst-arrow hidden" id="instArrow">⬇</div></div>
 <div class="rv hidden" id="rv"><div class="rv-box">
@@ -284,6 +326,7 @@ button{font-family:inherit}
   <button class="primary" id="rvFlip" type="button">뜻 보기</button>
   <div class="rv-btns hidden" id="rvBtns"><button class="rv-no" id="rvNo" type="button">❓ 몰라요</button><button class="rv-yes" id="rvYes" type="button">✅ 알아요</button></div>
 </div></div>
+<div class="cele hidden" id="cele"><div class="cele-box"><img src="img/celebrate.jpg" alt=""/><h3 id="celeT">복습 끝!</h3><p id="celeP"></p><button class="primary" id="celeX" type="button">닫기</button></div></div>
 <div class="toast hidden" id="toast"></div>
 
 <script src="config.js"></script>
@@ -293,6 +336,8 @@ const CFG=window.APP_CONFIG||{};
 const BNAME={1:'창세기',2:'출애굽기',19:'시편',23:'이사야',24:'예레미야',26:'에스겔',40:'마태복음',41:'마가복음',42:'누가복음',43:'요한복음',44:'사도행전',45:'로마서',46:'고린도전서',49:'에베소서',50:'빌립보서',58:'히브리서',59:'야고보서',66:'요한계시록'};
 const chW=b=>+b===19?'편':'장';
 const TAGS=['어휘','숙어','구문','문법'],TAGN={'어휘':1,'숙어':2,'구문':3,'문법':4};
+function tagIcon(t){const i=document.createElement('img');i.className='tgi';i.src='img/tag-'+(TAGN[t]||1)+'.png';i.alt='';return i}
+function tagEl(t){const x=document.createElement('span');x.className='tag t'+(TAGN[t]||1);x.appendChild(tagIcon(t));x.appendChild(document.createTextNode(t));return x}
 const $=id=>document.getElementById(id);
 const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e};
 const pad=c=>String(c).padStart(2,'0');
@@ -350,9 +395,9 @@ function extraTo(p,text){String(text).split(/([⑴-⑻])/).forEach(x=>{if(!x)ret
 const P={b:0,c:0,d:null,cur:-1,mode:'all',lock:0,rng:{a:-1,b:-1},want:false,pend:null,drag:false,lastUser:0,lastSave:0};
 const audioEl=(()=>{const a=document.createElement('audio');a.preload='metadata';a.setAttribute('playsinline','');a.setAttribute('webkit-playsinline','');document.body.appendChild(a);return a})();
 function renderEmptyStudy(){$('chTitle').textContent='장을 골라 주세요';$('chSel').textContent='';const l=$('setList');l.textContent='';
-  const c=el('div','card');c.appendChild(el('p','sub','홈에서 장을 고르거나, 아래 버튼으로 시작해요.'));const b=el('button','primary','요한복음 1장 열기');b.style.marginTop='10px';b.addEventListener('click',()=>openChap(43,1,{play:false}));c.appendChild(b);l.appendChild(c)}
+  const c=el('div','card');{const im=el('img','empty-img');im.src='img/empty.jpg';im.alt='';c.appendChild(im)}c.appendChild(el('p','sub','홈에서 장을 고르거나, 아래 버튼으로 시작해요.'));const b=el('button','primary','요한복음 1장 열기');b.style.marginTop='10px';b.addEventListener('click',()=>openChap(43,1,{play:false}));c.appendChild(b);l.appendChild(c)}
 function renderChips(){const c=$('chips');c.textContent='';
-  const mk=(t,on,fn,cls)=>{const b=el('button','chip '+(cls||'')+(on?' on':''),t);b.type='button';b.addEventListener('click',fn);c.appendChild(b)};
+  const mk=(t,on,fn,cls)=>{const b=el('button','chip '+(cls||'')+(on?' on':''),t);b.type='button';if(cls&&cls.indexOf('tg')===0){b.textContent='';b.appendChild(tagIcon(t));b.appendChild(document.createTextNode(t))}b.addEventListener('click',fn);c.appendChild(b)};
   mk('우리말',S.prefs.ko,()=>{S.prefs.ko=!S.prefs.ko;applyPrefs()});
   mk('색',S.prefs.color,()=>{S.prefs.color=!S.prefs.color;applyPrefs()});
   mk('설명',S.prefs.notes,()=>{S.prefs.notes=!S.prefs.notes;applyPrefs()});
@@ -371,7 +416,7 @@ function renderChap(){
     const ko=el('div','ko');spansTo(ko,s.ko);card.appendChild(ko);
     if(s.notes&&s.notes.length){const nt=el('div','notes');s.notes.forEach((n,ni)=>{
       const r=el('div','note t'+(TAGN[n.tag]||1));r.dataset.c=n.c;r.appendChild(el('span','dot d'+n.c,String(n.c)));
-      const b=el('div');b.appendChild(el('span','tag t'+(TAGN[n.tag]||1),n.tag));b.appendChild(el('span','term',n.term));if(n.meaning)b.appendChild(el('span','mean','  '+n.meaning));if(n.memo)b.appendChild(el('span','memo','★ '+n.memo));
+      const b=el('div');b.appendChild(tagEl(n.tag));b.appendChild(el('span','term',n.term));if(n.meaning)b.appendChild(el('span','mean','  '+n.meaning));if(n.memo)b.appendChild(el('span','memo','★ '+n.memo));
       r.appendChild(b);r.dataset.si=i;r.dataset.ni=ni;const kk=(S.vocab||{})[vkey(n)];const vq=el('button','vq'+(kk?' on':''),kk?'📌 담김':'❓ 몰라요');vq.type='button';vq.title='단어장 맨 위에 담기';r.appendChild(vq);nt.appendChild(r)});card.appendChild(nt)}
     const exs=(s.extra||[]).filter(t=>!/^밀도\s/.test(t));   /* 「밀도 6/8」 은 만든 쪽 점검 지표 — 학습자에게는 숨김 */
     if(exs.length){const ex=el('div','extra');exs.forEach(t=>{const p=el('p');const m=t.match(/^(\S+)\s+([\s\S]*)$/);p.appendChild(document.createTextNode('★ '));
@@ -489,7 +534,7 @@ const MORE={scope:'chap',tags:{'어휘':1,'숙어':1,'구문':1,'문법':1},q:''
 function renderMore(){
   const sc=$('moreScope');sc.textContent='';
   [['chap','이 장'],['all','이 책 전체']].forEach(a=>{const b=el('button','chip'+(MORE.scope===a[0]?' on':''),a[1]);b.type='button';b.addEventListener('click',()=>{MORE.scope=a[0];renderMore()});sc.appendChild(b)});
-  const tg=$('moreTags');tg.textContent='';TAGS.forEach(t=>{const b=el('button','chip tg'+TAGN[t]+(MORE.tags[t]?' on':''),t);b.type='button';b.addEventListener('click',()=>{MORE.tags[t]=MORE.tags[t]?0:1;renderMore()});tg.appendChild(b)});
+  const tg=$('moreTags');tg.textContent='';TAGS.forEach(t=>{const b=el('button','chip tg'+TAGN[t]+(MORE.tags[t]?' on':''),t);b.type='button';b.textContent='';b.appendChild(tagIcon(t));b.appendChild(document.createTextNode(t));b.addEventListener('click',()=>{MORE.tags[t]=MORE.tags[t]?0:1;renderMore()});tg.appendChild(b)});
   const b=P.d?P.b:43;const need=MORE.scope==='all'?((LIST||{})[b]||[]):(P.d?[P.c]:[1]);
   $('moreCount').textContent='불러오는 중…';
   Promise.all(need.map(c=>getChap(b,c).catch(()=>null))).then(ds=>{ds=ds.filter(Boolean);
@@ -503,7 +548,7 @@ function renderMore(){
     $('moreCount').textContent=items.length+'개 · '+(MORE.scope==='all'?bookName(b)+' '+ds.length+chW(b):(ds[0]?ds[0].title:''))+' · 위치를 누르면 그 문장으로 가요';
     if(!items.length)L.appendChild(el('p','sub',ds.some(d=>d.sets.some(x=>(x.notes||[]).length))?'찾은 것이 없어요.':'이 책은 어휘·숙어 설명이 아직 없어요 (지금은 요한복음에만 있어요).'));
     items.forEach(it=>{const r=el('div','more-row'),n=it.n;
-      r.appendChild(el('span','tag t'+TAGN[n.tag],n.tag));r.appendChild(el('span','term',n.term));if(n.meaning)r.appendChild(el('span','mean','  '+n.meaning));if(n.memo)r.appendChild(el('span','memo','★ '+n.memo));
+      r.appendChild(tagEl(n.tag));r.appendChild(el('span','term',n.term));if(n.meaning)r.appendChild(el('span','mean','  '+n.meaning));if(n.memo)r.appendChild(el('span','memo','★ '+n.memo));
       const lc=el('div','locs');it.locs.slice(0,6).forEach(x=>{const bt=el('button',null,x.ref+' ▶');bt.type='button';bt.addEventListener('click',()=>openChap(x.b,x.c,{i:x.i,play:true}));lc.appendChild(bt)});
       if(it.locs.length>6)lc.appendChild(el('small','sub','외 '+(it.locs.length-6)+'곳'));r.appendChild(lc);L.appendChild(r)})})}
 $('moreQ').addEventListener('input',()=>{MORE.q=$('moreQ').value;clearTimeout(renderMore._t);renderMore._t=setTimeout(renderMore,200)});
@@ -528,9 +573,9 @@ function renderVocab(){
   {const b=el('button','chip'+(VF.hide?' on':''),'뜻 가리기');b.type='button';b.addEventListener('click',()=>{VF.hide=!VF.hide;renderVocab()});ch.appendChild(b)}
   const L=$('vList');L.textContent='';L.classList.toggle('v-hide',VF.hide);
   const rows=all.filter(v=>VF.f==='all'||(VF.f==='unk'&&v.box<=1)||(VF.f==='done'&&v.box>=3));
-  if(!rows.length)L.appendChild(el('p','sub',all.length?'이 칸에는 아직 없어요.':'공부 화면의 설명 줄에서 ❓ 몰라요를 누르면 여기에 담겨요.'));
+  if(!rows.length){const im=el('img','empty-img');im.src='img/empty.jpg';im.alt='';L.appendChild(im);L.appendChild(el('p','sub',all.length?'이 칸에는 아직 없어요.':'공부 화면의 설명 줄에서 ❓ 몰라요를 누르면 여기에 담겨요.'))}
   rows.forEach(v=>{const r=el('div','v-row');r.dataset.k=v.k;
-    r.appendChild(el('span','tag t'+(TAGN[v.tag]||1),v.tag));r.appendChild(el('span','term',v.term));
+    r.appendChild(tagEl(v.tag));r.appendChild(el('span','term',v.term));
     if(v.meaning)r.appendChild(el('span','mean',v.meaning));if(v.memo)r.appendChild(el('span','memo','★ '+v.memo));
     const m=el('div','v-meta');m.appendChild(el('span','v-dots','●'.repeat(Math.min(5,v.box))+'○'.repeat(5-Math.min(5,v.box))));
     const dd=v.due<=Date.now()?'지금 복습':Math.max(1,Math.ceil((v.due-Date.now())/DAY))+'일 뒤';m.appendChild(el('span',null,dd));m.appendChild(el('span',null,v.ref||''));
@@ -555,7 +600,7 @@ function rvStart(){const q=vDue().sort(vSort).map(v=>v.k);if(!q.length){toast('�
 function rvShow(){
   if(RV.i>=RV.q.length){rvDone();return}
   const v=S.vocab[RV.q[RV.i]];if(!v){RV.i++;rvShow();return}RV.cur=v;rvAudio.pause();
-  $('rvProg').textContent=(RV.i+1)+' / '+RV.q.length;$('rvTag').className='tag t'+(TAGN[v.tag]||1);$('rvTag').textContent=v.tag;$('rvTerm').textContent=v.term;
+  $('rvProg').textContent=(RV.i+1)+' / '+RV.q.length;{const t=tagEl(v.tag),o=$('rvTag');o.className=t.className;o.textContent='';while(t.firstChild)o.appendChild(t.firstChild)}$('rvTerm').textContent=v.term;
   $('rvSent').textContent='';$('rvKo').textContent='';$('rvMean').textContent='';$('rvMemo').textContent='';
   $('rvAns').classList.add('hidden');$('rvBtns').classList.add('hidden');$('rvFlip').classList.remove('hidden');
   getChap(v.b,v.c).then(d=>{const s=d.sets[v.i];if(!s||RV.cur!==v)return;const e=$('rvSent');e.textContent='';
@@ -568,11 +613,12 @@ function rvGrade(ok){const v=RV.cur;if(!v)return;vGrade(v.k,ok);
   RV.i++;rvShow()}
 $('rvYes').addEventListener('click',()=>rvGrade(true));$('rvNo').addEventListener('click',()=>rvGrade(false));
 $('rvListen').addEventListener('click',()=>{if(RV.cur)rvPlay(RV.cur)});
-function rvDone(){rvAudio.pause();$('rv').classList.add('hidden');toast('복습 끝! 알아요 '+RV.ok+' · 몰라요 '+RV.no,3200);if(TAB==='vocab')renderVocab();else if(TAB==='home')renderHome()}
+function rvDone(){rvAudio.pause();$('rv').classList.add('hidden');$('celeT').textContent='오늘 복습 끝! 🎉';$('celeP').textContent='알아요 '+RV.ok+' · 몰라요 '+RV.no+' — 몰라요는 맨 위에서 바로 다시 나와요';$('cele').classList.remove('hidden');if(TAB==='vocab')renderVocab();else if(TAB==='home')renderHome()}
+$('celeX').addEventListener('click',()=>$('cele').classList.add('hidden'));$('cele').addEventListener('click',e=>{if(e.target.id==='cele')e.currentTarget.classList.add('hidden')});
 $('rvClose').addEventListener('click',()=>{rvAudio.pause();$('rv').classList.add('hidden');if(TAB==='vocab')renderVocab()});
 
 /* ===== 설정 ===== */
-function renderSet(){$('setName').value=S.name;$('setFs').value=String(S.prefs.fs);$('setKo').checked=!!S.prefs.ko;$('setColor').checked=!!S.prefs.color;$('setNotes').checked=!!S.prefs.notes;
+function renderSet(){{const r=$('setInst').closest('.set-row');if(r)r.classList.toggle('hidden',isStandalone())}$('setName').value=S.name;$('setFs').value=String(S.prefs.fs);$('setKo').checked=!!S.prefs.ko;$('setColor').checked=!!S.prefs.color;$('setNotes').checked=!!S.prefs.notes;
   const dn=Object.keys(S.done).length,hs=Object.values(S.heard).reduce((a,b)=>a+b,0);$('statText').textContent='끝까지 들은 장 '+dn+'장 · 지금까지 들은 문장 '+hs+'개 (이 폰 기준)'}
 $('setNameGo').addEventListener('click',()=>{const v=$('setName').value.trim();if(!v){toast('이름을 써 주세요');return}S.name=v;save();$('who').textContent='👤 '+v;toast('저장했어요')});
 $('setFs').addEventListener('change',()=>{S.prefs.fs=+$('setFs').value;applyPrefs()});
