@@ -1150,7 +1150,7 @@ function renderAll(){
 }
 
 /* ================= 읽기 ================= */
-let curB=1,curC=1,observer=null,maxVerse=0,dirtyVerse=false,openB=0,openC=0,readReq=false;
+let curB=1,curC=1,observer=null,maxVerse=0,dirtyVerse=false,openB=0,openC=0,readReq=false,USCROLL=false;   /* USCROLL: 이 장을 연 뒤 사용자가 직접 스크롤했나 (V3.22) */
 function initReader(){
   if(document.getElementById('bookSel').options.length)return;
   const bs=document.getElementById('bookSel');
@@ -1176,7 +1176,7 @@ function openChapter(noScroll){
   const body=document.getElementById('readerBody');
   const hint=document.getElementById('posHint');
   const chip=document.getElementById('resumeChip');
-  const b=BOOKS[curB-1];openB=curB;openC=curC;
+  const b=BOOKS[curB-1];openB=curB;openC=curC;USCROLL=false;
   title.textContent=b.n+' '+curC+chW(curB);
   document.getElementById('chapReadChk').checked=!!state.readChapters[key(curB,curC)];
   maxVerse=state.versePos[key(curB,curC)]||0;
@@ -1320,6 +1320,7 @@ document.getElementById('listenNewBtn').addEventListener('click',()=>{
   audList().then(()=>{const lr=state.lastRead;let b=40,c=1;if(lr&&hasAudio(lr.b,lr.c)){b=lr.b;c=lr.c}goRead(b,c)})});
 document.getElementById('listenNewX').addEventListener('click',lnDone);
 audioEl.addEventListener('play',lnDone);
+['wheel','touchmove','keydown'].forEach(ev=>window.addEventListener(ev,()=>{USCROLL=true},{passive:true}));   /* V3.22 직접 내려 읽었는지 (프로그램이 알아서 옮긴 스크롤은 아님) */
 /* V3.16 듣는 장으로 돌아가기 카드 — 10초 그대로 두면 자동 · 만지면 다시 10초 */
 function audAwayCard(){
   let el=document.getElementById('abAway');
@@ -1364,7 +1365,8 @@ function audStep(d){   /* 이전·다음 장 (소리 있는 장으로) */
 function audToggle(){
   if(AUD.away){AUD.away=false;audioEl.pause();AUD.want=true;audAwayCard();audLoad(curB,curC,true).then(()=>audMark(true));return}   /* 둘러보던 장으로 바꿔 듣기 */
   if(audioEl.paused){AUD.want=true;if(!audioEl.src||AUD.b!==curB||AUD.c!==curC){AUD.b=0;audSetup(curB,curC);return}
-    const T=AUD.T||[];if(audioEl.currentTime<0.1&&T[0]&&maxVerse>1){const v=T.find(x=>x[0]===maxVerse);if(v)audioEl.currentTime=v[1]}   /* 지난번 읽던 절부터 */
+    /* 지난번 읽던 절부터 — V3.22 ★저장된 위치(이전에 읽다 멈춘 곳) 또는 사용자가 직접 내려 읽은 곳만. 장을 열자마자 화면 가운데에 온 절(짧은 장은 4절 등)은 「읽은 곳」 이 아니다 → 처음 듣는 장은 1절부터 */
+    const T=AUD.T||[],rp=Math.max(+state.versePos[key(curB,curC)]||0,USCROLL?maxVerse:0);if(audioEl.currentTime<0.1&&T[0]&&rp>1){const v=T.find(x=>x[0]===rp);if(v)audioEl.currentTime=v[1]}
     audioEl.play().catch(()=>{})}
   else{AUD.want=false;audioEl.pause()}
 }
