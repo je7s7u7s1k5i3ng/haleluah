@@ -1856,7 +1856,7 @@ let deferredPrompt=null;
 const UA=navigator.userAgent||'';
 const IS_IOS=/iPhone|iPad|iPod/i.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 const IS_ANDROID=/Android/i.test(UA);
-const IN_KAKAO=/KAKAOTALK/i.test(UA),IN_APPWEB=IN_KAKAO||/NAVER|Instagram|FBAN|FBAV|Line\//i.test(UA);
+const IN_KAKAO=/KAKAOTALK/i.test(UA),IN_APPWEB=IN_KAKAO||/NAVER|Instagram|FBAN|FBAV|FB_IAB|Line\/|DaumApps|BAND|Twitter|; wv\)/i.test(UA);   /* V3.21 다른 앱 안 브라우저(안드로이드 웹뷰 포함) */
 const IS_IOS_SAFARI=IS_IOS&&/Safari/i.test(UA)&&!/CriOS|FxiOS|EdgiOS|Whale|NAVER/i.test(UA)&&!IN_APPWEB;
 function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true}
 function showInstallButtons(){
@@ -1892,9 +1892,11 @@ function installApp(){
   if(isStandalone()){alert('이미 홈 화면 앱으로 열려 있어요 🙂');return}
   if(deferredPrompt){const p=deferredPrompt;deferredPrompt=null;p.prompt();
     (p.userChoice||Promise.resolve()).then(r=>{if(r&&r.outcome==='accepted')showInstallButtons()});return}
-  if(IN_KAKAO&&IS_ANDROID){   /* 카톡 안 → 크롬으로 바로 열기 */
+  if(IN_APPWEB&&IS_ANDROID){   /* 카톡·네이버·인스타 등 다른 앱 안 → 크롬으로 바로 열기 (V3.21 카톡만 되던 것을 전부로) */
     location.href='intent://'+location.host+location.pathname+'#Intent;scheme=https;package=com.android.chrome;end';
-    setTimeout(()=>instSheet('크롬에서 열어 주세요',[['카톡 화면 오른쪽 위 ',{ico:'⋮'},' 를 눌러요'],['「다른 브라우저로 열기」 를 눌러요'],['크롬에서 다시 「📲 홈 화면에 설치」 를 누르면 끝!']],{copy:true}),1200);return}
+    setTimeout(()=>instSheet('크롬에서 열어 주세요',IN_KAKAO
+      ?[['카톡 화면 오른쪽 위 ',{ico:'⋮'},' 를 눌러요'],['「다른 브라우저로 열기」 를 눌러요'],['크롬에서 다시 「📲 홈 화면에 설치」 를 누르면 끝!']]
+      :[['지금 열린 이 화면은 앱 안의 브라우저라 설치가 안 돼요'],['화면의 메뉴 ',{ico:'⋮'},' 또는 ',{ico:'⋯'},' 에서 「다른 브라우저로 열기」 (또는 「기본 브라우저로 열기」) 를 눌러요'],['아래 「주소 복사하기」 로 크롬 주소창에 붙여넣어도 돼요'],['크롬에서 다시 「📲 홈 화면에 설치」 를 누르면 끝!']],{copy:true}),1200);return}
   if(IS_IOS&&!IS_IOS_SAFARI){
     instSheet('사파리에서 열어 주세요',IN_KAKAO
       ?[['카톡 화면 오른쪽 아래 ',{ico:'⋯'},' 또는 공유 버튼을 눌러요'],['「Safari로 열기」 를 눌러요'],['사파리에서 다시 「📲 홈 화면에 설치」 를 누르면 안내가 나와요']]
@@ -1902,7 +1904,7 @@ function installApp(){
   if(IS_IOS){
     instSheet('아이폰 홈 화면에 추가',[['화면 아래쪽 가운데 공유 버튼 ',{ico:'□↑'},' 을 눌러요'],['목록을 위로 올려 「홈 화면에 추가」 를 눌러요'],['오른쪽 위 「추가」 를 누르면 끝! 🙏']],{arrow:true});return}
   if(IS_ANDROID){
-    instSheet('안드로이드 홈 화면에 설치',[['오른쪽 위 ',{ico:'⋮'},' 메뉴를 눌러요 (삼성 인터넷은 아래 ',{ico:'≡'},')'],['「홈 화면에 추가」 또는 「앱 설치」 를 눌러요'],['「설치」/「추가」 를 누르면 끝! 🙏']]);return}
+    instSheet('안드로이드 홈 화면에 설치',[['오른쪽 위 ',{ico:'⋮'},' 메뉴를 눌러요 (삼성 인터넷은 아래 ',{ico:'≡'},')'],['「홈 화면에 추가」 또는 「앱 설치」 를 눌러요'],['「설치」/「추가」 를 누르면 끝! 🙏'],['메뉴에 안 보이면 — 시크릿 창이거나 이미 설치된 경우예요. 일반 크롬 창에서 열거나 홈 화면 아이콘으로 열어 보세요']],{copy:true});return}   /* V3.21 안 될 때 이유 안내 */
   instSheet('홈 화면(바탕화면)에 두기',[['휴대폰에서 이 주소를 열면 홈 화면에 추가할 수 있어요'],['컴퓨터는 주소창 오른쪽 ',{ico:'⊕'},' 설치 아이콘을 눌러요']],{copy:true});
 }
 ['instTop','instHome'].forEach(id=>{const e=document.getElementById(id);if(e)e.addEventListener('click',installApp)});

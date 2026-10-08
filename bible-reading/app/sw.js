@@ -1,5 +1,5 @@
 /* 성경 읽기 - 서비스 워커 (오프라인 지원) */
-const CACHE = 'bible-cache-app-20261005w';
+const CACHE = 'bible-cache-app-20261005x';
 const ASSETS = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {
