@@ -342,6 +342,8 @@ body.admin-mode .tabs button[data-tab="home"],body.admin-mode .tabs button[data-
 .adm-read .ing{color:var(--accent);font-weight:600}
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
+/* ===== V3.20 들으며 읽기 새로 나왔어요 ===== */
+.linklike{border:0;background:none;padding:0 0 0 6px;color:#8a7f6e;font:inherit;font-size:12.5px;text-decoration:underline;cursor:pointer}
 /* ===== V3.18 최근 읽은 곳 ===== */
 .adm-read .when{display:inline-block;min-width:5.6em;margin-right:6px;font-size:12px;color:#8a7f6e;font-variant-numeric:tabular-nums}
 .adm-read .more{border:0;background:none;color:var(--accent);font:inherit;font-weight:700;padding:2px 0;cursor:pointer}
@@ -458,6 +460,7 @@ h2{color:#1E2A55}
   <!-- 홈 -->
   <section id="tab-home">
     <div class="card inst-card promo hidden" id="instCard"><button id="instHome" class="promo-btn inst blink" type="button">📲 홈 화면에 설치 <span class="tap-hint">👆 여기 클릭</span></button><p class="sub" style="margin:8px 0 0">앱처럼 아이콘으로 바로 열려요 · 안드로이드·아이폰 모두</p></div>
+    <div class="card promo hidden" id="listenNew"><button id="listenNewBtn" class="promo-btn alt blink" type="button">🎧 들으며 읽기가 새로 나왔어요 <span class="tap-hint">👆 여기 클릭</span></button><p class="sub" style="margin:8px 0 0">재생을 누르면 <b>읽는 줄이 굵게</b> 따라가요 · 신약 소리 있는 장은 정지할 때까지 쭉 이어 들려요 · 멈춘 곳까지 자동 저장 <button id="listenNewX" class="linklike" type="button">닫기</button></p></div>
     <div class="card intro-card promo">
       <p class="intro-note">📣 지금은 <b>시험판 웹앱</b>이에요. 함께 써 보고 잘 되면 <b>플레이스토어 설치용 앱</b>으로 업데이트할 예정입니다.</p>
       <h2>이 앱에서 할 수 있는 것</h2>
@@ -1039,7 +1042,7 @@ function titled(n){n=String(n||'');return (CFG.adminName&&n===CFG.adminName)?n+'
 function renderMe(){const c=document.getElementById('meChip');if(!c)return;
   if(GUEST){c.textContent='👀 둘러보기';c.classList.remove('hidden');return}
   if(state.name){const t=titled(state.name);c.textContent='👤 '+t+(t.endsWith('목사님')?'':' 님')+(ADMIN&&!t.endsWith('목사님')?' · 관리':'');c.classList.remove('hidden')}else c.classList.add('hidden')}
-function renderHome(){renderMe();renderBadges();checkCelebrate();renderFeed();renderGoals();renderTodayPlan();
+function renderHome(){renderListenNew();renderMe();renderBadges();checkCelebrate();renderFeed();renderGoals();renderTodayPlan();
   renderResume();renderMyProg();renderBookGrid();
   const gs=document.getElementById('groupStats');gs.textContent='';
   const list=memberListForViews(),tw=todayWeek();
@@ -1307,6 +1310,16 @@ function audCenter(el){
   if(Math.abs(y)<6)return;
   window.scrollTo({top:Math.max(0,scrollY+y),behavior:'smooth'});
 }
+/* V3.20 들으며 읽기 새로 나왔어요 — 홈 맨 위 깜박이 안내 (한 번 누르거나 닫거나 소리를 한 번 재생하면 이 폰에선 끝) */
+const LN_KEY='bibleListenNew1';
+function lnSeen(){try{return localStorage.getItem(LN_KEY)==='1'}catch(e){return false}}
+function lnDone(){try{localStorage.setItem(LN_KEY,'1')}catch(e){}const c=document.getElementById('listenNew');if(c)c.classList.add('hidden')}
+function renderListenNew(){const c=document.getElementById('listenNew');if(c)c.classList.toggle('hidden',lnSeen())}
+document.getElementById('listenNewBtn').addEventListener('click',()=>{
+  lnDone();
+  audList().then(()=>{const lr=state.lastRead;let b=40,c=1;if(lr&&hasAudio(lr.b,lr.c)){b=lr.b;c=lr.c}goRead(b,c)})});
+document.getElementById('listenNewX').addEventListener('click',lnDone);
+audioEl.addEventListener('play',lnDone);
 /* V3.16 듣는 장으로 돌아가기 카드 — 10초 그대로 두면 자동 · 만지면 다시 10초 */
 function audAwayCard(){
   let el=document.getElementById('abAway');
@@ -1931,8 +1944,13 @@ function startApp(){
 /* V3.9 — 서비스워커를 앱 열자마자 등록 (첫 화면에서도 설치 가능) · 새 버전이 깔리면 한 번 자동 새로고침 */
 if('serviceWorker'in navigator){
   const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false;
-  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadCtl||reloaded)return;reloaded=true;location.reload()});
-  navigator.serviceWorker.register('sw.js').catch(()=>{});
+  /* V3.19 — 듣는 중이면 새로고침하지 않고 ★정지한 뒤에 (쭉 듣기 장 넘김 사이에는 AUD.want 가 켜져 있어 넘어가지 않음) · 저장은 pagehide 가 한다 */
+  let swWait=false;const swGo=()=>{if(!audioEl.paused||AUD.want){swWait=true;return}location.reload()};
+  audioEl.addEventListener('pause',()=>{if(swWait)setTimeout(()=>{if(audioEl.paused&&!AUD.want)location.reload()},1500)});
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadCtl||reloaded)return;reloaded=true;swGo()});
+  /* V3.19 — 열어 둔 채로 있던 앱도 새 버전 확인: 화면으로 돌아올 때 · 30분마다 (사장님 2026-10-08 「새 버전으로 열리게」) */
+  navigator.serviceWorker.register('sw.js').then(reg=>{const chk=()=>{try{reg.update().catch(()=>{})}catch(e){}};
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});window.addEventListener('focus',chk);setInterval(chk,30*60*1000)}).catch(()=>{});
 }
 (function boot(){
   pingVisit('open');   /* 링크 열어 봄 — 횟수만 */
