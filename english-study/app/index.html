@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>영어 공부</title>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#1E2A55"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="영어 공부"/>
+<meta name="format-detection" content="telephone=no"/>
+<link rel="icon" href="icon-192.png"/>
+<link rel="apple-touch-icon" href="icon-192.png"/>
+<meta name="description" content="영어 성경을 듣고 읽으며 어휘 · 숙어 · 구문 · 문법을 색으로 익히는 앱"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="영어 공부 · 함께 듣고 읽기"/>
+<meta property="og:description" content="듣고 따라 읽고, 색으로 어휘 · 숙어 · 구문 · 문법을 익혀요"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+@font-face{font-family:'SBAggroM';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');font-display:swap}
+@font-face{font-family:'SBAggroB';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');font-display:swap}
+:root{--bg:#f6f1e6;--card:#fffdf8;--ink:#2b2a33;--sub:#7a7385;--accent:#1e2a55;--gold:#e8b860;--line:#e5ddcb;--ok:#3f7a4c;--danger:#a33d2f;--fs:1;--tabh:58px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'SBAggroM','Noto Sans KR',system-ui,sans-serif;padding-bottom:calc(var(--tabh) + 22px + env(safe-area-inset-bottom))}
+body.hasbar{padding-bottom:calc(var(--tabh) + 140px + env(safe-area-inset-bottom))}
+main{max-width:680px;margin:0 auto;padding:12px 14px 20px}
+h1,h2,h3{margin:0}
+h2{font-size:15px;font-weight:700;margin-bottom:10px}
+.sub{color:var(--sub);font-size:12px;line-height:1.55}
+.hidden{display:none!important}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 1px 2px rgba(30,42,85,.05)}
+button{font-family:inherit}
+.primary{width:100%;padding:12px;border:0;border-radius:10px;background:var(--accent);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+.primary:active{opacity:.85}
+.ghost{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font-size:13.5px;cursor:pointer}
+/* 헤더 */
+.top{max-width:680px;margin:0 auto;padding:14px 14px 4px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(160deg,#2c3a6e,#1e2a55);color:#e8b860;display:flex;align-items:center;justify-content:center;font-size:16px;font-family:'SBAggroB','Noto Sans KR',sans-serif;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
+.brand h1{font-size:17px;font-family:'SBAggroB','Noto Sans KR',sans-serif;color:var(--accent)}
+.brand p{margin:0;font-size:11px;color:var(--sub)}
+.badge{font-size:11px;padding:5px 10px;border-radius:20px;background:#e6e9f5;color:var(--accent);white-space:nowrap;max-width:42vw;overflow:hidden;text-overflow:ellipsis}
+/* 하단 탭 */
+.tabs{position:fixed;left:0;right:0;bottom:0;display:flex;background:#fffdf8;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:20}
+.tabs button{flex:1;border:0;background:none;padding:9px 0 11px;font-size:11px;font-weight:500;color:var(--sub);display:flex;flex-direction:column;align-items:center;gap:3px}
+.tabs button .ico{font-size:18px;line-height:1}
+.tabs button.on{color:var(--accent);font-weight:700}
+/* 홈 */
+.promo-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:100%;min-height:54px;padding:12px;border:0;border-radius:14px;font-family:'SBAggroB','Noto Sans KR',sans-serif;font-size:16.5px;line-height:1.3;color:#fff;background:#2f7a3a;cursor:pointer}
+@keyframes promoPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,184,96,.75)}50%{box-shadow:0 0 0 6px rgba(232,184,96,.35),0 0 18px 4px rgba(255,216,77,.55)}}
+.blink{animation:promoPulse 1.8s ease-in-out infinite}
+@keyframes tapBlink{0%,49%{opacity:1}50%,100%{opacity:.15}}
+.tap-hint{display:inline-block;padding:3px 9px;border-radius:12px;background:#ffd84d;color:#1e2a55;font-size:12.5px;line-height:1.2;white-space:nowrap;animation:tapBlink 1s infinite}
+@media (prefers-reduced-motion:reduce){.blink,.tap-hint{animation:none}}
+.row{display:flex;gap:8px;align-items:center}
+.row input[type=text]{flex:1;min-width:0;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:15px;background:#fff}
+.resume b{display:block;font-size:15px;margin:2px 0 8px}
+.chap-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.chap-grid button{position:relative;padding:11px 0 9px;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:16px;font-weight:700;color:var(--accent);cursor:pointer}
+.chap-grid button small{display:block;font-size:10px;font-weight:400;color:var(--sub);margin-top:2px}
+.chap-grid button.done{background:#eef6ee;border-color:#bcd8bf}
+.chap-grid button.done small{color:var(--ok)}
+.chap-grid button.off{opacity:.38;cursor:default}
+.feat{margin:0;padding-left:0;list-style:none;font-size:13.5px;line-height:1.75}
+.feat li{margin-bottom:5px}
+/* 공부 머리 */
+.sh-top{display:flex;align-items:center;gap:8px}
+.sh-top h2{flex:1;margin:0;font-size:17px;font-family:'SBAggroB','Noto Sans KR',sans-serif;color:var(--accent)}
+.sh-top select{padding:8px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit;font-size:13px}
+.sh-top .ghost{padding:8px 11px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{padding:6px 11px;border:1px solid var(--line);border-radius:18px;background:#fff;font-size:12.5px;color:var(--sub);cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.chip.tg1.on{background:#4363d8;border-color:#4363d8}.chip.tg2.on{background:#f58231;border-color:#f58231}.chip.tg3.on{background:#3cb44b;border-color:#3cb44b}.chip.tg4.on{background:#911eb4;border-color:#911eb4}
+.hint{font-size:12px;color:var(--sub);margin:8px 2px 0;line-height:1.5}
+/* 문장 카드 */
+.set{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;cursor:pointer;position:relative}
+.set-h{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--sub);margin-bottom:6px}
+.set-h .ref{font-weight:700;color:var(--accent)}
+.set-h .idx{margin-left:auto}
+.set-h .pl{border:0;border-radius:14px;padding:5px 11px;background:#e6e9f5;color:var(--accent);font-size:12px;font-weight:700;cursor:pointer}
+.set.now .set-h .pl{background:var(--gold);color:#1e2a55}
+.set.now{border-color:var(--gold);box-shadow:0 0 0 2px rgba(232,184,96,.6);background:#fffaf0}
+.set.now::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:4px;border-radius:0 4px 4px 0;background:var(--gold)}
+.set.inrange{border-color:#7e8fd6;background:#f4f6ff}
+.set.rstart{box-shadow:0 0 0 2px #4363d8}
+.en{font-family:Georgia,'Times New Roman',serif;font-size:calc(18px*var(--fs));line-height:1.8;color:#1f1d27}
+.set.now .en{font-weight:700}
+.ko{font-size:calc(14px*var(--fs));line-height:1.75;color:#4a4452;margin-top:7px}
+.noko .ko{display:none}
+.cs{border-radius:4px;padding:1px 2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.cs .cn{font-size:.58em;font-weight:700;vertical-align:super;line-height:0;margin-right:1px;opacity:.85;font-family:'Noto Sans KR',sans-serif}
+.c1{background:rgba(230,25,75,.14);border-bottom:2px solid #e6194b}
+.c2{background:rgba(255,225,25,.34);border-bottom:2px solid #d4b800}
+.c3{background:rgba(70,240,240,.28);border-bottom:2px solid #1fb8b8}
+.c4{background:rgba(245,130,49,.20);border-bottom:2px solid #f58231}
+.c5{background:rgba(60,180,75,.18);border-bottom:2px solid #3cb44b}
+.c6{background:rgba(145,30,180,.14);border-bottom:2px solid #911eb4}
+.c7{background:rgba(67,99,216,.16);border-bottom:2px solid #4363d8}
+.c8{background:rgba(240,50,230,.15);border-bottom:2px solid #f032e6}
+.nocolor .cs{background:none;border-bottom:0}.nocolor .cs .cn{display:none}
+.set[data-hi="1"] .c1,.set[data-hi="2"] .c2,.set[data-hi="3"] .c3,.set[data-hi="4"] .c4,.set[data-hi="5"] .c5,.set[data-hi="6"] .c6,.set[data-hi="7"] .c7,.set[data-hi="8"] .c8{outline:2px solid #1e2a55;outline-offset:1px;filter:saturate(1.8) contrast(1.05)}
+.notes{margin-top:8px}
+.nonotes .notes,.nonotes .extra{display:none}
+.note{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px dashed var(--line);font-size:calc(13px*var(--fs));line-height:1.55}
+.set[data-hi="1"] .note[data-c="1"],.set[data-hi="2"] .note[data-c="2"],.set[data-hi="3"] .note[data-c="3"],.set[data-hi="4"] .note[data-c="4"],.set[data-hi="5"] .note[data-c="5"],.set[data-hi="6"] .note[data-c="6"],.set[data-hi="7"] .note[data-c="7"],.set[data-hi="8"] .note[data-c="8"]{background:#fff6dc;border-radius:8px}
+.dot{flex:0 0 22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;margin-top:1px;font-family:'Noto Sans KR',sans-serif}
+.d1{background:#e6194b}.d2{background:#ffe119;color:#4a3d00}.d3{background:#46f0f0;color:#00494a}.d4{background:#f58231}.d5{background:#3cb44b}.d6{background:#911eb4}.d7{background:#4363d8}.d8{background:#f032e6}
+.tag{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:10px;color:#fff;margin-right:5px;vertical-align:1px;font-family:'Noto Sans KR',sans-serif}
+.tag.t1{background:#4363d8}.tag.t2{background:#f58231}.tag.t3{background:#3cb44b}.tag.t4{background:#911eb4}   /* ★.note 행에도 t1~t4 가 붙어 있어 .tag 로 한정 (행 전체가 칠해지는 오류 — 2026-10-08) */
+.hide-t1 .note.t1,.hide-t2 .note.t2,.hide-t3 .note.t3,.hide-t4 .note.t4{display:none}
+.term{font-family:Georgia,serif;font-weight:700}
+.mean{color:#4a4452}
+.memo{display:block;color:var(--sub);font-size:.92em;margin-top:1px}
+.extra{margin-top:8px;padding:8px 10px;border-radius:10px;background:#f3eefb;font-size:calc(12.5px*var(--fs));line-height:1.65;color:#4a3d63}
+.extra p{margin:0 0 3px}
+.dot.mini{display:inline-flex;width:17px;height:17px;flex:none;font-size:10px;vertical-align:-3px;margin:0 2px}
+/* 소리 막대 */
+.audio-bar{position:fixed;left:0;right:0;bottom:calc(var(--tabh) + env(safe-area-inset-bottom));z-index:19;background:#1e2a55;color:#fbf8f1;padding:8px 12px 9px;box-shadow:0 -4px 14px rgba(20,28,60,.3)}
+.ab-in{max-width:680px;margin:0 auto}
+.ab-r1{display:flex;align-items:center;gap:8px}
+.ab-r1 button{border:0;background:rgba(255,255,255,.12);color:#fff;width:40px;height:40px;border-radius:50%;font-size:16px;cursor:pointer;flex:0 0 auto}
+.ab-r1 #abPlay{width:48px;height:48px;background:#e8b860;color:#1e2a55;font-size:20px;font-weight:700}
+.ab-seek{flex:1;min-width:0}
+.ab-seek input{width:100%;accent-color:#e8b860;margin:0}
+.ab-seek small{display:flex;justify-content:space-between;font-size:11px;opacity:.85;margin-top:2px}
+.ab-r2{display:flex;align-items:center;gap:6px;margin-top:7px}
+.ab-modes{display:flex;gap:4px;flex:1}
+.ab-modes button{flex:1;padding:7px 2px;border:1px solid rgba(255,255,255,.28);border-radius:9px;background:none;color:#fbf8f1;font-size:12px;cursor:pointer;white-space:nowrap}
+.ab-modes button.on{background:#e8b860;border-color:#e8b860;color:#1e2a55;font-weight:700}
+#abRate{padding:7px 9px;border:1px solid rgba(255,255,255,.28);border-radius:9px;background:none;color:#fbf8f1;font-size:12px;cursor:pointer;min-width:52px}
+.ab-info{font-size:11.5px;margin-top:6px;opacity:.9;min-height:15px}
+/* 모아보기 */
+.more-row{padding:10px 0;border-top:1px dashed var(--line);font-size:calc(13.5px*var(--fs));line-height:1.6}
+.more-row:first-child{border-top:0}
+.more-row .locs{margin-top:5px;display:flex;flex-wrap:wrap;gap:5px}
+.more-row .locs button{padding:3px 9px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:11.5px;color:var(--accent);cursor:pointer}
+.search{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:14px;background:#fff;margin-top:10px}
+/* 설정 */
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.set-row:first-of-type{border-top:0}
+.set-row select{padding:8px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit;font-size:13px}
+/* 설치 안내 */
+.inst-sheet{position:fixed;inset:0;z-index:70;background:rgba(20,28,60,.55);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:0 0 calc(12px + env(safe-area-inset-bottom))}
+.inst-box{background:var(--card);width:calc(100% - 24px);max-width:420px;border-radius:18px;padding:18px 18px 14px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.inst-box h3{margin:0 0 8px;font-family:'SBAggroB','Noto Sans KR',sans-serif;color:var(--accent);font-size:18px}
+.inst-box ol{margin:0 0 10px;padding-left:20px;font-size:14.5px;line-height:1.9}
+.inst-box .ico{display:inline-block;padding:0 6px;border:1px solid var(--line);border-radius:6px;background:#f7f1e4;font-weight:700}
+.inst-box .primary{margin-top:6px}
+.inst-arrow{font-size:34px;line-height:1;margin-top:8px;color:#fff;animation:tapBlink 1s infinite}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tabh) + 150px + env(safe-area-inset-bottom));z-index:60;background:rgba(30,42,85,.94);color:#fff;padding:10px 16px;border-radius:20px;font-size:13px;max-width:88vw;text-align:center;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="brand"><div class="brand-mark">EN</div><div><h1>영어 공부</h1><p>듣고 · 읽고 · 색으로 익히기</p></div></div>
+  <span class="badge" id="who"></span>
+</div>
+<main>
+  <!-- 홈 -->
+  <section id="vHome">
+    <div class="card hidden" id="instCard" style="padding:10px"><button id="instHome" class="promo-btn blink" type="button">📲 홈 화면에 설치 <span class="tap-hint">👆 여기 클릭</span></button><p class="sub" style="margin:8px 0 0;text-align:center">앱처럼 아이콘으로 바로 열려요 · 안드로이드·아이폰 모두</p></div>
+    <div class="card" id="nameCard"><h2>👋 이름을 알려 주세요</h2><div class="row"><input type="text" id="nameIn" placeholder="이름" maxlength="12" autocomplete="off"/><button class="primary" id="nameGo" type="button" style="width:auto;padding:11px 18px">시작</button></div><p class="sub" style="margin-top:8px">이 폰에 공부 기록이 저장돼요.</p></div>
+    <div class="card resume hidden" id="resumeCard"><small class="sub">이어서 공부</small><b id="resumeText"></b><button class="primary" id="resumeBtn" type="button">이어서 듣기 ›</button></div>
+    <div class="card"><h2>📖 요한복음 · 영어(NIV) 듣고 읽기</h2><div class="chap-grid" id="chapGrid"></div><p class="sub" style="margin-top:10px">장을 누르면 바로 열려요. 소리가 있는 장부터 차례로 늘어나요.</p></div>
+    <div class="card">
+      <h2>이 앱에서 할 수 있는 것</h2>
+      <ul class="feat">
+        <li>🎧 <b>듣고 따라 읽기</b> — 재생하면 읽는 문장이 <b>굵게</b> 따라가요</li>
+        <li>🔁 <b>한 문장 반복 · 한 장 반복 · 구간 반복</b> — 어려운 곳만 골라서 계속</li>
+        <li>🎨 <b>색 번호 매치</b> — 영어와 우리말에 같은 색이 칠해져요 · 색을 누르면 설명이 켜져요</li>
+        <li>📚 <b>어휘 · 숙어 · 구문 · 문법</b> — 문장마다 설명 · 종류별로 골라 보기 · <b>모아보기</b>에서 한꺼번에</li>
+        <li>🐢 <b>속도 조절</b> — 느리게 · 보통 · 빠르게</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 공부 -->
+  <section id="vStudy" class="hidden">
+    <div class="card" id="studyHead">
+      <div class="sh-top"><button class="ghost" id="chPrev" type="button">‹</button><h2 id="chTitle">장을 골라 주세요</h2><select id="chSel" aria-label="장 선택"></select><button class="ghost" id="chNext" type="button">›</button></div>
+      <div class="chips" id="chips"></div>
+      <p class="hint" id="modeHint"></p>
+    </div>
+    <div id="setList"></div>
+  </section>
+
+  <!-- 모아보기 -->
+  <section id="vMore" class="hidden">
+    <div class="card">
+      <h2>📚 어휘 · 숙어 · 구문 · 문법 모아보기</h2>
+      <div class="chips" id="moreScope"></div>
+      <div class="chips" id="moreTags"></div>
+      <input class="search" id="moreQ" type="search" placeholder="단어 · 뜻으로 찾기" autocomplete="off"/>
+      <p class="hint" id="moreCount"></p>
+    </div>
+    <div class="card" id="moreList"></div>
+  </section>
+
+  <!-- 설정 -->
+  <section id="vSet" class="hidden">
+    <div class="card">
+      <h2>⚙️ 설정</h2>
+      <div class="set-row"><span>이름</span><span class="row" style="gap:6px"><input type="text" id="setName" maxlength="12" style="width:120px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;font:inherit;font-size:14px"/><button class="ghost" id="setNameGo" type="button">저장</button></span></div>
+      <div class="set-row"><span>글자 크기</span><select id="setFs"><option value="0.9">작게</option><option value="1">보통</option><option value="1.15">크게</option><option value="1.3">아주 크게</option></select></div>
+      <div class="set-row"><span>우리말 보이기</span><input type="checkbox" id="setKo"/></div>
+      <div class="set-row"><span>색 표시</span><input type="checkbox" id="setColor"/></div>
+      <div class="set-row"><span>설명 보이기</span><input type="checkbox" id="setNotes"/></div>
+      <div class="set-row"><span>홈 화면에 설치</span><button class="ghost" id="setInst" type="button">📲 설치</button></div>
+    </div>
+    <div class="card"><h2>공부 기록</h2><p class="sub" id="statText"></p></div>
+  </section>
+</main>
+
+<div class="audio-bar hidden" id="audioBar"><div class="ab-in">
+  <div class="ab-r1">
+    <button id="abPrev" type="button" aria-label="이전 문장">⏮</button>
+    <button id="abPlay" type="button" aria-label="재생">▶</button>
+    <button id="abNext" type="button" aria-label="다음 문장">⏭</button>
+    <div class="ab-seek"><input id="abSeek" type="range" min="0" max="1000" value="0" aria-label="재생 위치"/><small><span id="abT1">0:00</span><span id="abT2">0:00</span></small></div>
+  </div>
+  <div class="ab-r2">
+    <div class="ab-modes" id="abModes"><button data-m="all" type="button">쭉</button><button data-m="set" type="button">문장🔁</button><button data-m="chap" type="button">장🔁</button><button data-m="range" type="button">구간🔁</button></div>
+    <button id="abRate" type="button">1.0×</button>
+  </div>
+  <div class="ab-info" id="abInfo"></div>
+</div></div>
+
+<nav class="tabs">
+  <button data-tab="home" class="on" type="button"><span class="ico">🏠</span>홈</button>
+  <button data-tab="study" type="button"><span class="ico">🎧</span>공부</button>
+  <button data-tab="more" type="button"><span class="ico">📚</span>모아보기</button>
+  <button data-tab="set" type="button"><span class="ico">⚙️</span>설정</button>
+</nav>
+<div id="instSheet" class="inst-sheet hidden"><div class="inst-box"><h3 id="instTitle">홈 화면에 설치</h3><ol id="instSteps"></ol><button id="instCopy" class="ghost hidden" type="button" style="width:100%;margin-bottom:6px">📋 주소 복사하기</button><button id="instClose" class="primary" type="button">알겠어요</button></div><div class="inst-arrow hidden" id="instArrow">⬇</div></div>
+<div class="toast hidden" id="toast"></div>
+
+<script src="config.js"></script>
+<script>
+'use strict';
+const CFG=window.APP_CONFIG||{};
+const BOOKS=[{b:43,n:'요한복음',en:'John'}];
+const TAGS=['어휘','숙어','구문','문법'],TAGN={'어휘':1,'숙어':2,'구문':3,'문법':4};
+const $=id=>document.getElementById(id);
+const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e};
+const pad=c=>String(c).padStart(2,'0');
+const bookName=b=>(BOOKS.find(x=>x.b===b)||{n:'?'}).n;
+function toast(t,ms){const e=$('toast');e.textContent=t;e.classList.remove('hidden');clearTimeout(toast._t);toast._t=setTimeout(()=>e.classList.add('hidden'),ms||2200)}
+
+/* ===== 저장 (이 폰) ===== */
+const DEF={name:'',last:null,done:{},heard:{},prefs:{ko:true,color:true,notes:true,tags:{'어휘':1,'숙어':1,'구문':1,'문법':1},rate:1,fs:1}};
+let S=(()=>{try{const j=JSON.parse(localStorage.getItem(CFG.storageKey)||'{}');return Object.assign({},DEF,j,{prefs:Object.assign({},DEF.prefs,j.prefs||{},{tags:Object.assign({},DEF.prefs.tags,(j.prefs||{}).tags||{})})})}catch(e){return JSON.parse(JSON.stringify(DEF))}})();
+function save(){try{localStorage.setItem(CFG.storageKey,JSON.stringify(S))}catch(e){}}
+
+/* ===== 데이터 ===== */
+let LIST=null;const CACHE={};
+function getList(){return LIST?Promise.resolve(LIST):fetch('data/list.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(j=>LIST=j)}
+function getChap(b,c){const k=b+'_'+pad(c);return CACHE[k]?Promise.resolve(CACHE[k]):fetch('data/'+k+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>CACHE[k]=j)}
+const hasAudio=(b,c)=>!!(LIST&&LIST[b]&&LIST[b].indexOf(c)>=0);
+
+/* ===== 탭 ===== */
+let TAB='home';
+function goTab(t){TAB=t;const m={home:'vHome',study:'vStudy',more:'vMore',set:'vSet'};
+  for(const k in m)$(m[k]).classList.toggle('hidden',k!==t);
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
+  if(t==='home')renderHome();if(t==='more')renderMore();if(t==='set')renderSet();
+  if(t==='study'&&!P.d)renderEmptyStudy();
+  window.scrollTo(0,0);if(t==='study'&&P.cur>=0)setTimeout(()=>centerNow(true),50)}
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>goTab(b.dataset.tab)));
+
+/* ===== 홈 ===== */
+function renderHome(){
+  $('who').textContent=S.name?('👤 '+S.name):'';$('nameCard').classList.toggle('hidden',!!S.name);
+  const rc=$('resumeCard'),lr=S.last;
+  if(lr&&hasAudio(lr.b,lr.c)){rc.classList.remove('hidden');$('resumeText').textContent=bookName(lr.b)+' '+lr.c+'장 · '+((lr.i||0)+1)+'번째 문장';}else rc.classList.add('hidden');
+  const g=$('chapGrid');g.textContent='';
+  const nm=(BOOKS[0].n==='요한복음')?21:0;
+  for(let c=1;c<=nm;c++){const k=BOOKS[0].b+'-'+c,ok=hasAudio(BOOKS[0].b,c),b=el('button',(S.done[k]?'done ':'')+(ok?'':'off'),String(c));
+    const sm=el('small',null,!ok?'준비 중':S.done[k]?'✓ 들음':(S.heard[k]?S.heard[k]+'문장':'듣기'));b.appendChild(sm);
+    if(ok)b.addEventListener('click',()=>openChap(BOOKS[0].b,c,{play:false}));g.appendChild(b)}
+}
+$('nameGo').addEventListener('click',()=>{const v=$('nameIn').value.trim();if(!v){toast('이름을 써 주세요');return}S.name=v;save();renderHome();toast(v+' 님 환영해요 🙏')});
+$('nameIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('nameGo').click()});
+$('resumeBtn').addEventListener('click',()=>{const lr=S.last;if(lr)openChap(lr.b,lr.c,{i:lr.i||0,play:true})});
+
+/* ===== 색 번호 칠하기 ===== */
+function spansTo(parent,arr){(arr||[]).forEach(x=>{if(x.c){const sp=el('span','cs c'+x.c);sp.dataset.c=x.c;sp.appendChild(el('sup','cn',String(x.c)));sp.appendChild(document.createTextNode(x.t));parent.appendChild(sp)}else parent.appendChild(document.createTextNode(x.t))})}
+
+/* 설명 줄 속 ⑴~⑻ 기호 → 색 동그라미 */
+function extraTo(p,text){String(text).split(/([⑴-⑻])/).forEach(x=>{if(!x)return;const k='⑴⑵⑶⑷⑸⑹⑺⑻'.indexOf(x);if(x.length===1&&k>=0){const d=el('span','dot mini d'+(k+1),String(k+1));p.appendChild(d)}else p.appendChild(document.createTextNode(x))})}
+/* ===== 공부 화면 ===== */
+const P={b:0,c:0,d:null,cur:-1,mode:'all',lock:0,rng:{a:-1,b:-1},want:false,pend:null,drag:false,lastUser:0,lastSave:0};
+const audioEl=(()=>{const a=document.createElement('audio');a.preload='metadata';a.setAttribute('playsinline','');a.setAttribute('webkit-playsinline','');document.body.appendChild(a);return a})();
+function renderEmptyStudy(){$('chTitle').textContent='장을 골라 주세요';$('chSel').textContent='';const l=$('setList');l.textContent='';
+  const c=el('div','card');c.appendChild(el('p','sub','홈에서 장을 고르거나, 아래 버튼으로 시작해요.'));const b=el('button','primary','요한복음 1장 열기');b.style.marginTop='10px';b.addEventListener('click',()=>openChap(43,1,{play:false}));c.appendChild(b);l.appendChild(c)}
+function renderChips(){const c=$('chips');c.textContent='';
+  const mk=(t,on,fn,cls)=>{const b=el('button','chip '+(cls||'')+(on?' on':''),t);b.type='button';b.addEventListener('click',fn);c.appendChild(b)};
+  mk('우리말',S.prefs.ko,()=>{S.prefs.ko=!S.prefs.ko;applyPrefs()});
+  mk('색',S.prefs.color,()=>{S.prefs.color=!S.prefs.color;applyPrefs()});
+  mk('설명',S.prefs.notes,()=>{S.prefs.notes=!S.prefs.notes;applyPrefs()});
+  TAGS.forEach(t=>mk(t,S.prefs.tags[t],()=>{S.prefs.tags[t]=S.prefs.tags[t]?0:1;applyPrefs()},'tg'+TAGN[t]))}
+function applyPrefs(){const l=$('setList');l.classList.toggle('noko',!S.prefs.ko);l.classList.toggle('nocolor',!S.prefs.color);l.classList.toggle('nonotes',!S.prefs.notes);
+  TAGS.forEach(t=>l.classList.toggle('hide-t'+TAGN[t],!S.prefs.tags[t]));document.documentElement.style.setProperty('--fs',S.prefs.fs);save();renderChips()}
+function renderChap(){
+  const d=P.d,l=$('setList');l.textContent='';
+  $('chTitle').textContent=d.title;
+  const sel=$('chSel');sel.textContent='';((LIST||{})[P.b]||[]).forEach(c=>{const o=el('option',null,c+'장');o.value=c;if(c===P.c)o.selected=true;sel.appendChild(o)});
+  d.sets.forEach((s,i)=>{
+    const card=el('div','set');card.dataset.i=i;
+    const h=el('div','set-h');const pl=el('button','pl','▶ 여기부터');pl.type='button';pl.dataset.go=i;h.appendChild(pl);h.appendChild(el('span','ref',s.ref));h.appendChild(el('span','idx',(i+1)+' / '+d.sets.length));card.appendChild(h);
+    const en=el('div','en');spansTo(en,s.en);card.appendChild(en);
+    const ko=el('div','ko');spansTo(ko,s.ko);card.appendChild(ko);
+    if(s.notes&&s.notes.length){const nt=el('div','notes');s.notes.forEach(n=>{
+      const r=el('div','note t'+(TAGN[n.tag]||1));r.dataset.c=n.c;r.appendChild(el('span','dot d'+n.c,String(n.c)));
+      const b=el('div');b.appendChild(el('span','tag t'+(TAGN[n.tag]||1),n.tag));b.appendChild(el('span','term',n.term));if(n.meaning)b.appendChild(el('span','mean','  '+n.meaning));if(n.memo)b.appendChild(el('span','memo','★ '+n.memo));
+      r.appendChild(b);nt.appendChild(r)});card.appendChild(nt)}
+    const exs=(s.extra||[]).filter(t=>!/^밀도\s/.test(t));   /* 「밀도 6/8」 은 만든 쪽 점검 지표 — 학습자에게는 숨김 */
+    if(exs.length){const ex=el('div','extra');exs.forEach(t=>{const p=el('p');const m=t.match(/^(\S+)\s+([\s\S]*)$/);p.appendChild(document.createTextNode('★ '));
+      if(m){p.appendChild(el('b',null,m[1]+' '));extraTo(p,m[2])}else extraTo(p,t);ex.appendChild(p)});card.appendChild(ex)}
+    l.appendChild(card)});
+  applyPrefs();updateRangeUI();modeHint()}
+/* 카드·색·설명 누르기 */
+$('setList').addEventListener('click',e=>{
+  const card=e.target.closest('.set');if(!card)return;const i=+card.dataset.i;
+  const cs=e.target.closest('.cs'),nt=e.target.closest('.note');
+  if(cs||nt){const c=cs?cs.dataset.c:nt.dataset.c;card.dataset.hi=card.dataset.hi===String(c)?'':String(c);
+    if(nt){const sp=card.querySelector('.cs.c'+c);if(sp&&card.dataset.hi)sp.scrollIntoView({block:'nearest',behavior:'smooth'})}return}
+  setTap(i)});
+
+/* ===== 소리 ===== */
+const fmt=t=>{t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+pad(t%60)};
+function idxAt(t){const s=P.d.sets;let r=0;for(let i=0;i<s.length;i++){if(s[i].start<=t+0.08)r=i;else break}return r}
+function seekTo(t){audioEl.currentTime=Math.max(0,t);tick(true)}
+function openChap(b,c,o){o=o||{};
+  return Promise.all([getList(),getChap(b,c)]).then(r=>{const d=r[1];
+    audioEl.pause();P.b=b;P.c=c;P.d=d;P.cur=-1;P.lock=o.i||0;P.rng={a:-1,b:-1};P.want=!!o.play;
+    audioEl.src=(CFG.audioBase||'audio/')+b+'_'+pad(c)+'.m4a';audioEl.playbackRate=S.prefs.rate;
+    P.pend=(o.i!=null&&d.sets[o.i])?d.sets[o.i].start:null;
+    $('audioBar').classList.remove('hidden');document.body.classList.add('hasbar');
+    renderChips();renderChap();updateBar();setMeta();goTab('study');
+    if(o.i!=null&&d.sets[o.i])markNow(o.i,true);
+    if(o.play)audioEl.play().catch(()=>{P.want=false;updateBar()});
+  }).catch(()=>toast('이 장은 아직 준비 중이에요'))}
+audioEl.addEventListener('loadedmetadata',()=>{if(P.pend!=null){audioEl.currentTime=P.pend;P.pend=null}$('abT2').textContent=fmt(audioEl.duration)});
+function markNow(i,force){
+  if(i===P.cur&&!force)return;
+  const l=$('setList'),old=l.querySelector('.set.now');if(old)old.classList.remove('now');
+  const n=l.querySelector('.set[data-i="'+i+'"]');if(n)n.classList.add('now');
+  P.cur=i;const k=P.b+'-'+P.c;if(i+1>(S.heard[k]||0)){S.heard[k]=Math.min(i+1,P.d.sets.length)}
+  updateInfo();centerNow(!!force)}
+function centerNow(force){
+  if(TAB!=='study')return;const n=document.querySelector('#setList .set.now');if(!n)return;
+  if(!force&&Date.now()-P.lastUser<4000)return;
+  const vv=window.visualViewport,H=vv?vv.height:window.innerHeight,bar=$('audioBar').offsetHeight||0,tab=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tabh'))||58;
+  const r=n.getBoundingClientRect(),mid=(0+(H-bar-tab))/2,delta=(r.top+r.height/2)-mid;
+  if(Math.abs(delta)>30)window.scrollBy({top:delta,behavior:force?'auto':'smooth'})}
+['touchstart','wheel','pointerdown'].forEach(ev=>window.addEventListener(ev,()=>{P.lastUser=Date.now()},{passive:true}));
+function tick(upd){
+  if(!P.d)return;const t=audioEl.currentTime||0,s=P.d.sets;
+  if(!audioEl.paused){
+    if(P.mode==='set'&&s[P.lock]&&t>=s[P.lock].end-0.03){audioEl.currentTime=s[P.lock].start;return}
+    if(P.mode==='range'&&P.rng.a>=0&&P.rng.b>=0&&t>=s[P.rng.b].end-0.03){audioEl.currentTime=s[P.rng.a].start;return}}
+  const i=idxAt(t);if(i!==P.cur)markNow(i);
+  if(!P.drag){const du=audioEl.duration||P.d.dur||1;$('abSeek').value=Math.round(t/du*1000);$('abT1').textContent=fmt(t)}
+  if(!audioEl.paused&&Date.now()-P.lastSave>15000)saveLast()}
+(function raf(){if(!audioEl.paused&&!document.hidden)tick();requestAnimationFrame(raf)})();
+function saveLast(){if(!P.d)return;P.lastSave=Date.now();S.last={b:P.b,c:P.c,i:Math.max(0,P.cur),t:Math.round(audioEl.currentTime*10)/10};save()}
+function updateBar(){const pl=!audioEl.paused;$('abPlay').textContent=pl?'⏸':'▶';$('abPlay').setAttribute('aria-label',pl?'일시정지':'재생');
+  document.querySelectorAll('#abModes button').forEach(b=>b.classList.toggle('on',b.dataset.m===P.mode));$('abRate').textContent=(+S.prefs.rate).toFixed(2).replace(/0$/,'')+'×'}
+function updateInfo(){if(!P.d)return;const n=P.d.sets.length,i=Math.max(0,P.cur);let t='문장 '+(i+1)+' / '+n;
+  if(P.mode==='set')t+=' · '+(P.lock+1)+'번 문장 반복 중';else if(P.mode==='chap')t+=' · 이 장 반복 중';
+  else if(P.mode==='range')t+=P.rng.a>=0&&P.rng.b>=0?' · 구간 '+(P.rng.a+1)+'~'+(P.rng.b+1)+' 반복 중':P.rng.a>=0?' · 끝 문장을 눌러 주세요':' · 시작 문장을 눌러 주세요';
+  $('abInfo').textContent=t}
+function modeHint(){const m={all:'재생 버튼을 누르면 읽는 문장이 굵게 따라가요. 문장을 누르면 거기서부터 들려요.',set:'🔁 한 문장 반복 — 문장을 누르면 그 문장만 계속 반복해요.',chap:'🔁 이 장 처음부터 끝까지 계속 반복해요.',range:'🔁 구간 반복 — ① 시작 문장 ② 끝 문장을 차례로 누르세요.'};$('modeHint').textContent=m[P.mode]}
+function updateRangeUI(){document.querySelectorAll('#setList .set').forEach(c=>{const i=+c.dataset.i,a=P.rng.a,b=P.rng.b;
+  c.classList.toggle('inrange',a>=0&&b>=0&&i>=a&&i<=b);c.classList.toggle('rstart',a>=0&&b<0&&i===a)})}
+function setTap(i){
+  if(!P.d)return;const s=P.d.sets;P.want=true;
+  if(P.mode==='range'){
+    if(P.rng.a<0||(P.rng.a>=0&&P.rng.b>=0)){P.rng={a:i,b:-1};toast('끝 문장을 눌러 주세요')}
+    else{let a=P.rng.a,b=i;if(b<a){const x=a;a=b;b=x}P.rng={a,b};toast('구간 '+(a+1)+'~'+(b+1)+' 반복')}
+    updateRangeUI();const st=P.rng.b>=0?s[P.rng.a].start:s[i].start;seekTo(st)}
+  else{if(P.mode==='set')P.lock=i;seekTo(s[i].start)}
+  audioEl.play().catch(()=>{P.want=false});updateInfo()}
+function setMode(m){P.mode=m;if(m==='set')P.lock=Math.max(0,P.cur);if(m!=='range'){P.rng={a:-1,b:-1};updateRangeUI()}
+  else if(P.rng.a>=0&&P.rng.b<0){}
+  updateBar();updateInfo();modeHint();if(m==='range')toast('시작 문장 → 끝 문장 순서로 눌러요')}
+$('abModes').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&P.d)setMode(b.dataset.m)});
+$('abPlay').addEventListener('click',()=>{if(!P.d)return;if(audioEl.paused){P.want=true;audioEl.play().catch(()=>{P.want=false;updateBar()})}else{P.want=false;audioEl.pause()}});
+$('abPrev').addEventListener('click',()=>{if(!P.d)return;const i=Math.max(0,P.cur-((audioEl.currentTime-P.d.sets[P.cur].start)>2?0:1));if(P.mode==='set')P.lock=i;seekTo(P.d.sets[i].start)});
+$('abNext').addEventListener('click',()=>{if(!P.d)return;const i=Math.min(P.d.sets.length-1,P.cur+1);if(P.mode==='set')P.lock=i;seekTo(P.d.sets[i].start)});
+$('abSeek').addEventListener('input',()=>{P.drag=true;const du=audioEl.duration||P.d.dur||1;$('abT1').textContent=fmt($('abSeek').value/1000*du)});
+$('abSeek').addEventListener('change',()=>{const du=audioEl.duration||P.d.dur||1;audioEl.currentTime=$('abSeek').value/1000*du;P.drag=false;if(P.mode==='set')P.lock=idxAt(audioEl.currentTime)});
+const RATES=[0.7,0.85,1,1.15,1.3];
+$('abRate').addEventListener('click',()=>{const i=RATES.indexOf(+S.prefs.rate);S.prefs.rate=RATES[(i+1)%RATES.length];audioEl.playbackRate=S.prefs.rate;save();updateBar();toast('속도 '+S.prefs.rate+'배')});
+audioEl.addEventListener('play',()=>{updateBar()});
+audioEl.addEventListener('pause',()=>{updateBar();saveLast()});
+function markDone(){const k=P.b+'-'+P.c;S.done[k]=Date.now();S.heard[k]=P.d.sets.length;save()}
+function nextChap(){const l=(LIST||{})[P.b]||[],i=l.indexOf(P.c),n=l[i+1]!=null?l[i+1]:l[0];
+  if(n==null||(n===P.c)){seekTo(0);audioEl.play().catch(()=>{});return}
+  openChap(P.b,n,{play:true})}
+audioEl.addEventListener('ended',()=>{if(!P.d)return;markDone();const s=P.d.sets;
+  if(P.mode==='chap'||P.mode==='set'||P.mode==='range'){const st=P.mode==='set'&&s[P.lock]?s[P.lock].start:(P.mode==='range'&&P.rng.a>=0?s[P.rng.a].start:0);audioEl.currentTime=st;audioEl.play().catch(()=>{});return}
+  nextChap()});
+window.addEventListener('pagehide',()=>{if(P.d)saveLast()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&P.d)saveLast()});
+$('chSel').addEventListener('change',()=>{openChap(P.b,+$('chSel').value,{play:false})});
+$('chPrev').addEventListener('click',()=>{const l=(LIST||{})[P.b]||[],i=l.indexOf(P.c);if(i>0)openChap(P.b,l[i-1],{play:false})});
+$('chNext').addEventListener('click',()=>{const l=(LIST||{})[P.b]||[],i=l.indexOf(P.c);if(i>=0&&i<l.length-1)openChap(P.b,l[i+1],{play:false})});
+function setMeta(){if(!('mediaSession'in navigator)||!P.d)return;
+  try{navigator.mediaSession.metadata=new MediaMetadata({title:P.d.title,artist:'영어 공부 · 영어(NIV) 낭독',album:'듣고 읽기',artwork:[{src:'icon-192.png',sizes:'192x192',type:'image/png'},{src:'icon-512.png',sizes:'512x512',type:'image/png'}]})}catch(e){}}
+if('mediaSession'in navigator){const ms=navigator.mediaSession,h=(a,f)=>{try{ms.setActionHandler(a,f)}catch(e){}};
+  h('play',()=>{P.want=true;audioEl.play()});h('pause',()=>{P.want=false;audioEl.pause()});
+  h('previoustrack',()=>$('abPrev').click());h('nexttrack',()=>$('abNext').click());
+  h('seekbackward',d=>{audioEl.currentTime=Math.max(0,audioEl.currentTime-((d&&d.seekOffset)||10))});
+  h('seekforward',d=>{audioEl.currentTime=Math.min(audioEl.duration||1e9,audioEl.currentTime+((d&&d.seekOffset)||10))});
+  h('seekto',d=>{if(d&&d.seekTime!=null)audioEl.currentTime=d.seekTime})}
+
+/* ===== 모아보기 ===== */
+const MORE={scope:'chap',tags:{'어휘':1,'숙어':1,'구문':1,'문법':1},q:''};
+function renderMore(){
+  const sc=$('moreScope');sc.textContent='';
+  [['chap','이 장'],['all','요한복음 전체']].forEach(a=>{const b=el('button','chip'+(MORE.scope===a[0]?' on':''),a[1]);b.type='button';b.addEventListener('click',()=>{MORE.scope=a[0];renderMore()});sc.appendChild(b)});
+  const tg=$('moreTags');tg.textContent='';TAGS.forEach(t=>{const b=el('button','chip tg'+TAGN[t]+(MORE.tags[t]?' on':''),t);b.type='button';b.addEventListener('click',()=>{MORE.tags[t]=MORE.tags[t]?0:1;renderMore()});tg.appendChild(b)});
+  const need=MORE.scope==='all'?((LIST||{})[43]||[]):(P.d?[P.c]:[1]);
+  const b=P.d?P.b:43;
+  $('moreCount').textContent='불러오는 중…';
+  Promise.all(need.map(c=>getChap(b,c).catch(()=>null))).then(ds=>{ds=ds.filter(Boolean);
+    const map=new Map(),q=MORE.q.trim().toLowerCase();
+    ds.forEach(d=>d.sets.forEach((s,i)=>(s.notes||[]).forEach(n=>{if(!MORE.tags[n.tag])return;
+      if(q&&(n.term+' '+n.meaning+' '+n.memo).toLowerCase().indexOf(q)<0)return;
+      const key=n.tag+'|'+n.term.toLowerCase();let it=map.get(key);
+      if(!it){it={n,locs:[]};map.set(key,it)}it.locs.push({b:d.b,c:d.c,i,ref:s.ref})})));
+    const items=[...map.values()].sort((x,y)=>(TAGN[x.n.tag]-TAGN[y.n.tag]));
+    const L=$('moreList');L.textContent='';
+    $('moreCount').textContent=items.length+'개 · '+(MORE.scope==='all'?'요한복음 '+ds.length+'장':(ds[0]?ds[0].title:''))+' · 위치를 누르면 그 문장으로 가요';
+    if(!items.length)L.appendChild(el('p','sub','찾은 것이 없어요.'));
+    items.forEach(it=>{const r=el('div','more-row'),n=it.n;
+      r.appendChild(el('span','tag t'+TAGN[n.tag],n.tag));r.appendChild(el('span','term',n.term));if(n.meaning)r.appendChild(el('span','mean','  '+n.meaning));if(n.memo)r.appendChild(el('span','memo','★ '+n.memo));
+      const lc=el('div','locs');it.locs.slice(0,6).forEach(x=>{const bt=el('button',null,x.ref+' ▶');bt.type='button';bt.addEventListener('click',()=>openChap(x.b,x.c,{i:x.i,play:true}));lc.appendChild(bt)});
+      if(it.locs.length>6)lc.appendChild(el('small','sub','외 '+(it.locs.length-6)+'곳'));r.appendChild(lc);L.appendChild(r)})})}
+$('moreQ').addEventListener('input',()=>{MORE.q=$('moreQ').value;clearTimeout(renderMore._t);renderMore._t=setTimeout(renderMore,200)});
+
+/* ===== 설정 ===== */
+function renderSet(){$('setName').value=S.name;$('setFs').value=String(S.prefs.fs);$('setKo').checked=!!S.prefs.ko;$('setColor').checked=!!S.prefs.color;$('setNotes').checked=!!S.prefs.notes;
+  const dn=Object.keys(S.done).length,hs=Object.values(S.heard).reduce((a,b)=>a+b,0);$('statText').textContent='끝까지 들은 장 '+dn+'장 · 지금까지 들은 문장 '+hs+'개 (이 폰 기준)'}
+$('setNameGo').addEventListener('click',()=>{const v=$('setName').value.trim();if(!v){toast('이름을 써 주세요');return}S.name=v;save();$('who').textContent='👤 '+v;toast('저장했어요')});
+$('setFs').addEventListener('change',()=>{S.prefs.fs=+$('setFs').value;applyPrefs()});
+$('setKo').addEventListener('change',()=>{S.prefs.ko=$('setKo').checked;applyPrefs()});
+$('setColor').addEventListener('change',()=>{S.prefs.color=$('setColor').checked;applyPrefs()});
+$('setNotes').addEventListener('change',()=>{S.prefs.notes=$('setNotes').checked;applyPrefs()});
+
+/* ===== 홈 화면 설치 (성경 읽기 앱 V3.2·V3.9 방식 그대로) ===== */
+let deferredPrompt=null;
+const UA=navigator.userAgent||'';
+const IS_IOS=/iPhone|iPad|iPod/i.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const IS_ANDROID=/Android/i.test(UA);
+const IN_KAKAO=/KAKAOTALK/i.test(UA),IN_APPWEB=IN_KAKAO||/NAVER|Instagram|FBAN|FBAV|Line\//i.test(UA);
+const IS_IOS_SAFARI=IS_IOS&&/Safari/i.test(UA)&&!/CriOS|FxiOS|EdgiOS|Whale|NAVER/i.test(UA)&&!IN_APPWEB;
+function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true}
+function showInstallButtons(){const c=$('instCard');if(c)c.classList.toggle('hidden',isStandalone())}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;showInstallButtons();instNowBtn()});
+function instNowBtn(){const sh=$('instSheet');if(!sh||sh.classList.contains('hidden')||!deferredPrompt)return;
+  let b=$('instNow');if(!b){b=document.createElement('button');b.id='instNow';b.type='button';b.className='primary';b.style.cssText='width:100%;margin:4px 0 10px;font-size:17px;padding:14px';
+    b.textContent='📲 지금 바로 설치';b.addEventListener('click',()=>{sh.classList.add('hidden');installApp()});const cl=$('instClose');cl.parentNode.insertBefore(b,cl)}
+  b.classList.remove('hidden')}
+window.addEventListener('appinstalled',()=>{deferredPrompt=null;showInstallButtons();alert('홈 화면에 설치됐어요! 이제 아이콘을 눌러 바로 열 수 있어요 🙏')});
+function instSheet(title,steps,opt){opt=opt||{};$('instTitle').textContent=title;const ol=$('instSteps');ol.textContent='';
+  steps.forEach(s=>{const li=document.createElement('li');(Array.isArray(s)?s:[s]).forEach(p=>{if(typeof p==='string')li.appendChild(document.createTextNode(p));else{const b=document.createElement('span');b.className='ico';b.textContent=p.ico;li.appendChild(b)}});ol.appendChild(li)});
+  $('instCopy').classList.toggle('hidden',!opt.copy);$('instArrow').classList.toggle('hidden',!opt.arrow);$('instSheet').classList.remove('hidden');
+  {const b=$('instNow');if(b)b.classList.add('hidden')}instNowBtn()}
+$('instClose').addEventListener('click',()=>$('instSheet').classList.add('hidden'));
+$('instSheet').addEventListener('click',e=>{if(e.target.id==='instSheet')e.currentTarget.classList.add('hidden')});
+$('instCopy').addEventListener('click',()=>{const l=location.origin+location.pathname;(navigator.clipboard?navigator.clipboard.writeText(l):Promise.reject()).then(()=>alert('주소를 복사했어요. 사파리(또는 크롬)를 열고 주소창에 붙여넣어 주세요.'),()=>prompt('아래 주소를 길게 눌러 복사하세요',l))});
+function installApp(){
+  if(isStandalone()){alert('이미 홈 화면 앱으로 열려 있어요 🙂');return}
+  if(deferredPrompt){const p=deferredPrompt;deferredPrompt=null;p.prompt();(p.userChoice||Promise.resolve()).then(r=>{if(r&&r.outcome==='accepted')showInstallButtons()});return}
+  if(IN_KAKAO&&IS_ANDROID){location.href='intent://'+location.host+location.pathname+'#Intent;scheme=https;package=com.android.chrome;end';
+    setTimeout(()=>instSheet('크롬에서 열어 주세요',[['카톡 화면 오른쪽 위 ',{ico:'⋮'},' 를 눌러요'],['「다른 브라우저로 열기」 를 눌러요'],['크롬에서 다시 「📲 홈 화면에 설치」 를 누르면 끝!']],{copy:true}),1200);return}
+  if(IS_IOS&&!IS_IOS_SAFARI){instSheet('사파리에서 열어 주세요',IN_KAKAO
+    ?[['카톡 화면 오른쪽 아래 ',{ico:'⋯'},' 또는 공유 버튼을 눌러요'],['「Safari로 열기」 를 눌러요'],['사파리에서 다시 「📲 홈 화면에 설치」 를 누르면 안내가 나와요']]
+    :[['아이폰은 ',{ico:'Safari'},' 에서만 홈 화면에 추가할 수 있어요'],['아래 「주소 복사하기」 → 사파리 주소창에 붙여넣기'],['사파리에서 다시 「📲 홈 화면에 설치」 를 눌러요']],{copy:true});return}
+  if(IS_IOS){instSheet('아이폰 홈 화면에 추가',[['화면 아래쪽 가운데 공유 버튼 ',{ico:'□↑'},' 을 눌러요'],['목록을 위로 올려 「홈 화면에 추가」 를 눌러요'],['오른쪽 위 「추가」 를 누르면 끝! 🙏']],{arrow:true});return}
+  if(IS_ANDROID){instSheet('안드로이드 홈 화면에 설치',[['오른쪽 위 ',{ico:'⋮'},' 메뉴를 눌러요 (삼성 인터넷은 아래 ',{ico:'≡'},')'],['「홈 화면에 추가」 또는 「앱 설치」 를 눌러요'],['「설치」/「추가」 를 누르면 끝! 🙏']]);return}
+  instSheet('홈 화면(바탕화면)에 두기',[['휴대폰에서 이 주소를 열면 홈 화면에 추가할 수 있어요'],['컴퓨터는 주소창 오른쪽 ',{ico:'⊕'},' 설치 아이콘을 눌러요']],{copy:true})}
+['instHome','setInst'].forEach(id=>$(id).addEventListener('click',installApp));
+
+/* ===== 서비스워커 · 열어 둔 앱도 새 버전 자동 확인 (성경 앱 V3.9·V3.19 방식) ===== */
+if('serviceWorker'in navigator){
+  const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false,swWait=false;
+  const swGo=()=>{if(!audioEl.paused||P.want){swWait=true;return}location.reload()};   /* 듣는 중이면 정지한 뒤에 */
+  audioEl.addEventListener('pause',()=>{if(swWait)setTimeout(()=>{if(audioEl.paused&&!P.want)location.reload()},1500)});
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadCtl||reloaded)return;reloaded=true;swGo()});
+  navigator.serviceWorker.register('sw.js').then(reg=>{const chk=()=>{try{reg.update().catch(()=>{})}catch(e){}};
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});window.addEventListener('focus',chk);setInterval(chk,30*60*1000)}).catch(()=>{})}
+
+/* ===== 시작 ===== */
+(function boot(){applyPrefs();renderChips();updateBar();showInstallButtons();
+  getList().then(()=>renderHome());renderHome();goTab('home')})();
+</script>
+</body>
+</html>
