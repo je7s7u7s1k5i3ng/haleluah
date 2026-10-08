@@ -1799,12 +1799,18 @@
   },
   {
    "rank": "39",
-   "name": "레몬 115과 18Kg",
+   "name": "레몬 17Kg",
    "category": "과일",
-   "price": "레몬 115과 18Kg 88,500원",
+   "price": "레몬 1박스 17Kg 68,500원",
    "note": "",
    "image": "assets/115-18kg-eq47axy6e1vg.jpg",
-   "options": [],
+   "options": [
+    {
+     "label": "1박스 17kg / 68,500원",
+     "value": "1박스 17kg / 68,500원",
+     "title": "옵션 선택"
+    }
+   ],
    "bulk_list": false,
    "sold_out": false
   },
