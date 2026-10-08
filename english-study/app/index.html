@@ -151,6 +151,8 @@ button{font-family:inherit}
 .inst-box .ico{display:inline-block;padding:0 6px;border:1px solid var(--line);border-radius:6px;background:#f7f1e4;font-weight:700}
 .inst-box .primary{margin-top:6px}
 .inst-arrow{font-size:34px;line-height:1;margin-top:8px;color:#fff;animation:tapBlink 1s infinite}
+.cap{position:fixed;left:8px;right:8px;z-index:18;max-width:664px;margin:0 auto;background:rgba(255,253,248,.98);border:2px solid var(--gold);border-radius:14px;padding:8px 12px;max-height:30vh;overflow:auto;box-shadow:0 4px 16px rgba(30,42,85,.25)}
+.cap .en{font-size:calc(17px*var(--fs));line-height:1.65;font-weight:700}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tabh) + 150px + env(safe-area-inset-bottom));z-index:60;background:rgba(30,42,85,.94);color:#fff;padding:10px 16px;border-radius:20px;font-size:13px;max-width:88vw;text-align:center;pointer-events:none}
 </style>
 </head>
@@ -215,6 +217,7 @@ button{font-family:inherit}
   </section>
 </main>
 
+<div class="cap hidden" id="cap"><div class="en" id="capEn"></div></div>
 <div class="audio-bar hidden" id="audioBar"><div class="ab-in">
   <div class="ab-r1">
     <button id="abPrev" type="button" aria-label="이전 문장">⏮</button>
@@ -251,7 +254,7 @@ const bookName=b=>(BOOKS.find(x=>x.b===b)||{n:'?'}).n;
 function toast(t,ms){const e=$('toast');e.textContent=t;e.classList.remove('hidden');clearTimeout(toast._t);toast._t=setTimeout(()=>e.classList.add('hidden'),ms||2200)}
 
 /* ===== 저장 (이 폰) ===== */
-const DEF={name:'',last:null,done:{},heard:{},prefs:{ko:true,color:true,notes:true,tags:{'어휘':1,'숙어':1,'구문':1,'문법':1},rate:1,fs:1}};
+const DEF={name:'',last:null,done:{},heard:{},prefs:{cap:false,ko:true,color:true,notes:true,tags:{'어휘':1,'숙어':1,'구문':1,'문법':1},rate:1,fs:1}};
 let S=(()=>{try{const j=JSON.parse(localStorage.getItem(CFG.storageKey)||'{}');return Object.assign({},DEF,j,{prefs:Object.assign({},DEF.prefs,j.prefs||{},{tags:Object.assign({},DEF.prefs.tags,(j.prefs||{}).tags||{})})})}catch(e){return JSON.parse(JSON.stringify(DEF))}})();
 function save(){try{localStorage.setItem(CFG.storageKey,JSON.stringify(S))}catch(e){}}
 
@@ -268,7 +271,7 @@ function goTab(t){TAB=t;const m={home:'vHome',study:'vStudy',more:'vMore',set:'v
   document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
   if(t==='home')renderHome();if(t==='more')renderMore();if(t==='set')renderSet();
   if(t==='study'&&!P.d)renderEmptyStudy();
-  window.scrollTo(0,0);if(t==='study'&&P.cur>=0)setTimeout(()=>centerNow(true),50)}
+  window.scrollTo(0,0);updateCap();if(t==='study'&&P.cur>=0)setTimeout(()=>centerNow(true),50)}
 document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>goTab(b.dataset.tab)));
 
 /* ===== 홈 ===== */
@@ -301,9 +304,10 @@ function renderChips(){const c=$('chips');c.textContent='';
   mk('우리말',S.prefs.ko,()=>{S.prefs.ko=!S.prefs.ko;applyPrefs()});
   mk('색',S.prefs.color,()=>{S.prefs.color=!S.prefs.color;applyPrefs()});
   mk('설명',S.prefs.notes,()=>{S.prefs.notes=!S.prefs.notes;applyPrefs()});
+  mk('자막',S.prefs.cap,()=>{S.prefs.cap=!S.prefs.cap;applyPrefs()});
   TAGS.forEach(t=>mk(t,S.prefs.tags[t],()=>{S.prefs.tags[t]=S.prefs.tags[t]?0:1;applyPrefs()},'tg'+TAGN[t]))}
 function applyPrefs(){const l=$('setList');l.classList.toggle('noko',!S.prefs.ko);l.classList.toggle('nocolor',!S.prefs.color);l.classList.toggle('nonotes',!S.prefs.notes);
-  TAGS.forEach(t=>l.classList.toggle('hide-t'+TAGN[t],!S.prefs.tags[t]));document.documentElement.style.setProperty('--fs',S.prefs.fs);save();renderChips()}
+  TAGS.forEach(t=>l.classList.toggle('hide-t'+TAGN[t],!S.prefs.tags[t]));document.documentElement.style.setProperty('--fs',S.prefs.fs);save();renderChips();updateCap()}
 function renderChap(){
   const d=P.d,l=$('setList');l.textContent='';
   $('chTitle').textContent=d.title;
@@ -350,13 +354,20 @@ function markNow(i,force){
   const l=$('setList'),old=l.querySelector('.set.now');if(old)old.classList.remove('now');
   const n=l.querySelector('.set[data-i="'+i+'"]');if(n)n.classList.add('now');
   P.cur=i;const k=P.b+'-'+P.c;if(i+1>(S.heard[k]||0)){S.heard[k]=Math.min(i+1,P.d.sets.length)}
-  updateInfo();centerNow(!!force)}
+  updateInfo();updateCap();centerNow(!!force)}
+function updateCap(){const c=$('cap');if(!c)return;const on=!!(S.prefs.cap&&P.d&&P.cur>=0&&TAB==='study');c.classList.toggle('hidden',!on);if(!on)return;
+  const e=$('capEn');e.textContent='';spansTo(e,P.d.sets[P.cur].en);
+  const tab=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tabh'))||58;
+  c.style.bottom='calc('+tab+'px + '+($('audioBar').offsetHeight||0)+'px + env(safe-area-inset-bottom) + 6px)';c.style.left='8px';c.style.right='8px'}
+/* ★읽는 영어 문장 줄(.en)을 화면 가운데로 — 카드 전체가 아니라 영어 줄 (설명이 긴 카드에서도 영어가 보이게) · 자막을 켜면 자막 높이만큼 비킨다 */
 function centerNow(force){
-  if(TAB!=='study')return;const n=document.querySelector('#setList .set.now');if(!n)return;
+  if(TAB!=='study')return;const n=document.querySelector('#setList .set.now .en');if(!n)return;
   if(!force&&Date.now()-P.lastUser<4000)return;
   const vv=window.visualViewport,H=vv?vv.height:window.innerHeight,bar=$('audioBar').offsetHeight||0,tab=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tabh'))||58;
-  const r=n.getBoundingClientRect(),mid=(0+(H-bar-tab))/2,delta=(r.top+r.height/2)-mid;
-  if(Math.abs(delta)>30)window.scrollBy({top:delta,behavior:force?'auto':'smooth'})}
+  const cp=$('cap'),capH=(cp&&!cp.classList.contains('hidden'))?cp.offsetHeight+6:0;
+  const top=0,bottom=H-bar-tab-capH,r=n.getBoundingClientRect(),mid=(top+bottom)/2;
+  let delta=(r.top+r.height/2)-mid;if(r.height>bottom-top-24)delta=r.top-(top+12);   /* 영어 줄이 화면보다 길면 맨 위를 맞춘다 */
+  if(Math.abs(delta)>24)window.scrollBy({top:delta,behavior:force?'auto':'smooth'})}
 ['touchstart','wheel','pointerdown'].forEach(ev=>window.addEventListener(ev,()=>{P.lastUser=Date.now()},{passive:true}));
 function tick(upd){
   if(!P.d)return;const t=audioEl.currentTime||0,s=P.d.sets;

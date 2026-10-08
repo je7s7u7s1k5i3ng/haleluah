@@ -1,5 +1,5 @@
 /* 영어 공부 - 서비스 워커 (성경 읽기 앱 V3.9 방식 그대로) */
-const CACHE = 'english-cache-app-20261008a';
+const CACHE = 'english-cache-app-20261008b';
 const ASSETS = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {
