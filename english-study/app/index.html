@@ -66,6 +66,9 @@ button{font-family:inherit}
 .chap-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .chap-grid button{position:relative;padding:11px 0 9px;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:16px;font-weight:700;color:var(--accent);cursor:pointer}
 .chap-grid button small{display:block;font-size:10px;font-weight:400;color:var(--sub);margin-top:2px}
+.chap-grid button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+#bkGrid{max-height:46vh;overflow-y:auto;padding:2px}
+.sh-top h2{-webkit-tap-highlight-color:transparent}
 .chap-grid button.done{background:#eef6ee;border-color:#bcd8bf}
 .chap-grid button.done small{color:var(--ok)}
 .chap-grid button.off{opacity:.38;cursor:default}
@@ -238,6 +241,10 @@ body{min-height:100vh;min-height:100dvh;-webkit-touch-callout:none}
 .adm-top small{color:var(--sub);font-size:11.5px}
 .adm-line{font-size:12.5px;color:#4a4452;margin:6px 0;line-height:1.6}
 .adm-btns{display:flex;gap:8px;margin-top:8px}
+.adm-det{margin-top:8px;border-top:1px dashed var(--line);padding-top:6px}
+.adm-det summary{cursor:pointer;font-size:13px;font-weight:700;color:#1E2A55;padding:4px 0}
+.adm-h{font-size:12.5px;font-weight:700;margin:10px 0 2px;color:#1E2A55}
+.adm-det .adm-line{margin:2px 0;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.05)}
 .adm-btns button{padding:7px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:12.5px;cursor:pointer}
 </style>
 </head>
@@ -250,10 +257,10 @@ body{min-height:100vh;min-height:100dvh;-webkit-touch-callout:none}
   <!-- 홈 -->
   <section id="vHome">
     <div class="card hidden" id="instCard" style="padding:10px"><button id="instHome" class="promo-btn blink" type="button">📲 홈 화면에 설치 <span class="tap-hint">👆 여기 클릭</span></button><p class="sub" style="margin:8px 0 0;text-align:center">앱처럼 아이콘으로 바로 열려요 · 안드로이드·아이폰 모두</p></div>
-    <div class="card splash" id="nameCard"><img class="splash-img" src="img/splash.jpg" alt=""/><div class="splash-in"><h2 id="loginT">👋 이름과 비밀번호를 알려 주세요</h2><div class="row"><input type="text" id="nameIn" placeholder="이름" maxlength="12" autocomplete="off"/><input type="password" id="pinIn" inputmode="numeric" pattern="[0-9]*" placeholder="비번 4자리" maxlength="4" autocomplete="off"/><button class="primary" id="nameGo" type="button" style="width:auto;padding:11px 18px">시작</button></div><p class="sub" id="loginMsg" style="margin-top:8px">처음이면 이 이름과 비밀번호로 등록돼요. 공부 기록은 시트에 쌓여서 다른 폰에서도 이어져요.</p><button class="ghost hidden" id="regBtn" type="button" style="margin-top:6px">처음이에요 · 이 이름으로 등록</button></div></div>
+    <div class="card splash" id="nameCard"><img class="splash-img" src="img/splash.jpg" alt=""/><div class="splash-in"><h2 id="loginT">👋 이름과 비밀번호를 알려 주세요</h2><div class="row"><input type="text" id="nameIn" placeholder="이름" maxlength="12" autocomplete="off"/><input type="password" id="pinIn" inputmode="numeric" pattern="[0-9]*" placeholder="비번 4자리" maxlength="4" autocomplete="off"/><button class="primary" id="nameGo" type="button" style="width:auto;padding:11px 18px">시작</button></div><p class="sub" id="loginMsg" style="margin-top:8px">처음이면 이 이름과 비밀번호로 등록돼요. 공부 기록은 시트에 쌓여서 다른 폰에서도 이어져요.</p><button class="ghost hidden" id="regBtn" type="button" style="margin-top:6px">처음이에요 · 이 이름으로 등록</button><div id="guestBox" style="margin-top:12px;padding-top:10px;border-top:1px dashed rgba(0,0,0,.15)"><button class="ghost" id="guestGo" type="button">👀 이름 없이 게스트로 둘러보기</button><p class="sub" id="guestWarn" style="margin:6px 0 0;color:#B23A2E">⚠ 게스트는 공부 기록(들은 시간·반복·단어장)이 <b>시트에 쌓이지 않고</b>, 나가거나 앱을 닫으면 사라져요.</p></div></div></div>
     <div class="card resume hidden" id="resumeCard"><small class="sub">이어서 공부</small><b id="resumeText"></b><button class="primary" id="resumeBtn" type="button">이어서 듣기 ›</button></div>
     <div class="card hidden" id="vocabCard"><h2>📝 오늘 복습할 어휘</h2><p class="sub" id="vocabCardText"></p><button class="primary" id="vocabCardGo" type="button" style="margin-top:10px">복습하러 가기 ›</button></div>
-    <div class="card hidden" id="statCard"><h2>📊 나의 공부 기록</h2><div id="statBox"></div></div>
+    <div class="card hidden" id="statCard"><h2>📊 나의 공부 기록</h2><div id="guestNote" class="hidden"><p class="sub" style="margin:0 0 10px;color:#B23A2E">⚠ 지금은 <b>게스트</b>예요. 들은 시간·반복·단어장이 <b>시트에 쌓이지 않고</b> 나가거나 앱을 닫으면 사라져요.<br>이름과 비밀번호로 들어오면 기록이 쌓이고 다른 폰에서도 이어져요.</p><button class="primary" id="guestToLogin" type="button">이름·비밀번호로 들어가기 ›</button></div><div id="statBox"></div></div>
     <div class="card"><h2 id="gridTitle">📖 영어(NIV) 듣고 읽기</h2><div class="chips" id="bookRow" style="margin:0 0 10px"></div><div class="chap-grid" id="chapGrid"></div><p class="sub" style="margin-top:10px">책을 고르고 장을 누르면 바로 열려요. 소리가 준비된 장부터 차례로 늘어나요.</p></div>
     <div class="card"><h2>🎨 색 번호는 이렇게 칠해져요</h2><div class="pen-wrap"><img src="img/pencils.jpg" alt=""/><div class="pen-nums"><span class="dot d1" style="left:23.27%">1</span><span class="dot d2" style="left:30.43%">2</span><span class="dot d3" style="left:37.82%">3</span><span class="dot d4" style="left:44.61%">4</span><span class="dot d5" style="left:51.73%">5</span><span class="dot d6" style="left:58.86%">6</span><span class="dot d7" style="left:66.02%">7</span><span class="dot d8" style="left:73.09%">8</span></div></div><p class="sub">영어와 우리말에 <b>같은 번호는 같은 색</b>이에요. 색을 누르면 그 설명이 켜져요. (색 설명은 지금 요한복음에 있어요)</p></div>
     <div class="card">
@@ -272,7 +279,8 @@ body{min-height:100vh;min-height:100dvh;-webkit-touch-callout:none}
   <!-- 공부 -->
   <section id="vStudy" class="hidden">
     <div class="card" id="studyHead">
-      <div class="sh-top"><button class="ghost" id="chPrev" type="button">‹</button><h2 id="chTitle">장을 골라 주세요</h2><select id="chSel" aria-label="장 선택"></select><button class="ghost" id="chNext" type="button">›</button></div>
+      <div class="sh-top"><button class="ghost" id="chPrev" type="button">‹</button><h2 id="chTitle">장을 골라 주세요</h2><button class="ghost" id="bkOpen" type="button" aria-label="성경 책 선택">📖 책</button><select id="chSel" aria-label="장 선택"></select><button class="ghost" id="chNext" type="button">›</button></div>
+      <div class="chips hidden" id="bkRow" style="margin:8px 0 0"></div>
       <div class="chips" id="chips"></div>
       <p class="hint" id="modeHint"></p>
     </div>
@@ -377,7 +385,7 @@ let S=(()=>{try{const j=JSON.parse(localStorage.getItem(CFG.storageKey)||'{}');r
 const SYNC_ON=!!(CFG.sheets&&CFG.sheets.webAppUrl);const SY={dirty:false,busy:false,t:0,err:'',_t:0};
 if(!S.dev)S.dev='d'+Math.random().toString(36).slice(2,10);
 if(!S.stats)S.stats={dev:{}};
-function save(){try{localStorage.setItem(CFG.storageKey,JSON.stringify(S))}catch(e){}if(SYNC_ON&&S.key&&S.pinH){SY.dirty=true;schedPush()}}
+function save(){try{localStorage.setItem(CFG.storageKey,JSON.stringify(S.guest?{guest:true,name:'게스트',prefs:S.prefs,dev:S.dev}:S))}catch(e){}if(SYNC_ON&&S.key&&S.pinH&&!S.guest){SY.dirty=true;schedPush()}}   /* V0.8 게스트: 기록은 이 폰에도 시트에도 남기지 않는다 (설정만) */
 
 /* ===== 데이터 ===== */
 let LIST=null;const CACHE={};
@@ -398,8 +406,9 @@ document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',
 /* ===== 홈 ===== */
 let HB=0;   /* 홈에서 고른 책 */
 function renderHome(){
-  $('who').textContent=S.name&&loggedIn()?((S.admin?'👑 ':'👤 ')+S.name):'';showLogin(!loggedIn());updateAdminTab();
-  {const sc=$('statCard');sc.classList.toggle('hidden',!loggedIn());if(loggedIn()){const b=$('statBox');b.textContent='';statBox(b,myTotals())}}
+  $('who').textContent=S.guest?'👀 게스트':(S.name&&loggedIn()?((S.admin?'👑 ':'👤 ')+S.name):'');showLogin(!loggedIn());updateAdminTab();
+  {const sc=$('statCard');sc.classList.toggle('hidden',!loggedIn());$('guestNote').classList.toggle('hidden',!S.guest);
+    if(loggedIn()){const b=$('statBox');b.textContent='';if(!S.guest)statBox(b,myTotals())}}
   const rc=$('resumeCard'),lr=S.last;
   if(lr&&hasAudio(lr.b,lr.c)){rc.classList.remove('hidden');$('resumeText').textContent=bookName(lr.b)+' '+lr.c+chW(lr.b)+' · '+((lr.i||0)+1)+'번째 문장';}else rc.classList.add('hidden');
   const nd=vDue().length,vc=$('vocabCard');vc.classList.toggle('hidden',!nd);if(nd)$('vocabCardText').textContent='오늘 다시 볼 말이 '+nd+'개 있어요. 모르는 말은 위쪽에 모여 있어요.';
@@ -426,7 +435,7 @@ function extraTo(p,text){String(text).split(/([⑴-⑻])/).forEach(x=>{if(!x)ret
 /* ===== 공부 화면 ===== */
 const P={b:0,c:0,d:null,cur:-1,mode:'all',lock:0,rng:{a:-1,b:-1},want:false,pend:null,drag:false,lastUser:0,lastSave:0};
 const audioEl=(()=>{const a=document.createElement('audio');a.preload='metadata';a.setAttribute('playsinline','');a.setAttribute('webkit-playsinline','');document.body.appendChild(a);return a})();
-function renderEmptyStudy(){$('chTitle').textContent='장을 골라 주세요';$('chSel').textContent='';const l=$('setList');l.textContent='';
+function renderEmptyStudy(){$('chTitle').textContent='장을 골라 주세요 ▾';$('chSel').textContent='';const l=$('setList');l.textContent='';BKSEL=0;bkRender();$('bkRow').classList.remove('hidden');   /* 비어 있으면 책·장 고르는 칸을 바로 펼친다 */
   const c=el('div','card');{const im=el('img','empty-img');im.src='img/empty.jpg';im.alt='';c.appendChild(im)}c.appendChild(el('p','sub','홈에서 장을 고르거나, 아래 버튼으로 시작해요.'));const b=el('button','primary','요한복음 1장 열기');b.style.marginTop='10px';b.addEventListener('click',()=>openChap(43,1,{play:false}));c.appendChild(b);l.appendChild(c)}
 function renderChips(){const c=$('chips');c.textContent='';
   const mk=(t,on,fn,cls)=>{const b=el('button','chip '+(cls||'')+(on?' on':''),t);b.type='button';if(cls&&cls.indexOf('tg')===0){b.textContent='';b.appendChild(tagIcon(t));b.appendChild(document.createTextNode(t))}b.addEventListener('click',fn);c.appendChild(b)};
@@ -540,9 +549,9 @@ $('abSeek').addEventListener('input',()=>{P.drag=true;const du=audioEl.duration|
 $('abSeek').addEventListener('change',()=>{const du=audioEl.duration||P.d.dur||1;audioEl.currentTime=$('abSeek').value/1000*du;P.drag=false;if(P.mode==='set')P.lock=idxAt(audioEl.currentTime)});
 const RATES=[0.7,0.85,1,1.15,1.3];
 $('abRate').addEventListener('click',()=>{const i=RATES.indexOf(+S.prefs.rate);S.prefs.rate=RATES[(i+1)%RATES.length];audioEl.playbackRate=S.prefs.rate;save();updateBar();toast('속도 '+S.prefs.rate+'배')});
-audioEl.addEventListener('play',()=>{updateBar()});
+audioEl.addEventListener('play',()=>{updateBar();logStart()});
 audioEl.addEventListener('pause',()=>{updateBar();saveLast();flush()});
-function markDone(){const k=P.b+'-'+P.c;S.done[k]=Date.now();S.heard[k]=P.d.sets.length;save()}
+function markDone(){const k=P.b+'-'+P.c;S.done[k]=Date.now();S.heard[k]=P.d.sets.length;{const c=chOf(me(),k);c.f++;c.t=Date.now()}save()}
 function allChaps(){const r=[];Object.keys(LIST||{}).map(Number).sort((a,b)=>a-b).forEach(b=>((LIST[b]||[]).slice().sort((x,y)=>x-y)).forEach(c=>r.push([b,c])));return r}
 function nextChap(){const a=allChaps(),i=a.findIndex(x=>x[0]===P.b&&x[1]===P.c),n=a[i+1]||a[0];   /* 책을 넘어 쭉 · 맨 끝이면 처음으로 */
   if(!n||(n[0]===P.b&&n[1]===P.c)){seekTo(0);audioEl.play().catch(()=>{});return}
@@ -554,6 +563,17 @@ audioEl.addEventListener('ended',()=>{if(!P.d)return;markDone();const s=P.d.sets
 window.addEventListener('pagehide',()=>{if(P.d)saveLast();flush(true)});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){if(P.d)saveLast();flush(true)}else if(SYNC_ON&&Date.now()-SY.t>60000)syncNow()});
 $('chSel').addEventListener('change',()=>{openChap(P.b,+$('chSel').value,{play:false})});
+/* V0.9 공부 탭에서 책 고르기 (사장님 2026-10-09 「공부에서 성경 선택할 수 있게 · 클릭이 안 돼」) — 책을 누르면 그 책의 마지막 읽던 장(없으면 첫 장)으로 */
+/* 책 → 장 두 단계: 책 칩을 누르면 그 책의 장 버튼이 아래에 나오고, 장을 누르면 열린다 (제목 「장을 골라 주세요」 · 📖 책 · 장 선택 칸 어느 것을 눌러도 같은 칸이 열림) */
+let BKSEL=0;
+function bkRender(){const r=$('bkRow');r.textContent='';const bs=Object.keys(LIST||{}).map(Number).sort((a,b)=>a-b);if(!BKSEL||!(LIST||{})[BKSEL])BKSEL=P.b&&(LIST||{})[P.b]?P.b:bs[0];
+  const row=el('div','chips');row.style.margin='0 0 8px';
+  bs.forEach(b=>{const x=el('button','chip'+(b===BKSEL?' on':''),bookName(b));x.type='button';x.addEventListener('click',()=>{BKSEL=b;bkRender()});row.appendChild(x)});r.appendChild(row);
+  const g=el('div','chap-grid');g.id='bkGrid';((LIST||{})[BKSEL]||[]).slice().sort((a,b)=>a-b).forEach(c=>{const x=el('button',(BKSEL===P.b&&c===P.c)?'on':'',String(c));x.type='button';x.setAttribute('aria-label',bookName(BKSEL)+' '+c+chW(BKSEL));
+    x.addEventListener('click',()=>{r.classList.add('hidden');openChap(BKSEL,c,{play:false})});g.appendChild(x)});r.appendChild(g)}
+function bkToggle(){const r=$('bkRow');if(r.classList.contains('hidden')){bkRender();r.classList.remove('hidden')}else r.classList.add('hidden')}
+$('bkOpen').addEventListener('click',bkToggle);
+$('chTitle').addEventListener('click',bkToggle);$('chTitle').style.cursor='pointer';$('chTitle').title='눌러서 책·장 고르기';
 $('chPrev').addEventListener('click',()=>{const l=(LIST||{})[P.b]||[],i=l.indexOf(P.c);if(i>0)openChap(P.b,l[i-1],{play:false})});
 $('chNext').addEventListener('click',()=>{const l=(LIST||{})[P.b]||[],i=l.indexOf(P.c);if(i>=0&&i<l.length-1)openChap(P.b,l[i+1],{play:false})});
 function setMeta(){if(!('mediaSession'in navigator)||!P.d)return;
@@ -655,7 +675,11 @@ $('celeX').addEventListener('click',()=>$('cele').classList.add('hidden'));$('ce
 $('rvClose').addEventListener('click',()=>{rvAudio.pause();$('rv').classList.add('hidden');if(TAB==='vocab')renderVocab()});
 
 /* ===== V0.7 로그인 · 시트 동기화 · 누적 통계 · 관리자 ===== */
-const loggedIn=()=>!!(S.name&&(!SYNC_ON||S.pinH));
+const loggedIn=()=>!!(S.guest||(S.name&&(!SYNC_ON||S.pinH)));
+/* V0.8 게스트 — 이름·비번 없이 둘러보기 · 기록은 쌓이지 않는다 (사장님 2026-10-09 「단점을 알리고」) */
+function freshS(){const pf=S.prefs,dv=S.dev;const n=JSON.parse(JSON.stringify(DEF));n.prefs=pf;n.dev=dv;return n}
+function enterGuest(){S=freshS();S.guest=true;S.name='게스트';save();renderHome();toast('게스트로 들어왔어요 · 기록은 쌓이지 않아요',3500)}
+function leaveGuest(){P.d=null;audioEl.pause();$('audioBar').classList.add('hidden');document.body.classList.remove('hasbar');S=freshS();save();$('nameIn').value='';$('loginMsg').dataset.set='';goTab('home');setTimeout(()=>$('nameIn').focus(),50)}
 function normKey(n){return String(n||'').replace(/\s+/g,' ').trim().toLowerCase()}
 function mix32(s){let h=2166136261>>>0;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0}h^=h>>>13;h=Math.imul(h,0x5bd1e995)>>>0;h^=h>>>15;return h>>>0}
 function pinHashOf(pin,uid){return 'p2-'+mix32(pin+'::'+uid).toString(36)+mix32(uid+'::'+pin).toString(36)}
@@ -668,8 +692,15 @@ function loginMsg(t){const m=$('loginMsg');m.textContent=t;m.dataset.set='1'}
 const todayK=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
 const me=()=>{const st=S.stats=S.stats||{dev:{}};return st.dev[S.dev]||(st.dev[S.dev]={sec:0,set:0,range:0,chap:0,rev:0,hear:0,ok:0,no:0,days:{},u:0})};
 const dayOf=m=>{const k=todayK();return m.days[k]||(m.days[k]={s:0,r:0,v:0})};
-function stat(k,dk,n){const m=me();m[k]=(m[k]||0)+(n||1);if(dk)dayOf(m)[dk]=(dayOf(m)[dk]||0)+(n||1);m.u=Date.now();save()}
-function statSec(dt){const m=me();m.sec+=dt;dayOf(m).s+=dt;m.u=Date.now();SY.dirty=true}
+function stat(k,dk,n){const m=me();m[k]=(m[k]||0)+(n||1);if(dk)dayOf(m)[dk]=(dayOf(m)[dk]||0)+(n||1);chStat(m,k,n||1);m.u=Date.now();save()}
+function statSec(dt){const m=me();m.sec+=dt;dayOf(m).s+=dt;if(P.d){const k=P.b+'-'+P.c,c=chOf(m,k);c.s+=dt;c.t=Date.now();const e=(m.log||[])[(m.log||[]).length-1];if(e&&e.k===k)e.s+=dt}m.u=Date.now();SY.dirty=true}
+/* V0.9 장별 기록 · 듣기 로그 (사장님 2026-10-09 「몇번 들었는지 횟수 로그 디테일하게 · 관리 화면에」)
+   ch[권-장] = {p 재생 횟수 · f 끝까지 들은 횟수 · s 들은 초 · r 반복 · h 들은 문장 · t 마지막} · log = [{t 시작, k 권-장, s 초}] 기기마다 최근 300개 */
+function chOf(m,k){const ch=m.ch||(m.ch={});return ch[k]||(ch[k]={p:0,f:0,s:0,r:0,h:0,t:0})}
+function chStat(m,k,n){if(!P.d)return;const c=chOf(m,P.b+'-'+P.c);if(k==='hear')c.h+=n;else if(k==='set'||k==='range'||k==='chap')c.r+=n;else return;c.t=Date.now()}
+function logStart(){if(!P.d)return;const m=me(),k=P.b+'-'+P.c,L=m.log||(m.log=[]),e=L[L.length-1],now=Date.now();
+  if(e&&e.k===k&&now-(e.t+e.s*1000)<120000)return;   /* 같은 장을 2분 안에 다시 누르면 같은 듣기로 본다 */
+  chOf(m,k).p++;L.push({t:now,k,s:0});if(L.length>300)L.splice(0,L.length-300);m.u=now;SY.dirty=true}
 function totalsOf(st,done,vocab){const t={sec:0,set:0,range:0,chap:0,rev:0,hear:0,ok:0,no:0,days:{},dev:0},dv=(st&&st.dev)||{};
   for(const id in dv){const x=dv[id];t.dev++;['sec','set','range','chap','rev','hear','ok','no'].forEach(k=>t[k]+=+x[k]||0);
     for(const d in (x.days||{})){const y=x.days[d],z=t.days[d]||(t.days[d]={s:0,r:0,v:0});z.s+=+y.s||0;z.r+=+y.r||0;z.v+=+y.v||0}}
@@ -717,6 +748,7 @@ async function login(reg){
   const n=$('nameIn').value.trim().replace(/\s+/g,' ');if(!n||n.length>12){loginMsg('이름을 1~12글자로 써 주세요');return}
   if(!SYNC_ON){S.name=n;save();renderHome();toast(n+' 님 환영해요 🙏');return}
   const pin=$('pinIn').value.trim();if(!/^\d{4}$/.test(pin)){loginMsg('비밀번호는 숫자 4자리예요');return}
+  if(S.guest)S=freshS();   /* 게스트 때 기록은 회원 기록에 섞지 않는다 */
   const key=normKey(n),h=pinHashOf(pin,key);loginMsg('확인하는 중…');$('nameGo').disabled=true;$('regBtn').classList.add('hidden');
   try{const r=await api({a:'login',n,h,reg:!!reg});
     if(r.ok){S.name=r.name||n;S.key=key;S.pinH=h;S.admin=!!r.admin;mergeIn(r.data);if(!S.joined)S.joined=Date.now();$('pinIn').value='';$('loginMsg').dataset.set='';save();renderHome();
@@ -726,7 +758,7 @@ async function login(reg){
     else if(r.error==='locked')loginMsg('비밀번호를 여러 번 틀려서 15분 동안 잠겼어요');
     else loginMsg('들어가지 못했어요 ('+r.error+')')}
   catch(e){loginMsg('인터넷 연결을 확인해 주세요')}finally{$('nameGo').disabled=false}}
-$('nameGo').addEventListener('click',()=>login(false));$('regBtn').addEventListener('click',()=>login(true));
+$('nameGo').addEventListener('click',()=>login(false));$('regBtn').addEventListener('click',()=>login(true));$('guestGo').addEventListener('click',enterGuest);$('guestToLogin').addEventListener('click',leaveGuest);
 $('setLogout').addEventListener('click',async()=>{
   if(SYNC_ON&&S.key&&S.pinH){await syncNow();if(SY.err&&!confirm('시트에 아직 저장하지 못한 기록이 있어요. 그래도 로그아웃할까요?'))return}
   const pf=S.prefs,dv=S.dev;S=JSON.parse(JSON.stringify(DEF));S.prefs=pf;S.dev=dv;save();P.d=null;audioEl.pause();$('audioBar').classList.add('hidden');document.body.classList.remove('hasbar');$('nameIn').value='';$('loginMsg').dataset.set='';goTab('home')});
@@ -734,6 +766,23 @@ $('setLogout').addEventListener('click',async()=>{
 const ADM={list:[],sort:'recent',busy:false};
 async function fetchAdmin(){if(ADM.busy)return;ADM.busy=true;try{const r=await api({a:'members',n:S.name,h:S.pinH});if(r.ok)ADM.list=r.members||[];else toast('관리자만 볼 수 있어요')}catch(e){toast('인터넷 연결을 확인해 주세요')}finally{ADM.busy=false;renderAdmin(true)}}
 function rangesOf(arr){arr=arr.slice().sort((a,b)=>a-b);const r=[];arr.forEach(c=>{const l=r[r.length-1];if(l&&c===l[1]+1)l[1]=c;else r.push([c,c])});return r.map(x=>x[0]===x[1]?x[0]:x[0]+'~'+x[1]).join(', ')}
+/* V0.9 관리 화면 「자세히」 — 장별 횟수 · 날짜별 · 듣기 기록 (서버 V1.1 이 sum.ch · sum.log · heard 를 준다) */
+function chName(k){const p=String(k).split('-').map(Number);return bookName(p[0])+' '+p[1]+chW(p[0])}
+function admDetail(m){const sm=m.sum||{},chs=sm.ch||{},d=el('details','adm-det');
+  const keys=Object.keys(chs).sort((a,b)=>(+chs[b].t||0)-(+chs[a].t||0));
+  d.appendChild(el('summary',null,'📋 자세히 보기 — 장별 '+keys.length+'곳 · 듣기 기록 '+(sm.log||[]).length+'번'));
+  d.appendChild(el('div','adm-h','📖 장별 횟수 (최근 들은 순)'));
+  if(!keys.length)d.appendChild(el('div','adm-line','장별 기록이 아직 없어요 — 2026-10-09 이후 들은 것부터 쌓여요'));
+  keys.forEach(k=>{const c=chs[k],hd=(m.heard||{})[k];
+    d.appendChild(el('div','adm-line',chName(k)+' · 재생 '+(c.p||0)+'번 · 끝까지 '+(c.f||0)+'번 · '+fmtDur(c.s)+' · 반복 '+(c.r||0)+'번 · 들은 문장 '+(c.h||0)+'개'+(hd?' · '+hd+'번째 문장까지':'')))});
+  d.appendChild(el('div','adm-h','📅 날짜별'));
+  const ds=Object.keys(sm.days||{}).filter(k=>{const y=sm.days[k];return (+y.s||0)>0||(+y.r||0)>0||(+y.v||0)>0}).sort().reverse();
+  if(!ds.length)d.appendChild(el('div','adm-line','아직 없음'));
+  ds.forEach(k=>{const y=sm.days[k];d.appendChild(el('div','adm-line',k+' · '+fmtDur(y.s)+' · 반복 '+(+y.r||0)+'번 · 복습 '+(+y.v||0)+'장'))});
+  d.appendChild(el('div','adm-h','🕘 듣기 기록 (최근 100번)'));
+  const lg=(sm.log||[]).slice(0,100);if(!lg.length)d.appendChild(el('div','adm-line','아직 없음 — 2026-10-09 이후 재생부터 쌓여요'));
+  lg.forEach(e=>{const t=new Date(+e.t||0);d.appendChild(el('div','adm-line',(t.getMonth()+1)+'/'+t.getDate()+' '+pad(t.getHours())+':'+pad(t.getMinutes())+' · '+chName(e.k)+' · '+fmtDur(e.s)))});
+  return d}
 function renderAdmin(noFetch){
   if(!S.admin){$('admList').textContent='';$('admSum').textContent='관리자 전용이에요';return}
   if(!noFetch&&!ADM.busy&&!ADM.list.length){fetchAdmin()}
@@ -749,6 +798,7 @@ function renderAdmin(noFetch){
     const lp=m.lastpos&&m.lastpos.b?bookName(m.lastpos.b)+' '+m.lastpos.c+chW(m.lastpos.b)+' '+((m.lastpos.i||0)+1)+'번째 문장':'아직 없음';c.appendChild(el('div','adm-line','▶ 어디까지: '+lp));
     const by={};(m.done||[]).forEach(k=>{const [b,cc]=k.split('-').map(Number);(by[b]=by[b]||[]).push(cc)});
     const dl=Object.keys(by).map(Number).sort((a,b)=>a-b).map(b=>bookName(b)+' '+rangesOf(by[b])+chW(b));c.appendChild(el('div','adm-line','✓ 끝까지 들은 곳: '+(dl.length?dl.join(' · '):'아직 없음')));
+    c.appendChild(admDetail(m));
     const bt=el('div','adm-btns');const rs=el('button',null,'🔑 비번 초기화');rs.type='button';rs.dataset.act='reset';bt.appendChild(rs);c.appendChild(bt);box.appendChild(c)})}
 $('admList').addEventListener('click',async e=>{const b=e.target.closest('button[data-act="reset"]');if(!b)return;const key=b.closest('.adm-card').dataset.key,m=ADM.list.find(x=>x.key===key);
   if(!confirm('「'+(m?m.n:key)+'」 님의 비밀번호를 초기화할까요?\n다음에 들어올 때 새 비밀번호를 다시 등록하게 돼요 (기록은 그대로).'))return;

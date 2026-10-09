@@ -1,5 +1,5 @@
 /* 영어 공부 - 서비스 워커 (성경 읽기 앱 V3.9 방식 그대로) */
-const CACHE = 'english-cache-app-20261009b';   // 2026-10-09 마태복음 28장 색번호 (801세트) · 누가복음 24장 (858세트)
+const CACHE = 'english-cache-app-20261009d';   // 2026-10-09 18권 전부 색번호 (188장 · 4279세트) · 게스트 입장 · 공부 탭 책·장 고르기 · 관리 화면 자세히(서버 V1.1 올린 뒤 채워짐)
 const ASSETS = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {
