@@ -1163,7 +1163,8 @@ function initReader(){
   fillChaps();
   if(readReq)return;
   if(state.lastRead){curB=state.lastRead.b;curC=state.lastRead.c;bs.value=curB;fillChaps();document.getElementById('chapSel').value=curC;openChapter()}
-  else{document.getElementById('readerTitle').textContent='읽을 성경을 골라 주세요';const rb=document.getElementById('readerBody');rb.textContent='';
+  else{document.getElementById('openBtn').classList.remove('hidden');   /* V3.25 ★아무 장도 안 열린 때만 「본문 열기」 — 드롭다운이 이미 창세기·1장이라 같은 값을 고르면 change 가 안 와서 창세기 1장만 안 열렸다 (사장님 2026-10-09) */
+    document.getElementById('readerTitle').textContent='읽을 성경을 골라 주세요';const rb=document.getElementById('readerBody');rb.textContent='';
     const p=document.createElement('p');p.className='no-bible';p.textContent='위에서 책과 장을 고르고 「본문 열기」를 누르거나, 홈의 「성경 고르기」에서 골라도 돼요.';rb.appendChild(p)}   /* 앱을 다시 켜면 ★마지막 읽던 절로 이동 + 「이어서 읽기」 */
 }
 function fillChaps(){
@@ -1177,7 +1178,7 @@ function openChapter(noScroll){
   const body=document.getElementById('readerBody');
   const hint=document.getElementById('posHint');
   const chip=document.getElementById('resumeChip');
-  const b=BOOKS[curB-1];openB=curB;openC=curC;USCROLL=false;
+  const b=BOOKS[curB-1];openB=curB;openC=curC;USCROLL=false;document.getElementById('openBtn').classList.add('hidden');   /* V3.25 장이 열리면 다시 숨김 (V3.15 그대로) */
   title.textContent=b.n+' '+curC+chW(curB);
   document.getElementById('chapReadChk').checked=!!state.readChapters[key(curB,curC)];
   maxVerse=state.versePos[key(curB,curC)]||0;
