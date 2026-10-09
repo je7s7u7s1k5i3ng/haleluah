@@ -3560,23 +3560,22 @@
    "rank": "1045",
    "name": "건새우 두절",
    "category": "건어물",
-   "price": "20,900원부터",
+   "price": "47,800원부터",
    "note": "원산지: 국산 / 옵션 2개",
-   "image": "",
+   "image": "assets/gunsaeu-dujeol-kr-20261009.jpg",
    "options": [
     {
-     "label": "200g / 20,900원",
-     "value": "200g / 20,900원 / 원산지 국산",
-     "title": "중량 선택",
-     "source_spec": "200g",
-     "source_id": "DN-0007"
-    },
-    {
-     "label": "500g / 42,700원",
-     "value": "500g / 42,700원 / 원산지 국산",
+     "label": "500g / 47,800원",
+     "value": "500g / 47,800원 / 원산지 국산",
      "title": "중량 선택",
      "source_spec": "500g",
      "source_id": "DN-0008"
+    },
+    {
+     "label": "1K / 91,500원",
+     "value": "1K / 91,500원 / 원산지 국산",
+     "title": "중량 선택",
+     "source_spec": "1K"
     }
    ],
    "bulk_list": true,
@@ -3586,27 +3585,20 @@
    "rank": "1046",
    "name": "건새우 두절 대 중국산",
    "category": "건어물",
-   "price": "10,300원부터",
-   "note": "원산지: 중국 / 옵션 3개",
-   "image": "",
+   "price": "19,000원부터",
+   "note": "원산지: 중국 / 옵션 2개",
+   "image": "assets/gunsaeu-dujeol-cn-20261009.jpg",
    "options": [
     {
-     "label": "200g / 10,300원",
-     "value": "200g / 10,300원 / 원산지 중국",
-     "title": "중량 선택",
-     "source_spec": "200g",
-     "source_id": "DN-0009"
-    },
-    {
-     "label": "500g / 16,800원",
-     "value": "500g / 16,800원 / 원산지 중국",
+     "label": "500g / 19,000원",
+     "value": "500g / 19,000원 / 원산지 중국",
      "title": "중량 선택",
      "source_spec": "500g",
      "source_id": "DN-0010"
     },
     {
-     "label": "1K / 28,600원",
-     "value": "1K / 28,600원 / 원산지 중국",
+     "label": "1K / 32,800원",
+     "value": "1K / 32,800원 / 원산지 중국",
      "title": "중량 선택",
      "source_spec": "1K",
      "source_id": "DN-0011"
