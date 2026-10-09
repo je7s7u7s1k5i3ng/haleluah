@@ -1213,17 +1213,22 @@ function openChapter(noScroll){
 function verseHTML(vs){
   return vs.map((t,i)=>t?'<p class="verse" id="v'+(i+1)+'" data-v="'+(i+1)+'"><sup>'+(i+1)+'</sup>'+esc(t)+'</p>':'').join('');
 }
+/* V3.23 ★장을 열기만 해서는 「읽음」 아님 — 직접 넘기기(스크롤·터치·키) 를 한 뒤부터 화면 가운데 절을 읽은 곳으로 (사장님 2026-10-09)
+   · 절 누르기 · 듣기(굵은 절) 로 저장되는 것은 그대로 */
+const VIS=new Set();
+function readFromView(){
+  if(!USCROLL||!VIS.size)return;
+  const v=Math.max(...VIS);if(v>maxVerse){maxVerse=v;dirtyVerse=true;markHere()}
+}
+window.addEventListener('scroll',()=>{if(USCROLL)readFromView()},{passive:true});
 function watchVerses(){
   if(observer)observer.disconnect();
   const vs=document.querySelectorAll('.verse');
   if(!vs.length||!('IntersectionObserver'in window))return;
+  VIS.clear();
   observer=new IntersectionObserver(es=>{
-    es.forEach(e=>{
-      if(e.isIntersecting){
-        const v=+e.target.dataset.v;
-        if(v>maxVerse){maxVerse=v;dirtyVerse=true;markHere()}
-      }
-    });
+    es.forEach(e=>{const v=+e.target.dataset.v;if(e.isIntersecting)VIS.add(v);else VIS.delete(v)});
+    readFromView();
   },{rootMargin:'-35% 0px -35% 0px'});
   vs.forEach(v=>observer.observe(v));
   markHere();

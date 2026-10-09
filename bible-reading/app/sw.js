@@ -1,5 +1,5 @@
 /* 성경 읽기 - 서비스 워커 (오프라인 지원) */
-const CACHE = 'bible-cache-app-20261005y';
+const CACHE = 'bible-cache-app-20261009a';
 const ASSETS = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {
@@ -45,7 +45,9 @@ self.addEventListener('fetch', (e) => {
 
   // V3.9 화면·설정·목록은 인터넷 먼저 (새로 올린 것이 바로 보이게) → 끊기면 저장본
   const p = url.pathname;
-  if (req.mode === 'navigate' || p.endsWith('/') || p.endsWith('.html') || p.endsWith('config.js') || p.endsWith('manifest.json')) {
+  // ★V3.23 소리 목록·시각표(audio/*.json)도 인터넷 먼저 — 예전엔 캐시 우선이라 폰이 처음 받은 목록(194·706장)을 계속 써서
+  //   나중에 늘어난 장(신명기 등)에 재생 버튼이 안 떴다 (사장님 2026-10-09 신고). 인터넷이 없을 때만 저장본
+  if (req.mode === 'navigate' || p.endsWith('/') || p.endsWith('.html') || p.endsWith('config.js') || p.endsWith('manifest.json') || (p.indexOf('/audio/') >= 0 && p.endsWith('.json'))) {
     e.respondWith(
       fetch(req.url, { cache: 'no-store', credentials: 'same-origin' })   // 화면 이동 요청에 옵션을 붙이면 크롬이 거부 → 주소로 다시 요청
         .then((res) => { if (res.ok) { const cp = res.clone(); caches.open(CACHE).then((c) => c.put(req.url, cp)); } return res; })   // 복사본은 바로 떠 둔다
