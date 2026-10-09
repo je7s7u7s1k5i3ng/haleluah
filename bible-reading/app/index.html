@@ -460,23 +460,8 @@ h2{color:#1E2A55}
   <!-- 홈 -->
   <section id="tab-home">
     <div class="card inst-card promo hidden" id="instCard"><button id="instHome" class="promo-btn inst blink" type="button">📲 홈 화면에 설치 <span class="tap-hint">👆 여기 클릭</span></button><p class="sub" style="margin:8px 0 0">앱처럼 아이콘으로 바로 열려요 · 안드로이드·아이폰 모두</p></div>
-    <div class="card promo hidden" id="listenNew"><button id="listenNewBtn" class="promo-btn alt blink" type="button">🎧 들으며 읽기가 새로 나왔어요 <span class="tap-hint">👆 여기 클릭</span></button><p class="sub" style="margin:8px 0 0">재생을 누르면 <b>읽는 줄이 굵게</b> 따라가요 · 신약 소리 있는 장은 정지할 때까지 쭉 이어 들려요 · 멈춘 곳까지 자동 저장 <button id="listenNewX" class="linklike" type="button">닫기</button></p></div>
-    <div class="card intro-card promo">
-      <p class="intro-note">📣 지금은 <b>시험판 웹앱</b>이에요. 함께 써 보고 잘 되면 <b>플레이스토어 설치용 앱</b>으로 업데이트할 예정입니다.</p>
-      <h2>이 앱에서 할 수 있는 것</h2>
-      <ul class="feat">
-        <li><b>📖 성경 고르기</b> — 읽고 싶은 책·장을 골라 바로 읽기 (개역한글)</li>
-        <li><b>👆 절 누르기</b> — 읽은 곳의 절을 누르면 거기까지 저장 · 마지막 절이면 그 장 완료</li>
-        <li><b>↩ 이어 읽기</b> — 중간에 나가도 다음에 읽던 절부터</li>
-        <li><b>🤝 함께 읽는 지체들</b> — 날짜별 읽음 🟢/🔴 만 보여요 · 무엇을 읽었는지는 본인과 목사님만</li>
-        <li><b>🔒 내 기록은 내 것</b> — 이름 + 비밀번호 4자리로만 들어가요 · 남이 내 이름으로 못 들어와요</li>
-        <li><b>🏃 내 도전</b> — 1주 1권 · 1년 신약 1독 · 1년 구약 1독 중 골라 속도 확인</li>
-        <li><b>🏅 배지 · 완독 축하</b> — 배지 8종 · 책 한 권을 끝내면 축하</li>
-        <li><b>👨‍🏫 목사님 관리</b> — 개개인 전체 기록은 목사님만 · 비번을 잊으면 목사님이 초기화</li>
-        <li><b>📲 홈 화면에 설치</b> — 버튼 한 번이면 앱처럼 아이콘으로 (안드로이드·아이폰)</li>
-      </ul>
-      <a class="promo-btn alt blink" href="../feedback/">💬 이런 기능이 있었으면 좋겠어요 <span class="tap-hint">👆 여기 클릭</span></a>
-    </div>
+    <div class="card promo hidden" id="listenNew"><button id="listenNewBtn" class="promo-btn alt blink" type="button">🎧 들으며 읽기가 새로 나왔어요 <span class="tap-hint">👆 여기 클릭</span></button><p class="sub" style="margin:8px 0 0">재생을 누르면 <b>읽는 줄이 굵게</b> 따라가요 · 성경 전체(창세기~요한계시록)를 정지할 때까지 쭉 이어 들려요 · 멈춘 곳까지 자동 저장 <button id="listenNewX" class="linklike" type="button">닫기</button></p></div>
+    <div class="card promo"><a class="promo-btn alt blink" href="../feedback/">💬 이런 기능이 있었으면 좋겠어요 <span class="tap-hint">👆 여기 클릭</span></a></div>   <!-- V3.24 홈 위쪽 = 깜박이 클릭 버튼만 (사장님 2026-10-09) · 앱 소개 문구는 맨 아래로 -->
     <div class="card quote-card"><blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀이다”</p><cite>— 황선주 목사님</cite></blockquote></div>
     <div class="card" id="todayPlan"><h2>📌 오늘 읽을 분량</h2><div id="todayPlanList"></div></div>
     <div class="card resume-card hidden" id="resumeCard"><div><small>이어 읽기</small><b id="resumeText"></b></div><button id="resumeBtn" class="primary" type="button">이어서 읽기 ›</button></div>
@@ -499,6 +484,21 @@ h2{color:#1E2A55}
     <div class="card"><h2>🏃 내 도전</h2><p class="sub" style="margin:-4px 0 8px">내 속도에 맞는 도전을 골라요. 여러 개 골라도 돼요.</p><div id="goalList"></div></div>
     <div class="card"><h2 id="badgeTitle">내 배지</h2><div id="badgeGrid" class="badge-grid"></div></div>
     <div class="card"><h2>우리 모두</h2><div id="groupStats"></div></div>
+    <div class="card intro-card">  <!-- V3.24 앱 소개 = 홈 맨 아래 -->
+      <p class="intro-note">📣 지금은 <b>시험판 웹앱</b>이에요. 함께 써 보고 잘 되면 <b>플레이스토어 설치용 앱</b>으로 업데이트할 예정입니다.</p>
+      <h2>이 앱에서 할 수 있는 것</h2>
+      <ul class="feat">
+        <li><b>📖 성경 고르기</b> — 읽고 싶은 책·장을 골라 바로 읽기 (개역한글)</li>
+        <li><b>👆 절 누르기</b> — 읽은 곳의 절을 누르면 거기까지 저장 · 마지막 절이면 그 장 완료</li>
+        <li><b>↩ 이어 읽기</b> — 중간에 나가도 다음에 읽던 절부터</li>
+        <li><b>🤝 함께 읽는 지체들</b> — 날짜별 읽음 🟢/🔴 만 보여요 · 무엇을 읽었는지는 본인과 목사님만</li>
+        <li><b>🔒 내 기록은 내 것</b> — 이름 + 비밀번호 4자리로만 들어가요 · 남이 내 이름으로 못 들어와요</li>
+        <li><b>🏃 내 도전</b> — 1주 1권 · 1년 신약 1독 · 1년 구약 1독 중 골라 속도 확인</li>
+        <li><b>🏅 배지 · 완독 축하</b> — 배지 8종 · 책 한 권을 끝내면 축하</li>
+        <li><b>👨‍🏫 목사님 관리</b> — 개개인 전체 기록은 목사님만 · 비번을 잊으면 목사님이 초기화</li>
+        <li><b>📲 홈 화면에 설치</b> — 버튼 한 번이면 앱처럼 아이콘으로 (안드로이드·아이폰)</li>
+      </ul>
+    </div>
   </section>
 
   <!-- 읽기 -->
@@ -1264,8 +1264,21 @@ let AUD_LIST=null,AUD_T={},AUD={b:0,c:0,T:null,cur:0,lock:-1,self:false,want:fal
 const audioEl=(()=>{const a=document.createElement('audio');a.preload='metadata';a.setAttribute('playsinline','');a.setAttribute('webkit-playsinline','');document.body.appendChild(a);return a})();
 try{const p=JSON.parse(localStorage.getItem('bibleAudioPref')||'{}');if(p.mode)AUD.mode=p.mode;if(p.rate)AUD.rate=+p.rate}catch(e){}
 function audPref(){try{localStorage.setItem('bibleAudioPref',JSON.stringify({mode:AUD.mode,rate:AUD.rate}))}catch(e){}}
-function audList(){return AUD_LIST?Promise.resolve(AUD_LIST):fetch('audio/list.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(j=>AUD_LIST=j)}
-function audTimes(b){return AUD_T[b]?Promise.resolve(AUD_T[b]):fetch('audio/'+b+'.json').then(r=>r.json()).then(j=>AUD_T[b]=j.ch||{})}
+/* V3.24 ★소리 목록·시각표는 주소 끝에 「?v=열때마다 다른 값」 — 옛 서비스워커(캐시 우선)·깃허브 서버 10분 캐시가 옛 목록을 못 준다
+   (V3.23 만으로는 옛 버전이 깔린 폰의 ★첫 번째 열기에서 옛 목록이 보일 수 있었다 — 사장님 2026-10-09 「신명기 같이 재생 버튼 안 나오는 데」) */
+let AUD_BUST=Date.now();
+function audList(){return AUD_LIST?Promise.resolve(AUD_LIST):fetch('audio/list.json?v='+AUD_BUST,{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{if(j)AUD_LIST=j;return AUD_LIST||{}})}
+function audTimes(b){return AUD_T[b]?Promise.resolve(AUD_T[b]):fetch('audio/'+b+'.json?v='+AUD_BUST,{cache:'no-store'}).then(r=>r.json()).then(j=>AUD_T[b]=j.ch||{})}
+/* V3.24 앱을 열어 둔 채로 있다가 돌아와도 — 목록이 바뀌었으면 새 목록으로 (소리만 올리는 배포는 화면이 새로고침되지 않는다) */
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden||!AUD_LIST)return;
+  const bust=Date.now();
+  fetch('audio/list.json?v='+bust,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{
+    if(!j||JSON.stringify(j)===JSON.stringify(AUD_LIST))return;
+    AUD_BUST=bust;AUD_LIST=j;for(const k in AUD_T)delete AUD_T[k];
+    if(audioEl.paused&&curB)audSetup(curB,curC);
+  }).catch(()=>{});
+});
 function hasAudio(b,c){return !!(AUD_LIST&&AUD_LIST[b]&&AUD_LIST[b].indexOf(c)>=0)}
 function fmt(t){t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')}
 function audLoad(b,c,go){   /* 소리 장 바꾸기 (시각표 받고 → 주소 → 필요하면 재생) */

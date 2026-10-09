@@ -1,5 +1,5 @@
 /* 성경 읽기 - 서비스 워커 (오프라인 지원) */
-const CACHE = 'bible-cache-app-20261009a';
+const CACHE = 'bible-cache-app-20261009c';
 const ASSETS = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {
@@ -50,7 +50,7 @@ self.addEventListener('fetch', (e) => {
   if (req.mode === 'navigate' || p.endsWith('/') || p.endsWith('.html') || p.endsWith('config.js') || p.endsWith('manifest.json') || (p.indexOf('/audio/') >= 0 && p.endsWith('.json'))) {
     e.respondWith(
       fetch(req.url, { cache: 'no-store', credentials: 'same-origin' })   // 화면 이동 요청에 옵션을 붙이면 크롬이 거부 → 주소로 다시 요청
-        .then((res) => { if (res.ok) { const cp = res.clone(); caches.open(CACHE).then((c) => c.put(req.url, cp)); } return res; })   // 복사본은 바로 떠 둔다
+        .then((res) => { if (res.ok) { const cp = res.clone(); caches.open(CACHE).then((c) => c.put(p.indexOf('/audio/') >= 0 ? url.origin + p : req.url, cp)); } return res; })   // 복사본은 바로 떠 둔다 · ★V3.24 소리 목록은 「?v=」 를 뺀 주소 하나로만 (요청마다 쌓이지 않게)
         .catch(() => caches.open(CACHE).then((c) => c.match(req.url, { ignoreSearch: true }).then((hit) => hit || c.match('./'))))
     );
     return;
