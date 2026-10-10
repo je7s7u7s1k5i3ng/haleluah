@@ -3560,22 +3560,30 @@
    "rank": "1045",
    "name": "국내산 두절새우",
    "category": "건어물",
-   "price": "47,800원부터",
-   "note": "원산지: 국산 / 옵션 2개",
+   "price": "12,800원부터",
+   "note": "원산지: 국산 / 옵션 3개",
    "image": "assets/gunsaeu-dujeol-kr-20261009.jpg",
    "options": [
     {
-     "label": "500g / 47,800원",
-     "value": "500g / 47,800원 / 원산지 국산",
+     "label": "100g / 12,800원",
+     "value": "100g / 12,800원 / 원산지 국산",
      "title": "중량 선택",
-     "source_spec": "500g",
+     "source_spec": "500g 원가 ÷ 5 × 1",
      "source_id": "DN-0008"
     },
     {
-     "label": "1K / 91,500원",
-     "value": "1K / 91,500원 / 원산지 국산",
+     "label": "200g / 21,500원",
+     "value": "200g / 21,500원 / 원산지 국산",
      "title": "중량 선택",
-     "source_spec": "1K"
+     "source_spec": "500g 원가 ÷ 5 × 2",
+     "source_id": "DN-0008"
+    },
+    {
+     "label": "300g / 30,300원",
+     "value": "300g / 30,300원 / 원산지 국산",
+     "title": "중량 선택",
+     "source_spec": "500g 원가 ÷ 5 × 3",
+     "source_id": "DN-0008"
     }
    ],
    "bulk_list": true,
