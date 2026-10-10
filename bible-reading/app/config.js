@@ -14,7 +14,7 @@ window.APP_CONFIG = {
   audioBase: 'https://pub-f04ff4ec924944709d64e0b325a9cce9.r2.dev/audio/',   // 성경 듣기 소리 (Cloudflare R2 · 버킷 yohan · 2026-10-07)
   // 홈 맨 앞 소개 영상 (2026-10-10) — 영상은 R2 video/ 에 · 썸네일은 앱 img/ · 영상을 바꿀 땐 이 세 줄(+R2 에 새 파일)만 고친다
   introVideo: {
-    src: 'https://pub-f04ff4ec924944709d64e0b325a9cce9.r2.dev/video/hanna-samuel-intro-V1.1.mp4',
+    src: 'https://pub-f04ff4ec924944709d64e0b325a9cce9.r2.dev/video/hanna-samuel-intro-V1.2.mp4',   // V1.2 (2026-10-10 17시) 배경음 수노 곡 판 · V1.1 은 R2 에 그대로 둠
     poster: 'img/intro-poster.jpg',
     title: '🎬 한나와 사무엘',
     note: '사무엘상 1~3장 · 소리 없이 입술만 움직이던 한나의 기도에서 사무엘의 첫 말까지 · 3분 45초'
