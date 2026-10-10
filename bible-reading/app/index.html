@@ -342,6 +342,14 @@ body.admin-mode .tabs button[data-tab="home"],body.admin-mode .tabs button[data-
 .adm-read .ing{color:var(--accent);font-weight:600}
 .hidden{display:none!important}
 @media(min-width:640px){main{padding-top:4px}}
+/* ===== V3.26 홈 맨 앞 소개 영상 ===== */
+.intro-video{padding:12px 12px 14px}
+.intro-video h2{margin:2px 2px 10px;font-size:16.5px}
+.intro-video .iv-box{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#17120d;box-shadow:0 4px 14px rgba(40,25,10,.25)}
+.intro-video video{display:block;width:100%;height:100%;object-fit:cover;background:#17120d}
+.intro-video .sub{margin:8px 2px 0}
+.intro-video .iv-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:68px;border:0;border-radius:50%;background:rgba(232,184,96,.94);color:#1E2A55;font-size:30px;line-height:68px;padding:0 0 0 5px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.45);animation:promoPulse 1.8s ease-in-out infinite}
+.intro-video .iv-play.hidden{display:none}
 /* ===== V3.20 들으며 읽기 새로 나왔어요 ===== */
 .linklike{border:0;background:none;padding:0 0 0 6px;color:#8a7f6e;font:inherit;font-size:12.5px;text-decoration:underline;cursor:pointer}
 /* ===== V3.18 최근 읽은 곳 ===== */
@@ -460,6 +468,7 @@ h2{color:#1E2A55}
   <!-- 홈 -->
   <section id="tab-home">
     <div class="card inst-card promo hidden" id="instCard"><button id="instHome" class="promo-btn inst blink" type="button">📲 홈 화면에 설치 <span class="tap-hint">👆 여기 클릭</span></button><p class="sub" style="margin:8px 0 0">앱처럼 아이콘으로 바로 열려요 · 안드로이드·아이폰 모두</p></div>
+    <div class="card intro-video hidden" id="introVideo"><h2 id="ivTitle"></h2><div class="iv-box" id="ivBox"></div><p class="sub" id="ivNote"></p></div>   <!-- V3.26 홈 맨 앞 소개 영상 (사장님 2026-10-10) · 주소·제목은 config.js 의 introVideo -->
     <div class="card promo hidden" id="listenNew"><button id="listenNewBtn" class="promo-btn alt blink" type="button">🎧 들으며 읽기가 새로 나왔어요 <span class="tap-hint">👆 여기 클릭</span></button><p class="sub" style="margin:8px 0 0">재생을 누르면 <b>읽는 줄이 굵게</b> 따라가요 · 성경 전체(창세기~요한계시록)를 정지할 때까지 쭉 이어 들려요 · 멈춘 곳까지 자동 저장 <button id="listenNewX" class="linklike" type="button">닫기</button></p></div>
     <div class="card promo"><a class="promo-btn alt blink" href="../feedback/">💬 이런 기능이 있었으면 좋겠어요 <span class="tap-hint">👆 여기 클릭</span></a></div>   <!-- V3.24 홈 위쪽 = 깜박이 클릭 버튼만 (사장님 2026-10-09) · 앱 소개 문구는 맨 아래로 -->
     <div class="card quote-card"><blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀이다”</p><cite>— 황선주 목사님</cite></blockquote></div>
@@ -1043,7 +1052,7 @@ function titled(n){n=String(n||'');return (CFG.adminName&&n===CFG.adminName)?n+'
 function renderMe(){const c=document.getElementById('meChip');if(!c)return;
   if(GUEST){c.textContent='👀 둘러보기';c.classList.remove('hidden');return}
   if(state.name){const t=titled(state.name);c.textContent='👤 '+t+(t.endsWith('목사님')?'':' 님')+(ADMIN&&!t.endsWith('목사님')?' · 관리':'');c.classList.remove('hidden')}else c.classList.add('hidden')}
-function renderHome(){renderListenNew();renderMe();renderBadges();checkCelebrate();renderFeed();renderGoals();renderTodayPlan();
+function renderHome(){renderIntroVideo();renderListenNew();renderMe();renderBadges();checkCelebrate();renderFeed();renderGoals();renderTodayPlan();
   renderResume();renderMyProg();renderBookGrid();
   const gs=document.getElementById('groupStats');gs.textContent='';
   const list=memberListForViews(),tw=todayWeek();
@@ -1331,6 +1340,26 @@ function audCenter(el){
   window.scrollTo({top:Math.max(0,scrollY+y),behavior:'smooth'});
 }
 /* V3.20 들으며 읽기 새로 나왔어요 — 홈 맨 위 깜박이 안내 (한 번 누르거나 닫거나 소리를 한 번 재생하면 이 폰에선 끝) */
+/* V3.26 홈 맨 앞 소개 영상 — 썸네일(poster)만 먼저 보이고 ▶ 를 눌러야 받기 시작 (preload none · 데이터 아낌) · 소리 듣기와 동시에 안 나오게 서로 멈춤 · 홈을 떠나면 멈춤 */
+let INTRO_VID=null;
+function renderIntroVideo(){
+  const c=CFG.introVideo,card=document.getElementById('introVideo');if(!card)return;
+  if(!c||!c.src){card.classList.add('hidden');return}
+  if(!INTRO_VID){
+    const v=document.createElement('video');v.id='introVid';v.controls=false;v.preload='none';v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');
+    v.setAttribute('controlsList','nodownload');v.poster=c.poster||'';v.src=c.src;v.setAttribute('aria-label',c.title||'소개 영상');
+    document.getElementById('ivBox').appendChild(v);INTRO_VID=v;
+    /* 처음엔 썸네일 전체가 보이게 조절 막대 없이 큰 ▶ 만 — 한 번 누르면 조절 막대가 나온다 */
+    const pb=document.createElement('button');pb.type='button';pb.id='ivPlay';pb.className='iv-play';pb.setAttribute('aria-label','소개 영상 재생');pb.textContent='▶';
+    pb.addEventListener('click',()=>{v.controls=true;pb.classList.add('hidden');v.play().catch(()=>{pb.classList.remove('hidden')})});
+    document.getElementById('ivBox').appendChild(pb);
+    v.addEventListener('click',()=>{if(!v.controls){pb.click()}});
+    v.addEventListener('play',()=>{if(!audioEl.paused){audioEl.pause()}AUD.want=false;audUI()});   /* 소리 듣기 중이면 멈춤 */
+    audioEl.addEventListener('play',()=>{if(!v.paused)v.pause()});
+    document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{if(!v.paused)v.pause()}));
+  }
+  document.getElementById('ivTitle').textContent=c.title||'';document.getElementById('ivNote').textContent=c.note||'';card.classList.remove('hidden');
+}
 const LN_KEY='bibleListenNew1';
 function lnSeen(){try{return localStorage.getItem(LN_KEY)==='1'}catch(e){return false}}
 function lnDone(){try{localStorage.setItem(LN_KEY,'1')}catch(e){}const c=document.getElementById('listenNew');if(c)c.classList.add('hidden')}
