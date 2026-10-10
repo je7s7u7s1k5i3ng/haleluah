@@ -93,6 +93,7 @@ h2{font-size:15px;font-weight:700;letter-spacing:-.2px;margin-bottom:10px}
 .sel-row{display:flex;gap:8px;margin-bottom:10px}
 select{flex:1;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;
   font-family:inherit;font-size:14px;color:var(--ink)}
+@media (max-width:359px){.sel-row select{min-width:0}}   /* V3.28 아주 좁은 폰(아이폰 SE 1세대·폴드 겉화면)에서 책·장 선택칸이 화면 밖으로 나가 옆으로 밀리던 것 — 360px 이상은 그대로 */
 .primary{width:100%;padding:12px;border:0;border-radius:10px;background:var(--accent);color:#fff;
   font-size:14px;font-weight:700;font-family:inherit;cursor:pointer}
 .primary:active{opacity:.85}
