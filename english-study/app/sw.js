@@ -1,5 +1,5 @@
 /* 영어 공부 - 서비스 워커 (성경 읽기 앱 V3.9 방식 그대로) */
-const CACHE = 'english-cache-app-20261009d';   // 2026-10-09 18권 전부 색번호 (188장 · 4279세트) · 게스트 입장 · 공부 탭 책·장 고르기 · 관리 화면 자세히(서버 V1.1 올린 뒤 채워짐)
+const CACHE = 'english-cache-app-20261011a';   // 2026-10-11 마지막 읽은·들은 곳 자동 저장 · 켜면 그 자리로 자동 열기 / 2026-10-09 18권 전부 색번호 (188장 · 4279세트) · 게스트 입장 · 공부 탭 책·장 고르기 · 관리 화면 자세히(서버 V1.1 올린 뒤 채워짐)
 const ASSETS = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {

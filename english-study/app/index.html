@@ -434,6 +434,8 @@ function spansTo(parent,arr){(arr||[]).forEach(x=>{if(x.c){const sp=el('span','c
 function extraTo(p,text){String(text).split(/([⑴-⑻])/).forEach(x=>{if(!x)return;const k='⑴⑵⑶⑷⑸⑹⑺⑻'.indexOf(x);if(x.length===1&&k>=0){const d=el('span','dot mini d'+(k+1),String(k+1));p.appendChild(d)}else p.appendChild(document.createTextNode(x))})}
 /* ===== 공부 화면 ===== */
 const P={b:0,c:0,d:null,cur:-1,mode:'all',lock:0,rng:{a:-1,b:-1},want:false,pend:null,drag:false,lastUser:0,lastSave:0};
+/* V0.10 마지막 위치 자동 저장·자동 이어 열기 (사장님 2026-10-11) — AUTO: 켤 때 자동으로 연 상태(아직 재생·조작 전) · LASTW: 이 기기가 위치를 마지막으로 쓴 시각 */
+const AUTO={on:false,at:0};let LASTW=0;
 const audioEl=(()=>{const a=document.createElement('audio');a.preload='metadata';a.setAttribute('playsinline','');a.setAttribute('webkit-playsinline','');document.body.appendChild(a);return a})();
 function renderEmptyStudy(){$('chTitle').textContent='장을 골라 주세요 ▾';$('chSel').textContent='';const l=$('setList');l.textContent='';BKSEL=0;bkRender();$('bkRow').classList.remove('hidden');   /* 비어 있으면 책·장 고르는 칸을 바로 펼친다 */
   const c=el('div','card');{const im=el('img','empty-img');im.src='img/empty.jpg';im.alt='';c.appendChild(im)}c.appendChild(el('p','sub','홈에서 장을 고르거나, 아래 버튼으로 시작해요.'));const b=el('button','primary','요한복음 1장 열기');b.style.marginTop='10px';b.addEventListener('click',()=>openChap(43,1,{play:false}));c.appendChild(b);l.appendChild(c)}
@@ -476,14 +478,15 @@ $('setList').addEventListener('click',e=>{
 /* ===== 소리 ===== */
 const fmt=t=>{t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+pad(t%60)};
 function idxAt(t){const s=P.d.sets;let r=0;for(let i=0;i<s.length;i++){if(s[i].start<=t+0.08)r=i;else break}return r}
-function seekTo(t){audioEl.currentTime=Math.max(0,t);tick(true)}
+function seekTo(t){audioEl.currentTime=Math.max(0,t);P.rd=false;tick(true);if(audioEl.paused)saveLast()}   /* 멈춘 채 문장을 옮겨도 위치를 바로 남긴다 */
 function openChap(b,c,o){o=o||{};
   return Promise.all([getList(),getChap(b,c)]).then(r=>{const d=r[1];
-    audioEl.pause();P.b=b;P.c=c;P.d=d;P.cur=-1;P.lock=o.i||0;P.rng={a:-1,b:-1};P.want=!!o.play;
+    audioEl.pause();P.b=b;P.c=c;P.d=d;P.cur=-1;P.rd=true;P.lock=o.i||0;P.rng={a:-1,b:-1};P.want=!!o.play;
     audioEl.src=(CFG.audioBase||'audio/')+b+'_'+pad(c)+'.m4a';audioEl.playbackRate=S.prefs.rate;
     P.pend=(o.i!=null&&d.sets[o.i])?d.sets[o.i].start:null;
     $('audioBar').classList.remove('hidden');document.body.classList.add('hasbar');
     renderChips();renderChap();updateBar();setMeta();goTab('study');
+    if(o.auto)AUTO.on=true;else{AUTO.on=false;setLast(o.i||0)}   /* 직접 연 장은 곧바로 「읽은 곳」으로 남긴다 · 켤 때 자동으로 연 것은 위치를 건드리지 않는다 */
     if(o.i!=null&&d.sets[o.i])markNow(o.i,true);
     if(o.play)audioEl.play().catch(()=>{P.want=false;updateBar()});
   }).catch(()=>toast('이 장은 아직 준비 중이에요'))}
@@ -520,7 +523,19 @@ function tick(upd){
   if(!audioEl.paused&&Date.now()-P.lastSave>15000)saveLast()}
 (function raf(){if(!audioEl.paused&&!document.hidden)tick();requestAnimationFrame(raf)})();
 setInterval(()=>{if(!audioEl.paused&&document.hidden)tick()},1000);   /* 화면이 꺼져도 듣는 시간·반복은 센다 */
-function saveLast(){if(!P.d)return;P.lastSave=Date.now();S.last={b:P.b,c:P.c,i:Math.max(0,P.cur),t:Math.round(audioEl.currentTime*10)/10};save()}
+function saveLast(){if(!P.d||P.rd)return;P.lastSave=Date.now();S.last={b:P.b,c:P.c,i:Math.max(0,P.cur),t:Math.round(audioEl.currentTime*10)/10,at:Date.now()};LASTW=S.last.at;save()}   /* at = 합치기에서 가장 나중 위치를 고르는 기준 (예전엔 없어서 기기끼리 못 합쳤다) */
+/* P.rd = 「눈으로 읽은 곳」이 소리 위치보다 나중 — 이때는 앱을 닫을 때(pagehide·화면 꺼짐)도 소리 위치로 덮어쓰지 않는다. 재생하거나 문장을 옮기면 풀린다 */
+function setLast(i){if(!P.d)return;const s=P.d.sets[i];if(!s)return;P.rd=true;S.last={b:P.b,c:P.c,i,t:s.start,at:Date.now()};LASTW=S.last.at;save()}
+/* 소리 없이 눈으로 읽을 때: 손으로 넘기다 멈추면 화면 가운데 문장을 「읽은 곳」으로 */
+let _rs=0;
+function readPos(){if(TAB!=='study'||!P.d||!audioEl.paused||Date.now()-P.lastUser>5000)return;
+  const bar=$('audioBar').offsetHeight||0,tab=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tabh'))||58,mid=(window.innerHeight-bar-tab)/2;
+  let best=-1,bd=1e9;document.querySelectorAll('#setList .set').forEach(c=>{const n=c.querySelector('.en');if(!n)return;const r=n.getBoundingClientRect(),dd=Math.abs(r.top+r.height/2-mid);if(dd<bd){bd=dd;best=+c.dataset.i}});
+  if(best>=0&&(!S.last||S.last.b!==P.b||S.last.c!==P.c||S.last.i!==best)){AUTO.on=false;setLast(best)}}
+window.addEventListener('scroll',()=>{if(TAB!=='study'||!P.d||!audioEl.paused)return;clearTimeout(_rs);_rs=setTimeout(readPos,1200)},{passive:true});
+/* 켤 때: 로그인한 사람이 마지막으로 읽던·듣던 장 · 문장으로 바로 열어 둔다 (소리는 브라우저 규칙상 ▶ 를 눌러야 나온다) */
+function autoResume(){const lr=S.last;if(S.guest||!loggedIn()||!lr||!hasAudio(lr.b,lr.c))return;AUTO.at=+lr.at||0;
+  openChap(lr.b,lr.c,{i:lr.i||0,play:false,auto:true}).then(()=>toast('지난번 그 자리예요 · '+bookName(lr.b)+' '+lr.c+chW(lr.b)+' '+((lr.i||0)+1)+'번째 문장 · ▶ 를 누르면 이어서 들려요'))}
 function updateBar(){const pl=!audioEl.paused;$('abPlay').textContent=pl?'⏸':'▶';$('abPlay').setAttribute('aria-label',pl?'일시정지':'재생');
   document.querySelectorAll('#abModes button').forEach(b=>b.classList.toggle('on',b.dataset.m===P.mode));$('abRate').textContent=(+S.prefs.rate).toFixed(2).replace(/0$/,'')+'×'}
 function updateInfo(){if(!P.d)return;const n=P.d.sets.length,i=Math.max(0,P.cur);let t='문장 '+(i+1)+' / '+n;
@@ -549,7 +564,7 @@ $('abSeek').addEventListener('input',()=>{P.drag=true;const du=audioEl.duration|
 $('abSeek').addEventListener('change',()=>{const du=audioEl.duration||P.d.dur||1;audioEl.currentTime=$('abSeek').value/1000*du;P.drag=false;if(P.mode==='set')P.lock=idxAt(audioEl.currentTime)});
 const RATES=[0.7,0.85,1,1.15,1.3];
 $('abRate').addEventListener('click',()=>{const i=RATES.indexOf(+S.prefs.rate);S.prefs.rate=RATES[(i+1)%RATES.length];audioEl.playbackRate=S.prefs.rate;save();updateBar();toast('속도 '+S.prefs.rate+'배')});
-audioEl.addEventListener('play',()=>{updateBar();logStart()});
+audioEl.addEventListener('play',()=>{AUTO.on=false;P.rd=false;updateBar();logStart()});
 audioEl.addEventListener('pause',()=>{updateBar();saveLast();flush()});
 function markDone(){const k=P.b+'-'+P.c;S.done[k]=Date.now();S.heard[k]=P.d.sets.length;{const c=chOf(me(),k);c.f++;c.t=Date.now()}save()}
 function allChaps(){const r=[];Object.keys(LIST||{}).map(Number).sort((a,b)=>a-b).forEach(b=>((LIST[b]||[]).slice().sort((x,y)=>x-y)).forEach(c=>r.push([b,c])));return r}
@@ -742,7 +757,8 @@ async function syncNow(keep){if(!SYNC_ON||!S.key||!S.pinH||SY.busy)return;SY.bus
     if(r.ok){mergeIn(r.data);S.admin=!!r.admin;if(r.members)ADM.list=r.members;SY.dirty=false;SY.err='';SY.t=Date.now();try{localStorage.setItem(CFG.storageKey,JSON.stringify(S))}catch(e){}afterSync()}
     else{SY.err=r.error||'?';if(r.error==='pin'||r.error==='noname'){S.pinH='';loginMsg(r.error==='pin'?'비밀번호가 바뀌었어요 — 다시 들어와 주세요':'이 이름의 기록이 시트에 없어요 — 다시 등록해 주세요');save();renderHome()}}}
   catch(e){SY.err='net'}finally{SY.busy=false}}
-function afterSync(){updateAdminTab();if(TAB==='home')renderHome();else if(TAB==='vocab')renderVocab();else if(TAB==='admin')renderAdmin();else if(TAB==='set')renderSet()}
+function afterSync(){updateAdminTab();
+  if(AUTO.on&&TAB==='study'&&audioEl.paused&&S.last&&(+S.last.at||0)>Math.max(AUTO.at,LASTW))autoResume();   /* 켠 직후 다른 기기에서 더 나중에 읽은 곳이 들어오면 그 자리로 옮긴다 (아직 아무것도 안 눌렀을 때만) */if(TAB==='home')renderHome();else if(TAB==='vocab')renderVocab();else if(TAB==='admin')renderAdmin();else if(TAB==='set')renderSet()}
 function updateAdminTab(){const b=document.querySelector('.tabs button[data-tab="admin"]');if(b)b.classList.toggle('hidden',!(S.admin&&loggedIn()))}
 async function login(reg){
   const n=$('nameIn').value.trim().replace(/\s+/g,' ');if(!n||n.length>12){loginMsg('이름을 1~12글자로 써 주세요');return}
@@ -862,7 +878,7 @@ if('serviceWorker'in navigator){
 
 /* ===== 시작 ===== */
 (function boot(){applyPrefs();renderChips();updateBar();showInstallButtons();
-  getList().then(()=>renderHome());renderHome();goTab('home')})();
+  getList().then(()=>{renderHome();autoResume()});renderHome();goTab('home')})();
 </script>
 </body>
 </html>
