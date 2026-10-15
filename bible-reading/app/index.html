@@ -249,6 +249,10 @@ input,select,textarea{font-size:16px!important}
 .ch{min-height:46px;border:1px solid var(--line);background:var(--card);border-radius:10px;font-family:inherit;font-size:15px;color:var(--ink)}
 .ch.done{background:var(--ok);border-color:var(--ok);color:#fff;font-weight:700}
 .ch.ing{border-color:var(--gold);color:var(--accent);font-weight:700;box-shadow:inset 0 -3px 0 var(--gold)}
+.ch{position:relative}.ch .rc{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;line-height:18px;padding:0 4px;box-sizing:border-box;border-radius:9px;background:var(--gold);color:#fff;font-size:11px;font-weight:700;pointer-events:none}   /* V3.29 같은 장 반복 횟수 (2번부터) */
+.again-row{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin:-4px 0 8px;font-size:12px}
+.again-row .cnt{color:var(--accent);font-weight:700}
+.again-row button{border:1px solid var(--gold);background:var(--card);color:var(--accent);border-radius:14px;padding:4px 10px;font-family:inherit;font-size:12px;font-weight:700}
 .goal{display:flex;align-items:center;gap:10px;padding:10px 2px;border-bottom:1px solid #f0e8d8}
 .goal:last-child{border-bottom:0}
 .goal-main{flex:1;min-width:0}
@@ -530,6 +534,8 @@ h2{color:#1E2A55}
       <div class="reader-head"><h2 id="readerTitle"></h2>
         <label class="chk-inline"><input type="checkbox" id="chapReadChk"/>다 읽음</label>
       </div>
+      <div id="againRow" class="again-row hidden"><span id="chapCnt" class="cnt"></span><button id="chapAgain" type="button">＋ 한 번 더 읽음</button></div>   <!-- V3.29 같은 장 반복 읽기 누적 -->
+      <p id="againMsg" class="sub hidden" style="text-align:right;margin:-4px 0 8px;font-size:12px"></p>
       <div id="audioBar" class="audio-bar hidden">   <!-- V3.13 성경 듣기 -->
         <div class="ab-top"><button id="abPlay" class="ab-play" type="button" aria-label="재생">▶</button>
           <div class="ab-mid"><div class="ab-t">🎧 성경 듣기 · 개역개정 낭독</div><div class="ab-time" id="abTime">0:00 / 0:00</div>
@@ -648,7 +654,7 @@ let REJOIN_NAME='';
 /* V2.3 예전 아이디(충돌 가능) → 새 아이디·가명으로 (uidOf 는 아래 함수라 먼저 쓸 수 있다) */
 if(state.name&&state.group&&!GUEST){const nu=uidOf(CFG.groupId||state.group,state.name);if(state.uid!==nu){state.uid=nu;if(state.privacy)state.alias=aliasOf(nu)}}
 /* 폰에 이미 들어간 잘못된 장 키 정리 (시트 날짜 변환으로 섞였던 것) — validKey 는 아래에 정의돼도 함수라 먼저 쓸 수 있다 */
-['readChapters','versePos','un','vpAt'].forEach(f=>{if(state[f]){for(const k in state[f])if(!validKey(k))delete state[f][k]}});
+['readChapters','versePos','un','vpAt','rr','rx'].forEach(f=>{if(state[f]){for(const k in state[f])if(!validKey(k))delete state[f][k]}});
 if(CFG.groupId){if(state.group&&state.group!==CFG.groupId){REJOIN_NAME=state.name||'';state.name='';}state.group=CFG.groupId;if(state.name||REJOIN_NAME)persist();}   /* 처음 온 사람(둘러보기 포함)은 폰에 아무것도 남기지 않는다 */
 else if(urlG){state.group=urlG.trim().toUpperCase();persist();}
 function persist(){if(GUEST)return;try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}}
@@ -722,6 +728,10 @@ let MODE='local',MEMBERS={},pollT=null;
 const TS36=t=>Math.floor((+t||0)/1000).toString(36), UN36=s=>(parseInt(s,36)||0)*1000;
 function encRC(rc){return Object.keys(rc).filter(k=>rc[k]).sort(cmpKey).map(k=>k+':'+TS36(rc[k])).join(',')}
 function decRC(s){const o={};String(s||'').split(',').forEach(p=>{const i=p.indexOf(':');if(i>0&&validKey(p.slice(0,i)))o[p.slice(0,i)]=UN36(p.slice(i+1))||1});return o}
+/* V3.29 다시 읽은 시각들 — 「1-3:a.b,2-1:c」 (장:시각36.시각36) */
+function encRR(rr){return Object.keys(rr||{}).filter(k=>validKey(k)&&Array.isArray(rr[k])&&rr[k].length).sort(cmpKey).map(k=>k+':'+rr[k].map(TS36).join('.')).join(',')}
+function decRR(s){const o={};String(s||'').split(',').forEach(p=>{const i=p.indexOf(':');if(i<=0)return;const k=p.slice(0,i);if(!validKey(k))return;
+  const a=[...new Set(p.slice(i+1).split('.').map(UN36).filter(t=>t>1e12))].sort((x,y)=>x-y);if(a.length)o[k]=a});return o}
 function myObj(){
   const lr=state.lastRead?{b:state.lastRead.b,c:state.lastRead.c,v:state.lastRead.v,t:state.lrAt||0}:null;
   return {name:(state.privacy?state.alias:state.name),uid:state.uid,priv:!!state.privacy,
@@ -729,12 +739,13 @@ function myObj(){
     readChapters:state.readChapters,versePos:state.versePos,
     readList:Object.keys(state.readChapters).filter(k=>state.readChapters[k]).sort(cmpKey),
     rcz:encRC(state.readChapters),
-    sync:{un:state.un||{},vpAt:state.vpAt||{},goals:state.goals||{},lrAt:state.lrAt||0,seat:state.seatPick||null},
+    sync:{un:state.un||{},vpAt:state.vpAt||{},goals:state.goals||{},lrAt:state.lrAt||0,seat:state.seatPick||null,rr:encRR(state.rr),rx:state.rx||{}},
     lastRead:lr,lastActive:Date.now(),aph:state.aph||''};
 }
 function myView(){
   return {name:(state.privacy?state.alias:state.name),uid:state.uid,priv:!!state.privacy,
-    readChapters:state.readChapters,versePos:state.versePos,goals:state.goals||{},lastRead:state.lastRead,lastActive:Date.now(),seat:(state.seatPick&&+state.seatPick.v)||0};
+    readChapters:state.readChapters,versePos:state.versePos,goals:state.goals||{},lastRead:state.lastRead,lastActive:Date.now(),seat:(state.seatPick&&+state.seatPick.v)||0,
+    rr:state.rr||{},rx:state.rx||{}};
 }
 function normMember(m){
   if(!m||m.__n)return m;
@@ -742,7 +753,7 @@ function normMember(m){
   const legacy=m.readChapters||{};for(const k in legacy)if(legacy[k]&&!rc[k]&&validKey(k))rc[k]=(typeof legacy[k]==='number'?legacy[k]:1);
   const s=m.sync||{};
   return Object.assign({},m,{readChapters:rc,un:cleanMap(s.un),vpAt:cleanMap(s.vpAt),versePos:cleanMap(m.versePos),goals:s.goals||{},
-    lrAt:+s.lrAt||(m.lastRead&&+m.lastRead.t)||0,seatPick:s.seat||null,seat:(s.seat&&+s.seat.v)||+m.seat||0,__n:1});
+    lrAt:+s.lrAt||(m.lastRead&&+m.lastRead.t)||0,seatPick:s.seat||null,seat:(s.seat&&+s.seat.v)||+m.seat||0,rr:decRR(s.rr),rx:cleanMap(s.rx),__n:1});
 }
 function displayName(m){return m.priv?'🔒 '+(m.name||'비공개'):(m.name||'이름 없음')}
 function setBadge(t,off){const b=document.getElementById('connBadge');b.textContent=t;b.classList.toggle('off',!!off)}
@@ -804,6 +815,9 @@ function mergeMine(m){
   const rg=m.goals||{};
   for(const g in rg){if(!state.goals[g]||(+rg[g].t||0)>(+state.goals[g].t||0)){state.goals[g]=rg[g];ch=true}}
   if(m.seatPick&&(+m.seatPick.t||0)>(+(state.seatPick||{}).t||0)){state.seatPick=m.seatPick;ch=true}   /* V3.11 자리 모습 — 최근 것이 이김 */
+  {const rr=m.rr||{},rx=m.rx||{};state.rr=state.rr||{};state.rx=state.rx||{};   /* V3.29 다시 읽은 시각 — 두 기기 것을 모두 합친다 (지우지 않음) · 체크 끈 시각은 최근 것 */
+   for(const k in rr){const s=new Set(state.rr[k]||[]),n0=s.size;rr[k].forEach(t=>s.add(+t));if(s.size>n0){state.rr[k]=[...s].sort((x,y)=>x-y);ch=true}}
+   for(const k in rx)if((+rx[k]||0)>(+state.rx[k]||0)){state.rx[k]=+rx[k];ch=true}}
   if(ch){state.celebrated=state.celebrated||{};for(let b=1;b<=66;b++)if(!state.celebrated['b'+b]&&booksDone(state,b,b))state.celebrated['b'+b]=Date.now()}  /* 다른 기기에서 끝낸 책은 조용히 */
   return ch;
 }
@@ -817,6 +831,8 @@ function sheetBehind(m){
   if((+m.lrAt||0)<(+state.lrAt||0))return true;
   for(const x in (state.goals||{}))if(!g[x]||(+g[x].t||0)<(+state.goals[x].t||0))return true;
   if(state.seatPick&&(+(m.seatPick||{}).t||0)<(+state.seatPick.t||0))return true;
+  {const rr=m.rr||{},rx=m.rx||{};for(const k in (state.rr||{})){const s=new Set(rr[k]||[]);if((state.rr[k]||[]).some(t=>!s.has(t)))return true}   /* V3.29 */
+   for(const k in (state.rx||{}))if((+rx[k]||0)<(+state.rx[k]||0))return true}
   if((m.name||'')!==(state.privacy?state.alias:state.name))return true;
   return false;
 }
@@ -850,7 +866,7 @@ function sheetsPull(force){
       sheetsSynced=true;
       if(changed)persist();
       if(pendingPush||sheetBehind(mine)){pendingPush=false;sheetsPush()}
-      if(changed&&openB){const k=key(openB,openC);document.getElementById('chapReadChk').checked=!!state.readChapters[k];
+      if(changed&&openB){const k=key(openB,openC);document.getElementById('chapReadChk').checked=!!state.readChapters[k];showAgain();
         if((state.versePos[k]||0)>maxVerse&&!dirtyVerse){maxVerse=state.versePos[k];markHere()}}
       renderStatus();renderHome();if(ADMIN&&!document.getElementById('tab-all').classList.contains('hidden'))renderAll();
     })
@@ -905,7 +921,19 @@ function pushMe(){
 }
 /* 기록 바꾸는 곳은 모두 여기로 — 시각을 함께 남긴다 */
 function markRead(k,on){const t=Date.now();state.un=state.un||{};
-  if(on){state.readChapters[k]=t;delete state.un[k]}else{delete state.readChapters[k];state.un[k]=t}}
+  if(on){state.readChapters[k]=t;delete state.un[k]}else{delete state.readChapters[k];state.un[k]=t;(state.rx=state.rx||{})[k]=t}}   /* V3.29 체크 끄면 그때까지의 반복도 안 셈 (rx · 시각은 지우지 않고 남김) */
+/* V3.29 같은 장을 다시 읽으면 횟수 누적 — 1번째 = readChapters(예전 그대로 · 진도·주간·배지 기준) · 2번째부터 rr[장]=[시각…] */
+const RR_GAP=120e3;   /* 같은 장을 2분 안에 또 끝내면 한 번으로 (두 번 누름 방지) */
+function rrOf(o,k){if(!(o.readChapters||{})[k])return [];const x=+(o.rx||{})[k]||0;return ((o.rr||{})[k]||[]).filter(t=>t>x)}
+function readCount(o,k){return (o.readChapters||{})[k]?1+rrOf(o,k).length:0}
+function totalReads(o){let n=0;const rc=o.readChapters||{};for(const k in rc)if(rc[k])n+=readCount(o,k);return n}
+function lastDoneAt(o,k){return Math.max(+(o.readChapters||{})[k]||0,...rrOf(o,k))}
+function addReread(k){if(!state.readChapters[k])return false;const t=Math.floor(Date.now()/1000)*1000;if(t-lastDoneAt(state,k)<RR_GAP)return false;
+  state.rr=state.rr||{};(state.rr[k]=state.rr[k]||[]).push(t);return true}
+function showAgain(){   /* 읽는 화면 — 이 장 몇 번 읽었는지 · 「한 번 더 읽음」 */
+  const row=document.getElementById('againRow');if(!row||!openB)return;const k=key(openB,openC),n=readCount(state,k);
+  row.classList.toggle('hidden',!n);document.getElementById('chapCnt').textContent=n>=2?'🔁 이 장 '+n+'번 읽음':'1번 읽음'}
+function againMsg(t){const p=document.getElementById('againMsg');if(!p)return;p.textContent=t;p.classList.remove('hidden');clearTimeout(againMsg.T);againMsg.T=setTimeout(()=>p.classList.add('hidden'),3500)}
 function setVP(k,v){state.versePos[k]=v;(state.vpAt=state.vpAt||{})[k]=Date.now()}
 function setLR(b,c,v){state.lastRead={b,c,v};state.lrAt=Date.now()}
 
@@ -954,8 +982,10 @@ function readDetailLines(o){
   BOOKS.forEach((B,i)=>{const b=i+1,done=[],ing=[];
     for(let c=1;c<=B.c;c++){if(chapPart(o,b,c)>=1)done.push(c);else{const v=+(o.versePos||{})[key(b,c)]||0;if(v>0)ing.push(c+chW(b)+' '+v+'절까지 ('+verseCount(b,c)+'절 중)')}}
     if(!done.length&&!ing.length)return;
+    const reps=done.map(c=>[c,readCount(o,key(b,c))]).filter(x=>x[1]>=2);   /* V3.29 반복해서 읽은 장 */
     out.push({n:B.n,doneN:done.length,all:done.length===B.c,
-      done:done.length===B.c?'전체 '+B.c+chW(b)+' ✓':(done.length?chRanges(done)+chW(b)+' ✓':''),ing})});
+      done:done.length===B.c?'전체 '+B.c+chW(b)+' ✓':(done.length?chRanges(done)+chW(b)+' ✓':''),ing,
+      reps:reps.length?'🔁 '+reps.map(x=>x[0]+chW(b)+' '+x[1]+'번').join(', '):''})});
   return out;
 }
 /* V3.18 최근 읽은 곳 — 장마다 남은 시각(다 읽음 = readChapters · 읽는 중 = vpAt)으로 최근 순 · 날짜 함께 */
@@ -963,7 +993,8 @@ function fmtWhen(t){if(!(t>1e12))return '';const d=new Date(t),p=n=>String(n).pa
 function recentReads(o){
   const out=[],rc=o.readChapters||{},vp=o.versePos||{},va=o.vpAt||{},seen={};
   const add=(k,t,txt,done)=>{if(seen[k])return;seen[k]=1;const [b,c]=k.split('-').map(Number);out.push({k,t:+t||0,b,c,txt,done})};
-  for(const k in rc){if(!rc[k]||!validKey(k))continue;const [b,c]=k.split('-').map(Number);add(k,Math.max(+rc[k]||0,+va[k]||0),BOOKS[b-1].n+' '+c+chW(b)+' 다 읽음 ✓',true)}
+  for(const k in rc){if(!rc[k]||!validKey(k))continue;const [b,c]=k.split('-').map(Number),rn=readCount(o,k);   /* V3.29 반복 — 「n번째」 · 마지막으로 다시 읽은 시각 */
+    add(k,Math.max(+rc[k]||0,+va[k]||0,lastDoneAt(o,k)),BOOKS[b-1].n+' '+c+chW(b)+' 다 읽음 ✓'+(rn>=2?' (🔁 '+rn+'번째)':''),true)}
   for(const k in vp){const v=+vp[k]||0;if(!v||!validKey(k)||seen[k])continue;const [b,c]=k.split('-').map(Number),n=verseCount(b,c);
     add(k,va[k],BOOKS[b-1].n+' '+c+chW(b)+(n&&v>=n?' 다 읽음 ✓':' '+v+'절까지 ('+n+'절 중)'),n&&v>=n)}
   return out.sort((x,y)=>(y.t-x.t)||(x.b-y.b)||(x.c-y.c));
@@ -984,11 +1015,12 @@ function recentBox(o,id){
 }
 function readDetailBox(m){
   const L=readDetailLines(m),det=document.createElement('details');det.className='adm-read';det.open=true;det.dataset.k='a'+(m.uid||'');
-  const sm=document.createElement('summary');const ch=L.reduce((s,x)=>s+x.doneN,0);
-  sm.textContent='📖 읽은 곳 전체 — '+(L.length?L.length+'권 · 다 읽은 장 '+ch+'장':'아직 없음');det.appendChild(sm);
+  const sm=document.createElement('summary');const ch=L.reduce((s,x)=>s+x.doneN,0),tr=totalReads(m);
+  sm.textContent='📖 읽은 곳 전체 — '+(L.length?L.length+'권 · 다 읽은 장 '+ch+'장'+(tr>ch?' · 🔁 반복 포함 누적 '+tr+'장':''):'아직 없음');det.appendChild(sm);   /* V3.29 */
   if(L.length){const ul=document.createElement('ul');
     L.forEach(x=>{const li=document.createElement('li');const b=document.createElement('b');b.textContent=x.n;li.appendChild(b);
       if(x.done)li.appendChild(document.createTextNode(' '+x.done));
+      if(x.reps){const s=document.createElement('span');s.className='rep';s.textContent=' · '+x.reps;li.appendChild(s)}
       x.ing.forEach(t=>{const s=document.createElement('span');s.className='ing';s.textContent=' · '+t;li.appendChild(s)});
       ul.appendChild(li)});
     det.appendChild(ul)}
@@ -1011,6 +1043,8 @@ function renderAdminList(){
     card.appendChild(top);
     const dotsRow=memberDotsRow(m,1);const dl=dotsRow.querySelector('.dots');if(dl)card.appendChild(dl);
     const l1=document.createElement('div');l1.className='adm-line';l1.textContent='이번 주 '+wp.done+'장 · 전체 '+pct1(tp)+'% (구약 '+pct1(ot)+'% · 신약 '+pct1(nt)+'%)';card.appendChild(l1);
+    {const tr=totalReads(m),u=Object.keys(m.readChapters||{}).filter(k=>m.readChapters[k]).length;   /* V3.29 반복 포함 누적 */
+     const l=document.createElement('div');l.className='adm-line';l.textContent='📚 누적 읽은 장 '+tr+'장 (서로 다른 장 '+u+'장'+(tr>u?' · 🔁 다시 읽음 '+(tr-u)+'번':'')+')';card.appendChild(l)}
     const l2=document.createElement('div');l2.className='adm-line sub2';l2.textContent='마지막 읽은 곳: '+lr+' · '+ago(m.lastActive);card.appendChild(l2);
     const jd=String(m.joinedAt||'');const l3=document.createElement('div');l3.className='adm-line sub2';l3.textContent='가입: '+(jd?(+jd.slice(5,7))+'/'+(+jd.slice(8,10))+' '+jd.slice(11,16):'기록 전 (가입 시각 기능 이전 가입)');card.appendChild(l3);
     card.appendChild(recentBox(m,'u'+m.uid));   /* V3.18 최근 읽은 곳 (날짜) */
@@ -1111,6 +1145,7 @@ function renderChapPanel(){
   for(let c=1;c<=B.c;c++){
     const k=key(openBook,c),done=!!state.readChapters[k],vp=state.versePos[k]||0;
     const btn=document.createElement('button');btn.type='button';btn.className='ch'+(done?' done':(vp?' ing':''));btn.textContent=done?c+'✓':c;
+    {const rn=readCount(state,k);if(rn>=2){const r=document.createElement('span');r.className='rc';r.textContent='×'+rn;btn.appendChild(r);btn.title=rn+'번 읽음'}}   /* V3.29 */
     const ob=openBook;btn.addEventListener('click',()=>goRead(ob,c));
     g.appendChild(btn);
   }
@@ -1195,7 +1230,7 @@ function openChapter(noScroll){
   const b=BOOKS[curB-1];openB=curB;openC=curC;USCROLL=false;document.getElementById('openBtn').classList.add('hidden');   /* V3.25 장이 열리면 다시 숨김 (V3.15 그대로) */
   title.textContent=b.n+' '+curC+chW(curB);
   document.getElementById('chapReadChk').checked=!!state.readChapters[key(curB,curC)];
-  maxVerse=state.versePos[key(curB,curC)]||0;
+  maxVerse=state.versePos[key(curB,curC)]||0;showAgain();
 
   loadBible().then(()=>{
     const verses=getChapterText(curB,curC);
@@ -1256,10 +1291,12 @@ function markHere(){
 /* 절을 누르면 「거기까지 읽음」 — 앞 절을 누르면 거기로 되돌린다 · 마지막 절이면 그 장 「다 읽음」 */
 document.getElementById('readerBody').addEventListener('click',e=>{
   const p=e.target.closest('.verse');if(!p||!BIBLE)return;
-  const v=+p.dataset.v,k=key(curB,curC),n=verseCount(curB,curC);
+  const v=+p.dataset.v,k=key(curB,curC),n=verseCount(curB,curC),pv=+state.versePos[k]||0;
   maxVerse=v;dirtyVerse=false;
   setVP(k,v);setLR(curB,curC,v);
   if(n&&v>=n&&!state.readChapters[k]){markRead(k,true);document.getElementById('chapReadChk').checked=true}
+  else if(n&&v>=n&&pv<n&&addReread(k))againMsg('🔁 다시 읽었어요 — 이 장 '+readCount(state,k)+'번째');   /* V3.29 다 읽은 장을 다시 앞에서부터 읽어 끝 절까지 → 횟수 +1 */
+  showAgain();
   document.getElementById('resumeChip').classList.add('hidden');
   markHere();save();renderHome();
 });
@@ -1271,9 +1308,16 @@ function renderPosHint(){
 }
 document.getElementById('chapReadChk').addEventListener('change',e=>{
   const k=key(curB,curC);
+  if(!e.target.checked&&readCount(state,k)>=2&&!confirm('이 장을 '+readCount(state,k)+'번 읽은 기록이 있어요.\n「다 읽음」을 끄면 이 장은 안 읽은 것으로 바뀌어요. 끌까요?')){e.target.checked=true;return}   /* V3.29 */
   markRead(k,e.target.checked);
   setLR(curB,curC,maxVerse||1);
-  save();renderHome();
+  showAgain();save();renderHome();
+});
+document.getElementById('chapAgain').addEventListener('click',()=>{   /* V3.29 종이 성경 등으로 다시 읽었을 때 — 한 번 더 */
+  const k=key(curB,curC);
+  if(!state.readChapters[k])return;
+  if(!addReread(k)){againMsg('방금 기록했어요 — 2분 뒤에 다시 누를 수 있어요');return}
+  setLR(curB,curC,maxVerse||1);showAgain();againMsg('🔁 이 장 '+readCount(state,k)+'번째 읽음으로 기록했어요');save();renderHome();
 });
 /* ===== V3.13 성경 듣기 — 개역개정 낭독 + MFA 절 시각 → 지금 읽는 절 굵게 ===== */
 let AUD_LIST=null,AUD_T={},AUD={b:0,c:0,T:null,cur:0,lock:-1,self:false,want:false,mode:'all',rate:1};
@@ -1443,13 +1487,14 @@ function audSave(full){
   if(v>(+state.versePos[k]||0))setVP(k,v);
   setLR(b,c,v);
   if((full||(n&&v>=n))&&!state.readChapters[k])markRead(k,true);
-  if(b===curB&&c===curC){maxVerse=Math.max(maxVerse,v);dirtyVerse=false;const ck=document.getElementById('chapReadChk');if(ck)ck.checked=!!state.readChapters[k];markHere()}
+  else if(full&&addReread(k)&&b===curB&&c===curC)againMsg('🔁 다시 들었어요 — 이 장 '+readCount(state,k)+'번째');   /* V3.29 다 읽은 장을 끝까지 다시 들으면 +1 (2분 안 중복은 한 번) */
+  if(b===curB&&c===curC){maxVerse=Math.max(maxVerse,v);dirtyVerse=false;const ck=document.getElementById('chapReadChk');if(ck)ck.checked=!!state.readChapters[k];markHere();showAgain()}
   save();renderHome();
 }
 audioEl.addEventListener('pause',()=>{if(!audioEl.ended)audSave(false)});
 window.addEventListener('pagehide',()=>{if(!audioEl.paused)audSave(false)});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&!audioEl.paused)audSave(false)});
-audioEl.addEventListener('ended',()=>{if(AUD.mode==='all')audSave(true)},true);   /* 쭉 듣기로 장을 끝까지 → 다 읽음 (다음 장 넘어가기 전에) */
+audioEl.addEventListener('ended',()=>{if(AUD.mode==='all'||AUD.mode==='chap')audSave(true)},true);   /* 쭉 듣기로 장을 끝까지 → 다 읽음 (다음 장 넘어가기 전에) · V3.29 「이 장 반복」도 한 바퀴 끝날 때마다 (반복 횟수 누적) */
 audioEl.addEventListener('ended',()=>{
   if(AUD.mode==='chap'||AUD.mode==='verse'){const T=AUD.T||[];AUD.self=true;audioEl.currentTime=AUD.mode==='verse'&&T[AUD.lock]?T[AUD.lock][1]:0;audioEl.play().catch(()=>{});return}
   if(!audStep(1)){AUD.want=false;audUI()}   /* 쭉 듣기 — 다음 장으로 (마지막 장이면 멈춤) */
@@ -1887,7 +1932,7 @@ document.getElementById('suJoin').addEventListener('click',()=>{
 /* ===== 둘러보기 (V2.1) — 가입 없이 앱을 미리 본다 · ★아무것도 저장·전송하지 않는다 ===== */
 function startGuest(){
   GUEST=true;pingVisit('guest');
-  state={name:'둘러보기',group:CFG.groupId||'',uid:'guest',readChapters:{},versePos:{},lastRead:null,un:{},vpAt:{},goals:{}};
+  state={name:'둘러보기',group:CFG.groupId||'',uid:'guest',readChapters:{},versePos:{},lastRead:null,un:{},vpAt:{},goals:{},rr:{},rx:{}};
   document.getElementById('setup').classList.add('hidden');
   document.getElementById('guestBar').classList.remove('hidden');
   startApp();
