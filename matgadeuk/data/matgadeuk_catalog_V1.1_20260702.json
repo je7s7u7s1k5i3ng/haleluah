@@ -77,6 +77,38 @@
    "rank": "3"
   },
   {
+   "rank": "21",
+   "name": "완숙토마토 (500g·1.5·2·5kg)",
+   "category": "과일",
+   "price": "완숙토마토 500g 6,100원원부터 · 1.5 · 2 · 5kg 선택",
+   "note": "완숙토마토 · 500g · 1.5kg · 2kg · 5kg",
+   "image": "assets/tomato-ripe-20261015.jpg",
+   "options": [
+    {
+     "title": "중량 선택",
+     "label": "500g / 6,100원",
+     "value": "500g / 6,100원"
+    },
+    {
+     "title": "중량 선택",
+     "label": "1.5kg / 10,200원",
+     "value": "1.5kg / 10,200원"
+    },
+    {
+     "title": "중량 선택",
+     "label": "2kg / 12,300원",
+     "value": "2kg / 12,300원"
+    },
+    {
+     "title": "중량 선택",
+     "label": "5kg / 24,600원",
+     "value": "5kg / 24,600원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false
+  },
+  {
    "category": "과일",
    "name": "태추단감 (2·3·4.5kg)",
    "price": "태추단감 2kg 20,300원부터 · 3kg · 4.5kg / 소과 · 중과 · 대과 선택",
@@ -1635,43 +1667,6 @@
     {
      "label": "10kg / 79,500원",
      "value": "10kg / 79,500원",
-     "title": "중량 선택"
-    }
-   ],
-   "bulk_list": false,
-   "sold_out": false
-  },
-  {
-   "rank": "21",
-   "name": "완숙토마토 5Kg",
-   "category": "과일",
-   "price": "완숙토마토 5Kg 1kg / 8,000원 / 2kg / 9,000원 / 3kg / 10,500원 / 4kg / 11,500원 / 5kg / 12,500원",
-   "note": "",
-   "image": "assets/5kg-9u7qf31bn7gzqyba.jpg",
-   "options": [
-    {
-     "label": "1kg / 8,000원",
-     "value": "1kg / 8,000원",
-     "title": "중량 선택"
-    },
-    {
-     "label": "2kg / 9,000원",
-     "value": "2kg / 9,000원",
-     "title": "중량 선택"
-    },
-    {
-     "label": "3kg / 10,500원",
-     "value": "3kg / 10,500원",
-     "title": "중량 선택"
-    },
-    {
-     "label": "4kg / 11,500원",
-     "value": "4kg / 11,500원",
-     "title": "중량 선택"
-    },
-    {
-     "label": "5kg / 12,500원",
-     "value": "5kg / 12,500원",
      "title": "중량 선택"
     }
    ],
