@@ -7726,7 +7726,7 @@
    "category": "견과류",
    "price": "19,200원부터",
    "note": "원산지: 이란 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-fig-semi.jpg",
    "options": [
     {
      "label": "1K / 19,200원",
@@ -7745,7 +7745,7 @@
    "category": "견과류",
    "price": "11,500원부터",
    "note": "원산지: 태국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-dried-pineapple.jpg",
    "options": [
     {
      "label": "500g / 11,500원",
@@ -7771,7 +7771,7 @@
    "category": "견과류",
    "price": "6,500원부터",
    "note": "원산지: 칠레 / 옵션 4개",
-   "image": "",
+   "image": "assets/n-raisin.jpg",
    "options": [
     {
      "label": "200g / 6,500원",
@@ -7811,7 +7811,7 @@
    "category": "견과류",
    "price": "7,400원부터",
    "note": "원산지: 베트남 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-peanut-salted.jpg",
    "options": [
     {
      "label": "800g / 7,400원",
@@ -7830,7 +7830,7 @@
    "category": "견과류",
    "price": "23,900원부터",
    "note": "원산지: 국산 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-peanut-raw.jpg",
    "options": [
     {
      "label": "1K / 23,900원",
@@ -7849,7 +7849,7 @@
    "category": "견과류",
    "price": "16,200원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-peanut-raw.jpg",
    "options": [
     {
      "label": "1K / 16,200원",
@@ -7868,7 +7868,7 @@
    "category": "견과류",
    "price": "7,600원부터",
    "note": "원산지: 중국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-peanut-seasoned.jpg",
    "options": [
     {
      "label": "500g / 7,600원",
@@ -7894,7 +7894,7 @@
    "category": "견과류",
    "price": "6,200원부터",
    "note": "원산지: 중국 / 옵션 5개",
-   "image": "",
+   "image": "assets/n-peanut-half.jpg",
    "options": [
     {
      "label": "200g / 6,200원",
@@ -7941,7 +7941,7 @@
    "category": "견과류",
    "price": "7,400원부터",
    "note": "원산지: 중국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-peanut-powder.jpg",
    "options": [
     {
      "label": "500g / 7,400원",
@@ -7967,7 +7967,7 @@
    "category": "견과류",
    "price": "7,400원부터",
    "note": "원산지: 중국 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-peanut-chopped.jpg",
    "options": [
     {
      "label": "500g / 7,400원",
@@ -8072,7 +8072,7 @@
    "category": "견과류",
    "price": "4,800원부터",
    "note": "원산지: 중국 / 옵션 10개",
-   "image": "",
+   "image": "assets/n-peanut-chopped.jpg",
    "options": [
     {
      "label": "100g / 4,800원",
@@ -8144,7 +8144,7 @@
    "category": "견과류",
    "price": "8,300원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-peanut-choco.jpg",
    "options": [
     {
      "label": "1K / 8,300원",
@@ -8163,7 +8163,7 @@
    "category": "견과류",
    "price": "12,100원부터",
    "note": "원산지: 태국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-dried-papaya.jpg",
    "options": [
     {
      "label": "500g / 12,100원",
@@ -8189,7 +8189,7 @@
    "category": "견과류",
    "price": "8,000원부터",
    "note": "원산지: 원산지 확인중 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-sesame-snack.jpg",
    "options": [
     {
      "label": "600g / 8,000원",
@@ -8208,7 +8208,7 @@
    "category": "견과류",
    "price": "15,600원부터",
    "note": "원산지: 원산지 확인중 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-trail-mix.jpg",
    "options": [
     {
      "label": "500g / 15,600원",
@@ -8227,7 +8227,7 @@
    "category": "견과류",
    "price": "13,900원부터",
    "note": "원산지: 원산지 확인중 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-trail-mix.jpg",
    "options": [
     {
      "label": "1K / 13,900원",
@@ -8347,7 +8347,7 @@
    "category": "견과류",
    "price": "8,000원부터",
    "note": "원산지: 원산지 확인중 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-sesame-peanut.jpg",
    "options": [
     {
      "label": "450g / 8,000원",
@@ -8366,7 +8366,7 @@
    "category": "견과류",
    "price": "8,000원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-choco-crunch.jpg",
    "options": [
     {
      "label": "1K / 8,000원",
@@ -8385,7 +8385,7 @@
    "category": "견과류",
    "price": "5,600원부터",
    "note": "원산지: 중국 / 옵션 4개",
-   "image": "",
+   "image": "assets/n-coffee-peanut.jpg",
    "options": [
     {
      "label": "200g / 5,600원",
@@ -8425,7 +8425,7 @@
    "category": "견과류",
    "price": "11,500원부터",
    "note": "원산지: 중국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-candied-ginger.jpg",
    "options": [
     {
      "label": "500g / 11,500원",
@@ -8451,7 +8451,7 @@
    "category": "견과류",
    "price": "8,000원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-choco-sunflower.jpg",
    "options": [
     {
      "label": "1K / 8,000원",
@@ -8470,7 +8470,7 @@
    "category": "견과류",
    "price": "23,900원부터",
    "note": "원산지: 미국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-hazelnut.jpg",
    "options": [
     {
      "label": "500g / 23,900원",
@@ -8496,7 +8496,7 @@
    "category": "견과류",
    "price": "6,800원부터",
    "note": "원산지: 중국 / 옵션 4개",
-   "image": "",
+   "image": "assets/n-pumpkin-seed.jpg",
    "options": [
     {
      "label": "200g / 6,800원",
@@ -8536,7 +8536,7 @@
    "category": "건과류",
    "price": "8,000원부터",
    "note": "원산지: 국산 / 옵션 5개",
-   "image": "",
+   "image": "assets/n-chestnut-peeled.jpg",
    "options": [
     {
      "label": "120g / 8,000원",
@@ -8583,7 +8583,7 @@
    "category": "건과류",
    "price": "19,200원부터",
    "note": "원산지: 국산 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-pine-nut.jpg",
    "options": [
     {
      "label": "100g / 19,200원",
@@ -8616,7 +8616,7 @@
    "category": "건과류",
    "price": "10,900원부터",
    "note": "원산지: 중국 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-pine-nut.jpg",
    "options": [
     {
      "label": "100g / 10,900원",
@@ -8671,7 +8671,7 @@
    "category": "건과류",
    "price": "8,600원부터",
    "note": "원산지: 터키 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-dried-apricot.jpg",
    "options": [
     {
      "label": "200g / 8,600원",
@@ -8697,7 +8697,7 @@
    "category": "건과류",
    "price": "14,500원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-jujube-chip.jpg",
    "options": [
     {
      "label": "1KG / 14,500원",
@@ -8716,7 +8716,7 @@
    "category": "건과류",
    "price": "25,000원부터",
    "note": "원산지: 국산 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-jujube.jpg",
    "options": [
     {
      "label": "1KG / 25,000원",
@@ -8757,7 +8757,7 @@
    "category": "건과류",
    "price": "10,900원부터",
    "note": "원산지: 국산 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-jujube.jpg",
    "options": [
     {
      "label": "500G / 10,900원",
@@ -8783,7 +8783,7 @@
    "category": "건과류",
    "price": "6,500원부터",
    "note": "원산지: 국산 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-jujube.jpg",
    "options": [
     {
      "label": "100g / 6,500원",
@@ -8816,7 +8816,7 @@
    "category": "건과류",
    "price": "18,000원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-jujube.jpg",
    "options": [
     {
      "label": "1KG / 18,000원",
@@ -8835,7 +8835,7 @@
    "category": "건과류",
    "price": "6,800원부터",
    "note": "원산지: 국산 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-jujube-shred.jpg",
    "options": [
     {
      "label": "100g / 6,800원",
@@ -8868,7 +8868,7 @@
    "category": "건과류",
    "price": "16,800원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-jujube-shred.jpg",
    "options": [
     {
      "label": "1KG / 16,800원",
@@ -8925,7 +8925,7 @@
    "category": "건과류",
    "price": "6,000원부터",
    "note": "원산지: 국산 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-ginkgo.jpg",
    "options": [
     {
      "label": "100g / 6,000원",
@@ -8951,7 +8951,7 @@
    "category": "건과류",
    "price": "8,800원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-ginkgo.jpg",
    "options": [
     {
      "label": "500g / 8,800원",
@@ -8970,7 +8970,7 @@
    "category": "건과류",
    "price": "8,800원부터",
    "note": "원산지: 중국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-ginkgo.jpg",
    "options": [
     {
      "label": "500g / 8,800원",
@@ -8996,7 +8996,7 @@
    "category": "건과류",
    "price": "13,300원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-ginkgo.jpg",
    "options": [
     {
      "label": "1KG / 13,300원",
@@ -9015,7 +9015,7 @@
    "category": "건과류",
    "price": "33,300원부터",
    "note": "원산지: 국산 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-chestnut-dried.jpg",
    "options": [
     {
      "label": "1KG / 33,300원",
