@@ -3963,7 +3963,7 @@
    "category": "건어물",
    "price": "11,900원부터",
    "note": "원산지: 러시아 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-bugeo-head.jpg",
    "options": [
     {
      "label": "500g / 11,900원",
@@ -3989,7 +3989,7 @@
    "category": "건어물",
    "price": "16,100원부터",
    "note": "원산지: 베트남 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-dipori.jpg",
    "options": [
     {
      "label": "1.5K / 16,100원",
@@ -4008,7 +4008,7 @@
    "category": "건어물",
    "price": "25,800원부터",
    "note": "원산지: 국산 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-dipori.jpg",
    "options": [
     {
      "label": "1.5K / 25,800원",
@@ -4027,7 +4027,7 @@
    "category": "건어물",
    "price": "24,600원부터",
    "note": "원산지: 원산지 확인중 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-cod-jerky.jpg",
    "options": [
     {
      "label": "300g / 24,600원",
@@ -4046,7 +4046,7 @@
    "category": "건어물",
    "price": "14,900원부터",
    "note": "원산지: 국산 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-gosari.jpg",
    "options": [
     {
      "label": "100g / 14,900원",
@@ -4079,7 +4079,7 @@
    "category": "건어물",
    "price": "14,900원부터",
    "note": "원산지: 중국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-gosari.jpg",
    "options": [
     {
      "label": "500g / 14,900원",
@@ -4105,7 +4105,7 @@
    "category": "건어물",
    "price": "20,400원부터",
    "note": "원산지: 페루 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-giant-squid-legs.jpg",
    "options": [
     {
      "label": "500g / 20,400원",
@@ -4131,7 +4131,7 @@
    "category": "건어물",
    "price": "13,700원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-perilla-powder.jpg",
    "options": [
     {
      "label": "1K / 13,700원",
@@ -4150,7 +4150,7 @@
    "category": "건어물",
    "price": "14,900원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-perilla-powder.jpg",
    "options": [
     {
      "label": "1K / 14,900원",
@@ -4191,7 +4191,7 @@
    "category": "건어물",
    "price": "8,500원부터",
    "note": "",
-   "image": "",
+   "image": "assets/n-sweet-potato-stem.jpg",
    "options": [
     {
      "label": "100g / 8,500원",
@@ -4224,7 +4224,7 @@
    "category": "건어물",
    "price": "16,100원부터",
    "note": "",
-   "image": "",
+   "image": "assets/n-sweet-potato-stem.jpg",
    "options": [
     {
      "label": "500g / 16,100원",
@@ -4250,7 +4250,7 @@
    "category": "건어물",
    "price": "9,500원부터",
    "note": "원산지: 국산 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-bujigaengi.jpg",
    "options": [
     {
      "label": "100g / 9,500원",
@@ -4283,7 +4283,7 @@
    "category": "건어물",
    "price": "23,400원부터",
    "note": "원산지: 인도네시아 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-katsuobushi-flakes.jpg",
    "options": [
     {
      "label": "500g / 23,400원",
@@ -4302,7 +4302,7 @@
    "category": "건어물",
    "price": "18,500원부터",
    "note": "원산지: 인도네시아 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-katsuobushi-stock.jpg",
    "options": [
     {
      "label": "500g / 18,500원",
@@ -4321,7 +4321,7 @@
    "category": "건어물",
    "price": "19,700원부터",
    "note": "원산지: 국산 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-kudzu-root.jpg",
    "options": [
     {
      "label": "1K / 19,700원",
@@ -4340,7 +4340,7 @@
    "category": "건어물",
    "price": "10,100원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-kudzu-root.jpg",
    "options": [
     {
      "label": "500g / 10,100원",
@@ -4359,7 +4359,7 @@
    "category": "건어물",
    "price": "8,900원부터",
    "note": "원산지: 원산지 확인중 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-licorice.jpg",
    "options": [
     {
      "label": "500g / 8,900원",
@@ -4385,7 +4385,7 @@
    "category": "건어물",
    "price": "7,300원부터",
    "note": "원산지: 국산 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-dried-eggplant.jpg",
    "options": [
     {
      "label": "100g / 7,300원",
@@ -4470,7 +4470,7 @@
    "category": "건어물",
    "price": "25,800원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-gungchae.jpg",
    "options": [
     {
      "label": "1KG / 25,800원",
@@ -4489,7 +4489,7 @@
    "category": "건어물",
    "price": "13,700원부터",
    "note": "원산지: 중국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-darae-sun.jpg",
    "options": [
     {
      "label": "500g / 13,700원",
@@ -4515,7 +4515,7 @@
    "category": "건어물",
    "price": "46,300원부터",
    "note": "원산지: 국산 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-doraji.jpg",
    "options": [
     {
      "label": "1KG / 46,300원",
@@ -4534,7 +4534,7 @@
    "category": "건어물",
    "price": "14,300원부터",
    "note": "원산지: 미국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-crab-stick-shred.jpg",
    "options": [
     {
      "label": "500g / 14,300원",
@@ -6694,7 +6694,7 @@
    "category": "건어물",
    "price": "22,200원부터",
    "note": "원산지: 러시아 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-bugeo-head.jpg",
    "options": [
     {
      "label": "1K / 22,200원",
