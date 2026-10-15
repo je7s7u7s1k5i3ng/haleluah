@@ -3587,29 +3587,78 @@
    "rank": "1045",
    "name": "국내산 두절새우",
    "category": "건어물",
-   "price": "12,800원부터",
-   "note": "원산지: 국산 / 옵션 3개",
+   "price": "12,500원부터",
+   "note": "원산지: 국산 / 옵션 10개",
    "image": "assets/gunsaeu-dujeol-kr-20261009.jpg",
    "options": [
     {
-     "label": "100g / 12,800원",
-     "value": "100g / 12,800원 / 원산지 국산",
+     "label": "100g / 12,500원",
+     "value": "100g / 12,500원 / 원산지 국산",
      "title": "중량 선택",
-     "source_spec": "500g 원가 ÷ 5 × 1",
+     "source_spec": "500g 원가 35,000 ÷ 5 × 1",
      "source_id": "DN-0008"
     },
     {
-     "label": "200g / 21,500원",
-     "value": "200g / 21,500원 / 원산지 국산",
+     "label": "200g / 21,000원",
+     "value": "200g / 21,000원 / 원산지 국산",
      "title": "중량 선택",
-     "source_spec": "500g 원가 ÷ 5 × 2",
+     "source_spec": "500g 원가 35,000 ÷ 5 × 2",
      "source_id": "DN-0008"
     },
     {
-     "label": "300g / 30,300원",
-     "value": "300g / 30,300원 / 원산지 국산",
+     "label": "300g / 29,400원",
+     "value": "300g / 29,400원 / 원산지 국산",
      "title": "중량 선택",
-     "source_spec": "500g 원가 ÷ 5 × 3",
+     "source_spec": "500g 원가 35,000 ÷ 5 × 3",
+     "source_id": "DN-0008"
+    },
+    {
+     "label": "400g / 37,800원",
+     "value": "400g / 37,800원 / 원산지 국산",
+     "title": "중량 선택",
+     "source_spec": "500g 원가 35,000 ÷ 5 × 4",
+     "source_id": "DN-0008"
+    },
+    {
+     "label": "500g / 46,300원",
+     "value": "500g / 46,300원 / 원산지 국산",
+     "title": "중량 선택",
+     "source_spec": "500g 원가 35,000 ÷ 5 × 5",
+     "source_id": "DN-0008"
+    },
+    {
+     "label": "600g / 54,700원",
+     "value": "600g / 54,700원 / 원산지 국산",
+     "title": "중량 선택",
+     "source_spec": "500g 원가 35,000 ÷ 5 × 6",
+     "source_id": "DN-0008"
+    },
+    {
+     "label": "700g / 63,100원",
+     "value": "700g / 63,100원 / 원산지 국산",
+     "title": "중량 선택",
+     "source_spec": "500g 원가 35,000 ÷ 5 × 7",
+     "source_id": "DN-0008"
+    },
+    {
+     "label": "800g / 71,600원",
+     "value": "800g / 71,600원 / 원산지 국산",
+     "title": "중량 선택",
+     "source_spec": "500g 원가 35,000 ÷ 5 × 8",
+     "source_id": "DN-0008"
+    },
+    {
+     "label": "900g / 80,000원",
+     "value": "900g / 80,000원 / 원산지 국산",
+     "title": "중량 선택",
+     "source_spec": "500g 원가 35,000 ÷ 5 × 9",
+     "source_id": "DN-0008"
+    },
+    {
+     "label": "1000g / 88,400원",
+     "value": "1000g / 88,400원 / 원산지 국산",
+     "title": "중량 선택",
+     "source_spec": "500g 원가 35,000 ÷ 5 × 10",
      "source_id": "DN-0008"
     }
    ],
@@ -3620,22 +3669,78 @@
    "rank": "1046",
    "name": "중국산 두절새우",
    "category": "건어물",
-   "price": "19,000원부터",
-   "note": "원산지: 중국 / 옵션 2개",
+   "price": "6,900원부터",
+   "note": "원산지: 중국 / 옵션 10개",
    "image": "assets/gunsaeu-dujeol-cn-20261009.jpg",
    "options": [
     {
-     "label": "500g / 19,000원",
-     "value": "500g / 19,000원 / 원산지 중국",
+     "label": "100g / 6,900원",
+     "value": "100g / 6,900원 / 원산지 중국",
      "title": "중량 선택",
-     "source_spec": "500g",
-     "source_id": "DN-0010"
+     "source_spec": "대 1K 원가 23,000 ÷ 10 × 1",
+     "source_id": "DN-0011"
     },
     {
-     "label": "1K / 32,800원",
-     "value": "1K / 32,800원 / 원산지 중국",
+     "label": "200g / 9,600원",
+     "value": "200g / 9,600원 / 원산지 중국",
      "title": "중량 선택",
-     "source_spec": "1K",
+     "source_spec": "대 1K 원가 23,000 ÷ 10 × 2",
+     "source_id": "DN-0011"
+    },
+    {
+     "label": "300g / 12,400원",
+     "value": "300g / 12,400원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "대 1K 원가 23,000 ÷ 10 × 3",
+     "source_id": "DN-0011"
+    },
+    {
+     "label": "400g / 15,200원",
+     "value": "400g / 15,200원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "대 1K 원가 23,000 ÷ 10 × 4",
+     "source_id": "DN-0011"
+    },
+    {
+     "label": "500g / 17,900원",
+     "value": "500g / 17,900원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "대 1K 원가 23,000 ÷ 10 × 5",
+     "source_id": "DN-0011"
+    },
+    {
+     "label": "600g / 20,700원",
+     "value": "600g / 20,700원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "대 1K 원가 23,000 ÷ 10 × 6",
+     "source_id": "DN-0011"
+    },
+    {
+     "label": "700g / 23,500원",
+     "value": "700g / 23,500원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "대 1K 원가 23,000 ÷ 10 × 7",
+     "source_id": "DN-0011"
+    },
+    {
+     "label": "800g / 26,300원",
+     "value": "800g / 26,300원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "대 1K 원가 23,000 ÷ 10 × 8",
+     "source_id": "DN-0011"
+    },
+    {
+     "label": "900g / 29,000원",
+     "value": "900g / 29,000원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "대 1K 원가 23,000 ÷ 10 × 9",
+     "source_id": "DN-0011"
+    },
+    {
+     "label": "1000g / 31,800원",
+     "value": "1000g / 31,800원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "대 1K 원가 23,000 ÷ 10 × 10",
      "source_id": "DN-0011"
     }
    ],
@@ -6632,7 +6737,7 @@
    "category": "견과류",
    "price": "18,000원부터",
    "note": "원산지: 미국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-dried-blueberry.jpg",
    "options": [
     {
      "label": "500g / 18,000원",
@@ -6658,7 +6763,7 @@
    "category": "견과류",
    "price": "11,500원부터",
    "note": "원산지: 베트남 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-dried-mango.jpg",
    "options": [
     {
      "label": "500g / 11,500원",
@@ -6684,7 +6789,7 @@
    "category": "견과류",
    "price": "9,200원부터",
    "note": "원산지: 미국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-prune.jpg",
    "options": [
     {
      "label": "500g / 9,200원",
@@ -6710,7 +6815,7 @@
    "category": "견과류",
    "price": "8,600원부터",
    "note": "원산지: 미국 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-almond-salted.jpg",
    "options": [
     {
      "label": "200g / 8,600원",
@@ -6743,7 +6848,7 @@
    "category": "견과류",
    "price": "8,600원부터",
    "note": "원산지: 미국 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-almond-unsalted.jpg",
    "options": [
     {
      "label": "200g / 8,600원",
@@ -6776,7 +6881,7 @@
    "category": "견과류",
    "price": "20,300원부터",
    "note": "원산지: 미국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-almond-powder.jpg",
    "options": [
     {
      "label": "1K / 20,300원",
@@ -6795,7 +6900,7 @@
    "category": "견과류",
    "price": "20,300원부터",
    "note": "원산지: 미국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-almond-chopped.jpg",
    "options": [
     {
      "label": "1K / 20,300원",
@@ -6814,7 +6919,7 @@
    "category": "견과류",
    "price": "8,600원부터",
    "note": "원산지: 미국 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-almond-raw.jpg",
    "options": [
     {
      "label": "200g / 8,600원",
@@ -6847,7 +6952,7 @@
    "category": "견과류",
    "price": "8,600원부터",
    "note": "원산지: 미국 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-almond-blanched.jpg",
    "options": [
     {
      "label": "200g / 8,600원",
@@ -6880,7 +6985,7 @@
    "category": "견과류",
    "price": "19,200원부터",
    "note": "원산지: 태국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-macadamia.jpg",
    "options": [
     {
      "label": "500g / 19,200원",
@@ -6904,29 +7009,78 @@
    "rank": "1246",
    "name": "피스타치오 구운 미국산",
    "category": "견과류",
-   "price": "8,600원부터",
-   "note": "원산지: 미국 / 옵션 3개",
-   "image": "",
+   "price": "6,300원부터",
+   "note": "원산지: 미국 / 옵션 10개",
+   "image": "assets/n-pistachio-roasted.jpg",
    "options": [
     {
-     "label": "200g / 8,600원",
-     "value": "200g / 8,600원 / 원산지 미국",
+     "label": "100g / 6,300원",
+     "value": "100g / 6,300원 / 원산지 미국",
      "title": "중량 선택",
-     "source_spec": "200g",
-     "source_id": "DN-0321"
+     "source_spec": "1K 원가 18,000 ÷ 10 × 1",
+     "source_id": "DN-0320"
     },
     {
-     "label": "500g / 14,500원",
-     "value": "500g / 14,500원 / 원산지 미국",
+     "label": "200g / 8,400원",
+     "value": "200g / 8,400원 / 원산지 미국",
      "title": "중량 선택",
-     "source_spec": "500g",
-     "source_id": "DN-0322"
+     "source_spec": "1K 원가 18,000 ÷ 10 × 2",
+     "source_id": "DN-0320"
     },
     {
-     "label": "1K / 23,900원",
-     "value": "1K / 23,900원 / 원산지 미국",
+     "label": "300g / 10,600원",
+     "value": "300g / 10,600원 / 원산지 미국",
      "title": "중량 선택",
-     "source_spec": "1K",
+     "source_spec": "1K 원가 18,000 ÷ 10 × 3",
+     "source_id": "DN-0320"
+    },
+    {
+     "label": "400g / 12,800원",
+     "value": "400g / 12,800원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 18,000 ÷ 10 × 4",
+     "source_id": "DN-0320"
+    },
+    {
+     "label": "500g / 14,900원",
+     "value": "500g / 14,900원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 18,000 ÷ 10 × 5",
+     "source_id": "DN-0320"
+    },
+    {
+     "label": "600g / 17,100원",
+     "value": "600g / 17,100원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 18,000 ÷ 10 × 6",
+     "source_id": "DN-0320"
+    },
+    {
+     "label": "700g / 19,300원",
+     "value": "700g / 19,300원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 18,000 ÷ 10 × 7",
+     "source_id": "DN-0320"
+    },
+    {
+     "label": "800g / 21,400원",
+     "value": "800g / 21,400원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 18,000 ÷ 10 × 8",
+     "source_id": "DN-0320"
+    },
+    {
+     "label": "900g / 23,600원",
+     "value": "900g / 23,600원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 18,000 ÷ 10 × 9",
+     "source_id": "DN-0320"
+    },
+    {
+     "label": "1000g / 25,800원",
+     "value": "1000g / 25,800원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 18,000 ÷ 10 × 10",
      "source_id": "DN-0320"
     }
    ],
@@ -6937,15 +7091,78 @@
    "rank": "1247",
    "name": "피스타치오 탈각 미국산",
    "category": "견과류",
-   "price": "50,900원부터",
-   "note": "원산지: 미국 / 옵션 1개",
-   "image": "",
+   "price": "8,900원부터",
+   "note": "원산지: 미국 / 옵션 10개",
+   "image": "assets/n-pistachio-kernel.jpg",
    "options": [
     {
-     "label": "1K / 50,900원",
-     "value": "1K / 50,900원 / 원산지 미국",
+     "label": "100g / 8,900원",
+     "value": "100g / 8,900원 / 원산지 미국",
      "title": "중량 선택",
-     "source_spec": "1K",
+     "source_spec": "1K 원가 40,000 ÷ 10 × 1",
+     "source_id": "DN-0323"
+    },
+    {
+     "label": "200g / 13,700원",
+     "value": "200g / 13,700원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 40,000 ÷ 10 × 2",
+     "source_id": "DN-0323"
+    },
+    {
+     "label": "300g / 18,500원",
+     "value": "300g / 18,500원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 40,000 ÷ 10 × 3",
+     "source_id": "DN-0323"
+    },
+    {
+     "label": "400g / 23,400원",
+     "value": "400g / 23,400원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 40,000 ÷ 10 × 4",
+     "source_id": "DN-0323"
+    },
+    {
+     "label": "500g / 28,200원",
+     "value": "500g / 28,200원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 40,000 ÷ 10 × 5",
+     "source_id": "DN-0323"
+    },
+    {
+     "label": "600g / 33,000원",
+     "value": "600g / 33,000원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 40,000 ÷ 10 × 6",
+     "source_id": "DN-0323"
+    },
+    {
+     "label": "700g / 37,800원",
+     "value": "700g / 37,800원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 40,000 ÷ 10 × 7",
+     "source_id": "DN-0323"
+    },
+    {
+     "label": "800g / 42,600원",
+     "value": "800g / 42,600원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 40,000 ÷ 10 × 8",
+     "source_id": "DN-0323"
+    },
+    {
+     "label": "900g / 47,500원",
+     "value": "900g / 47,500원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 40,000 ÷ 10 × 9",
+     "source_id": "DN-0323"
+    },
+    {
+     "label": "1000g / 52,300원",
+     "value": "1000g / 52,300원 / 원산지 미국",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 40,000 ÷ 10 × 10",
      "source_id": "DN-0323"
     }
    ],
@@ -6958,7 +7175,7 @@
    "category": "견과류",
    "price": "9,200원부터",
    "note": "원산지: 필리핀 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-banana-chip.jpg",
    "options": [
     {
      "label": "500g / 9,200원",
@@ -6984,7 +7201,7 @@
    "category": "견과류",
    "price": "7,600원부터",
    "note": "원산지: 원산지 확인중 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-chili-corn.jpg",
    "options": [
     {
      "label": "500g / 7,600원",
@@ -7003,7 +7220,7 @@
    "category": "견과류",
    "price": "21,500원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-dried-kiwi.jpg",
    "options": [
     {
      "label": "1K / 21,500원",
@@ -7022,7 +7239,7 @@
    "category": "견과류",
    "price": "7,400원부터",
    "note": "원산지: 미국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-walnut-quarter.jpg",
    "options": [
     {
      "label": "200g / 7,400원",
@@ -7048,7 +7265,7 @@
    "category": "견과류",
    "price": "12,100원부터",
    "note": "원산지: 미국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-walnut-half.jpg",
    "options": [
     {
      "label": "500g / 12,100원",
@@ -7074,7 +7291,7 @@
    "category": "견과류",
    "price": "16,800원부터",
    "note": "원산지: 미국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-walnut-quarter.jpg",
    "options": [
     {
      "label": "1K / 16,800원",
@@ -7093,7 +7310,7 @@
    "category": "견과류",
    "price": "11,500원부터",
    "note": "원산지: 미국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-walnut-chopped.jpg",
    "options": [
     {
      "label": "500g / 11,500원",
@@ -7119,7 +7336,7 @@
    "category": "견과류",
    "price": "6,000원부터",
    "note": "원산지: 원산지 확인중 / 옵션 4개",
-   "image": "",
+   "image": "assets/n-sunflower-seed.jpg",
    "options": [
     {
      "label": "200g / 6,000원",
@@ -7159,7 +7376,7 @@
    "category": "견과류",
    "price": "7,600원부터",
    "note": "원산지: 인도네시아 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-sweet-potato-stick.jpg",
    "options": [
     {
      "label": "350g / 7,600원",
@@ -7178,7 +7395,7 @@
    "category": "견과류",
    "price": "6,800원부터",
    "note": "원산지: 미국 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-cranberry.jpg",
    "options": [
     {
      "label": "200g / 6,800원",
@@ -7211,7 +7428,7 @@
    "category": "견과류",
    "price": "7,600원부터",
    "note": "원산지: 원산지 확인중 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-seaweed-snack.jpg",
    "options": [
     {
      "label": "600g / 7,600원",
@@ -7230,7 +7447,7 @@
    "category": "견과류",
    "price": "6,500원부터",
    "note": "원산지: 원산지 확인중 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-mixed-nuts.jpg",
    "options": [
     {
      "label": "200g / 6,500원",
@@ -7256,7 +7473,7 @@
    "category": "견과류",
    "price": "13,300원부터",
    "note": "원산지: 원산지 확인중 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-mixed-nuts.jpg",
    "options": [
     {
      "label": "1K / 13,300원",
@@ -7275,7 +7492,7 @@
    "category": "견과류",
    "price": "8,600원부터",
    "note": "원산지: 인도 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-cashew-roasted.jpg",
    "options": [
     {
      "label": "200g / 8,600원",
@@ -7308,7 +7525,7 @@
    "category": "견과류",
    "price": "19,200원부터",
    "note": "원산지: 인도네시아 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-cashew-raw.jpg",
    "options": [
     {
      "label": "1K / 19,200원",
@@ -7327,7 +7544,7 @@
    "category": "견과류",
    "price": "5,900원부터",
    "note": "원산지: 중국 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-peanut-inshell.jpg",
    "options": [
     {
      "label": "200g / 5,900원",
@@ -7360,7 +7577,7 @@
    "category": "견과류",
    "price": "8,000원부터",
    "note": "원산지: 원산지 확인중 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-laver-peanut.jpg",
    "options": [
     {
      "label": "500g / 8,000원",
@@ -7379,7 +7596,7 @@
    "category": "견과류",
    "price": "13,300원부터",
    "note": "원산지: 미국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-cranberry.jpg",
    "options": [
     {
      "label": "1K / 13,300원",
@@ -7398,7 +7615,7 @@
    "category": "견과류",
    "price": "26,800원부터",
    "note": "원산지: 중국 / 옵션 1개",
-   "image": "",
+   "image": "assets/n-peanut-roasted-red.jpg",
    "options": [
     {
      "label": "3.75K / 26,800원",
@@ -7417,7 +7634,7 @@
    "category": "견과류",
    "price": "6,800원부터",
    "note": "원산지: 중국 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-peanut-roasted.jpg",
    "options": [
     {
      "label": "200g / 6,800원",
@@ -7450,7 +7667,7 @@
    "category": "견과류",
    "price": "18,600원부터",
    "note": "원산지: 미국 / 옵션 2개",
-   "image": "",
+   "image": "assets/n-pecan.jpg",
    "options": [
     {
      "label": "500g / 18,600원",
@@ -7476,7 +7693,7 @@
    "category": "견과류",
    "price": "9,200원부터",
    "note": "원산지: 이란 / 옵션 3개",
-   "image": "",
+   "image": "assets/n-fig-dried.jpg",
    "options": [
     {
      "label": "200g / 9,200원",
@@ -7778,6 +7995,150 @@
    "sold_out": false
   },
   {
+   "rank": "1217",
+   "name": "땅콩분태 1/16 중국산",
+   "category": "견과류",
+   "price": "4,800원부터",
+   "note": "원산지: 중국 / 옵션 10개",
+   "image": "",
+   "options": [
+    {
+     "label": "100g / 4,800원",
+     "value": "100g / 4,800원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/16)/중국 1K 원가 6,000 ÷ 10 × 1"
+    },
+    {
+     "label": "200g / 5,500원",
+     "value": "200g / 5,500원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/16)/중국 1K 원가 6,000 ÷ 10 × 2"
+    },
+    {
+     "label": "300g / 6,300원",
+     "value": "300g / 6,300원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/16)/중국 1K 원가 6,000 ÷ 10 × 3"
+    },
+    {
+     "label": "400g / 7,000원",
+     "value": "400g / 7,000원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/16)/중국 1K 원가 6,000 ÷ 10 × 4"
+    },
+    {
+     "label": "500g / 7,700원",
+     "value": "500g / 7,700원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/16)/중국 1K 원가 6,000 ÷ 10 × 5"
+    },
+    {
+     "label": "600g / 8,400원",
+     "value": "600g / 8,400원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/16)/중국 1K 원가 6,000 ÷ 10 × 6"
+    },
+    {
+     "label": "700g / 9,100원",
+     "value": "700g / 9,100원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/16)/중국 1K 원가 6,000 ÷ 10 × 7"
+    },
+    {
+     "label": "800g / 9,900원",
+     "value": "800g / 9,900원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/16)/중국 1K 원가 6,000 ÷ 10 × 8"
+    },
+    {
+     "label": "900g / 10,600원",
+     "value": "900g / 10,600원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/16)/중국 1K 원가 6,000 ÷ 10 × 9"
+    },
+    {
+     "label": "1000g / 11,300원",
+     "value": "1000g / 11,300원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/16)/중국 1K 원가 6,000 ÷ 10 × 10"
+    }
+   ],
+   "bulk_list": true,
+   "sold_out": false
+  },
+  {
+   "rank": "1217",
+   "name": "땅콩분태 1/8 중국산",
+   "category": "견과류",
+   "price": "4,800원부터",
+   "note": "원산지: 중국 / 옵션 10개",
+   "image": "",
+   "options": [
+    {
+     "label": "100g / 4,800원",
+     "value": "100g / 4,800원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/8)/중국 1K 원가 6,000 ÷ 10 × 1"
+    },
+    {
+     "label": "200g / 5,500원",
+     "value": "200g / 5,500원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/8)/중국 1K 원가 6,000 ÷ 10 × 2"
+    },
+    {
+     "label": "300g / 6,300원",
+     "value": "300g / 6,300원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/8)/중국 1K 원가 6,000 ÷ 10 × 3"
+    },
+    {
+     "label": "400g / 7,000원",
+     "value": "400g / 7,000원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/8)/중국 1K 원가 6,000 ÷ 10 × 4"
+    },
+    {
+     "label": "500g / 7,700원",
+     "value": "500g / 7,700원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/8)/중국 1K 원가 6,000 ÷ 10 × 5"
+    },
+    {
+     "label": "600g / 8,400원",
+     "value": "600g / 8,400원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/8)/중국 1K 원가 6,000 ÷ 10 × 6"
+    },
+    {
+     "label": "700g / 9,100원",
+     "value": "700g / 9,100원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/8)/중국 1K 원가 6,000 ÷ 10 × 7"
+    },
+    {
+     "label": "800g / 9,900원",
+     "value": "800g / 9,900원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/8)/중국 1K 원가 6,000 ÷ 10 × 8"
+    },
+    {
+     "label": "900g / 10,600원",
+     "value": "900g / 10,600원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/8)/중국 1K 원가 6,000 ÷ 10 × 9"
+    },
+    {
+     "label": "1000g / 11,300원",
+     "value": "1000g / 11,300원 / 원산지 중국",
+     "title": "중량 선택",
+     "source_spec": "땅콩분태(1/8)/중국 1K 원가 6,000 ÷ 10 × 10"
+    }
+   ],
+   "bulk_list": true,
+   "sold_out": false
+  },
+  {
    "rank": "1218",
    "name": "땅콩쵸코볼 중국산",
    "category": "견과류",
@@ -7967,7 +8328,7 @@
    "category": "견과류",
    "price": "41,500원부터",
    "note": "원산지: 브라질 / 옵션 1개",
-   "image": "",
+   "image": "assets/brazilnut-20261015.jpg",
    "options": [
     {
      "label": "1K / 41,500원",
@@ -8662,6 +9023,48 @@
      "title": "중량 선택",
      "source_spec": "1KG",
      "source_id": "DN-0438"
+    }
+   ],
+   "bulk_list": true,
+   "sold_out": false
+  },
+  {
+   "rank": "1271",
+   "name": "곶감 접시 국산",
+   "category": "건과류",
+   "price": "11,300원부터",
+   "note": "원산지: 국산 / 한 접시 10개 · 1~5접시",
+   "image": "",
+   "options": [
+    {
+     "label": "1접시 (10개) / 11,300원",
+     "value": "1접시 (10개) / 11,300원 / 원산지 국산",
+     "title": "수량 선택",
+     "source_spec": "곶감/접시/국산 10EA 원가 6,000 × 1"
+    },
+    {
+     "label": "2접시 (20개) / 18,500원",
+     "value": "2접시 (20개) / 18,500원 / 원산지 국산",
+     "title": "수량 선택",
+     "source_spec": "곶감/접시/국산 10EA 원가 6,000 × 2"
+    },
+    {
+     "label": "3접시 (30개) / 25,800원",
+     "value": "3접시 (30개) / 25,800원 / 원산지 국산",
+     "title": "수량 선택",
+     "source_spec": "곶감/접시/국산 10EA 원가 6,000 × 3"
+    },
+    {
+     "label": "4접시 (40개) / 33,000원",
+     "value": "4접시 (40개) / 33,000원 / 원산지 국산",
+     "title": "수량 선택",
+     "source_spec": "곶감/접시/국산 10EA 원가 6,000 × 4"
+    },
+    {
+     "label": "5접시 (50개) / 40,200원",
+     "value": "5접시 (50개) / 40,200원 / 원산지 국산",
+     "title": "수량 선택",
+     "source_spec": "곶감/접시/국산 10EA 원가 6,000 × 5"
     }
    ],
    "bulk_list": true,
