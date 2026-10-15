@@ -1226,6 +1226,33 @@
    "sold_out": false
   },
   {
+   "rank": "1",
+   "name": "스테비아 방울토마토 (500g×4팩)",
+   "category": "과일",
+   "price": "스테비아 방울토마토 500g×4팩 16,300원부터 · 토망고 청포도향 · 망고향 선택",
+   "note": "500g × 4팩 (2kg) · 일반 · 토망고 청포도향 · 토망고 망고향 · ★배송비 무료",
+   "image": "assets/stevia-tomato-20261015.jpg",
+   "options": [
+    {
+     "title": "종류 선택",
+     "label": "스테비아 방울토마토 500g×4팩 / 16,300원",
+     "value": "스테비아 방울토마토 500g×4팩 / 16,300원"
+    },
+    {
+     "title": "종류 선택",
+     "label": "토망고 청포도향 500g×4팩 / 16,900원",
+     "value": "토망고 청포도향 500g×4팩 / 16,900원"
+    },
+    {
+     "title": "종류 선택",
+     "label": "토망고 망고향 500g×4팩 / 16,900원",
+     "value": "토망고 망고향 500g×4팩 / 16,900원"
+    }
+   ],
+   "bulk_list": false,
+   "sold_out": false
+  },
+  {
    "rank": "41",
    "name": "하우스자두 300g",
    "category": "과일",
@@ -7856,23 +7883,79 @@
    "rank": "1227",
    "name": "브라질넛 페루",
    "category": "견과류",
-   "price": "12,100원부터",
-   "note": "원산지: 브라질 / 옵션 2개",
-   "image": "",
+   "price": "7,000원부터",
+   "note": "원산지: 페루 / 옵션 10개",
+   "image": "assets/brazilnut-20261015.jpg",
    "options": [
     {
-     "label": "200g / 12,100원",
-     "value": "200g / 12,100원 / 원산지 브라질",
+     "label": "100g / 7,000원",
+     "value": "100g / 7,000원 / 원산지 페루",
      "title": "중량 선택",
-     "source_spec": "200g",
-     "source_id": "DN-0284"
+     "source_spec": "1K 원가 ÷ 10 × 1",
+     "source_id": "DN-0286"
     },
     {
-     "label": "500g / 23,300원",
-     "value": "500g / 23,300원 / 원산지 브라질",
+     "label": "200g / 9,900원",
+     "value": "200g / 9,900원 / 원산지 페루",
      "title": "중량 선택",
-     "source_spec": "500g",
-     "source_id": "DN-0285"
+     "source_spec": "1K 원가 ÷ 10 × 2",
+     "source_id": "DN-0286"
+    },
+    {
+     "label": "300g / 12,800원",
+     "value": "300g / 12,800원 / 원산지 페루",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 ÷ 10 × 3",
+     "source_id": "DN-0286"
+    },
+    {
+     "label": "400g / 15,700원",
+     "value": "400g / 15,700원 / 원산지 페루",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 ÷ 10 × 4",
+     "source_id": "DN-0286"
+    },
+    {
+     "label": "500g / 18,500원",
+     "value": "500g / 18,500원 / 원산지 페루",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 ÷ 10 × 5",
+     "source_id": "DN-0286"
+    },
+    {
+     "label": "600g / 21,400원",
+     "value": "600g / 21,400원 / 원산지 페루",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 ÷ 10 × 6",
+     "source_id": "DN-0286"
+    },
+    {
+     "label": "700g / 24,300원",
+     "value": "700g / 24,300원 / 원산지 페루",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 ÷ 10 × 7",
+     "source_id": "DN-0286"
+    },
+    {
+     "label": "800g / 27,200원",
+     "value": "800g / 27,200원 / 원산지 페루",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 ÷ 10 × 8",
+     "source_id": "DN-0286"
+    },
+    {
+     "label": "900g / 30,100원",
+     "value": "900g / 30,100원 / 원산지 페루",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 ÷ 10 × 9",
+     "source_id": "DN-0286"
+    },
+    {
+     "label": "1000g / 33,000원",
+     "value": "1000g / 33,000원 / 원산지 페루",
+     "title": "중량 선택",
+     "source_spec": "1K 원가 ÷ 10 × 10",
+     "source_id": "DN-0286"
     }
    ],
    "bulk_list": true,
