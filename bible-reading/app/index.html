@@ -310,6 +310,9 @@ input,select,textarea{font-size:16px!important}
 .adm-row span{font-size:12px;color:var(--sub)}
 .adm-row .adm-reset{align-self:flex-start;margin-top:4px;padding:8px 12px;font-size:12.5px;width:auto}
 /* ===== V3.1 목사님 관리 · 오늘 분량 ===== */
+.gate-toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);box-sizing:border-box;background:rgba(45,32,20,.94);color:#fff;font-size:14px;line-height:1.45;padding:10px 14px;border-radius:12px;z-index:9000;pointer-events:none;opacity:0;transition:opacity .2s;text-align:center}.gate-toast.on{opacity:1}
+.join-must{margin:10px 0 12px;padding:12px 14px;border-radius:12px;background:#fff4dc;border:2px solid var(--gold);font-size:14px;line-height:1.55;text-align:left}.join-must b{color:var(--accent);font-size:15px}
+.inst-why{margin:0 0 10px;font-size:14px;line-height:1.5;color:var(--accent);font-weight:600}
 body.admin-mode .tabs button[data-tab="home"],body.admin-mode .tabs button[data-tab="read"],body.admin-mode .tabs button[data-tab="status"]{display:none!important}
 .admin-head .seg{margin-top:10px;margin-bottom:0}
 .adm-card{padding:12px 2px;border-bottom:1px solid #f0e8d8}
@@ -440,8 +443,9 @@ h2{color:#1E2A55}
   <div class="setup-card">
     <h1>성경 읽기</h1>
     <p>함께 읽고, 함께 기록해요</p>
+    <div class="join-must" id="joinMust">🙏 <b>꼭 참여해 주세요</b><br/>참여해야 <b>목사님이 읽은 기록을 함께 살펴 주실 수 있어요.</b> 아래에 이름과 비밀번호 4자리를 넣고 「참여하기」를 누르면 끝! 한 번만 하면 다음부터는 바로 읽던 성경이 열려요.</div>
     <div class="promo-top promo">
-      <button id="suGuest" class="promo-btn blink" type="button">👀 가입 없이 먼저 둘러보기 <span class="tap-hint">👆 여기 클릭</span></button>
+      <button id="suGuest" class="promo-btn blink hidden" type="button">👀 가입 없이 먼저 둘러보기 <span class="tap-hint">👆 여기 클릭</span></button>
       <a class="promo-btn alt blink" href="../feedback/">💬 이런 기능이 있었으면 좋겠어요 <span class="tap-hint">👆 여기 클릭</span></a>
       <button id="instTop" class="promo-btn inst blink" type="button">📲 홈 화면에 설치 <span class="tap-hint">👆 여기 클릭</span></button>
     </div>
@@ -459,7 +463,7 @@ h2{color:#1E2A55}
   </div>
 </div>
 
-<div id="instSheet" class="inst-sheet hidden"><div class="inst-box"><h3 id="instTitle">홈 화면에 설치</h3><ol id="instSteps"></ol><button id="instCopy" class="ghost hidden" type="button" style="width:100%;margin-bottom:6px">📋 주소 복사하기</button><button id="instClose" class="primary" type="button">알겠어요</button></div><div class="inst-arrow hidden" id="instArrow">⬇</div></div>
+<div id="instSheet" class="inst-sheet hidden"><div class="inst-box"><h3 id="instTitle">홈 화면에 설치</h3><p id="instWhy" class="inst-why hidden"></p><ol id="instSteps"></ol><button id="instCopy" class="ghost hidden" type="button" style="width:100%;margin-bottom:6px">📋 주소 복사하기</button><button id="instClose" class="primary" type="button">알겠어요</button></div><div class="inst-arrow hidden" id="instArrow">⬇</div></div>
 <!-- 한 주 완독 축하 (V1.2) -->
 <div id="celebrate" class="cele hidden"><div class="cele-card"><img src="img/celebrate.jpg" alt=""/><h1 id="celeTitle">완독!</h1><p id="celeText"></p><button id="celeClose" class="primary">계속 읽기</button></div></div>
 
@@ -739,7 +743,7 @@ function myObj(){
     readChapters:state.readChapters,versePos:state.versePos,
     readList:Object.keys(state.readChapters).filter(k=>state.readChapters[k]).sort(cmpKey),
     rcz:encRC(state.readChapters),
-    sync:{un:state.un||{},vpAt:state.vpAt||{},goals:state.goals||{},lrAt:state.lrAt||0,seat:state.seatPick||null,rr:encRR(state.rr),rx:state.rx||{}},
+    sync:{un:state.un||{},vpAt:state.vpAt||{},goals:state.goals||{},lrAt:state.lrAt||0,seat:state.seatPick||null,rr:encRR(state.rr),rx:state.rx||{},inst:+state.inst||0},
     lastRead:lr,lastActive:Date.now(),aph:state.aph||''};
 }
 function myView(){
@@ -753,7 +757,7 @@ function normMember(m){
   const legacy=m.readChapters||{};for(const k in legacy)if(legacy[k]&&!rc[k]&&validKey(k))rc[k]=(typeof legacy[k]==='number'?legacy[k]:1);
   const s=m.sync||{};
   return Object.assign({},m,{readChapters:rc,un:cleanMap(s.un),vpAt:cleanMap(s.vpAt),versePos:cleanMap(m.versePos),goals:s.goals||{},
-    lrAt:+s.lrAt||(m.lastRead&&+m.lastRead.t)||0,seatPick:s.seat||null,seat:(s.seat&&+s.seat.v)||+m.seat||0,rr:decRR(s.rr),rx:cleanMap(s.rx),__n:1});
+    lrAt:+s.lrAt||(m.lastRead&&+m.lastRead.t)||0,seatPick:s.seat||null,seat:(s.seat&&+s.seat.v)||+m.seat||0,rr:decRR(s.rr),rx:cleanMap(s.rx),inst:+s.inst||0,__n:1});
 }
 function displayName(m){return m.priv?'🔒 '+(m.name||'비공개'):(m.name||'이름 없음')}
 function setBadge(t,off){const b=document.getElementById('connBadge');b.textContent=t;b.classList.toggle('off',!!off)}
@@ -818,6 +822,7 @@ function mergeMine(m){
   {const rr=m.rr||{},rx=m.rx||{};state.rr=state.rr||{};state.rx=state.rx||{};   /* V3.29 다시 읽은 시각 — 두 기기 것을 모두 합친다 (지우지 않음) · 체크 끈 시각은 최근 것 */
    for(const k in rr){const s=new Set(state.rr[k]||[]),n0=s.size;rr[k].forEach(t=>s.add(+t));if(s.size>n0){state.rr[k]=[...s].sort((x,y)=>x-y);ch=true}}
    for(const k in rx)if((+rx[k]||0)>(+state.rx[k]||0)){state.rx[k]=+rx[k];ch=true}}
+  if((+m.inst||0)>(+state.inst||0)){state.inst=+m.inst;ch=true}   /* V3.30 홈 화면 앱으로 연 적 있음 — 다른 브라우저에서도 설치 팝업 안 띄움 */
   if(ch){state.celebrated=state.celebrated||{};for(let b=1;b<=66;b++)if(!state.celebrated['b'+b]&&booksDone(state,b,b))state.celebrated['b'+b]=Date.now()}  /* 다른 기기에서 끝낸 책은 조용히 */
   return ch;
 }
@@ -833,6 +838,7 @@ function sheetBehind(m){
   if(state.seatPick&&(+(m.seatPick||{}).t||0)<(+state.seatPick.t||0))return true;
   {const rr=m.rr||{},rx=m.rx||{};for(const k in (state.rr||{})){const s=new Set(rr[k]||[]);if((state.rr[k]||[]).some(t=>!s.has(t)))return true}   /* V3.29 */
    for(const k in (state.rx||{}))if((+rx[k]||0)<(+state.rx[k]||0))return true}
+  if((+state.inst||0)>(+m.inst||0))return true;   /* V3.30 */
   if((m.name||'')!==(state.privacy?state.alias:state.name))return true;
   return false;
 }
@@ -856,15 +862,16 @@ function sheetsPull(force){
       const M={};const src=ADMIN?data.full:data.members;for(const u in src)M[u]=ADMIN?normMember(src[u]):lightMember(src[u]);
       MEMBERS=M;
       {const t=document.querySelector('.tabs button[data-tab="all"]');if(t)t.classList.toggle('hidden',!ADMIN);state.admin=ADMIN;
-       const was=document.body.classList.contains('admin-mode');document.body.classList.toggle('admin-mode',ADMIN&&ROLE!=='both');
-       if(ADMIN&&ROLE!=='both'&&!was)goTab('all');
-       {const gl=document.getElementById('groupLabel');if(gl)gl.textContent=(ADMIN&&ROLE!=='both')?(CFG.groupId||'요한순교자')+' · 관리자 전용':(CFG.groupName||'모임');}   /* V3.7 목사님 페이지 제목 */
-       const note=document.getElementById('bothNote');if(note)note.classList.toggle('hidden',ROLE!=='both');}   /* 목사님 = 관리자 모드 — 들어오면 바로 관리 화면 */
+       const was=document.body.classList.contains('admin-mode');document.body.classList.toggle('admin-mode',false);   /* V3.30 목사님도 지체와 같은 화면(홈·읽기·현황) + 관리 탭 · 들어오면 읽던 성경으로 (사장님 2026-10-17) */
+       {const gl=document.getElementById('groupLabel');if(gl)gl.textContent=CFG.groupName||'모임';}   /* V3.7 목사님 페이지 제목 */
+       const note=document.getElementById('bothNote');if(note)note.classList.toggle('hidden',!ADMIN);}   /* 목사님 = 관리자 모드 — 들어오면 바로 관리 화면 */
       if(GUEST){renderStatus();renderHome();return}   /* 둘러보기: 읽기만 · 합치기·올리기 없음 */
       const mine=data.me?normMember(data.me):null;   /* 내 기록 전체는 내 비번이 맞을 때만 온다 */
       const changed=mergeMine(mine);
       sheetsSynced=true;
       if(changed)persist();
+      if(AUTO_WAIT&&state.lastRead&&state.lastRead.b){AUTO_WAIT=false;if(!openB&&readVisible())goRead(state.lastRead.b,state.lastRead.c)}   /* V3.30 새 기기 — 시트에서 읽던 곳을 받으면 바로 */
+      if(changed&&state.inst&&INST_AUTO_T){const s=document.getElementById('instSheet');if(s)s.classList.add('hidden')}
       if(pendingPush||sheetBehind(mine)){pendingPush=false;sheetsPush()}
       if(changed&&openB){const k=key(openB,openC);document.getElementById('chapReadChk').checked=!!state.readChapters[k];showAgain();
         if((state.versePos[k]||0)>maxVerse&&!dirtyVerse){maxVerse=state.versePos[k];markHere()}}
@@ -921,7 +928,7 @@ function pushMe(){
 }
 /* 기록 바꾸는 곳은 모두 여기로 — 시각을 함께 남긴다 */
 function markRead(k,on){const t=Date.now();state.un=state.un||{};
-  if(on){state.readChapters[k]=t;delete state.un[k]}else{delete state.readChapters[k];state.un[k]=t;(state.rx=state.rx||{})[k]=t}}   /* V3.29 체크 끄면 그때까지의 반복도 안 셈 (rx · 시각은 지우지 않고 남김) */
+  if(on){state.readChapters[k]=t;delete state.un[k];if(GT&&k===key(openB,openC))GT.since=0}else{delete state.readChapters[k];state.un[k]=t;(state.rx=state.rx||{})[k]=t}}   /* V3.29 체크 끄면 그때까지의 반복도 안 셈 (rx · 시각은 지우지 않고 남김) */
 /* V3.29 같은 장을 다시 읽으면 횟수 누적 — 1번째 = readChapters(예전 그대로 · 진도·주간·배지 기준) · 2번째부터 rr[장]=[시각…] */
 const RR_GAP=120e3;   /* 같은 장을 2분 안에 또 끝내면 한 번으로 (두 번 누름 방지) */
 function rrOf(o,k){if(!(o.readChapters||{})[k])return [];const x=+(o.rx||{})[k]||0;return ((o.rr||{})[k]||[]).filter(t=>t>x)}
@@ -929,7 +936,7 @@ function readCount(o,k){return (o.readChapters||{})[k]?1+rrOf(o,k).length:0}
 function totalReads(o){let n=0;const rc=o.readChapters||{};for(const k in rc)if(rc[k])n+=readCount(o,k);return n}
 function lastDoneAt(o,k){return Math.max(+(o.readChapters||{})[k]||0,...rrOf(o,k))}
 function addReread(k){if(!state.readChapters[k])return false;const t=Math.floor(Date.now()/1000)*1000;if(t-lastDoneAt(state,k)<RR_GAP)return false;
-  state.rr=state.rr||{};(state.rr[k]=state.rr[k]||[]).push(t);return true}
+  state.rr=state.rr||{};(state.rr[k]=state.rr[k]||[]).push(t);if(GT&&k===key(openB,openC))GT.since=0;return true}
 function showAgain(){   /* 읽는 화면 — 이 장 몇 번 읽었는지 · 「한 번 더 읽음」 */
   const row=document.getElementById('againRow');if(!row||!openB)return;const k=key(openB,openC),n=readCount(state,k);
   row.classList.toggle('hidden',!n);document.getElementById('chapCnt').textContent=n>=2?'🔁 이 장 '+n+'번 읽음':'1번 읽음'}
@@ -1045,6 +1052,7 @@ function renderAdminList(){
     const l1=document.createElement('div');l1.className='adm-line';l1.textContent='이번 주 '+wp.done+'장 · 전체 '+pct1(tp)+'% (구약 '+pct1(ot)+'% · 신약 '+pct1(nt)+'%)';card.appendChild(l1);
     {const tr=totalReads(m),u=Object.keys(m.readChapters||{}).filter(k=>m.readChapters[k]).length;   /* V3.29 반복 포함 누적 */
      const l=document.createElement('div');l.className='adm-line';l.textContent='📚 누적 읽은 장 '+tr+'장 (서로 다른 장 '+u+'장'+(tr>u?' · 🔁 다시 읽음 '+(tr-u)+'번':'')+')';card.appendChild(l)}
+    if(m.inst){const l=document.createElement('div');l.className='adm-line sub2';l.textContent='📱 홈 화면 앱으로 쓰는 중';card.appendChild(l)}   /* V3.30 */
     const l2=document.createElement('div');l2.className='adm-line sub2';l2.textContent='마지막 읽은 곳: '+lr+' · '+ago(m.lastActive);card.appendChild(l2);
     const jd=String(m.joinedAt||'');const l3=document.createElement('div');l3.className='adm-line sub2';l3.textContent='가입: '+(jd?(+jd.slice(5,7))+'/'+(+jd.slice(8,10))+' '+jd.slice(11,16):'기록 전 (가입 시각 기능 이전 가입)');card.appendChild(l3);
     card.appendChild(recentBox(m,'u'+m.uid));   /* V3.18 최근 읽은 곳 (날짜) */
@@ -1227,6 +1235,7 @@ function openChapter(noScroll){
   const body=document.getElementById('readerBody');
   const hint=document.getElementById('posHint');
   const chip=document.getElementById('resumeChip');
+  const rs=(RESTORE&&RESTORE.b===curB&&RESTORE.c===curC)?RESTORE:null;RESTORE=null;GT.bank=0;GT.since=0;   /* V3.30 */
   const b=BOOKS[curB-1];openB=curB;openC=curC;USCROLL=false;document.getElementById('openBtn').classList.add('hidden');   /* V3.25 장이 열리면 다시 숨김 (V3.15 그대로) */
   title.textContent=b.n+' '+curC+chW(curB);
   document.getElementById('chapReadChk').checked=!!state.readChapters[key(curB,curC)];
@@ -1254,7 +1263,8 @@ function openChapter(noScroll){
         });
       }else chip.classList.add('hidden');
       watchVerses();
-      if(maxVerse&&!noScroll)setTimeout(()=>{const el=document.getElementById('v'+Math.max(1,maxVerse-2));if(el)el.scrollIntoView({block:'center'})},150);
+      if(rs||maxVerse&&!noScroll)setTimeout(()=>{const el=document.getElementById('v'+(rs?Math.max(1,rs.v):Math.max(1,maxVerse-2)));if(el)el.scrollIntoView({block:'center'});lvSave()},150);   /* V3.30 다시 켜면 보던 절 그대로 */
+      else lvSave();
     }
     renderPosHint();
     audSetup(curB,curC);   /* V3.13 성경 듣기 */
@@ -1269,7 +1279,9 @@ function verseHTML(vs){
 const VIS=new Set();
 function readFromView(){
   if(!USCROLL||!VIS.size)return;
-  const v=Math.max(...VIS);if(v>maxVerse){maxVerse=v;dirtyVerse=true;markHere()}
+  let v=Math.max(...VIS);if(v<=maxVerse)return;
+  if(gateOn())v=gateTo(v);   /* V3.30 읽는 시간만큼만 */
+  if(v>maxVerse){maxVerse=v;dirtyVerse=true;markHere()}
 }
 window.addEventListener('scroll',()=>{if(USCROLL)readFromView()},{passive:true});
 function watchVerses(){
@@ -1288,10 +1300,64 @@ function markHere(){
   document.querySelectorAll('#readerBody .verse').forEach(el=>{const v=+el.dataset.v;el.classList.toggle('read',v<=maxVerse);el.classList.toggle('here',v===maxVerse)});
   renderPosHint();
 }
+/* ===== V3.30 읽는 속도 문 — 대충 넘겨 읽기 방지 (사장님 2026-10-17 「성경을 읽게 하기 위한 것」) =====
+   · 절 길이만큼(초당 15자 · 한 절 최소 1.5초) 화면을 펴 두어야 그 절이 「읽음」 · 쌓아 둘 수 있는 것은 3절까지
+   · 읽은 곳에서 3절 앞까지만 내려갈 수 있다 (빨리 밀면 되돌아오고 「천천히」 안내) · 위로는 자유
+   · 끝 절 누르기 · 「다 읽음」 · 「한 번 더 읽음」 도 이 안에서만 · 듣기는 소리 속도대로라 그대로
+   · 호종건 은 제외 (config.js readGate.free 로 바꿀 수 있음) · 점검 도구는 localStorage bibleQA=1 */
+const RG=Object.assign({cps:15,min:1.5,ahead:3,free:['호종건']},CFG.readGate||{});
+var GT={bank:0,since:0,last:0,toastAt:0},RESTORE=null,AUTO_WAIT=false,INST_AUTO_T=0,QA=false;
+try{QA=localStorage.getItem('bibleQA')==='1'}catch(e){}
+function gateOn(){return !QA&&(RG.free||[]).indexOf(state.name)<0}
+function readVisible(){const t=document.getElementById('tab-read');return !!t&&!t.classList.contains('hidden')}
+function vcost(v){const vs=getChapterText(openB,openC),t=(vs&&vs[v-1])||'';return t?Math.max(RG.min,t.replace(/\s/g,'').length/RG.cps):0}
+function chapCost(){const n=verseCount(openB,openC);let s=0;for(let v=1;v<=n;v++)s+=vcost(v);return s}
+function bankCap(){const n=verseCount(openB,openC);let s=0;for(let v=maxVerse+1;v<=Math.min(n,maxVerse+RG.ahead);v++)s+=vcost(v);return s}
+function gateTo(v){const n=verseCount(openB,openC)||v;let f=maxVerse;
+  while(f<v&&f<n){const c=vcost(f+1);if(GT.bank+1e-6<c)break;GT.bank-=c;f++}
+  return f}
+function gateDone(){const n=verseCount(openB,openC);return (n&&maxVerse>=n)||GT.since>=chapCost()}
+function gateNeed(again){const left=Math.max(1,Math.ceil((chapCost()-GT.since)/60));
+  const t='📖 아직 이 장을 '+(again?'다시 ':'')+'다 읽지 않았어요 — 끝 절까지 천천히 읽으면 '+(again?'「한 번 더 읽음」':'「다 읽음」')+'이 돼요 (약 '+left+'분)';
+  againMsg(t);gateToast(t,1)}
+function gateToast(t,force){const now=Date.now();if(!force&&now-GT.toastAt<2500)return;GT.toastAt=now;
+  let el=document.getElementById('gateToast');if(!el){el=document.createElement('div');el.id='gateToast';el.className='gate-toast';el.setAttribute('role','status');document.body.appendChild(el)}
+  el.textContent=t||('📖 천천히 읽어 주세요 — 읽는 만큼 '+RG.ahead+'절씩 열려요');el.classList.add('on');clearTimeout(gateToast.T);gateToast.T=setTimeout(()=>el.classList.remove('on'),2600)}
+/* 더 내려갈 수 없는 선 — 읽은 곳 + 3절 다음 절이 화면 가운데 띠(위 35%~아래 35%)에 들어오기 직전까지 */
+function wallY(){
+  if(!gateOn()||!openB||!BIBLE||!readVisible())return Infinity;
+  if(!audioEl.paused&&AUD.b===openB&&AUD.c===openC)return Infinity;   /* 듣는 중에는 소리가 화면을 옮긴다 */
+  const n=verseCount(openB,openC);let el=null;
+  for(let v=maxVerse+RG.ahead+1;v<=n&&!el;v++)el=document.getElementById('v'+v);
+  if(!el)return Infinity;
+  return Math.max(0,el.getBoundingClientRect().top+scrollY-innerHeight*0.65);
+}
+setInterval(()=>{const t=Date.now(),dt=Math.min(1,Math.max(0,(t-(GT.last||t))/1000));GT.last=t;
+  if(!openB||document.hidden||!readVisible()||!BIBLE)return;
+  GT.since+=dt;GT.bank=Math.min(bankCap(),GT.bank+dt);
+  if(USCROLL)readFromView();
+},250);
+window.addEventListener('scroll',()=>{const w=wallY();if(scrollY>w+2){window.scrollTo(0,w);gateToast()}lvSaveSoon()},{passive:true});
+let GT_Y=null;
+window.addEventListener('touchstart',e=>{GT_Y=e.touches.length===1?e.touches[0].clientY:null},{passive:true});
+window.addEventListener('touchmove',e=>{if(GT_Y==null||e.touches.length!==1)return;const y=e.touches[0].clientY,dy=GT_Y-y;GT_Y=y;
+  if(dy>0&&e.cancelable&&scrollY>=wallY()-1){e.preventDefault();gateToast()}},{passive:false});
+window.addEventListener('wheel',e=>{if(e.deltaY>0&&scrollY>=wallY()-1){e.preventDefault();gateToast()}},{passive:false});
+window.addEventListener('keydown',e=>{if(['ArrowDown','PageDown','End',' ','Spacebar'].indexOf(e.key)>=0&&!/INPUT|TEXTAREA|SELECT/.test((e.target&&e.target.tagName)||'')&&scrollY>=wallY()-1){e.preventDefault();gateToast()}});
+/* ===== V3.30 보던 곳 기억 — 껐다 켜면 그 장 · 그 절 (이 기기) · 없으면 시트의 마지막 읽은 곳 ===== */
+const LV_KEY='bibleLastView';
+function lvSave(){if(GUEST||!openB||!state.uid)return;let v=maxVerse||1;if(VIS.size)v=Math.min(...VIS);
+  try{localStorage.setItem(LV_KEY,JSON.stringify({u:state.uid,b:openB,c:openC,v}))}catch(e){}}
+function lvSaveSoon(){if(!openB||!readVisible())return;clearTimeout(lvSaveSoon.T);lvSaveSoon.T=setTimeout(lvSave,700)}
+function lvGet(){try{const o=JSON.parse(localStorage.getItem(LV_KEY)||'null');if(o&&o.u===state.uid&&o.b>=1&&o.b<=66&&o.c>=1&&o.c<=BOOKS[o.b-1].c)return o}catch(e){}return null}
+function autoRead(){if(GUEST)return;const lv=lvGet(),lr=state.lastRead,t=lv||(lr&&lr.b?{b:lr.b,c:lr.c,v:lr.v||1}:null);
+  if(t){RESTORE=t;goRead(t.b,t.c)}else{AUTO_WAIT=true;goTab('read')}}
 /* 절을 누르면 「거기까지 읽음」 — 앞 절을 누르면 거기로 되돌린다 · 마지막 절이면 그 장 「다 읽음」 */
 document.getElementById('readerBody').addEventListener('click',e=>{
   const p=e.target.closest('.verse');if(!p||!BIBLE)return;
-  const v=+p.dataset.v,k=key(curB,curC),n=verseCount(curB,curC),pv=+state.versePos[k]||0;
+  let v=+p.dataset.v;const k=key(curB,curC),n=verseCount(curB,curC),pv=+state.versePos[k]||0;
+  if(gateOn()&&v>maxVerse){const nv=gateTo(v);if(nv<=maxVerse){gateToast('📖 아직 거기까지 읽지 않았어요 — 천천히 읽어 주세요');return}   /* V3.30 건너뛰어 끝 절 누르기 막음 */
+    if(nv<v)gateToast('📖 '+nv+'절까지 읽음으로 했어요 — 천천히 읽어 주세요');v=nv}
   maxVerse=v;dirtyVerse=false;
   setVP(k,v);setLR(curB,curC,v);
   if(n&&v>=n&&!state.readChapters[k]){markRead(k,true);document.getElementById('chapReadChk').checked=true}
@@ -1308,6 +1374,7 @@ function renderPosHint(){
 }
 document.getElementById('chapReadChk').addEventListener('change',e=>{
   const k=key(curB,curC);
+  if(e.target.checked&&gateOn()&&!gateDone()){e.target.checked=false;gateNeed(false);return}   /* V3.30 */
   if(!e.target.checked&&readCount(state,k)>=2&&!confirm('이 장을 '+readCount(state,k)+'번 읽은 기록이 있어요.\n「다 읽음」을 끄면 이 장은 안 읽은 것으로 바뀌어요. 끌까요?')){e.target.checked=true;return}   /* V3.29 */
   markRead(k,e.target.checked);
   setLR(curB,curC,maxVerse||1);
@@ -1316,6 +1383,7 @@ document.getElementById('chapReadChk').addEventListener('change',e=>{
 document.getElementById('chapAgain').addEventListener('click',()=>{   /* V3.29 종이 성경 등으로 다시 읽었을 때 — 한 번 더 */
   const k=key(curB,curC);
   if(!state.readChapters[k])return;
+  if(gateOn()&&GT.since<chapCost()){gateNeed(true);return}   /* V3.30 그 장을 다시 읽는 시간만큼 편 뒤에만 */
   if(!addReread(k)){againMsg('방금 기록했어요 — 2분 뒤에 다시 누를 수 있어요');return}
   setLR(curB,curC,maxVerse||1);showAgain();againMsg('🔁 이 장 '+readCount(state,k)+'번째 읽음으로 기록했어요');save();renderHome();
 });
@@ -1525,6 +1593,7 @@ setInterval(()=>{ // 읽는 위치 주기 저장
   }
 },4000);
 function flushNow(){
+  if(readVisible())lvSave();   /* V3.30 */
   if(dirtyVerse){
     dirtyVerse=false;
     if(openB){setVP(key(openB,openC),maxVerse);setLR(openB,openC,maxVerse)}
@@ -1908,7 +1977,7 @@ document.getElementById('suJoin').addEventListener('click',()=>{
     if(GUEST){GUEST=false;persist();location.reload();return}   /* 둘러보다가 참여 → 새로 시작 */
     persist();
     document.getElementById('setup').classList.add('hidden');
-    startApp();
+    startApp();instAuto();
   };
   const u=CFG.sheets&&CFG.sheets.webAppUrl;
   if(CFG.backend==='sheets'&&u){ // 기존 등록분과 비밀번호가 일치하는지 서버에서 확인
@@ -1960,6 +2029,15 @@ const IS_ANDROID=/Android/i.test(UA);
 const IN_KAKAO=/KAKAOTALK/i.test(UA),IN_APPWEB=IN_KAKAO||/NAVER|Instagram|FBAN|FBAV|FB_IAB|Line\/|DaumApps|BAND|Twitter|; wv\)/i.test(UA);   /* V3.21 다른 앱 안 브라우저(안드로이드 웹뷰 포함) */
 const IS_IOS_SAFARI=IS_IOS&&/Safari/i.test(UA)&&!/CriOS|FxiOS|EdgiOS|Whale|NAVER/i.test(UA)&&!IN_APPWEB;
 function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true}
+/* V3.30 설치 감지 — 홈 화면 아이콘으로 열면(standalone) 「설치함」 을 이 기기와 시트 내 기록에 남긴다
+   · 설치 안 된 브라우저로 열면 열 때마다 설치 안내 (닫을 수 있음 · 다음에 또) · 설치가 확인되면 안 띄움 */
+function instFlag(){try{localStorage.setItem('bibleInstalled','1')}catch(e){}if(!GUEST&&state.uid&&state.name&&!state.inst){state.inst=Date.now();save()}}
+function instAuto(){
+  if(QA)return;if(isStandalone()){instFlag();return}
+  let known=!!state.inst;try{known=known||!!localStorage.getItem('bibleInstalled')}catch(e){}
+  if(known)return;
+  setTimeout(()=>{if(isStandalone()||state.inst)return;const sh=document.getElementById('instSheet'),su=document.getElementById('setup');
+    if(!sh.classList.contains('hidden')||!su.classList.contains('hidden'))return;INST_AUTO_T=Date.now();installApp(true)},1500)}
 function showInstallButtons(){
   const hide=isStandalone()||CFG.feedbackPhase===false&&false;
   ['instTop'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.toggle('hidden',isStandalone())});
@@ -1975,13 +2053,14 @@ function instNowBtn(){
     const cl=document.getElementById('instClose');cl.parentNode.insertBefore(b,cl)}
   b.classList.remove('hidden');
 }
-window.addEventListener('appinstalled',()=>{deferredPrompt=null;showInstallButtons();alert('홈 화면에 설치됐어요! 이제 아이콘을 눌러 바로 열 수 있어요 🙏')});
+window.addEventListener('appinstalled',()=>{deferredPrompt=null;instFlag();showInstallButtons();alert('홈 화면에 설치됐어요! 이제 아이콘을 눌러 바로 열 수 있어요 🙏')});
 function instSheet(title,steps,opt){
   opt=opt||{};document.getElementById('instTitle').textContent=title;
   const ol=document.getElementById('instSteps');ol.textContent='';
   steps.forEach(s=>{const li=document.createElement('li');(Array.isArray(s)?s:[s]).forEach(p=>{if(typeof p==='string')li.appendChild(document.createTextNode(p));else{const b=document.createElement('span');b.className='ico';b.textContent=p.ico;li.appendChild(b)}});ol.appendChild(li)});
   document.getElementById('instCopy').classList.toggle('hidden',!opt.copy);
   document.getElementById('instArrow').classList.toggle('hidden',!opt.arrow);
+  {const w=document.getElementById('instWhy'),a=Date.now()-INST_AUTO_T<4000;if(w){w.textContent='🙏 홈 화면에 설치하면 아이콘 한 번으로 읽던 성경이 바로 열려요. 설치할 때까지 이 안내가 떠요.';w.classList.toggle('hidden',!a)}document.getElementById('instClose').textContent=a?'나중에 할게요':'알겠어요'}   /* V3.30 */
   document.getElementById('instSheet').classList.remove('hidden');
   {const b=document.getElementById('instNow');if(b)b.classList.add('hidden')}instNowBtn();
 }
@@ -1989,12 +2068,12 @@ document.getElementById('instClose').addEventListener('click',()=>document.getEl
 document.getElementById('instSheet').addEventListener('click',e=>{if(e.target.id==='instSheet')e.currentTarget.classList.add('hidden')});
 document.getElementById('instCopy').addEventListener('click',()=>{const l=location.origin+location.pathname;
   (navigator.clipboard?navigator.clipboard.writeText(l):Promise.reject()).then(()=>alert('주소를 복사했어요. 사파리(또는 크롬)를 열고 주소창에 붙여넣어 주세요.'),()=>prompt('아래 주소를 길게 눌러 복사하세요',l))});
-function installApp(){
-  if(isStandalone()){alert('이미 홈 화면 앱으로 열려 있어요 🙂');return}
-  if(deferredPrompt){const p=deferredPrompt;deferredPrompt=null;p.prompt();
+function installApp(auto){
+  if(isStandalone()){if(!auto)alert('이미 홈 화면 앱으로 열려 있어요 🙂');return}
+  if(deferredPrompt&&!auto){const p=deferredPrompt;deferredPrompt=null;p.prompt();
     (p.userChoice||Promise.resolve()).then(r=>{if(r&&r.outcome==='accepted')showInstallButtons()});return}
   if(IN_APPWEB&&IS_ANDROID){   /* 카톡·네이버·인스타 등 다른 앱 안 → 크롬으로 바로 열기 (V3.21 카톡만 되던 것을 전부로) */
-    location.href='intent://'+location.host+location.pathname+'#Intent;scheme=https;package=com.android.chrome;end';
+    if(!auto)location.href='intent://'+location.host+location.pathname+'#Intent;scheme=https;package=com.android.chrome;end';   /* V3.30 자동 안내 때는 다른 브라우저로 넘기지 않는다 */
     setTimeout(()=>instSheet('크롬에서 열어 주세요',IN_KAKAO
       ?[['카톡 화면 오른쪽 위 ',{ico:'⋮'},' 를 눌러요'],['「다른 브라우저로 열기」 를 눌러요'],['크롬에서 다시 「📲 홈 화면에 설치」 를 누르면 끝!']]
       :[['지금 열린 이 화면은 앱 안의 브라우저라 설치가 안 돼요'],['화면의 메뉴 ',{ico:'⋮'},' 또는 ',{ico:'⋯'},' 에서 「다른 브라우저로 열기」 (또는 「기본 브라우저로 열기」) 를 눌러요'],['아래 「주소 복사하기」 로 크롬 주소창에 붙여넣어도 돼요'],['크롬에서 다시 「📲 홈 화면에 설치」 를 누르면 끝!']],{copy:true}),1200);return}
@@ -2060,7 +2139,7 @@ if('serviceWorker'in navigator){
   // 미리보기 모드: ?preview=1 이면 오버레이 생략 (테스트용)
   const preview=new URLSearchParams(location.search).has('preview');
   if(state.group&&state.name&&!preview){
-    startApp();
+    startApp();autoRead();instAuto();   /* V3.30 참여한 뒤부터는 열면 바로 읽던 성경 · 설치 안 됐으면 설치 안내 */
   }else if(preview){
     startGuest();   /* 예전엔 「나」 로 진짜 모임에 올라갈 수 있었다 → 둘러보기로 */
   }else{
