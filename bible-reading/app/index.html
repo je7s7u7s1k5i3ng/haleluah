@@ -1115,6 +1115,7 @@ function renderMe(){const c=document.getElementById('meChip');if(!c)return;
 function renderHome(){renderIntroVideo();renderListenNew();renderMe();renderBadges();checkCelebrate();renderFeed();renderGoals();renderTodayPlan();
   renderResume();renderMyProg();renderBookGrid();
   const gs=document.getElementById('groupStats');gs.textContent='';
+  {const gc=gs.closest('.card');if(gc&&gc.id!=='feedCard'&&gc.querySelector('#groupStats')===gs&&gc.children.length<=3)gc.classList.toggle('hidden',!!state.hiddenMe);else gs.classList.toggle('hidden',!!state.hiddenMe)}   /* V3.32b 숨김 이름 — 「함께하는 지체」 숫자도 없음 */
   const list=memberListForViews(),tw=todayWeek();
   const td=ymd(Date.now()),ws=weekStart(tw).getTime();
   const todayN=list.filter(m=>daysOf(m).has(td)).length;
@@ -1742,6 +1743,8 @@ document.getElementById('celeClose').addEventListener('click',()=>document.getEl
 /* ================= 현황 ================= */
 function renderStatus(){
   const list=document.getElementById('memberList');list.textContent='';
+  {const tb=document.querySelector('.tabs button[data-tab="status"]');if(tb)tb.classList.toggle('hidden',!!state.hiddenMe);   /* V3.32b 숨김 이름(테스트) — 「함께 읽는 사람들」(자리 배치·명단) 현황 탭 자체가 없음 (사장님 2026-10-17) */
+   if(state.hiddenMe){if(!document.getElementById('tab-status').classList.contains('hidden'))goTab('read');return}}
   const arr=memberListForViews(),tw=todayWeek();
   const others=arr.filter(m=>m.uid!==state.uid).length;
   document.getElementById('memberCount').textContent=others
