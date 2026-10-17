@@ -505,7 +505,7 @@ h2{color:#1E2A55}
       <div class="bk-grid" id="bookGrid"></div>
       <div id="chapPanel" class="chap-panel hidden"></div>
     </div>
-    <div class="card"><h2>함께 읽는 지체들</h2><div id="feedList"></div></div>
+    <div class="card" id="feedCard"><h2>함께 읽는 지체들</h2><div id="feedList"></div></div>
     <div class="card"><h2>🏃 내 도전</h2><p class="sub" style="margin:-4px 0 8px">내 속도에 맞는 도전을 골라요. 여러 개 골라도 돼요.</p><div id="goalList"></div></div>
     <div class="card"><h2 id="badgeTitle">내 배지</h2><div id="badgeGrid" class="badge-grid"></div></div>
     <div class="card"><h2>우리 모두</h2><div id="groupStats"></div></div>
@@ -875,6 +875,7 @@ function sheetsPull(force){
        {const gl=document.getElementById('groupLabel');if(gl)gl.textContent=CFG.groupName||'모임';}   /* V3.7 목사님 페이지 제목 */
        const note=document.getElementById('bothNote');if(note)note.classList.toggle('hidden',!ADMIN);}   /* 목사님 = 관리자 모드 — 들어오면 바로 관리 화면 */
       if(GUEST){renderStatus();renderHome();return}   /* 둘러보기: 읽기만 · 합치기·올리기 없음 */
+      if(data.me&&!!data.hidden!==!!state.hiddenMe){state.hiddenMe=!!data.hidden;persist()}   /* V3.32 시트가 숨김 이름이라고 알려 줌 (본인에게만) */
       const mine=data.me?normMember(data.me):null;   /* 내 기록 전체는 내 비번이 맞을 때만 온다 */
       const changed=mergeMine(mine);
       sheetsSynced=true;
@@ -1923,6 +1924,7 @@ function seatRoom(opt){
 /* ===== 함께 읽는 지체들 (V1.4) — 최근 활동 순 ===== */
 function renderFeed(){
   const box=document.getElementById('feedList');if(!box)return;
+  {const fc=document.getElementById('feedCard');if(fc)fc.classList.toggle('hidden',!!state.hiddenMe);if(state.hiddenMe){box.textContent='';return}}   /* V3.32 숨김 이름(테스트) — 자리 배치 화면 자체가 없음 (사장님 2026-10-17) */
   box.textContent='';
   const list=memberListForViews().slice().sort((a,b)=>(lastDayOf(b)>lastDayOf(a)?1:lastDayOf(b)<lastDayOf(a)?-1:String(a.name).localeCompare(String(b.name))));
   const td=ymd(Date.now());
