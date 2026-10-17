@@ -160,6 +160,7 @@ code{background:#efe8da;padding:2px 7px;border-radius:6px;font-size:13px}
 .setup-card h1{font-family:'SBAggroB','Noto Sans KR',sans-serif;font-size:26px;color:var(--accent);text-align:center}
 .setup-card>p{text-align:center;color:var(--sub);font-size:13px;margin:6px 0 18px}
 .setup-card .field input{padding:13px}
+.setup-card .field input.fixed{background:#efe6d2;border-color:transparent;font-weight:700;color:var(--accent);pointer-events:none}   /* V3.33 모임 이름 고정 */
 .setup-card .sub{text-align:center;margin-top:14px}
 
 /* ===== V1.2 이미지 적용 ===== */
@@ -447,7 +448,7 @@ h2{color:#1E2A55}
     <h1>성경 읽기</h1>
     <!-- V3.31 「성경 읽기」 바로 밑 = 이름 · 요한순교자 · 비밀번호 · 참여하기 (한 번만 넣으면 다음부터 자동으로 들어옴) -->
     <div class="field"><label>① 이름</label><input id="suName" placeholder="이름 또는 닉네임" maxlength="12"/></div>
-    <div class="field"><label>② 모임 (자동 · 그대로 두세요)</label><input id="suGroup" placeholder="예) AB12CD" autocomplete="off" maxlength="20" style="text-transform:uppercase"/></div>
+    <div class="field"><label>② 모임 (고정)</label><input id="suGroup" placeholder="예) AB12CD" autocomplete="off" maxlength="20" style="text-transform:uppercase"/></div>
     <div class="field" id="pinField"><label id="pinLabel">비밀번호 (선택 · 프라이버시 모드)</label><input id="suPin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="숫자 4자리" maxlength="4"/></div>
     <div class="btn-row">
       <button id="suJoin" class="primary">참여하기</button>
@@ -1349,7 +1350,7 @@ function wallY(){
 setInterval(()=>{const t=Date.now(),dt=Math.min(1,Math.max(0,(t-(GT.last||t))/1000));GT.last=t;
   {const dr=Math.min(70,Math.max(0,(t-(GT.lastR||t))/1000));GT.lastR=t;   /* V3.31 장별 읽은 시간 */
    const ak=(!audioEl.paused&&AUD.b)?key(AUD.b,AUD.c):'',vk=(openB&&!document.hidden&&readVisible()&&t-GT.act<90000)?key(openB,openC):'';
-   if(vk)ctAdd(vk,dt);if(ak&&ak!==vk)ctAdd(ak,dr)}
+   if(vk&&vk!==ak)ctAdd(vk,dt)}   /* V3.33 듣는 장은 시계가 아니라 소리가 실제 재생된 길이로 (atFlush) */
   if(!openB||document.hidden||!readVisible()||!BIBLE)return;
   GT.since+=dt;GT.bank=Math.min(bankCap(),GT.bank+dt);
   if(USCROLL)readFromView();
@@ -1365,7 +1366,7 @@ window.addEventListener('keydown',e=>{if(['ArrowDown','PageDown','End',' ','Spac
 /* ===== V3.31 장별 읽은 시간 — ct[장] = 마지막으로 다 읽은 뒤 그 장을 편 시간(초 · 이 기기) → 다 읽는 순간 rt[완독시각36] 으로 ===== */
 GT.act=Date.now();['touchstart','wheel','keydown','pointerdown','scroll'].forEach(ev=>window.addEventListener(ev,()=>{GT.act=Date.now()},{passive:true}));
 function ctAdd(k,d){if(GUEST||!(d>0))return;state.ct=state.ct||{};state.ct[k]=(+state.ct[k]||0)+d}
-function rtMark(k,t){const c=+((state.ct||{})[k])||0;if(c>=1){state.rt=state.rt||{};state.rt[TS36(t)]=Math.round(c)}if(state.ct)delete state.ct[k]}
+function rtMark(k,t){atFlush();const c=+((state.ct||{})[k])||0;if(c>=1){state.rt=state.rt||{};state.rt[TS36(t)]=Math.round(c)}if(state.ct)delete state.ct[k]}
 function fmtDur(s){s=Math.round(+s||0);if(s<60)return s+'초';const m=Math.round(s/60);return m<60?m+'분':Math.floor(m/60)+'시간 '+(m%60)+'분'}
 const LV_KEY='bibleLastView';
 function lvSave(){if(GUEST||!openB||!state.uid)return;let v=maxVerse||1;if(VIS.size)v=Math.min(...VIS);
@@ -1583,6 +1584,16 @@ function audSave(full){
 }
 audioEl.addEventListener('pause',()=>{if(!audioEl.ended)audSave(false)});
 window.addEventListener('pagehide',()=>{if(!audioEl.paused)audSave(false)});
+/* V3.33 듣기 시간 = 소리가 실제로 재생된 길이 ÷ 속도 (아이폰은 화면이 꺼지면 앱 시계가 멈춰 짧게 잡히던 것 · 사장님 2026-10-17)
+   · 재생 위치가 앞으로 간 만큼만 · 그 사이 실제 흐른 시간보다 많이 간 것(건너뛰기)은 안 셈 · 뒤로 간 것도 안 셈 */
+const AT={ct:0,w:0};
+function atReset(){AT.ct=audioEl.currentTime||0;AT.w=Date.now()}
+function atFlush(){if(!AT.w||!AUD.b)return;const ct=audioEl.currentTime||0,d=ct-AT.ct,wall=(Date.now()-AT.w)/1000,r=audioEl.playbackRate||1;
+  if(d>0&&d<=wall*r+3)ctAdd(key(AUD.b,AUD.c),d/r);AT.ct=ct;AT.w=Date.now()}
+audioEl.addEventListener('play',atReset);audioEl.addEventListener('seeked',atReset);audioEl.addEventListener('emptied',()=>{AT.w=0});
+['timeupdate','pause'].forEach(ev=>audioEl.addEventListener(ev,()=>{if(AT.w)atFlush()}));
+audioEl.addEventListener('ended',()=>{if(AT.w)atFlush()},true);
+document.addEventListener('visibilitychange',()=>{if(AT.w&&!audioEl.paused)atFlush()});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&!audioEl.paused)audSave(false)});
 audioEl.addEventListener('ended',()=>{if(AUD.mode==='all'||AUD.mode==='chap')audSave(true)},true);   /* 쭉 듣기로 장을 끝까지 → 다 읽음 (다음 장 넘어가기 전에) · V3.29 「이 장 반복」도 한 바퀴 끝날 때마다 (반복 횟수 누적) */
 audioEl.addEventListener('ended',()=>{
@@ -1813,6 +1824,7 @@ function showSetup(prefill){
   const o=document.getElementById('setup');o.classList.remove('hidden');
   if(prefill){document.getElementById('suGroup').value=prefill;document.getElementById('suNew').classList.add('hidden');
     if(CFG.groupId&&prefill===CFG.groupId)document.getElementById('suGroup').readOnly=true}
+  if(CFG.groupId){const gi=document.getElementById('suGroup');gi.value=CFG.groupId;gi.readOnly=true;gi.tabIndex=-1;gi.classList.add('fixed');document.getElementById('suNew').classList.add('hidden')}   /* V3.33 「요한순교자」 고정 — 쓰거나 지울 필요 없음 (사장님 2026-10-17) */
 }
 /* ===== 모임 모드 (config.js 의 privacyMode) =====
    optional  원본 — 비밀번호는 선택, 넣은 사람만 가명 처리
@@ -1984,7 +1996,7 @@ document.getElementById('suNew').addEventListener('click',()=>{
 });
 document.getElementById('suJoin').addEventListener('click',()=>{
   const n=document.getElementById('suName').value.trim();
-  const g=document.getElementById('suGroup').value.trim().toUpperCase();
+  const g=(CFG.groupId||document.getElementById('suGroup').value.trim()).toUpperCase();   /* V3.33 모임은 고정값 그대로 */
   const pin=(PRIV_MODE==='off')?'':document.getElementById('suPin').value.trim();
   if(!n){alert('이름을 입력해주세요');return}
   if(!g){alert('그룹 코드를 입력하거나 새로 만들어주세요');return}
