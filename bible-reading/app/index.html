@@ -441,24 +441,27 @@ h2{color:#1E2A55}
 <!-- 시작 화면 (그룹 코드/이름) -->
 <div id="setup" class="overlay hidden">
   <div class="setup-card">
-    <h1>성경 읽기</h1>
-    <p>함께 읽고, 함께 기록해요</p>
-    <div class="join-must" id="joinMust">🙏 <b>꼭 참여해 주세요</b><br/>참여해야 <b>목사님이 읽은 기록을 함께 살펴 주실 수 있어요.</b> 아래에 이름과 비밀번호 4자리를 넣고 「참여하기」를 누르면 끝! 한 번만 하면 다음부터는 바로 읽던 성경이 열려요.</div>
-    <div class="promo-top promo">
-      <button id="suGuest" class="promo-btn blink hidden" type="button">👀 가입 없이 먼저 둘러보기 <span class="tap-hint">👆 여기 클릭</span></button>
-      <a class="promo-btn alt blink" href="../feedback/">💬 이런 기능이 있었으면 좋겠어요 <span class="tap-hint">👆 여기 클릭</span></a>
+    <div class="promo-top promo" style="margin-top:0">   <!-- V3.31 홈 화면 설치 깜박이 = 맨 위 (사장님 2026-10-17) -->
       <button id="instTop" class="promo-btn inst blink" type="button">📲 홈 화면에 설치 <span class="tap-hint">👆 여기 클릭</span></button>
     </div>
-    <p class="intro-note promo">📣 지금은 <b>시험판 웹앱</b>이에요. 함께 써 보고 잘 되면 <b>플레이스토어 설치용 앱</b>으로 업데이트할 예정입니다.</p>
-    <blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀이다”</p><cite>— 황선주 목사님</cite></blockquote>
-    <div id="howtoSetup"></div>
+    <h1>성경 읽기</h1>
+    <!-- V3.31 「성경 읽기」 바로 밑 = 이름 · 요한순교자 · 비밀번호 · 참여하기 (한 번만 넣으면 다음부터 자동으로 들어옴) -->
     <div class="field"><label>① 이름</label><input id="suName" placeholder="이름 또는 닉네임" maxlength="12"/></div>
-    <div class="field"><label>② 그룹 코드 (자동 · 그대로 두세요)</label><input id="suGroup" placeholder="예) AB12CD" autocomplete="off" maxlength="20" style="text-transform:uppercase"/></div>
+    <div class="field"><label>② 모임 (자동 · 그대로 두세요)</label><input id="suGroup" placeholder="예) AB12CD" autocomplete="off" maxlength="20" style="text-transform:uppercase"/></div>
     <div class="field" id="pinField"><label id="pinLabel">비밀번호 (선택 · 프라이버시 모드)</label><input id="suPin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="숫자 4자리" maxlength="4"/></div>
     <div class="btn-row">
       <button id="suJoin" class="primary">참여하기</button>
       <button id="suNew" class="ghost">새 코드 만들기</button>
     </div>
+    <p>함께 읽고, 함께 기록해요</p>
+    <div class="join-must" id="joinMust">🙏 <b>꼭 참여해 주세요</b><br/>참여해야 <b>목사님이 읽은 기록을 함께 살펴 주실 수 있어요.</b> 위에 이름과 비밀번호 4자리를 넣고 「참여하기」를 누르면 끝! 한 번만 하면 다음부터는 바로 읽던 성경이 열려요.</div>
+    <div class="promo-top promo">
+      <button id="suGuest" class="promo-btn blink hidden" type="button">👀 가입 없이 먼저 둘러보기 <span class="tap-hint">👆 여기 클릭</span></button>
+      <a class="promo-btn alt blink" href="../feedback/">💬 이런 기능이 있었으면 좋겠어요 <span class="tap-hint">👆 여기 클릭</span></a>
+    </div>
+    <p class="intro-note promo">📣 지금은 <b>시험판 웹앱</b>이에요. 함께 써 보고 잘 되면 <b>플레이스토어 설치용 앱</b>으로 업데이트할 예정입니다.</p>
+    <blockquote class="quote"><p>“지나고 되돌아보면, 남는 것은 말씀이다”</p><cite>— 황선주 목사님</cite></blockquote>
+    <div id="howtoSetup"></div>
     <p class="sub" id="setupNote">초대받은 링크로 들어오면 코드가 자동으로 채워져요. 이름이 곧 계정이라 같은 이름으로 들어오면 어느 기기에서나 기록이 이어집니다.<br/><b>비밀번호를 넣으면 프라이버시 모드</b> — 목사님·다른 멤버에게는 가명(비공개#코드)으로만 보이고, 시트에 실명이 저장되지 않아요.</p>
   </div>
 </div>
@@ -526,6 +529,7 @@ h2{color:#1E2A55}
 
   <!-- 읽기 -->
   <section id="tab-read" class="hidden">
+    <div class="card promo hidden" id="instRead"><button id="instReadBtn" class="promo-btn inst blink" type="button">📲 홈 화면에 설치 <span class="tap-hint">👆 여기 클릭</span></button></div>   <!-- V3.31 설치 안 됐으면 읽기 화면 위쪽에도 (설치 확인되면 사라짐) -->
     <div class="card">
       <div class="sel-row">
         <select id="bookSel"></select>
@@ -736,6 +740,9 @@ function decRC(s){const o={};String(s||'').split(',').forEach(p=>{const i=p.inde
 function encRR(rr){return Object.keys(rr||{}).filter(k=>validKey(k)&&Array.isArray(rr[k])&&rr[k].length).sort(cmpKey).map(k=>k+':'+rr[k].map(TS36).join('.')).join(',')}
 function decRR(s){const o={};String(s||'').split(',').forEach(p=>{const i=p.indexOf(':');if(i<=0)return;const k=p.slice(0,i);if(!validKey(k))return;
   const a=[...new Set(p.slice(i+1).split('.').map(UN36).filter(t=>t>1e12))].sort((x,y)=>x-y);if(a.length)o[k]=a});return o}
+/* V3.31 장별 읽은 시간 — 다 읽은 그 순간(시각36) : 그 장을 편 시간(초) 「t36:초,t36:초」 · 관리 화면에만 보임 */
+function encRT(rt){return Object.keys(rt||{}).filter(x=>/^[0-9a-z]{5,8}$/.test(x)&&+rt[x]>0).sort().map(x=>x+':'+Math.round(+rt[x])).join(',')}
+function decRT(s){const o={};String(s||'').split(',').forEach(p=>{const i=p.indexOf(':');if(i<=0)return;const x=p.slice(0,i),v=+p.slice(i+1);if(/^[0-9a-z]{5,8}$/.test(x)&&v>0&&v<864000)o[x]=v});return o}
 function myObj(){
   const lr=state.lastRead?{b:state.lastRead.b,c:state.lastRead.c,v:state.lastRead.v,t:state.lrAt||0}:null;
   return {name:(state.privacy?state.alias:state.name),uid:state.uid,priv:!!state.privacy,
@@ -743,7 +750,7 @@ function myObj(){
     readChapters:state.readChapters,versePos:state.versePos,
     readList:Object.keys(state.readChapters).filter(k=>state.readChapters[k]).sort(cmpKey),
     rcz:encRC(state.readChapters),
-    sync:{un:state.un||{},vpAt:state.vpAt||{},goals:state.goals||{},lrAt:state.lrAt||0,seat:state.seatPick||null,rr:encRR(state.rr),rx:state.rx||{},inst:+state.inst||0},
+    sync:{un:state.un||{},vpAt:state.vpAt||{},goals:state.goals||{},lrAt:state.lrAt||0,seat:state.seatPick||null,rr:encRR(state.rr),rx:state.rx||{},inst:+state.inst||0,rt:encRT(state.rt)},
     lastRead:lr,lastActive:Date.now(),aph:state.aph||''};
 }
 function myView(){
@@ -757,7 +764,7 @@ function normMember(m){
   const legacy=m.readChapters||{};for(const k in legacy)if(legacy[k]&&!rc[k]&&validKey(k))rc[k]=(typeof legacy[k]==='number'?legacy[k]:1);
   const s=m.sync||{};
   return Object.assign({},m,{readChapters:rc,un:cleanMap(s.un),vpAt:cleanMap(s.vpAt),versePos:cleanMap(m.versePos),goals:s.goals||{},
-    lrAt:+s.lrAt||(m.lastRead&&+m.lastRead.t)||0,seatPick:s.seat||null,seat:(s.seat&&+s.seat.v)||+m.seat||0,rr:decRR(s.rr),rx:cleanMap(s.rx),inst:+s.inst||0,__n:1});
+    lrAt:+s.lrAt||(m.lastRead&&+m.lastRead.t)||0,seatPick:s.seat||null,seat:(s.seat&&+s.seat.v)||+m.seat||0,rr:decRR(s.rr),rx:cleanMap(s.rx),inst:+s.inst||0,rt:decRT(s.rt),__n:1});
 }
 function displayName(m){return m.priv?'🔒 '+(m.name||'비공개'):(m.name||'이름 없음')}
 function setBadge(t,off){const b=document.getElementById('connBadge');b.textContent=t;b.classList.toggle('off',!!off)}
@@ -822,7 +829,8 @@ function mergeMine(m){
   {const rr=m.rr||{},rx=m.rx||{};state.rr=state.rr||{};state.rx=state.rx||{};   /* V3.29 다시 읽은 시각 — 두 기기 것을 모두 합친다 (지우지 않음) · 체크 끈 시각은 최근 것 */
    for(const k in rr){const s=new Set(state.rr[k]||[]),n0=s.size;rr[k].forEach(t=>s.add(+t));if(s.size>n0){state.rr[k]=[...s].sort((x,y)=>x-y);ch=true}}
    for(const k in rx)if((+rx[k]||0)>(+state.rx[k]||0)){state.rx[k]=+rx[k];ch=true}}
-  if((+m.inst||0)>(+state.inst||0)){state.inst=+m.inst;ch=true}   /* V3.30 홈 화면 앱으로 연 적 있음 — 다른 브라우저에서도 설치 팝업 안 띄움 */
+  if((+m.inst||0)>(+state.inst||0)){state.inst=+m.inst;ch=true;setTimeout(showInstallButtons,0)}
+  {const rt=m.rt||{};state.rt=state.rt||{};for(const x in rt)if(!(state.rt[x]>0)){state.rt[x]=rt[x];ch=true}}   /* V3.31 읽은 시간 — 두 기기 것 합침 */   /* V3.30 홈 화면 앱으로 연 적 있음 — 다른 브라우저에서도 설치 팝업 안 띄움 */
   if(ch){state.celebrated=state.celebrated||{};for(let b=1;b<=66;b++)if(!state.celebrated['b'+b]&&booksDone(state,b,b))state.celebrated['b'+b]=Date.now()}  /* 다른 기기에서 끝낸 책은 조용히 */
   return ch;
 }
@@ -839,6 +847,7 @@ function sheetBehind(m){
   {const rr=m.rr||{},rx=m.rx||{};for(const k in (state.rr||{})){const s=new Set(rr[k]||[]);if((state.rr[k]||[]).some(t=>!s.has(t)))return true}   /* V3.29 */
    for(const k in (state.rx||{}))if((+rx[k]||0)<(+state.rx[k]||0))return true}
   if((+state.inst||0)>(+m.inst||0))return true;   /* V3.30 */
+  {const rt=m.rt||{};for(const x in (state.rt||{}))if(!(rt[x]>0))return true}   /* V3.31 */
   if((m.name||'')!==(state.privacy?state.alias:state.name))return true;
   return false;
 }
@@ -928,7 +937,7 @@ function pushMe(){
 }
 /* 기록 바꾸는 곳은 모두 여기로 — 시각을 함께 남긴다 */
 function markRead(k,on){const t=Date.now();state.un=state.un||{};
-  if(on){state.readChapters[k]=t;delete state.un[k];if(GT&&k===key(openB,openC))GT.since=0}else{delete state.readChapters[k];state.un[k]=t;(state.rx=state.rx||{})[k]=t}}   /* V3.29 체크 끄면 그때까지의 반복도 안 셈 (rx · 시각은 지우지 않고 남김) */
+  if(on){state.readChapters[k]=t;delete state.un[k];if(GT&&k===key(openB,openC))GT.since=0;rtMark(k,t)}else{delete state.readChapters[k];state.un[k]=t;(state.rx=state.rx||{})[k]=t}}   /* V3.29 체크 끄면 그때까지의 반복도 안 셈 (rx · 시각은 지우지 않고 남김) */
 /* V3.29 같은 장을 다시 읽으면 횟수 누적 — 1번째 = readChapters(예전 그대로 · 진도·주간·배지 기준) · 2번째부터 rr[장]=[시각…] */
 const RR_GAP=120e3;   /* 같은 장을 2분 안에 또 끝내면 한 번으로 (두 번 누름 방지) */
 function rrOf(o,k){if(!(o.readChapters||{})[k])return [];const x=+(o.rx||{})[k]||0;return ((o.rr||{})[k]||[]).filter(t=>t>x)}
@@ -936,7 +945,7 @@ function readCount(o,k){return (o.readChapters||{})[k]?1+rrOf(o,k).length:0}
 function totalReads(o){let n=0;const rc=o.readChapters||{};for(const k in rc)if(rc[k])n+=readCount(o,k);return n}
 function lastDoneAt(o,k){return Math.max(+(o.readChapters||{})[k]||0,...rrOf(o,k))}
 function addReread(k){if(!state.readChapters[k])return false;const t=Math.floor(Date.now()/1000)*1000;if(t-lastDoneAt(state,k)<RR_GAP)return false;
-  state.rr=state.rr||{};(state.rr[k]=state.rr[k]||[]).push(t);if(GT&&k===key(openB,openC))GT.since=0;return true}
+  state.rr=state.rr||{};(state.rr[k]=state.rr[k]||[]).push(t);if(GT&&k===key(openB,openC))GT.since=0;rtMark(k,t);return true}
 function showAgain(){   /* 읽는 화면 — 이 장 몇 번 읽었는지 · 「한 번 더 읽음」 */
   const row=document.getElementById('againRow');if(!row||!openB)return;const k=key(openB,openC),n=readCount(state,k);
   row.classList.toggle('hidden',!n);document.getElementById('chapCnt').textContent=n>=2?'🔁 이 장 '+n+'번 읽음':'1번 읽음'}
@@ -997,18 +1006,19 @@ function readDetailLines(o){
 }
 /* V3.18 최근 읽은 곳 — 장마다 남은 시각(다 읽음 = readChapters · 읽는 중 = vpAt)으로 최근 순 · 날짜 함께 */
 function fmtWhen(t){if(!(t>1e12))return '';const d=new Date(t),p=n=>String(n).padStart(2,'0');return (d.getMonth()+1)+'/'+d.getDate()+' '+p(d.getHours())+':'+p(d.getMinutes())}
-function recentReads(o){
+function recentReads(o,tm){
   const out=[],rc=o.readChapters||{},vp=o.versePos||{},va=o.vpAt||{},seen={};
   const add=(k,t,txt,done)=>{if(seen[k])return;seen[k]=1;const [b,c]=k.split('-').map(Number);out.push({k,t:+t||0,b,c,txt,done})};
   for(const k in rc){if(!rc[k]||!validKey(k))continue;const [b,c]=k.split('-').map(Number),rn=readCount(o,k);   /* V3.29 반복 — 「n번째」 · 마지막으로 다시 읽은 시각 */
-    add(k,Math.max(+rc[k]||0,+va[k]||0,lastDoneAt(o,k)),BOOKS[b-1].n+' '+c+chW(b)+' 다 읽음 ✓'+(rn>=2?' (🔁 '+rn+'번째)':''),true)}
+    const sec=tm?+((o.rt||{})[TS36(lastDoneAt(o,k))])||0:0;   /* V3.31 관리 화면만 — 가장 최근에 다 읽었을 때 걸린 시간 */
+    add(k,Math.max(+rc[k]||0,+va[k]||0,lastDoneAt(o,k)),BOOKS[b-1].n+' '+c+chW(b)+' 다 읽음 ✓'+(rn>=2?' (🔁 '+rn+'번째)':'')+(sec?' · ⏱ '+fmtDur(sec):''),true)}
   for(const k in vp){const v=+vp[k]||0;if(!v||!validKey(k)||seen[k])continue;const [b,c]=k.split('-').map(Number),n=verseCount(b,c);
     add(k,va[k],BOOKS[b-1].n+' '+c+chW(b)+(n&&v>=n?' 다 읽음 ✓':' '+v+'절까지 ('+n+'절 중)'),n&&v>=n)}
   return out.sort((x,y)=>(y.t-x.t)||(x.b-y.b)||(x.c-y.c));
 }
 const RECENT_ALL={};
 function recentBox(o,id){
-  const L=recentReads(o),det=document.createElement('details');det.className='adm-read recent';det.open=true;det.dataset.k='r'+id;
+  const L=recentReads(o,id!=='me'&&ADMIN),det=document.createElement('details');det.className='adm-read recent';det.open=true;det.dataset.k='r'+id;
   const sm=document.createElement('summary'),ing=L.filter(x=>!x.done).length;
   sm.textContent='🕘 최근 읽은 곳 — '+(L.length?'최근 순'+(ing?' · 읽는 중 '+ing+'곳':''):'아직 없음');det.appendChild(sm);
   if(!L.length)return det;
@@ -1055,6 +1065,8 @@ function renderAdminList(){
     if(m.inst){const l=document.createElement('div');l.className='adm-line sub2';l.textContent='📱 홈 화면 앱으로 쓰는 중';card.appendChild(l)}   /* V3.30 */
     const l2=document.createElement('div');l2.className='adm-line sub2';l2.textContent='마지막 읽은 곳: '+lr+' · '+ago(m.lastActive);card.appendChild(l2);
     const jd=String(m.joinedAt||'');const l3=document.createElement('div');l3.className='adm-line sub2';l3.textContent='가입: '+(jd?(+jd.slice(5,7))+'/'+(+jd.slice(8,10))+' '+jd.slice(11,16):'기록 전 (가입 시각 기능 이전 가입)');card.appendChild(l3);
+    {const v=Object.values(m.rt||{}).filter(x=>x>0);if(v.length){const l=document.createElement('div');l.className='adm-line sub2';   /* V3.31 장별 읽은 시간 요약 */
+      l.textContent='⏱ 한 장 읽은 시간 평균 '+fmtDur(v.reduce((a,b)=>a+b,0)/v.length)+' (기록 '+v.length+'번 · 아래 「최근 읽은 곳」에 장마다)';card.appendChild(l)}}
     card.appendChild(recentBox(m,'u'+m.uid));   /* V3.18 최근 읽은 곳 (날짜) */
     card.appendChild(readDetailBox(m));   /* V3.6 읽은 곳 전체 */
     const gl=GOALS.filter(x=>(m.goals||{})[x.id]&&m.goals[x.id].on);
@@ -1306,7 +1318,7 @@ function markHere(){
    · 끝 절 누르기 · 「다 읽음」 · 「한 번 더 읽음」 도 이 안에서만 · 듣기는 소리 속도대로라 그대로
    · 호종건 은 제외 (config.js readGate.free 로 바꿀 수 있음) · 점검 도구는 localStorage bibleQA=1 */
 const RG=Object.assign({cps:15,min:1.5,ahead:3,free:['호종건']},CFG.readGate||{});
-var GT={bank:0,since:0,last:0,toastAt:0},RESTORE=null,AUTO_WAIT=false,INST_AUTO_T=0,QA=false;
+var GT={bank:0,since:0,last:0,toastAt:0},RESTORE=null,AUTO_WAIT=false,INST_AUTO_T=0,INST_SHEET_AUTO=false,QA=false;
 try{QA=localStorage.getItem('bibleQA')==='1'}catch(e){}
 function gateOn(){return !QA&&(RG.free||[]).indexOf(state.name)<0}
 function readVisible(){const t=document.getElementById('tab-read');return !!t&&!t.classList.contains('hidden')}
@@ -1333,6 +1345,9 @@ function wallY(){
   return Math.max(0,el.getBoundingClientRect().top+scrollY-innerHeight*0.65);
 }
 setInterval(()=>{const t=Date.now(),dt=Math.min(1,Math.max(0,(t-(GT.last||t))/1000));GT.last=t;
+  {const dr=Math.min(70,Math.max(0,(t-(GT.lastR||t))/1000));GT.lastR=t;   /* V3.31 장별 읽은 시간 */
+   const ak=(!audioEl.paused&&AUD.b)?key(AUD.b,AUD.c):'',vk=(openB&&!document.hidden&&readVisible()&&t-GT.act<90000)?key(openB,openC):'';
+   if(vk)ctAdd(vk,dt);if(ak&&ak!==vk)ctAdd(ak,dr)}
   if(!openB||document.hidden||!readVisible()||!BIBLE)return;
   GT.since+=dt;GT.bank=Math.min(bankCap(),GT.bank+dt);
   if(USCROLL)readFromView();
@@ -1345,6 +1360,11 @@ window.addEventListener('touchmove',e=>{if(GT_Y==null||e.touches.length!==1)retu
 window.addEventListener('wheel',e=>{if(e.deltaY>0&&scrollY>=wallY()-1){e.preventDefault();gateToast()}},{passive:false});
 window.addEventListener('keydown',e=>{if(['ArrowDown','PageDown','End',' ','Spacebar'].indexOf(e.key)>=0&&!/INPUT|TEXTAREA|SELECT/.test((e.target&&e.target.tagName)||'')&&scrollY>=wallY()-1){e.preventDefault();gateToast()}});
 /* ===== V3.30 보던 곳 기억 — 껐다 켜면 그 장 · 그 절 (이 기기) · 없으면 시트의 마지막 읽은 곳 ===== */
+/* ===== V3.31 장별 읽은 시간 — ct[장] = 마지막으로 다 읽은 뒤 그 장을 편 시간(초 · 이 기기) → 다 읽는 순간 rt[완독시각36] 으로 ===== */
+GT.act=Date.now();['touchstart','wheel','keydown','pointerdown','scroll'].forEach(ev=>window.addEventListener(ev,()=>{GT.act=Date.now()},{passive:true}));
+function ctAdd(k,d){if(GUEST||!(d>0))return;state.ct=state.ct||{};state.ct[k]=(+state.ct[k]||0)+d}
+function rtMark(k,t){const c=+((state.ct||{})[k])||0;if(c>=1){state.rt=state.rt||{};state.rt[TS36(t)]=Math.round(c)}if(state.ct)delete state.ct[k]}
+function fmtDur(s){s=Math.round(+s||0);if(s<60)return s+'초';const m=Math.round(s/60);return m<60?m+'분':Math.floor(m/60)+'시간 '+(m%60)+'분'}
 const LV_KEY='bibleLastView';
 function lvSave(){if(GUEST||!openB||!state.uid)return;let v=maxVerse||1;if(VIS.size)v=Math.min(...VIS);
   try{localStorage.setItem(LV_KEY,JSON.stringify({u:state.uid,b:openB,c:openC,v}))}catch(e){}}
@@ -2031,7 +2051,7 @@ const IS_IOS_SAFARI=IS_IOS&&/Safari/i.test(UA)&&!/CriOS|FxiOS|EdgiOS|Whale|NAVER
 function isStandalone(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true}
 /* V3.30 설치 감지 — 홈 화면 아이콘으로 열면(standalone) 「설치함」 을 이 기기와 시트 내 기록에 남긴다
    · 설치 안 된 브라우저로 열면 열 때마다 설치 안내 (닫을 수 있음 · 다음에 또) · 설치가 확인되면 안 띄움 */
-function instFlag(){try{localStorage.setItem('bibleInstalled','1')}catch(e){}if(!GUEST&&state.uid&&state.name&&!state.inst){state.inst=Date.now();save()}}
+function instFlag(){try{localStorage.setItem('bibleInstalled','1')}catch(e){}if(!GUEST&&state.uid&&state.name&&!state.inst){state.inst=Date.now();save()}showInstallButtons()}
 function instAuto(){
   if(QA)return;if(isStandalone()){instFlag();return}
   let known=!!state.inst;try{known=known||!!localStorage.getItem('bibleInstalled')}catch(e){}
@@ -2042,6 +2062,7 @@ function showInstallButtons(){
   const hide=isStandalone()||CFG.feedbackPhase===false&&false;
   ['instTop'].forEach(id=>{const e=document.getElementById(id);if(e)e.classList.toggle('hidden',isStandalone())});
   const c=document.getElementById('instCard');if(c)c.classList.toggle('hidden',isStandalone());
+  {let k=isStandalone()||!!state.inst;try{k=k||!!localStorage.getItem('bibleInstalled')}catch(e){}const r=document.getElementById('instRead');if(r)r.classList.toggle('hidden',k||GUEST)}   /* V3.31 */
 }
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;showInstallButtons();instNowBtn()});
 /* V3.9 자동 설치 — 안내가 떠 있는 동안 크롬 설치창이 준비되면 「지금 바로 설치」 버튼이 저절로 나타난다 */
@@ -2060,7 +2081,7 @@ function instSheet(title,steps,opt){
   steps.forEach(s=>{const li=document.createElement('li');(Array.isArray(s)?s:[s]).forEach(p=>{if(typeof p==='string')li.appendChild(document.createTextNode(p));else{const b=document.createElement('span');b.className='ico';b.textContent=p.ico;li.appendChild(b)}});ol.appendChild(li)});
   document.getElementById('instCopy').classList.toggle('hidden',!opt.copy);
   document.getElementById('instArrow').classList.toggle('hidden',!opt.arrow);
-  {const w=document.getElementById('instWhy'),a=Date.now()-INST_AUTO_T<4000;if(w){w.textContent='🙏 홈 화면에 설치하면 아이콘 한 번으로 읽던 성경이 바로 열려요. 설치할 때까지 이 안내가 떠요.';w.classList.toggle('hidden',!a)}document.getElementById('instClose').textContent=a?'나중에 할게요':'알겠어요'}   /* V3.30 */
+  {const w=document.getElementById('instWhy'),a=!!INST_SHEET_AUTO;if(w){w.textContent='🙏 홈 화면에 설치하면 아이콘 한 번으로 읽던 성경이 바로 열려요. 설치할 때까지 이 안내가 떠요.';w.classList.toggle('hidden',!a)}document.getElementById('instClose').textContent=a?'나중에 할게요':'알겠어요'}   /* V3.30 */
   document.getElementById('instSheet').classList.remove('hidden');
   {const b=document.getElementById('instNow');if(b)b.classList.add('hidden')}instNowBtn();
 }
@@ -2069,6 +2090,7 @@ document.getElementById('instSheet').addEventListener('click',e=>{if(e.target.id
 document.getElementById('instCopy').addEventListener('click',()=>{const l=location.origin+location.pathname;
   (navigator.clipboard?navigator.clipboard.writeText(l):Promise.reject()).then(()=>alert('주소를 복사했어요. 사파리(또는 크롬)를 열고 주소창에 붙여넣어 주세요.'),()=>prompt('아래 주소를 길게 눌러 복사하세요',l))});
 function installApp(auto){
+  auto=auto===true;INST_SHEET_AUTO=auto;   /* V3.31 자동 안내인지는 부를 때 정확히 (시간으로 짐작하지 않음) */
   if(isStandalone()){if(!auto)alert('이미 홈 화면 앱으로 열려 있어요 🙂');return}
   if(deferredPrompt&&!auto){const p=deferredPrompt;deferredPrompt=null;p.prompt();
     (p.userChoice||Promise.resolve()).then(r=>{if(r&&r.outcome==='accepted')showInstallButtons()});return}
@@ -2087,7 +2109,7 @@ function installApp(auto){
     instSheet('안드로이드 홈 화면에 설치',[['오른쪽 위 ',{ico:'⋮'},' 메뉴를 눌러요 (삼성 인터넷은 아래 ',{ico:'≡'},')'],['「홈 화면에 추가」 또는 「앱 설치」 를 눌러요'],['「설치」/「추가」 를 누르면 끝! 🙏'],['메뉴에 안 보이면 — 시크릿 창이거나 이미 설치된 경우예요. 일반 크롬 창에서 열거나 홈 화면 아이콘으로 열어 보세요']],{copy:true});return}   /* V3.21 안 될 때 이유 안내 */
   instSheet('홈 화면(바탕화면)에 두기',[['휴대폰에서 이 주소를 열면 홈 화면에 추가할 수 있어요'],['컴퓨터는 주소창 오른쪽 ',{ico:'⊕'},' 설치 아이콘을 눌러요']],{copy:true});
 }
-['instTop','instHome'].forEach(id=>{const e=document.getElementById(id);if(e)e.addEventListener('click',installApp)});
+['instTop','instHome','instReadBtn'].forEach(id=>{const e=document.getElementById(id);if(e)e.addEventListener('click',()=>installApp())});   /* V3.31 손으로 누름 = 바로 설치 창 (V3.30 은 클릭 정보가 auto 로 넘어가 한 단계 더) */
 showInstallButtons();
 
 /* ===== 방문 통계 (V3.4) — 횟수만 · 누가인지 보내지 않음 ===== */
