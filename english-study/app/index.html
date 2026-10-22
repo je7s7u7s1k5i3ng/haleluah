@@ -288,6 +288,7 @@ body{min-height:100vh;min-height:100dvh;-webkit-touch-callout:none}
       <p class="hint" id="modeHint"></p>
       <div class="vs hidden" id="vsBox"><b>절로 고르기</b><select id="vsA" aria-label="시작 절"></select><span>절 ~</span><select id="vsB" aria-label="끝 절"></select><span>절</span><button class="primary" id="vsGo" type="button">🔁 이 절 구간 반복</button></div>
       <p class="hint hidden" id="vsNote"></p>
+      <div class="vs hidden" id="acBox"><b>쉐도잉 누적</b><span>묶음</span><select id="acLim" aria-label="누적 묶음 크기"><option value="0">장 전체</option><option value="4">4문장</option><option value="6">6문장</option><option value="8">8문장</option></select><span>단계마다</span><select id="acRep" aria-label="단계마다 반복 횟수"><option value="1">1번</option><option value="2">2번</option><option value="3">3번</option></select></div>
     </div>
     <div id="setList"></div>
   </section>
@@ -343,7 +344,7 @@ body{min-height:100vh;min-height:100dvh;-webkit-touch-callout:none}
     <div class="ab-seek"><input id="abSeek" type="range" min="0" max="1000" value="0" aria-label="재생 위치"/><small><span id="abT1">0:00</span><span id="abT2">0:00</span></small></div>
   </div>
   <div class="ab-r2">
-    <div class="ab-modes" id="abModes"><button data-m="all" type="button">쭉</button><button data-m="set" type="button">문장🔁</button><button data-m="chap" type="button">장🔁</button><button data-m="range" type="button">구간🔁</button></div>
+    <div class="ab-modes" id="abModes"><button data-m="all" type="button">쭉</button><button data-m="set" type="button">문장🔁</button><button data-m="chap" type="button">장🔁</button><button data-m="range" type="button">구간🔁</button><button data-m="accum" type="button">쉐도잉🔁</button></div>
     <button id="abRate" type="button">1.0×</button>
   </div>
   <div class="ab-info" id="abInfo"></div>
@@ -495,6 +496,7 @@ function applyChap(b,c,d,o){
   renderChips();renderChap();updateBar();setMeta();goTab('study');
   if(o.auto)AUTO.on=true;else{AUTO.on=false;setLast(o.i||0)}   /* 직접 연 장은 곧바로 「읽은 곳」으로 남긴다 · 켤 때 자동으로 연 것은 위치를 건드리지 않는다 */
   if(o.i!=null&&d.sets[o.i])markNow(o.i,true);
+  P.ac=null;if(P.mode==='accum')acStart(o.i!=null?o.i:0,true);acRender();   /* 쉐도잉 모드로 장을 열면 그 장 1번(또는 고른 문장)부터 쌓기 */
   prefetchNext()}
 function nextOf(){const a=allChaps(),i=a.findIndex(x=>x[0]===P.b&&x[1]===P.c);return a[i+1]||a[0]}
 function prefetchNext(){try{const n=nextOf();if(n&&!(n[0]===P.b&&n[1]===P.c))getChap(n[0],n[1]).catch(()=>{})}catch(e){}}
@@ -533,7 +535,10 @@ function tick(upd){
   {const nw=performance.now();if(!audioEl.paused){if(P.lt){const dt=(nw-P.lt)/1000;if(dt>0&&dt<5)statSec(dt)}P.lt=nw}else P.lt=0}   /* 들은 시간 누적 */
   if(!audioEl.paused){
     if(P.mode==='set'&&s[P.lock]&&t>=s[P.lock].end-0.03){audioEl.currentTime=s[P.lock].start;stat('set','r');return}
-    if(P.mode==='range'&&P.rng.a>=0&&P.rng.b>=0&&t>=s[P.rng.b].end-0.03){audioEl.currentTime=s[P.rng.a].start;stat('range','r');return}}
+    if(P.mode==='range'&&P.rng.a>=0&&P.rng.b>=0&&t>=s[P.rng.b].end-0.03){audioEl.currentTime=s[P.rng.a].start;stat('range','r');return}
+    if(P.mode==='accum'&&P.ac){const c=P.ac;   /* 쉐도잉 누적: 손으로 소리 위치를 옮겼으면 거기를 새 출발점으로 · 이번 단계 끝이면 한 문장 늘려 처음부터 */
+      if(t<s[c.a].start-0.6||t>s[c.e].end+1.2)acStart(idxAt(t),true);
+      else if(t>=s[c.e].end-0.03){acAdvance();return}}}
   const i=idxAt(t);if(i!==P.cur)markNow(i);
   if(!P.drag){const du=audioEl.duration||P.d.dur||1;$('abSeek').value=Math.round(t/du*1000);$('abT1').textContent=fmt(t)}
   if(!audioEl.paused&&Date.now()-P.lastSave>15000)saveLast()}
@@ -556,9 +561,10 @@ function updateBar(){const pl=!audioEl.paused;$('abPlay').textContent=pl?'⏸':'
   document.querySelectorAll('#abModes button').forEach(b=>b.classList.toggle('on',b.dataset.m===P.mode));$('abRate').textContent=(+S.prefs.rate).toFixed(2).replace(/0$/,'')+'×'}
 function updateInfo(){if(!P.d)return;const n=P.d.sets.length,i=Math.max(0,P.cur);let t='문장 '+(i+1)+' / '+n;
   if(P.mode==='set')t+=' · '+(P.lock+1)+'번 문장 반복 중';else if(P.mode==='chap')t+=' · 이 장 반복 중';
+  else if(P.mode==='accum'&&P.ac){const c=P.ac,rep=+S.prefs.acRep||1;t+=' · 쉐도잉 '+(c.a+1)+(c.e>c.a?'~'+(c.e+1):'')+'번 문장'+(rep>1?' ('+(c.r+1)+'/'+rep+'번째)':'')}
   else if(P.mode==='range')t+=P.rng.a>=0&&P.rng.b>=0?' · '+(()=>{const sp=vsSpans();return sp?'절 '+sp[P.rng.a][0]+'~'+sp[P.rng.b][1]:'구간 '+(P.rng.a+1)+'~'+(P.rng.b+1)})()+' 반복 중':P.rng.a>=0?' · 끝 문장을 눌러 주세요':' · 시작 문장을 눌러 주세요';
   $('abInfo').textContent=t}
-function modeHint(){const m={all:'재생 버튼을 누르면 읽는 문장이 굵게 따라가요. 문장을 누르면 거기서부터 들려요.',set:'🔁 한 문장 반복 — 문장을 누르면 그 문장만 계속 반복해요.',chap:'🔁 이 장 처음부터 끝까지 계속 반복해요.',range:'🔁 구간 반복 — 아래에서 몇 절부터 몇 절까지 골라 버튼을 누르거나, ① 시작 문장 ② 끝 문장을 차례로 누르세요.'};$('modeHint').textContent=m[P.mode]}
+function modeHint(){const m={all:'재생 버튼을 누르면 읽는 문장이 굵게 따라가요. 문장을 누르면 거기서부터 들려요.',set:'🔁 한 문장 반복 — 문장을 누르면 그 문장만 계속 반복해요.',chap:'🔁 이 장 처음부터 끝까지 계속 반복해요.',range:'🔁 구간 반복 — 아래에서 몇 절부터 몇 절까지 골라 버튼을 누르거나, ① 시작 문장 ② 끝 문장을 차례로 누르세요.',accum:'🔁 쉐도잉 누적 — 1 → 1~2 → 1~3 → 1~4 … 한 문장씩 늘려 가며 처음부터 다시 따라 읽어요. 문장을 누르면 거기서부터 쌓기 시작해요.'};$('modeHint').textContent=m[P.mode]}
 function updateRangeUI(){document.querySelectorAll('#setList .set').forEach(c=>{const i=+c.dataset.i,a=P.rng.a,b=P.rng.b;
   c.classList.toggle('inrange',a>=0&&b>=0&&i>=a&&i<=b);c.classList.toggle('rstart',a>=0&&b<0&&i===a)});vsRender()}
 /* ===== V0.11 절 구간 반복 (사장님 2026-10-22 「몇 절부터 몇 절 구간 자유롭게 반복」) — 구간🔁 모드에서 시작 절 ~ 끝 절을 골라 반복.
@@ -585,12 +591,27 @@ function setTap(i){
     if(P.rng.a<0||(P.rng.a>=0&&P.rng.b>=0)){P.rng={a:i,b:-1};toast('끝 문장을 눌러 주세요')}
     else{let a=P.rng.a,b=i;if(b<a){const x=a;a=b;b=x}P.rng={a,b};toast('구간 '+(a+1)+'~'+(b+1)+' 반복')}
     updateRangeUI();const st=P.rng.b>=0?s[P.rng.a].start:s[i].start;seekTo(st)}
+  else if(P.mode==='accum'){acStart(i)}
   else{if(P.mode==='set')P.lock=i;seekTo(s[i].start)}
   audioEl.play().catch(()=>{P.want=false});updateInfo()}
+/* ===== V0.12 쉐도잉 누적 반복 (사장님 2026-10-22 「1 → 1-2 → 1-2-3 → 1-2-3-4 … 이렇게 반복」) =====
+   문장(소리 묶음) 단위로 한 문장씩 늘려 가며 처음부터 다시 듣는다. 묶음 크기를 정하면 그만큼 쌓은 뒤 다음 묶음으로 넘어간다 (예: 4 → 1 · 1-2 · 1-2-3 · 1-2-3-4 다음 5 · 5-6 · …) */
+function acBlockEnd(a){const n=P.d.sets.length,l=+S.prefs.acLim||0;return l?Math.min(a+l-1,n-1):n-1}
+function acStart(i,noSeek){if(!P.d)return;const s=P.d.sets;i=Math.max(0,Math.min(i,s.length-1));P.ac={a:i,e:i,r:0};P.rng={a:i,b:i};updateRangeUI();updateInfo();if(!noSeek)seekTo(s[i].start)}
+function acAdvance(){const s=P.d.sets,c=P.ac,rep=+S.prefs.acRep||1;c.r++;
+  if(c.r<rep){seekTo(s[c.a].start);updateInfo();return}
+  c.r=0;const be=acBlockEnd(c.a);
+  if(c.e<be)c.e++;
+  else if(be<s.length-1){c.a=be+1;c.e=c.a}
+  else{P.want=false;audioEl.pause();acStart(0);toast('쉐도잉 누적 반복이 끝났어요 · ▶ 를 누르면 처음부터 다시');return}
+  P.rng={a:c.a,b:c.e};updateRangeUI();updateInfo();seekTo(s[c.a].start)}
+function acRender(){const box=$('acBox');box.classList.toggle('hidden',P.mode!=='accum');if(P.mode!=='accum')return;$('acLim').value=String(+S.prefs.acLim||0);$('acRep').value=String(+S.prefs.acRep||1)}
+['acLim','acRep'].forEach(id=>$(id).addEventListener('change',()=>{S.prefs.acLim=+$('acLim').value;S.prefs.acRep=+$('acRep').value;save();if(P.mode==='accum'&&P.d)acStart(P.ac?P.ac.a:Math.max(0,P.cur))}));
 function setMode(m){P.mode=m;if(m==='set')P.lock=Math.max(0,P.cur);if(m!=='range'){P.rng={a:-1,b:-1};updateRangeUI()}
   else if(P.rng.a>=0&&P.rng.b<0){}
   P.vsKey='';vsRender();
-  updateBar();updateInfo();modeHint();if(m==='range')toast(vsSpans()?'절을 골라 반복하거나, 시작 문장 → 끝 문장 순서로 눌러요':'시작 문장 → 끝 문장 순서로 눌러요')}
+  if(m==='accum'&&P.d)acStart(Math.max(0,P.cur));else if(m!=='accum')P.ac=null;   /* 지금 문장부터 쌓기 시작 (장을 막 열었으면 1번부터) */
+  acRender();updateBar();updateInfo();modeHint();if(m==='range')toast(vsSpans()?'절을 골라 반복하거나, 시작 문장 → 끝 문장 순서로 눌러요':'시작 문장 → 끝 문장 순서로 눌러요')}
 $('abModes').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&P.d)setMode(b.dataset.m)});
 $('abPlay').addEventListener('click',()=>{if(!P.d)return;if(audioEl.paused){P.want=true;audioEl.play().catch(()=>{P.want=false;updateBar()})}else{P.want=false;audioEl.pause()}});
 $('abPrev').addEventListener('click',()=>{if(!P.d)return;const i=Math.max(0,P.cur-((audioEl.currentTime-P.d.sets[P.cur].start)>2?0:1));if(P.mode==='set')P.lock=i;seekTo(P.d.sets[i].start)});
@@ -599,7 +620,7 @@ $('abSeek').addEventListener('input',()=>{P.drag=true;const du=audioEl.duration|
 $('abSeek').addEventListener('change',()=>{const du=audioEl.duration||P.d.dur||1;audioEl.currentTime=$('abSeek').value/1000*du;P.drag=false;if(P.mode==='set')P.lock=idxAt(audioEl.currentTime)});
 const RATES=[0.7,0.85,1,1.15,1.3];
 $('abRate').addEventListener('click',()=>{const i=RATES.indexOf(+S.prefs.rate);S.prefs.rate=RATES[(i+1)%RATES.length];audioEl.playbackRate=S.prefs.rate;save();updateBar();toast('속도 '+S.prefs.rate+'배')});
-audioEl.addEventListener('play',()=>{AUTO.on=false;P.rd=false;updateBar();logStart()});
+audioEl.addEventListener('play',()=>{AUTO.on=false;P.rd=false;if(P.mode==='accum'&&P.d&&P.ac){const s=P.d.sets,c=P.ac,t=audioEl.currentTime||0;if(t<s[c.a].start-0.6||t>s[c.e].end+1.2)acStart(idxAt(t),true)}updateBar();logStart()});
 audioEl.addEventListener('pause',()=>{updateBar();saveLast();flush()});
 function markDone(){const k=P.b+'-'+P.c;S.done[k]=Date.now();S.heard[k]=P.d.sets.length;{const c=chOf(me(),k);c.f++;c.t=Date.now()}save()}
 function allChaps(){const r=[];Object.keys(LIST||{}).map(Number).sort((a,b)=>a-b).forEach(b=>((LIST[b]||[]).slice().sort((x,y)=>x-y)).forEach(c=>r.push([b,c])));return r}
@@ -608,6 +629,7 @@ function nextChap(){const n=nextOf();   /* 책을 넘어 쭉 · 맨 끝이면 �
   openChap(n[0],n[1],{play:true,chain:true})}
 audioEl.addEventListener('ended',()=>{if(!P.d)return;const s=P.d.sets;
   try{markDone();if(P.mode==='chap')stat('chap','r');else if(P.mode==='set')stat('set','r');else if(P.mode==='range')stat('range','r');flush()}catch(e){}   /* 기록하다 오류가 나도 다음 장으로 넘어가는 일은 막지 않는다 */
+  if(P.mode==='accum'&&P.ac){acAdvance();if(P.want)audioEl.play().catch(()=>{});return}   /* 맨 끝 문장까지 쌓은 장이 끝났을 때 */
   if(P.mode==='chap'||P.mode==='set'||P.mode==='range'){const st=P.mode==='set'&&s[P.lock]?s[P.lock].start:(P.mode==='range'&&P.rng.a>=0?s[P.rng.a].start:0);audioEl.currentTime=st;audioEl.play().catch(()=>{});return}
   nextChap()});
 window.addEventListener('pagehide',()=>{if(P.d)saveLast();flush(true)});
