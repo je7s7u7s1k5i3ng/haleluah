@@ -160,6 +160,10 @@ code{background:#efe8da;padding:2px 7px;border-radius:6px;font-size:13px}
 .setup-card h1{font-family:'SBAggroB','Noto Sans KR',sans-serif;font-size:26px;color:var(--accent);text-align:center}
 .setup-card>p{text-align:center;color:var(--sub);font-size:13px;margin:6px 0 18px}
 .setup-card .field input{padding:13px}
+.guest-btn{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;margin:10px 0 4px;padding:11px;border-radius:12px;font-size:15px}.guest-btn small{font-size:12px;color:var(--sub);font-weight:400}
+.lm-ta{width:100%;box-sizing:border-box;min-height:96px;padding:10px;border:1px solid var(--line);border-radius:10px;font:inherit;font-size:14px;margin:8px 0}
+.lm-row{padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;display:flex;align-items:center;gap:8px}.lm-row .lm-t{flex:1;min-width:0;word-break:break-all}.lm-row .lm-t small{display:block;color:var(--sub)}
+.lm-row button{flex:none;border:0;border-radius:8px;padding:7px 10px;background:var(--accent);color:#fff;font:inherit;font-size:12px;cursor:pointer}   /* V3.35 개인 링크 */
 .setup-card .field input.fixed{background:#efe6d2;border-color:transparent;font-weight:700;color:var(--accent);pointer-events:none}   /* V3.33 모임 이름 고정 */
 .setup-card .sub{text-align:center;margin-top:14px}
 
@@ -454,10 +458,10 @@ h2{color:#1E2A55}
       <button id="suJoin" class="primary">참여하기</button>
       <button id="suNew" class="ghost">새 코드 만들기</button>
     </div>
+    <button id="suGuest" class="ghost guest-btn" type="button">🎧 참여 없이 듣기·읽기<small>기록은 남지 않아요</small></button>   <!-- V3.35 사장님 2026-10-22 「참여 없이 그냥 듣고 싶은 사람」 · 참여하기 바로 아래 연한 버튼 -->
     <p>함께 읽고, 함께 기록해요</p>
     <div class="join-must" id="joinMust">🙏 <b>꼭 참여해 주세요</b><br/>참여해야 <b>목사님이 읽은 기록을 함께 살펴 주실 수 있어요.</b> 위에 이름과 비밀번호 4자리를 넣고 「참여하기」를 누르면 끝! 한 번만 하면 다음부터는 바로 읽던 성경이 열려요.</div>
     <div class="promo-top promo">
-      <button id="suGuest" class="promo-btn blink hidden" type="button">👀 가입 없이 먼저 둘러보기 <span class="tap-hint">👆 여기 클릭</span></button>
       <a class="promo-btn alt blink" href="../feedback/">💬 이런 기능이 있었으면 좋겠어요 <span class="tap-hint">👆 여기 클릭</span></a>
     </div>
     <p class="intro-note promo">📣 지금은 <b>시험판 웹앱</b>이에요. 함께 써 보고 잘 되면 <b>플레이스토어 설치용 앱</b>으로 업데이트할 예정입니다.</p>
@@ -573,6 +577,7 @@ h2{color:#1E2A55}
   <section id="tab-all" class="hidden">
     <div class="card admin-head"><h2>👨‍🏫 목사님 관리 화면</h2><p class="sub">지체들의 읽기 현황을 한눈에 봐요. 이 화면은 목사님(관리 계정)만 보여요.</p><p class="sub hidden" id="bothNote">👀 이 계정은 지체 화면(홈·읽기·현황)과 관리 화면을 함께 볼 수 있어요.</p><div id="statsRow"></div>
       <div class="seg" id="admSort"><button type="button" data-s="name" class="on">이름순</button><button type="button" data-s="idle">오래 안 읽은 순</button><button type="button" data-s="pct">진도순</button></div></div>
+    <div class="card" id="linkMaker"><h2>🔗 개인 링크 만들기</h2><p class="sub">아직 참여하지 않은 지체 이름을 한 줄에 하나씩 적고 「링크 만들기」를 누르세요. 사람마다 링크가 나와요. 그 링크를 <b>1:1 카톡</b>으로 보내면, 지체는 누르기만 하면 바로 참여돼요. (단톡방 공용 링크는 그대로 써도 돼요)</p><textarea id="lmNames" class="lm-ta" placeholder="김은혜&#10;박요셉"></textarea><div class="btn-row"><button id="lmGo" class="primary" type="button">링크 만들기</button><button id="lmAll" class="ghost hidden" type="button">전체 복사</button></div><div id="lmOut"></div></div>   <!-- V3.35 -->
     <div class="card"><h2>📊 링크 방문 통계</h2><div id="visitStats"></div></div>
     <div class="card"><h2>🪑 함께 앉은 자리</h2><p class="sub">자리를 누르면 그 지체의 읽은 곳 전체로 가요.</p><div id="adminRoom"></div></div>
     <div class="card"><h2>지체별 현황</h2><div id="adminList"></div></div>
@@ -588,6 +593,7 @@ h2{color:#1E2A55}
       <div class="field"><label>이름</label><input id="nameInput" maxlength="12"/></div>
       <div class="btn-row"><button id="saveNameBtn" class="primary">이름 저장</button></div>
       <p class="sub" id="privState" style="margin-top:8px"></p>
+      <p class="sub hidden" id="myPinNote" style="margin-top:6px"></p>   <!-- V3.35 개인 링크로 참여한 사람 -->
     </div>
     <div class="card">
       <h2>모임 초대</h2>
@@ -1791,6 +1797,7 @@ function renderSet(){
     ?'🔒 프라이버시 모드 켜짐 — 다른 사람(목사님 포함)에게는 "'+(state.alias||'비공개')+'"로만 보이고 시트에 실명이 저장되지 않습니다.'
     :'프라이버시 모드 꺼짐 — 모임에 처음 등록할 때 비밀번호를 입력하면 켜집니다.';
   document.getElementById('groupCodeTxt').textContent=state.group||'—';
+  {const e=document.getElementById('myPinNote');if(e){e.classList.toggle('hidden',!state.linkPin);if(state.linkPin)e.textContent='🔗 개인 링크로 참여했어요 · 내 비밀번호 '+state.linkPin+' — 다른 폰에서는 받은 링크를 다시 누르거나, 이름과 이 번호로 들어오면 기록이 이어져요.'}}
   const link=cleanLink();
   document.getElementById('shareLink').textContent=link;
   renderConn();
@@ -2026,6 +2033,7 @@ document.getElementById('suJoin').addEventListener('click',()=>{
     state.name=n;state.group=g;state.uid=uid;
     state.privacy=(PRIV_MODE==='named')?false:!!pin;state.alias=state.privacy?alias:'';
     state.pinHash=pinHash;state.aph=aph;
+    if(LINKJ&&LINKJ.n===n&&LINKJ.p===pin)state.linkPin=pin;   /* V3.35 */
     if(!state.planStart)state.planStart=new Date().toISOString().slice(0,10);
     if(GUEST){GUEST=false;persist();location.reload();return}   /* 둘러보다가 참여 → 새로 시작 */
     persist();
@@ -2189,12 +2197,38 @@ if('serviceWorker'in navigator){
   navigator.serviceWorker.register('sw.js').then(reg=>{const chk=()=>{try{reg.update().catch(()=>{})}catch(e){}};
     document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()});window.addEventListener('focus',chk);setInterval(chk,30*60*1000)}).catch(()=>{});
 }
+/* ===== V3.35 개인 링크 — 주소 끝 #n=이름&p=4자리 (# 뒤는 서버로 가지 않음) ===== */
+const LINKJ=(()=>{try{const h=new URLSearchParams(location.hash.slice(1)),n=(h.get('n')||'').trim(),p=(h.get('p')||'').trim();return (n&&n.length<=12&&/^[0-9]{4}$/.test(p))?{n,p}:null}catch(e){return null}})();
+function linkFor(n,p){return location.origin+location.pathname+'#n='+encodeURIComponent(n)+'&p='+p}
+function rnd4(){try{const a=new Uint32Array(1);crypto.getRandomValues(a);return String(a[0]%10000).padStart(4,'0')}catch(e){return String(Math.floor(Math.random()*10000)).padStart(4,'0')}}
+function copyText(t,ok){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{if(ok)ok()},()=>prompt('아래 글을 길게 눌러 복사하세요',t))}
+let LM_LIST=[];
+document.getElementById('lmGo').addEventListener('click',()=>{
+  const names=[...new Set(document.getElementById('lmNames').value.split(/[\n,]/).map(x=>x.trim()).filter(Boolean))].slice(0,200);
+  const out=document.getElementById('lmOut');out.textContent='';LM_LIST=[];
+  const have=new Set(Object.values(MEMBERS||{}).map(m=>m.name));
+  names.forEach(n=>{const row=document.createElement('div');row.className='lm-row';const t=document.createElement('div');t.className='lm-t';row.appendChild(t);
+    if(n.length>12)t.textContent='⚠ '+n+' — 이름은 12자까지예요';
+    else if(CFG.adminName&&n===CFG.adminName)t.textContent='⚠ '+n+' — 목사님 전용 이름이라 링크를 만들지 않아요';
+    else if(have.has(n))t.textContent='✅ '+n+' — 이미 참여했어요 (링크 필요 없음)';
+    else{const p=rnd4(),l=linkFor(n,p),msg=n+'님, 요한순교자 성경 읽기 개인 링크예요 🙏\n누르기만 하면 바로 참여돼요.\n'+l;LM_LIST.push(msg);
+      const b=document.createElement('b');b.textContent=n;t.appendChild(b);const sm=document.createElement('small');sm.textContent=l;t.appendChild(sm);
+      const c=document.createElement('button');c.type='button';c.textContent='복사';c.addEventListener('click',()=>copyText(msg,()=>{c.textContent='복사됨 ✓'}));row.appendChild(c)}
+    out.appendChild(row)});
+  document.getElementById('lmAll').classList.toggle('hidden',LM_LIST.length<2);
+});
+document.getElementById('lmAll').addEventListener('click',e=>copyText(LM_LIST.join('\n\n'),()=>{e.target.textContent='전체 복사됨 ✓'}));
 (function boot(){
   pingVisit('open');   /* 링크 열어 봄 — 횟수만 */
   // 미리보기 모드: ?preview=1 이면 오버레이 생략 (테스트용)
   const preview=new URLSearchParams(location.search).has('preview');
+  if(LINKJ&&!preview&&!(state.group&&state.name)){   /* V3.35 개인 링크 — 처음이면 그 이름·4자리로 바로 참여 (기존 참여 흐름 그대로) */
+    showSetup(CFG.groupId||urlG||'');document.getElementById('suName').value=LINKJ.n;document.getElementById('suPin').value=LINKJ.p;
+    setTimeout(()=>document.getElementById('suJoin').click(),300);return;
+  }
   if(state.group&&state.name&&!preview){
-    startApp();autoRead();instAuto();   /* V3.30 참여한 뒤부터는 열면 바로 읽던 성경 · 설치 안 됐으면 설치 안내 */
+    startApp();autoRead();instAuto();
+    if(LINKJ&&LINKJ.n!==state.name)setTimeout(()=>alert('이 폰은 「'+state.name+'」 님으로 이미 참여되어 있어요. 받은 링크(「'+LINKJ.n+'」)는 다른 폰에서 열어 주세요.'),800);   /* V3.30 참여한 뒤부터는 열면 바로 읽던 성경 · 설치 안 됐으면 설치 안내 */
   }else if(preview){
     startGuest();   /* 예전엔 「나」 로 진짜 모임에 올라갈 수 있었다 → 둘러보기로 */
   }else{
