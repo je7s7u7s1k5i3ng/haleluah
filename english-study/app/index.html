@@ -93,6 +93,9 @@ button{font-family:inherit}
 .set.now .set-h .pl{background:var(--gold);color:#1e2a55}
 .set.now{border-color:var(--gold);box-shadow:0 0 0 2px rgba(232,184,96,.6);background:#fffaf0}
 .set.now::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:4px;border-radius:0 4px 4px 0;background:var(--gold)}
+.vs{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--ink,#222)}
+.vs select{padding:8px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit;font-size:14px;min-width:64px}
+.vs button{margin-left:auto;padding:9px 12px;font-size:13px}
 .set.inrange{border-color:#7e8fd6;background:#f4f6ff}
 .set.rstart{box-shadow:0 0 0 2px #4363d8}
 .en{font-family:Georgia,'Times New Roman',serif;font-size:calc(18px*var(--fs));line-height:1.8;color:#1f1d27}
@@ -283,6 +286,8 @@ body{min-height:100vh;min-height:100dvh;-webkit-touch-callout:none}
       <div class="chips hidden" id="bkRow" style="margin:8px 0 0"></div>
       <div class="chips" id="chips"></div>
       <p class="hint" id="modeHint"></p>
+      <div class="vs hidden" id="vsBox"><b>절로 고르기</b><select id="vsA" aria-label="시작 절"></select><span>절 ~</span><select id="vsB" aria-label="끝 절"></select><span>절</span><button class="primary" id="vsGo" type="button">🔁 이 절 구간 반복</button></div>
+      <p class="hint hidden" id="vsNote"></p>
     </div>
     <div id="setList"></div>
   </section>
@@ -479,17 +484,28 @@ $('setList').addEventListener('click',e=>{
 const fmt=t=>{t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+pad(t%60)};
 function idxAt(t){const s=P.d.sets;let r=0;for(let i=0;i<s.length;i++){if(s[i].start<=t+0.08)r=i;else break}return r}
 function seekTo(t){audioEl.currentTime=Math.max(0,t);P.rd=false;tick(true);if(audioEl.paused)saveLast()}   /* 멈춘 채 문장을 옮겨도 위치를 바로 남긴다 */
+/* V0.11 쭉 듣기에서 장이 끝나면 멈추던 문제 (사장님 2026-10-22) — 다음 장 글을 미리 받아 두고(prefetchNext), 장이 끝나는 순간 기다림 없이 바로 다음 소리를 건다.
+   예전엔 끝난 뒤에야 다음 장 글을 내려받았고, 그 사이 화면이 꺼진 폰이 소리 재생을 막으면 ▶ 를 다시 눌러야 했다 */
+function applyChap(b,c,d,o){
+  audioEl.pause();P.b=b;P.c=c;P.d=d;P.cur=-1;P.rd=true;P.lock=o.i||0;P.rng={a:-1,b:-1};P.want=!!o.play;P.errN=0;
+  audioEl.src=(CFG.audioBase||'audio/')+b+'_'+pad(c)+'.m4a';audioEl.playbackRate=S.prefs.rate;
+  P.pend=(o.i!=null&&d.sets[o.i])?d.sets[o.i].start:null;
+  if(o.play){P.chain=o.chain?Date.now():0;audioEl.play().catch(()=>{P.want=false;updateBar();if(o.chain)toast('소리가 멈췄어요 · ▶ 를 눌러 이어서 들어 주세요')})}   /* ★그림 그리기 전에 소리부터 건다 */
+  $('audioBar').classList.remove('hidden');document.body.classList.add('hasbar');
+  renderChips();renderChap();updateBar();setMeta();goTab('study');
+  if(o.auto)AUTO.on=true;else{AUTO.on=false;setLast(o.i||0)}   /* 직접 연 장은 곧바로 「읽은 곳」으로 남긴다 · 켤 때 자동으로 연 것은 위치를 건드리지 않는다 */
+  if(o.i!=null&&d.sets[o.i])markNow(o.i,true);
+  prefetchNext()}
+function nextOf(){const a=allChaps(),i=a.findIndex(x=>x[0]===P.b&&x[1]===P.c);return a[i+1]||a[0]}
+function prefetchNext(){try{const n=nextOf();if(n&&!(n[0]===P.b&&n[1]===P.c))getChap(n[0],n[1]).catch(()=>{})}catch(e){}}
 function openChap(b,c,o){o=o||{};
-  return Promise.all([getList(),getChap(b,c)]).then(r=>{const d=r[1];
-    audioEl.pause();P.b=b;P.c=c;P.d=d;P.cur=-1;P.rd=true;P.lock=o.i||0;P.rng={a:-1,b:-1};P.want=!!o.play;
-    audioEl.src=(CFG.audioBase||'audio/')+b+'_'+pad(c)+'.m4a';audioEl.playbackRate=S.prefs.rate;
-    P.pend=(o.i!=null&&d.sets[o.i])?d.sets[o.i].start:null;
-    $('audioBar').classList.remove('hidden');document.body.classList.add('hasbar');
-    renderChips();renderChap();updateBar();setMeta();goTab('study');
-    if(o.auto)AUTO.on=true;else{AUTO.on=false;setLast(o.i||0)}   /* 직접 연 장은 곧바로 「읽은 곳」으로 남긴다 · 켤 때 자동으로 연 것은 위치를 건드리지 않는다 */
-    if(o.i!=null&&d.sets[o.i])markNow(o.i,true);
-    if(o.play)audioEl.play().catch(()=>{P.want=false;updateBar()});
-  }).catch(()=>toast('이 장은 아직 준비 중이에요'))}
+  const k=b+'_'+pad(c);
+  if(LIST&&CACHE[k]){try{applyChap(b,c,CACHE[k],o)}catch(e){toast('이 장은 아직 준비 중이에요')}return Promise.resolve()}   /* 미리 받아 둔 장은 기다림 없이 */
+  return Promise.all([getList(),getChap(b,c)]).then(r=>applyChap(b,c,r[1],o)).catch(()=>toast('이 장은 아직 준비 중이에요'))}
+/* 다음 장 소리가 안 나올 때: 2.5초 뒤 한 번 더 걸고 · 화면이 다시 켜지면 또 걸고 · 소리 파일을 못 받으면 한 번 다시 받는다 */
+audioEl.addEventListener('playing',()=>{P.chain=0});
+setInterval(()=>{if(P.chain&&Date.now()-P.chain>2500&&audioEl.paused&&P.want){P.chain=Date.now();audioEl.play().catch(()=>{})}else if(P.chain&&Date.now()-P.chain>20000)P.chain=0},1000);
+audioEl.addEventListener('error',()=>{if(P.d&&P.want&&(P.errN||0)<2){P.errN=(P.errN||0)+1;const t=audioEl.currentTime||0,src=audioEl.src;setTimeout(()=>{if(!P.want||audioEl.src!==src)return;audioEl.load();if(t>0)P.pend=t;audioEl.play().catch(()=>{})},1500)}});
 audioEl.addEventListener('loadedmetadata',()=>{if(P.pend!=null){audioEl.currentTime=P.pend;P.pend=null}$('abT2').textContent=fmt(audioEl.duration)});
 function markNow(i,force){
   if(i===P.cur&&!force)return;
@@ -540,11 +556,29 @@ function updateBar(){const pl=!audioEl.paused;$('abPlay').textContent=pl?'⏸':'
   document.querySelectorAll('#abModes button').forEach(b=>b.classList.toggle('on',b.dataset.m===P.mode));$('abRate').textContent=(+S.prefs.rate).toFixed(2).replace(/0$/,'')+'×'}
 function updateInfo(){if(!P.d)return;const n=P.d.sets.length,i=Math.max(0,P.cur);let t='문장 '+(i+1)+' / '+n;
   if(P.mode==='set')t+=' · '+(P.lock+1)+'번 문장 반복 중';else if(P.mode==='chap')t+=' · 이 장 반복 중';
-  else if(P.mode==='range')t+=P.rng.a>=0&&P.rng.b>=0?' · 구간 '+(P.rng.a+1)+'~'+(P.rng.b+1)+' 반복 중':P.rng.a>=0?' · 끝 문장을 눌러 주세요':' · 시작 문장을 눌러 주세요';
+  else if(P.mode==='range')t+=P.rng.a>=0&&P.rng.b>=0?' · '+(()=>{const sp=vsSpans();return sp?'절 '+sp[P.rng.a][0]+'~'+sp[P.rng.b][1]:'구간 '+(P.rng.a+1)+'~'+(P.rng.b+1)})()+' 반복 중':P.rng.a>=0?' · 끝 문장을 눌러 주세요':' · 시작 문장을 눌러 주세요';
   $('abInfo').textContent=t}
-function modeHint(){const m={all:'재생 버튼을 누르면 읽는 문장이 굵게 따라가요. 문장을 누르면 거기서부터 들려요.',set:'🔁 한 문장 반복 — 문장을 누르면 그 문장만 계속 반복해요.',chap:'🔁 이 장 처음부터 끝까지 계속 반복해요.',range:'🔁 구간 반복 — ① 시작 문장 ② 끝 문장을 차례로 누르세요.'};$('modeHint').textContent=m[P.mode]}
+function modeHint(){const m={all:'재생 버튼을 누르면 읽는 문장이 굵게 따라가요. 문장을 누르면 거기서부터 들려요.',set:'🔁 한 문장 반복 — 문장을 누르면 그 문장만 계속 반복해요.',chap:'🔁 이 장 처음부터 끝까지 계속 반복해요.',range:'🔁 구간 반복 — 아래에서 몇 절부터 몇 절까지 골라 버튼을 누르거나, ① 시작 문장 ② 끝 문장을 차례로 누르세요.'};$('modeHint').textContent=m[P.mode]}
 function updateRangeUI(){document.querySelectorAll('#setList .set').forEach(c=>{const i=+c.dataset.i,a=P.rng.a,b=P.rng.b;
-  c.classList.toggle('inrange',a>=0&&b>=0&&i>=a&&i<=b);c.classList.toggle('rstart',a>=0&&b<0&&i===a)})}
+  c.classList.toggle('inrange',a>=0&&b>=0&&i>=a&&i<=b);c.classList.toggle('rstart',a>=0&&b<0&&i===a)});vsRender()}
+/* ===== V0.11 절 구간 반복 (사장님 2026-10-22 「몇 절부터 몇 절 구간 자유롭게 반복」) — 구간🔁 모드에서 시작 절 ~ 끝 절을 골라 반복.
+   소리 시간표는 문장 묶음(예: 1~2절) 단위라서, 고른 절이 묶음 가운데면 그 묶음 처음·끝까지 넓혀 반복하고 알려 준다 ===== */
+function verseSpan(ref){const m=String(ref||'').match(/:(\d+)(?:\s*[-–~]\s*(\d+))?/);if(!m)return null;const a=+m[1];return [a,m[2]?Math.max(a,+m[2]):a]}
+function vsSpans(){if(!P.d)return null;const sp=P.d.sets.map(s=>verseSpan(s.ref));return sp.every(x=>x)?sp:null}
+function vsRender(){const box=$('vsBox'),sp=P.mode==='range'?vsSpans():null;box.classList.toggle('hidden',!sp);if(!sp){$('vsNote').classList.add('hidden');return}
+  const key=P.b+'-'+P.c,A=$('vsA'),B=$('vsB');
+  if(P.vsKey!==key){P.vsKey=key;const vs=[];sp.forEach(x=>{for(let v=x[0];v<=x[1];v++)if(vs.indexOf(v)<0)vs.push(v)});vs.sort((x,y)=>x-y);
+    [A,B].forEach(s=>{s.textContent='';vs.forEach(v=>{const o=el('option',null,String(v));o.value=v;s.appendChild(o)})});
+    const c0=sp[Math.max(0,P.cur)]||sp[0];A.value=c0[0];B.value=c0[1]}
+  if(P.rng.a>=0&&P.rng.b>=0){A.value=sp[P.rng.a][0];B.value=sp[P.rng.b][1]}}
+function vsApply(){const sp=vsSpans();if(!sp||!P.d)return;
+  let lo=+$('vsA').value,hi=+$('vsB').value;if(hi<lo){const x=lo;lo=hi;hi=x}
+  const a=sp.findIndex(x=>lo>=x[0]&&lo<=x[1]);let b=-1;sp.forEach((x,i)=>{if(hi>=x[0]&&hi<=x[1])b=i});if(a<0||b<0)return;if(b<a)b=a;
+  P.rng={a,b};P.want=true;updateRangeUI();updateInfo();const s=P.d.sets;seekTo(s[a].start);audioEl.play().catch(()=>{P.want=false;updateBar()});
+  const ra=sp[a][0],rb=sp[b][1],nt=$('vsNote');
+  if(ra!==lo||rb!==hi){nt.textContent='소리가 '+ra+'~'+rb+'절 묶음 단위로 잘려 있어서 '+ra+'~'+rb+'절을 반복해요.';nt.classList.remove('hidden')}else nt.classList.add('hidden');
+  toast('절 '+ra+'~'+rb+' 반복')}
+$('vsGo').addEventListener('click',vsApply);
 function setTap(i){
   if(!P.d)return;const s=P.d.sets;P.want=true;
   if(P.mode==='range'){
@@ -555,7 +589,8 @@ function setTap(i){
   audioEl.play().catch(()=>{P.want=false});updateInfo()}
 function setMode(m){P.mode=m;if(m==='set')P.lock=Math.max(0,P.cur);if(m!=='range'){P.rng={a:-1,b:-1};updateRangeUI()}
   else if(P.rng.a>=0&&P.rng.b<0){}
-  updateBar();updateInfo();modeHint();if(m==='range')toast('시작 문장 → 끝 문장 순서로 눌러요')}
+  P.vsKey='';vsRender();
+  updateBar();updateInfo();modeHint();if(m==='range')toast(vsSpans()?'절을 골라 반복하거나, 시작 문장 → 끝 문장 순서로 눌러요':'시작 문장 → 끝 문장 순서로 눌러요')}
 $('abModes').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&P.d)setMode(b.dataset.m)});
 $('abPlay').addEventListener('click',()=>{if(!P.d)return;if(audioEl.paused){P.want=true;audioEl.play().catch(()=>{P.want=false;updateBar()})}else{P.want=false;audioEl.pause()}});
 $('abPrev').addEventListener('click',()=>{if(!P.d)return;const i=Math.max(0,P.cur-((audioEl.currentTime-P.d.sets[P.cur].start)>2?0:1));if(P.mode==='set')P.lock=i;seekTo(P.d.sets[i].start)});
@@ -568,15 +603,15 @@ audioEl.addEventListener('play',()=>{AUTO.on=false;P.rd=false;updateBar();logSta
 audioEl.addEventListener('pause',()=>{updateBar();saveLast();flush()});
 function markDone(){const k=P.b+'-'+P.c;S.done[k]=Date.now();S.heard[k]=P.d.sets.length;{const c=chOf(me(),k);c.f++;c.t=Date.now()}save()}
 function allChaps(){const r=[];Object.keys(LIST||{}).map(Number).sort((a,b)=>a-b).forEach(b=>((LIST[b]||[]).slice().sort((x,y)=>x-y)).forEach(c=>r.push([b,c])));return r}
-function nextChap(){const a=allChaps(),i=a.findIndex(x=>x[0]===P.b&&x[1]===P.c),n=a[i+1]||a[0];   /* 책을 넘어 쭉 · 맨 끝이면 처음으로 */
+function nextChap(){const n=nextOf();   /* 책을 넘어 쭉 · 맨 끝이면 처음으로 */
   if(!n||(n[0]===P.b&&n[1]===P.c)){seekTo(0);audioEl.play().catch(()=>{});return}
-  openChap(n[0],n[1],{play:true})}
-audioEl.addEventListener('ended',()=>{if(!P.d)return;markDone();const s=P.d.sets;
-  if(P.mode==='chap')stat('chap','r');else if(P.mode==='set')stat('set','r');else if(P.mode==='range')stat('range','r');flush();
+  openChap(n[0],n[1],{play:true,chain:true})}
+audioEl.addEventListener('ended',()=>{if(!P.d)return;const s=P.d.sets;
+  try{markDone();if(P.mode==='chap')stat('chap','r');else if(P.mode==='set')stat('set','r');else if(P.mode==='range')stat('range','r');flush()}catch(e){}   /* 기록하다 오류가 나도 다음 장으로 넘어가는 일은 막지 않는다 */
   if(P.mode==='chap'||P.mode==='set'||P.mode==='range'){const st=P.mode==='set'&&s[P.lock]?s[P.lock].start:(P.mode==='range'&&P.rng.a>=0?s[P.rng.a].start:0);audioEl.currentTime=st;audioEl.play().catch(()=>{});return}
   nextChap()});
 window.addEventListener('pagehide',()=>{if(P.d)saveLast();flush(true)});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){if(P.d)saveLast();flush(true)}else if(SYNC_ON&&Date.now()-SY.t>60000)syncNow()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){if(P.d)saveLast();flush(true)}else{if(P.chain&&P.want&&audioEl.paused)audioEl.play().catch(()=>{});if(SYNC_ON&&Date.now()-SY.t>60000)syncNow()}});
 $('chSel').addEventListener('change',()=>{openChap(P.b,+$('chSel').value,{play:false})});
 /* V0.9 공부 탭에서 책 고르기 (사장님 2026-10-09 「공부에서 성경 선택할 수 있게 · 클릭이 안 돼」) — 책을 누르면 그 책의 마지막 읽던 장(없으면 첫 장)으로 */
 /* 책 → 장 두 단계: 책 칩을 누르면 그 책의 장 버튼이 아래에 나오고, 장을 누르면 열린다 (제목 「장을 골라 주세요」 · 📖 책 · 장 선택 칸 어느 것을 눌러도 같은 칸이 열림) */
