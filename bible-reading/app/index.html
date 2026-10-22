@@ -1419,7 +1419,7 @@ function audPref(){try{localStorage.setItem('bibleAudioPref',JSON.stringify({mod
    (V3.23 만으로는 옛 버전이 깔린 폰의 ★첫 번째 열기에서 옛 목록이 보일 수 있었다 — 사장님 2026-10-09 「신명기 같이 재생 버튼 안 나오는 데」) */
 let AUD_BUST=Date.now();
 function audList(){return AUD_LIST?Promise.resolve(AUD_LIST):fetch('audio/list.json?v='+AUD_BUST,{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{if(j)AUD_LIST=j;return AUD_LIST||{}})}
-function audTimes(b){return AUD_T[b]?Promise.resolve(AUD_T[b]):fetch('audio/'+b+'.json?v='+AUD_BUST,{cache:'no-store'}).then(r=>r.json()).then(j=>AUD_T[b]=j.ch||{})}
+function audTimes(b){return AUD_T[b]?Promise.resolve(AUD_T[b]):fetch('audio/'+b+'.json?v='+AUD_BUST,{cache:'no-store'}).then(r=>r.json()).then(j=>AUD_T[b]=j.ch||{}).catch(()=>({}))}   /* V3.34 시각표 실패해도 소리는 재생 (실패는 저장 안 함 → 다음에 다시 받음) */
 /* V3.24 앱을 열어 둔 채로 있다가 돌아와도 — 목록이 바뀌었으면 새 목록으로 (소리만 올리는 배포는 화면이 새로고침되지 않는다) */
 document.addEventListener('visibilitychange',()=>{
   if(document.hidden||!AUD_LIST)return;
@@ -1437,7 +1437,7 @@ function audLoad(b,c,go){   /* 소리 장 바꾸기 (시각표 받고 → 주소
     AUD.T=(ch[String(c)]||[]);AUD.b=b;AUD.c=c;AUD.cur=0;AUD.lock=-1;
     audioEl.src=(CFG.audioBase||'audio/')+b+'_'+String(c).padStart(2,'0')+'.m4a';   /* 소리 = config.js audioBase (Cloudflare R2) */
     audioEl.playbackRate=AUD.rate;if(go){AUD.want=true;audioEl.play().catch(()=>{AUD.want=false;audUI()})}
-    audUI();audMeta();audAwayCard();
+    audUI();audMeta();audAwayCard();audPrep();
   });
 }
 function audSetup(b,c){   /* 장을 열 때마다 — 소리 있는 장이면 막대 · ★듣는 중에 다른 장을 열면 소리는 그대로(둘러보기) */
@@ -1540,6 +1540,22 @@ function audMeta(){
   try{navigator.mediaSession.metadata=new MediaMetadata({title:BOOKS[AUD.b-1].n+' '+AUD.c+chW(AUD.b),artist:'개역개정 낭독 · 요한순교자 함께 성경 읽기',album:'성경 듣기',
     artwork:[{src:'icon-192.png',sizes:'192x192',type:'image/png'},{src:'icon-512.png',sizes:'512x512',type:'image/png'}]})}catch(e){}
 }
+/* V3.34 쭉 듣기 — 다음 소리 있는 장 (audStep 과 같은 규칙 · 화면은 안 건드림) */
+function audNextOf(b,c){let n=0;do{c++;if(c>BOOKS[b-1].c){b++;c=1}if(b>66){b=1;c=1}}while(!hasAudio(b,c)&&++n<1200);return hasAudio(b,c)?{b,c}:null}
+function audPrep(){if(AUD.mode!=='all'||!AUD.b)return;const n=audNextOf(AUD.b,AUD.c);if(n&&!AUD_T[n.b])audTimes(n.b)}   /* 다음 장 시각표 미리 */
+function audNextNow(){   /* ★장이 끝난 그 자리에서 바로 다음 장 소리 — 기다림 없이 (화면 꺼짐·백그라운드에서도 이어지게) · 화면은 그다음 */
+  const n=audNextOf(AUD.b||curB,AUD.c||curC);if(!n)return false;
+  const ch=AUD_T[n.b];AUD.T=ch?(ch[String(n.c)]||[]):[];AUD.b=n.b;AUD.c=n.c;AUD.cur=0;AUD.lock=-1;
+  audioEl.src=(CFG.audioBase||'audio/')+n.b+'_'+String(n.c).padStart(2,'0')+'.m4a';audioEl.playbackRate=AUD.rate;
+  AUD.want=true;audioEl.play().catch(()=>{AUD.blocked=true;audUI()});   /* 막히면 화면으로 돌아올 때 이어서 */
+  audMeta();
+  if(!ch)audTimes(n.b).then(c2=>{if(AUD.b===n.b&&AUD.c===n.c){AUD.T=c2[String(n.c)]||[];audUI();audMark(true)}});
+  if(AUD.away){audUI();audAwayCard()}else{AUD.auto=true;goRead(n.b,n.c)}
+  audPrep();return true}
+audioEl.addEventListener('playing',()=>{AUD.blocked=false;AUD.errSrc='';audPrep()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&AUD.blocked&&AUD.want&&audioEl.paused)audioEl.play().catch(()=>{})});
+audioEl.addEventListener('error',()=>{if(!AUD.want||!audioEl.src||AUD.errSrc===audioEl.src)return;AUD.errSrc=audioEl.src;   /* 소리 파일 받기 실패 — 2초 뒤 한 번 더 */
+  setTimeout(()=>{if(!AUD.want)return;audioEl.load();audioEl.play().catch(()=>{AUD.blocked=true;audUI()})},2000)});
 function audStep(d){   /* 이전·다음 장 (소리 있는 장으로) */
   let b=AUD.b||curB,c=AUD.c||curC,n=0;
   /* V3.17 소리 없는 장은 건너뛰고 ★소리 있는 다음 장으로 · 맨 끝이면 처음으로 — 정지 전까지 멈추지 않는다 (사장님 2026-10-07) */
@@ -1598,7 +1614,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden&&!audioEl.p
 audioEl.addEventListener('ended',()=>{if(AUD.mode==='all'||AUD.mode==='chap')audSave(true)},true);   /* 쭉 듣기로 장을 끝까지 → 다 읽음 (다음 장 넘어가기 전에) · V3.29 「이 장 반복」도 한 바퀴 끝날 때마다 (반복 횟수 누적) */
 audioEl.addEventListener('ended',()=>{
   if(AUD.mode==='chap'||AUD.mode==='verse'){const T=AUD.T||[];AUD.self=true;audioEl.currentTime=AUD.mode==='verse'&&T[AUD.lock]?T[AUD.lock][1]:0;audioEl.play().catch(()=>{});return}
-  if(!audStep(1)){AUD.want=false;audUI()}   /* 쭉 듣기 — 다음 장으로 (마지막 장이면 멈춤) */
+  if(!audNextNow()){AUD.want=false;audUI()}   /* 쭉 듣기 — 다음 장으로 (V3.34 ★기다림 없이 바로 · 마지막 장이면 멈춤) */
 });
 (function rafLoop(){if(!audioEl.paused&&!document.hidden)audMark(false);requestAnimationFrame(rafLoop)})();
 if('mediaSession'in navigator){const ms=navigator.mediaSession,h=(a,f)=>{try{ms.setActionHandler(a,f)}catch(e){}};
