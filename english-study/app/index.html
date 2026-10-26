@@ -94,6 +94,7 @@ button{font-family:inherit}
 .set.now{border-color:var(--gold);box-shadow:0 0 0 2px rgba(232,184,96,.6);background:#fffaf0}
 .set.now::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:4px;border-radius:0 4px 4px 0;background:var(--gold)}
 .vs{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--ink,#222)}
+.acg{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
 .vs select{padding:8px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit;font-size:14px;min-width:64px}
 .vs button{margin-left:auto;padding:9px 12px;font-size:13px}
 .set.inrange{border-color:#7e8fd6;background:#f4f6ff}
@@ -288,7 +289,7 @@ body{min-height:100vh;min-height:100dvh;-webkit-touch-callout:none}
       <p class="hint" id="modeHint"></p>
       <div class="vs hidden" id="vsBox"><b>절로 고르기</b><select id="vsA" aria-label="시작 절"></select><span>절 ~</span><select id="vsB" aria-label="끝 절"></select><span>절</span><button class="primary" id="vsGo" type="button">🔁 이 절 구간 반복</button></div>
       <p class="hint hidden" id="vsNote"></p>
-      <div class="vs hidden" id="acBox"><b>쉐도잉 누적</b><span>묶음</span><select id="acLim" aria-label="누적 묶음 크기"><option value="0">장 전체</option><option value="4">4문장</option><option value="6">6문장</option><option value="8">8문장</option></select><span>단계마다</span><select id="acRep" aria-label="단계마다 반복 횟수"><option value="1">1번</option><option value="2">2번</option><option value="3">3번</option></select></div>
+      <div class="vs hidden" id="acBox"><b>쉐도잉 누적</b><span class="acg" data-g="md"><span>방식</span><select id="acMode" aria-label="쉐도잉 방식"><option value="basic">한 문장씩 누적</option><option value="step">5문장 단계</option><option value="book">장 단위(책 전체)</option></select></span><span class="acg" data-g="lim"><span>묶음</span><select id="acLim" aria-label="누적 묶음 크기"><option value="0">장 전체</option><option value="4">4문장</option><option value="6">6문장</option><option value="8">8문장</option></select></span><span class="acg" data-g="rep"><span>단계마다</span><select id="acRep" aria-label="단계마다 반복 횟수"><option value="1">1번</option><option value="2">2번</option><option value="3">3번</option></select></span><span class="acg hidden" data-g="cb"><span>이음 읽기</span><select id="acCb" aria-label="앞 문장 이음 읽기 횟수"><option value="0">안 함</option><option value="1">1번</option><option value="2">2번</option></select></span><span class="acg hidden" data-g="fr"><span>단계 끝 통독</span><select id="acFr" aria-label="단계 끝 처음부터 통독 횟수"><option value="0">안 함</option><option value="1">1번</option><option value="2">2번</option></select></span></div>
     </div>
     <div id="setList"></div>
   </section>
@@ -488,10 +489,10 @@ function seekTo(t){audioEl.currentTime=Math.max(0,t);P.rd=false;tick(true);if(au
 /* V0.11 쭉 듣기에서 장이 끝나면 멈추던 문제 (사장님 2026-10-22) — 다음 장 글을 미리 받아 두고(prefetchNext), 장이 끝나는 순간 기다림 없이 바로 다음 소리를 건다.
    예전엔 끝난 뒤에야 다음 장 글을 내려받았고, 그 사이 화면이 꺼진 폰이 소리 재생을 막으면 ▶ 를 다시 눌러야 했다 */
 function applyChap(b,c,d,o){
-  audioEl.pause();P.b=b;P.c=c;P.d=d;P.cur=-1;P.rd=true;P.lock=o.i||0;P.rng={a:-1,b:-1};P.want=!!o.play;P.errN=0;
+  audioEl.pause();P.cb=null;P.b=b;P.c=c;P.d=d;P.cur=-1;P.rd=true;P.lock=o.i||0;P.rng={a:-1,b:-1};P.want=!!o.play;P.errN=0;
   audioEl.src=(CFG.audioBase||'audio/')+b+'_'+pad(c)+'.m4a';audioEl.playbackRate=S.prefs.rate;
   P.pend=(o.i!=null&&d.sets[o.i])?d.sets[o.i].start:null;
-  if(o.play){P.chain=o.chain?Date.now():0;audioEl.play().catch(()=>{P.want=false;updateBar();if(o.chain)toast('소리가 멈췄어요 · ▶ 를 눌러 이어서 들어 주세요')})}   /* ★그림 그리기 전에 소리부터 건다 */
+  if(o.play){P.chain=o.chain?Date.now():0;if(!o.cb)audioEl.play().catch(()=>{P.want=false;updateBar();if(o.chain)toast('소리가 멈췄어요 · ▶ 를 눌러 이어서 들어 주세요')})}   /* ★그림 그리기 전에 소리부터 건다 · o.cb = 쉐도잉 이음 읽기가 먼저 소리를 걸 때(앞 장 소리부터)는 여기서 걸지 않는다 */
   $('audioBar').classList.remove('hidden');document.body.classList.add('hasbar');
   renderChips();renderChap();updateBar();setMeta();goTab('study');
   if(o.auto)AUTO.on=true;else{AUTO.on=false;setLast(o.i||0)}   /* 직접 연 장은 곧바로 「읽은 곳」으로 남긴다 · 켤 때 자동으로 연 것은 위치를 건드리지 않는다 */
@@ -516,8 +517,9 @@ function markNow(i,force){
   if(!force&&!audioEl.paused&&P.cur>=0)stat('hear',null,1);
   P.cur=i;const k=P.b+'-'+P.c;if(i+1>(S.heard[k]||0)){S.heard[k]=Math.min(i+1,P.d.sets.length)}
   updateInfo();updateCap();centerNow(!!force)}
-function updateCap(){const c=$('cap');if(!c)return;const on=!!(S.prefs.cap&&P.d&&P.cur>=0&&TAB==='study');c.classList.toggle('hidden',!on);if(!on)return;
-  const e=$('capEn');e.textContent='';spansTo(e,P.d.sets[P.cur].en);
+function updateCap(){const c=$('cap');if(!c)return;const tl=!!(P.cb&&P.cb.ph==='tail'&&P.cb.pd);   /* 이음 읽기에서 앞 장 마지막 문장이 들리는 동안은 그 문장을 자막으로 */
+  const on=!!(S.prefs.cap&&P.d&&(P.cur>=0||tl)&&TAB==='study');c.classList.toggle('hidden',!on);if(!on)return;
+  const e=$('capEn');e.textContent='';spansTo(e,tl?P.cb.pd.sets[P.cb.pd.sets.length-1].en:P.d.sets[P.cur].en);
   const tab=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tabh'))||58;
   c.style.bottom='calc('+tab+'px + '+($('audioBar').offsetHeight||0)+'px + env(safe-area-inset-bottom) + 6px)';c.style.left='8px';c.style.right='8px'}
 /* ★읽는 영어 문장 줄(.en)을 화면 가운데로 — 카드 전체가 아니라 영어 줄 (설명이 긴 카드에서도 영어가 보이게) · 자막을 켜면 자막 높이만큼 비킨다 */
@@ -529,22 +531,23 @@ function centerNow(force){
   const top=0,bottom=H-bar-tab-capH,r=n.getBoundingClientRect(),mid=(top+bottom)/2;
   let delta=(r.top+r.height/2)-mid;if(r.height>bottom-top-24)delta=r.top-(top+12);   /* 영어 줄이 화면보다 길면 맨 위를 맞춘다 */
   if(Math.abs(delta)>24)window.scrollBy({top:delta,behavior:force?'auto':'smooth'})}
-['touchstart','wheel','pointerdown'].forEach(ev=>window.addEventListener(ev,()=>{P.lastUser=Date.now()},{passive:true}));
+['touchstart','wheel','pointerdown'].forEach(ev=>window.addEventListener(ev,e=>{const t=e.target;if(t&&t.closest&&t.closest('#audioBar,.tabs,#cap'))return;P.lastUser=Date.now()},{passive:true}));   /* 소리 막대·탭·자막을 누르는 것은 「화면을 손으로 넘기는 중」이 아니다 — 그것까지 세면 4초 동안 자막이 안 따라간다 */
 function tick(upd){
   if(!P.d)return;const t=audioEl.currentTime||0,s=P.d.sets;
   {const nw=performance.now();if(!audioEl.paused){if(P.lt){const dt=(nw-P.lt)/1000;if(dt>0&&dt<5)statSec(dt)}P.lt=nw}else P.lt=0}   /* 들은 시간 누적 */
   if(!audioEl.paused){
+    if(P.cb){if(audioEl.readyState>=1)cbTick();return}   /* 이음 읽기 중에는 소리가 앞 장 파일일 수 있다 — 이 장 시간표로 문장을 찾지 않는다 */
     if(P.mode==='set'&&s[P.lock]&&t>=s[P.lock].end-0.03){audioEl.currentTime=s[P.lock].start;stat('set','r');return}
     if(P.mode==='range'&&P.rng.a>=0&&P.rng.b>=0&&t>=s[P.rng.b].end-0.03){audioEl.currentTime=s[P.rng.a].start;stat('range','r');return}
-    if(P.mode==='accum'&&P.ac){const c=P.ac;   /* 쉐도잉 누적: 손으로 소리 위치를 옮겼으면 거기를 새 출발점으로 · 이번 단계 끝이면 한 문장 늘려 처음부터 */
-      if(t<s[c.a].start-0.6||t>s[c.e].end+1.2)acStart(idxAt(t),true);
+    if(P.mode==='accum'&&P.ac&&!(P.aq&&P.aq.exp)&&audioEl.readyState>=1){const c=P.ac;   /* 쉐도잉 누적: 손으로 소리 위치를 옮겼으면 거기를 새 출발점으로 · 이번 단계 끝이면 한 문장 늘려 처음부터 (다음 장을 여는 중이거나 소리 파일이 아직 안 열렸으면 건드리지 않는다) */
+      if(t<s[c.a].start-0.6||t>s[c.e].end+1.2)acStart(idxAt(t),true,true);
       else if(t>=s[c.e].end-0.03){acAdvance();return}}}
   const i=idxAt(t);if(i!==P.cur)markNow(i);
   if(!P.drag){const du=audioEl.duration||P.d.dur||1;$('abSeek').value=Math.round(t/du*1000);$('abT1').textContent=fmt(t)}
   if(!audioEl.paused&&Date.now()-P.lastSave>15000)saveLast()}
 (function raf(){if(!audioEl.paused&&!document.hidden)tick();requestAnimationFrame(raf)})();
 setInterval(()=>{if(!audioEl.paused&&document.hidden)tick()},1000);   /* 화면이 꺼져도 듣는 시간·반복은 센다 */
-function saveLast(){if(!P.d||P.rd)return;P.lastSave=Date.now();S.last={b:P.b,c:P.c,i:Math.max(0,P.cur),t:Math.round(audioEl.currentTime*10)/10,at:Date.now()};LASTW=S.last.at;save()}   /* at = 합치기에서 가장 나중 위치를 고르는 기준 (예전엔 없어서 기기끼리 못 합쳤다) */
+function saveLast(){if(!P.d||P.rd||P.cb)return;   /* 이음 읽기 중에는 소리 위치가 앞 장 파일의 것이라 저장하지 않는다 */P.lastSave=Date.now();S.last={b:P.b,c:P.c,i:Math.max(0,P.cur),t:Math.round(audioEl.currentTime*10)/10,at:Date.now()};LASTW=S.last.at;save()}   /* at = 합치기에서 가장 나중 위치를 고르는 기준 (예전엔 없어서 기기끼리 못 합쳤다) */
 /* P.rd = 「눈으로 읽은 곳」이 소리 위치보다 나중 — 이때는 앱을 닫을 때(pagehide·화면 꺼짐)도 소리 위치로 덮어쓰지 않는다. 재생하거나 문장을 옮기면 풀린다 */
 function setLast(i){if(!P.d)return;const s=P.d.sets[i];if(!s)return;P.rd=true;S.last={b:P.b,c:P.c,i,t:s.start,at:Date.now()};LASTW=S.last.at;save()}
 /* 소리 없이 눈으로 읽을 때: 손으로 넘기다 멈추면 화면 가운데 문장을 「읽은 곳」으로 */
@@ -561,10 +564,15 @@ function updateBar(){const pl=!audioEl.paused;$('abPlay').textContent=pl?'⏸':'
   document.querySelectorAll('#abModes button').forEach(b=>b.classList.toggle('on',b.dataset.m===P.mode));$('abRate').textContent=(+S.prefs.rate).toFixed(2).replace(/0$/,'')+'×'}
 function updateInfo(){if(!P.d)return;const n=P.d.sets.length,i=Math.max(0,P.cur);let t='문장 '+(i+1)+' / '+n;
   if(P.mode==='set')t+=' · '+(P.lock+1)+'번 문장 반복 중';else if(P.mode==='chap')t+=' · 이 장 반복 중';
+  else if(P.mode==='accum'&&P.aq&&P.ac)t+=aqLabel();
   else if(P.mode==='accum'&&P.ac){const c=P.ac,rep=+S.prefs.acRep||1;t+=' · 쉐도잉 '+(c.a+1)+(c.e>c.a?'~'+(c.e+1):'')+'번 문장'+(rep>1?' ('+(c.r+1)+'/'+rep+'번째)':'')}
   else if(P.mode==='range')t+=P.rng.a>=0&&P.rng.b>=0?' · '+(()=>{const sp=vsSpans();return sp?'절 '+sp[P.rng.a][0]+'~'+sp[P.rng.b][1]:'구간 '+(P.rng.a+1)+'~'+(P.rng.b+1)})()+' 반복 중':P.rng.a>=0?' · 끝 문장을 눌러 주세요':' · 시작 문장을 눌러 주세요';
   $('abInfo').textContent=t}
-function modeHint(){const m={all:'재생 버튼을 누르면 읽는 문장이 굵게 따라가요. 문장을 누르면 거기서부터 들려요.',set:'🔁 한 문장 반복 — 문장을 누르면 그 문장만 계속 반복해요.',chap:'🔁 이 장 처음부터 끝까지 계속 반복해요.',range:'🔁 구간 반복 — 아래에서 몇 절부터 몇 절까지 골라 버튼을 누르거나, ① 시작 문장 ② 끝 문장을 차례로 누르세요.',accum:'🔁 쉐도잉 누적 — 1 → 1~2 → 1~3 → 1~4 … 한 문장씩 늘려 가며 처음부터 다시 따라 읽어요. 장 끝까지 쌓으면 다음 장으로 이어져요. 문장을 누르면 거기서부터 쌓기 시작해요.'};$('modeHint').textContent=m[P.mode]}
+function modeHint(){const m={all:'재생 버튼을 누르면 읽는 문장이 굵게 따라가요. 문장을 누르면 거기서부터 들려요.',set:'🔁 한 문장 반복 — 문장을 누르면 그 문장만 계속 반복해요.',chap:'🔁 이 장 처음부터 끝까지 계속 반복해요.',range:'🔁 구간 반복 — 아래에서 몇 절부터 몇 절까지 골라 버튼을 누르거나, ① 시작 문장 ② 끝 문장을 차례로 누르세요.',accum:accumHint()};$('modeHint').textContent=m[P.mode]}
+function accumHint(){const md=acMode();
+  if(md==='step')return '🔁 쉐도잉 5문장 단계 — 5문장씩 끊어 1 → 1~2 → … → 1~5 로 쌓고, 단계가 끝나면 처음부터 그 단계 끝까지 한 번 이어 읽어요. 단계 사이·장 사이에는 앞 문장을 이어 붙여 읽고 넘어가요. 문장을 누르면 거기서부터 시작해요.';
+  if(md==='book')return '🔁 쉐도잉 장 단위 — 장 하나를 통째로 읽고, 권역 안에서 앞 장부터 지금 장까지 이어 읽으며 쌓아요(요한복음은 1~4·5~10·11~17·18~21장). 권역이 끝나면 책 처음부터 그 권역 끝까지 한 번 이어 읽어요.';
+  return '🔁 쉐도잉 누적 — 1 → 1~2 → 1~3 → 1~4 … 한 문장씩 늘려 가며 처음부터 다시 따라 읽어요. 장 끝까지 쌓으면 다음 장으로 이어져요. 문장을 누르면 거기서부터 쌓기 시작해요.'}
 function updateRangeUI(){document.querySelectorAll('#setList .set').forEach(c=>{const i=+c.dataset.i,a=P.rng.a,b=P.rng.b;
   c.classList.toggle('inrange',a>=0&&b>=0&&i>=a&&i<=b);c.classList.toggle('rstart',a>=0&&b<0&&i===a)});vsRender()}
 /* ===== V0.11 절 구간 반복 (사장님 2026-10-22 「몇 절부터 몇 절 구간 자유롭게 반복」) — 구간🔁 모드에서 시작 절 ~ 끝 절을 골라 반복.
@@ -586,7 +594,7 @@ function vsApply(){const sp=vsSpans();if(!sp||!P.d)return;
   toast('절 '+ra+'~'+rb+' 반복')}
 $('vsGo').addEventListener('click',vsApply);
 function setTap(i){
-  if(!P.d)return;const s=P.d.sets;P.want=true;
+  if(!P.d)return;const s=P.d.sets;P.want=true;P.lastUser=0;   /* 문장을 눌러 옮긴 것은 곧바로 그 문장을 가운데로 */
   if(P.mode==='range'){
     if(P.rng.a<0||(P.rng.a>=0&&P.rng.b>=0)){P.rng={a:i,b:-1};toast('끝 문장을 눌러 주세요')}
     else{let a=P.rng.a,b=i;if(b<a){const x=a;a=b;b=x}P.rng={a,b};toast('구간 '+(a+1)+'~'+(b+1)+' 반복')}
@@ -597,8 +605,8 @@ function setTap(i){
 /* ===== V0.12 쉐도잉 누적 반복 (사장님 2026-10-22 「1 → 1-2 → 1-2-3 → 1-2-3-4 … 이렇게 반복」) =====
    문장(소리 묶음) 단위로 한 문장씩 늘려 가며 처음부터 다시 듣는다. 묶음 크기를 정하면 그만큼 쌓은 뒤 다음 묶음으로 넘어간다 (예: 4 → 1 · 1-2 · 1-2-3 · 1-2-3-4 다음 5 · 5-6 · …) */
 function acBlockEnd(a){const n=P.d.sets.length,l=+S.prefs.acLim||0;return l?Math.min(a+l-1,n-1):n-1}
-function acStart(i,noSeek){if(!P.d)return;const s=P.d.sets;i=Math.max(0,Math.min(i,s.length-1));P.ac={a:i,e:i,r:0};P.rng={a:i,b:i};updateRangeUI();updateInfo();if(!noSeek)seekTo(s[i].start)}
-function acAdvance(){const s=P.d.sets,c=P.ac,rep=+S.prefs.acRep||1;c.r++;
+function acStart(i,noSeek,noCb){if(!P.d)return;if(acMode()!=='basic')return aqStart(i,noSeek,noCb);const s=P.d.sets;i=Math.max(0,Math.min(i,s.length-1));P.ac={a:i,e:i,r:0};P.rng={a:i,b:i};updateRangeUI();updateInfo();if(!noSeek)seekTo(s[i].start)}
+function acAdvance(){if(P.aq)return aqAdvance();const s=P.d.sets,c=P.ac,rep=+S.prefs.acRep||1;c.r++;
   if(c.r<rep){seekTo(s[c.a].start);updateInfo();return}
   c.r=0;const be=acBlockEnd(c.a);
   if(c.e<be)c.e++;
@@ -607,9 +615,104 @@ function acAdvance(){const s=P.d.sets,c=P.ac,rep=+S.prefs.acRep||1;c.r++;
     if(ci>=0&&ci<ch.length-1){toast('다음 장으로 이어서 쉐도잉해요');openChap(ch[ci+1][0],ch[ci+1][1],{play:true,chain:true});return}
     P.want=false;audioEl.pause();acStart(0);toast('쉐도잉 누적 반복이 모두 끝났어요 · ▶ 를 누르면 처음부터 다시');return}
   P.rng={a:c.a,b:c.e};updateRangeUI();updateInfo();seekTo(s[c.a].start)}
-function acRender(){const box=$('acBox');box.classList.toggle('hidden',P.mode!=='accum');if(P.mode!=='accum')return;$('acLim').value=String(+S.prefs.acLim||0);$('acRep').value=String(+S.prefs.acRep||1)}
-['acLim','acRep'].forEach(id=>$(id).addEventListener('change',()=>{S.prefs.acLim=+$('acLim').value;S.prefs.acRep=+$('acRep').value;save();if(P.mode==='accum'&&P.d)acStart(P.ac?P.ac.a:Math.max(0,P.cur))}));
-function setMode(m){P.mode=m;if(m==='set')P.lock=Math.max(0,P.cur);if(m!=='range'){P.rng={a:-1,b:-1};updateRangeUI()}
+function acRender(){const box=$('acBox');box.classList.toggle('hidden',P.mode!=='accum');if(P.mode!=='accum')return;const md=acMode();
+  $('acMode').value=md;$('acLim').value=String(+S.prefs.acLim||0);$('acRep').value=String(+S.prefs.acRep||1);$('acCb').value=String(pf('acCb',2));$('acFr').value=String(pf('acFr',1));
+  const sh=(g,on)=>{const x=box.querySelector('[data-g="'+g+'"]');if(x)x.classList.toggle('hidden',!on)};sh('lim',md==='basic');sh('rep',md!=='book');sh('cb',md!=='basic');sh('fr',md==='step')}
+['acMode','acLim','acRep','acCb','acFr'].forEach(id=>$(id).addEventListener('change',()=>{const v=$(id).value;S.prefs[id]=id==='acMode'?v:+v;save();
+  if(id==='acMode'){aqAbort();modeHint()}
+  acRender();if(P.mode==='accum'&&P.d)acStart(id==='acMode'?Math.max(0,P.cur):(P.ac?P.ac.a:Math.max(0,P.cur)))}));
+/* ===== V0.13 쉐도잉 5문장 단계 · 이음 읽기 · 장 단위 (사장님 2026-10-27 「전부 5세트 단위로 순서대로」) =====
+   기본(한 문장씩 누적)은 그대로 두고, 방식을 고르면 아래 「재생 순서표(P.aq)」로 돈다. 표의 한 칸 = 소리 묶음(세트) 구간을 몇 번 읽는지.
+   · 5문장 단계: [이음(앞 문장+이 문장)] → 1 → 1~2 → … → 1~5 (단계마다) → [처음부터 이 단계 끝까지 통독] · 장이 시작될 때 [앞 장 마지막 문장 → 이 장 첫 문장] 이음 읽기
+   · 장 단위: 장 하나를 통째로 → 권역 처음 장부터 지금 장까지 이어 읽기 · 권역이 끝나면 책 처음부터 그 권역 끝까지 이어 읽기
+   · 마지막 단계가 6~7문장이 되는 규칙(남는 1~2문장은 앞 단계에 합침)은 붙여 주신 설계 그대로 */
+const pf=(k,d)=>S.prefs[k]==null?d:+S.prefs[k];
+function acMode(){const m=S.prefs.acMode;return m==='step'||m==='book'?m:'basic'}
+const REGIONS={43:[[1,4],[5,10],[11,17],[18,21]]};   /* 요한복음 4대 권역 · 다른 책은 5장씩(남는 1~2장은 마지막 권역에 합침) */
+function cbSrc(b,c){return (CFG.audioBase||'audio/')+b+'_'+pad(c)+'.m4a'}
+function aqSteps(n,from){const r=[];for(let s=from;s<n;s+=5){let e=Math.min(s+4,n-1);if(n-1-e<=2&&e!==n-1)e=n-1;r.push([s,e]);if(e===n-1)break}return r}
+function aqPrev(){const a=allChaps(),i=a.findIndex(x=>x[0]===P.b&&x[1]===P.c);return i>0?a[i-1]:null}
+function aqBuildStep(from,withCb){
+  const n=P.d.sets.length,items=[],st=aqSteps(n,from),rep=+S.prefs.acRep||1,fr=pf('acFr',1),cbn=pf('acCb',2),pv=aqPrev();
+  if(withCb&&cbn>0&&pv)items.push({k:'cb',b:P.b,c:P.c,pb:pv[0],pc:pv[1],n:cbn,lab:'이음 읽기'});
+  st.forEach((g,si)=>{const sa=g[0],ea=g[1],mk=(a,e,r,lab)=>items.push({k:'seg',a,e,rep:r,lab,st:si+1,ns:st.length});
+    if(si>0)mk(sa-1,sa,1,'이음');
+    for(let v=sa;v<=ea;v++)mk(sa,v,rep,'쌓기');
+    if(fr>0)mk(from,ea,fr,from>0?'여기부터 통독':'처음부터 통독')});
+  return {mode:'step',items,i:0,exp:null}}
+function aqBuildBook(from,withCb){
+  const b=P.b,cs=((LIST||{})[b]||[]).slice().sort((x,y)=>x-y),cbn=pf('acCb',2),T=REGIONS[b];let rg=null;
+  if(T){const r=T.map(x=>cs.filter(c=>c>=x[0]&&c<=x[1])).filter(x=>x.length);if(r.reduce((t,x)=>t+x.length,0)===cs.length)rg=r}
+  if(!rg){rg=[];for(let i=0;i<cs.length;i+=5){let j=Math.min(i+5,cs.length);if(cs.length-j<=2&&j<cs.length)j=cs.length;rg.push(cs.slice(i,j));if(j===cs.length)break}}
+  const items=[],ch=(c,lab,run)=>items.push({k:'chap',b,c,lab,run:!!run}),W=c=>c+chW(b);
+  rg.forEach((g,ri)=>{
+    g.forEach((c,ci)=>{const gi=cs.indexOf(c);
+      if(gi>0&&cbn>0)items.push({k:'cb',b,c,pb:b,pc:cs[gi-1],n:cbn,lab:'이음 읽기'});
+      ch(c,W(c));
+      g.slice(0,ci+1).forEach(x=>ch(x,(ci?W(g[0])+'~'+W(c):W(c))+' 이어 읽기',true))});
+    if(ri>0)cs.filter(x=>x<=g[g.length-1]).forEach(x=>ch(x,'책 처음~'+W(g[g.length-1])+' 이어 읽기',true))});
+  let idx=items.findIndex(it=>it.k==='chap'&&!it.run&&it.c===P.c);if(idx<0)idx=0;
+  if(from>0)items[idx].from=from;else if(withCb&&idx>0&&items[idx-1].k==='cb'&&items[idx-1].c===P.c)idx--;
+  return {mode:'book',items,i:idx,exp:null,book:b}}
+function aqCbRestore(){if(!P.cb)return false;P.cb=null;audioEl.src=cbSrc(P.b,P.c);audioEl.playbackRate=S.prefs.rate;P.chain=0;return true}   /* 이음 읽기 도중에 손을 대면 이 장 소리로 되돌린다 */
+function aqAbort(){const was=aqCbRestore();if(was&&P.d)P.pend=P.d.sets[Math.max(0,P.cur)].start;P.aq=null}
+function aqStart(i,noSeek,noCb){
+  const md=acMode(),q0=P.aq;i=Math.max(0,Math.min(i,P.d.sets.length-1));
+  if(q0&&q0.exp&&q0.exp.b===P.b&&q0.exp.c===P.c){const bk=q0.mode==='book';q0.exp=null;if(bk&&md==='book'){aqEnter(q0.i,false);return}}   /* 순서표가 직접 연 다음 장 — 장 단위는 이어서 · 5문장 단계는 새 장 표를 만든다 */
+  const restored=aqCbRestore(),wc=!!noSeek&&!noCb&&!!P.want&&i===0;   /* 이음 읽기는 소리가 이어지는 중(자동으로 넘어온 장)에만 — 장을 눌러 연 것·문장을 누른 것은 그 자리에서 */
+  P.aq=md==='book'?aqBuildBook(i,wc):aqBuildStep(i,wc);
+  aqEnter(P.aq.i,!noSeek);
+  if(restored&&P.ac)P.pend=P.d.sets[P.ac.a].start}
+function aqOpen(q,b,c,o){q.exp={b,c};openChap(b,c,o);
+  setTimeout(()=>{if(P.aq===q&&q.exp&&q.exp.b===b&&q.exp.c===c){q.exp=null;P.want=false;audioEl.pause();toast('다음 장을 열지 못했어요 · ▶ 를 눌러 다시 시도해 주세요')}},20000)}
+function aqEnter(i,seek){const q=P.aq;if(!q||!P.d)return;q.i=i;const it=q.items[i],tb=it.k==='seg'?P.b:it.b,tc=it.k==='seg'?P.c:it.c;
+  if(tb!==P.b||tc!==P.c){aqOpen(q,tb,tc,{play:it.k==='chap',chain:true});return}
+  if(it.k==='cb'){cbBegin(it);return}
+  const s=P.d.sets,a=it.k==='seg'?it.a:(it.from||0),e=it.k==='seg'?it.e:s.length-1;
+  P.ac={a,e,r:0};P.rng={a,b:e};updateRangeUI();updateInfo();if(seek)seekTo(s[a].start)}
+function aqAdvance(){const q=P.aq,c=P.ac;if(!q||!c||q.exp||P.cb)return;const it=q.items[q.i],s=P.d.sets;c.r++;
+  if(it.k==='seg'&&c.r<it.rep){seekTo(s[c.a].start);updateInfo();return}
+  q.i++;if(q.i<q.items.length){aqEnter(q.i,true);return}
+  aqFinish()}
+function aqFinish(){const q=P.aq;
+  if(q.mode==='step'){const ch=allChaps(),ci=ch.findIndex(x=>x[0]===P.b&&x[1]===P.c);   /* 5문장 단계: 이 장을 다 마쳤으면 다음 장으로 이어서 (맨 끝 장이면 멈춤) */
+    if(ci>=0&&ci<ch.length-1){toast('다음 장으로 이어서 쉐도잉해요');aqOpen(q,ch[ci+1][0],ch[ci+1][1],{play:true,chain:true,cb:pf('acCb',2)>0});return}}
+  P.want=false;audioEl.pause();toast(q.mode==='book'?'장 단위 쉐도잉을 모두 마쳤어요 · ▶ 를 누르면 이 장부터 다시':'쉐도잉이 모두 끝났어요 · ▶ 를 누르면 처음부터 다시');
+  P.aq=null;aqStart(0)}
+function aqLabel(){const q=P.aq,it=q.items[q.i]||{},c=P.ac||{a:0,e:0,r:0};
+  if(P.cb)return ' · 이음 읽기 '+(P.cb.r+1)+'/'+P.cb.n+'번 · '+(P.cb.ph==='tail'?'앞 장 마지막 문장':'이 장 첫 문장');
+  if(it.k==='seg')return ' · 단계 '+it.st+'/'+it.ns+' · '+it.lab+' '+(c.a+1)+(c.e>c.a?'~'+(c.e+1):'')+'번 문장'+(it.rep>1?' ('+(c.r+1)+'/'+it.rep+'번째)':'');
+  if(it.k==='chap')return ' · 장 단위 '+(q.i+1)+'/'+q.items.length+' · '+it.lab;
+  return ' · 쉐도잉'}
+/* 이음 읽기: [앞 장 마지막 문장] → [이 장 첫 문장] 을 n번 — 소리 파일이 장마다 따로라서 앞 장 파일 ↔ 이 장 파일을 번갈아 건다 (자막도 따라 바뀜) */
+function cbBegin(it){const q=P.aq;if(!q)return;
+  getChap(it.pb,it.pc).then(pd=>{if(P.aq!==q||q.items[q.i]!==it)return;P.cb={n:it.n,r:0,ph:'tail',pd};P.ac={a:0,e:0,r:0};P.rng={a:-1,b:-1};updateRangeUI();cbPhase('tail')})
+   .catch(()=>{if(P.aq!==q||q.items[q.i]!==it)return;P.cb=null;q.i++;P.want=true;if(q.i<q.items.length)aqEnter(q.i,true);else aqFinish();audioEl.play().catch(()=>{})})}   /* 앞 장을 못 받으면 이음 읽기만 건너뜀 */
+function cbPhase(ph){const b=P.cb;if(!b)return;b.ph=ph;const tail=ph==='tail',pd=b.pd,s=tail?pd.sets[pd.sets.length-1]:P.d.sets[0];
+  audioEl.src=tail?cbSrc(P.aq.items[P.aq.i].pb,P.aq.items[P.aq.i].pc):cbSrc(P.b,P.c);audioEl.playbackRate=S.prefs.rate;P.pend=s.start;P.want=true;P.chain=Date.now();
+  audioEl.play().catch(()=>{});
+  if(tail){P.cur=-1;const o=document.querySelector('#setList .set.now');if(o)o.classList.remove('now');updateCap()}else markNow(0,true);
+  updateInfo()}
+function cbNext(){const b=P.cb;if(!b)return;if(b.ph==='tail'){cbPhase('head');return}b.r++;if(b.r<b.n){cbPhase('tail');return}cbDone()}
+function cbDone(){const q=P.aq;P.cb=null;if(!q)return;q.i++;if(q.i<q.items.length)aqEnter(q.i,true);else aqFinish()}
+function cbTick(){const b=P.cb;if(!b)return;const t=audioEl.currentTime||0;
+  if(b.ph==='tail'){const l=b.pd.sets[b.pd.sets.length-1];if(t>=l.start-0.01&&t>=l.end-0.03)cbNext()}
+  else{const s0=P.d.sets[0];if(t>=s0.start-0.01&&t>=s0.end-0.03)cbNext()}}
+/* ===== V0.13 자막 따라가기 안전망 (사장님 2026-10-27 「오디오 나올 때 자막 자동이동 안되는 경우 없게」) =====
+   예전엔 문장이 바뀌는 순간에만 가운데로 옮겼고, 그 순간 손을 댔거나(4초) 화면이 가려져 있었으면 다음 문장까지 못 따라갔다.
+   이제 소리가 나는 동안 0.7초마다 ① 굵은 문장이 소리 위치와 같은지 ② 읽는 영어 줄이 화면 안에 있는지 확인해 어긋나면 바로잡는다 */
+function followCheck(){
+  if(!P.d||audioEl.paused||document.hidden||TAB!=='study'||audioEl.readyState<1||(P.aq&&P.aq.exp))return;
+  if(P.cb){if(P.cb.ph==='head'&&P.cur!==0)markNow(0,true);return}
+  const i=idxAt(audioEl.currentTime||0),now=document.querySelector('#setList .set.now');
+  if(i!==P.cur||!now||+now.dataset.i!==i){markNow(i,true);return}
+  if(Date.now()-P.lastUser<4000)return;
+  const n=now.querySelector('.en');if(!n)return;
+  const vv=window.visualViewport,H=vv?vv.height:window.innerHeight,bar=$('audioBar').offsetHeight||0,tab=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tabh'))||58,cp=$('cap'),capH=(cp&&!cp.classList.contains('hidden'))?cp.offsetHeight+6:0,bottom=H-bar-tab-capH,r=n.getBoundingClientRect();
+  if(r.height<bottom-24&&(r.top<0||r.bottom>bottom))centerNow(false)}
+setInterval(followCheck,700);
+audioEl.addEventListener('playing',()=>{try{followCheck()}catch(e){}});
+function setMode(m){if(m!=='accum')aqAbort();P.mode=m;if(m==='set')P.lock=Math.max(0,P.cur);if(m!=='range'){P.rng={a:-1,b:-1};updateRangeUI()}
   else if(P.rng.a>=0&&P.rng.b<0){}
   P.vsKey='';vsRender();
   if(m==='accum'&&P.d)acStart(Math.max(0,P.cur));else if(m!=='accum')P.ac=null;   /* 지금 문장부터 쌓기 시작 (장을 막 열었으면 1번부터) */
@@ -622,7 +725,7 @@ $('abSeek').addEventListener('input',()=>{P.drag=true;const du=audioEl.duration|
 $('abSeek').addEventListener('change',()=>{const du=audioEl.duration||P.d.dur||1;audioEl.currentTime=$('abSeek').value/1000*du;P.drag=false;if(P.mode==='set')P.lock=idxAt(audioEl.currentTime)});
 const RATES=[0.7,0.85,1,1.15,1.3];
 $('abRate').addEventListener('click',()=>{const i=RATES.indexOf(+S.prefs.rate);S.prefs.rate=RATES[(i+1)%RATES.length];audioEl.playbackRate=S.prefs.rate;save();updateBar();toast('속도 '+S.prefs.rate+'배')});
-audioEl.addEventListener('play',()=>{AUTO.on=false;P.rd=false;if(P.mode==='accum'&&P.d&&P.ac){const s=P.d.sets,c=P.ac,t=audioEl.currentTime||0;if(t<s[c.a].start-0.6||t>s[c.e].end+1.2)acStart(idxAt(t),true)}updateBar();logStart()});
+audioEl.addEventListener('play',()=>{AUTO.on=false;P.rd=false;if(P.mode==='accum'&&P.d&&P.ac&&!P.cb&&!(P.aq&&P.aq.exp)&&audioEl.readyState>=1){const s=P.d.sets,c=P.ac,t=audioEl.currentTime||0;if(t<s[c.a].start-0.6||t>s[c.e].end+1.2)acStart(idxAt(t),true,true)}updateBar();logStart()});
 audioEl.addEventListener('pause',()=>{updateBar();saveLast();flush()});
 function markDone(){const k=P.b+'-'+P.c;S.done[k]=Date.now();S.heard[k]=P.d.sets.length;{const c=chOf(me(),k);c.f++;c.t=Date.now()}save()}
 function allChaps(){const r=[];Object.keys(LIST||{}).map(Number).sort((a,b)=>a-b).forEach(b=>((LIST[b]||[]).slice().sort((x,y)=>x-y)).forEach(c=>r.push([b,c])));return r}
@@ -630,12 +733,14 @@ function nextChap(){const n=nextOf();   /* 책을 넘어 쭉 · 맨 끝이면 �
   if(!n||(n[0]===P.b&&n[1]===P.c)){seekTo(0);audioEl.play().catch(()=>{});return}
   openChap(n[0],n[1],{play:true,chain:true})}
 audioEl.addEventListener('ended',()=>{if(!P.d)return;const s=P.d.sets;
+  if(P.cb){cbNext();return}   /* 이음 읽기 중 파일 끝까지 간 소리 — 이 장을 다 들은 것이 아니다 */
   try{markDone();if(P.mode==='chap')stat('chap','r');else if(P.mode==='set')stat('set','r');else if(P.mode==='range')stat('range','r');flush()}catch(e){}   /* 기록하다 오류가 나도 다음 장으로 넘어가는 일은 막지 않는다 */
-  if(P.mode==='accum'&&P.ac){acAdvance();if(P.want)audioEl.play().catch(()=>{});return}   /* 맨 끝 문장까지 쌓은 장이 끝났을 때 */
+  if(P.aq&&P.aq.exp)return;   /* 다음 장을 여는 중 — 끝난 소리를 다시 걸지 않는다 */
+  if(P.mode==='accum'&&P.ac){acAdvance();if(P.want&&!P.cb&&!(P.aq&&(P.aq.exp||(P.aq.items[P.aq.i]||{}).k==='cb')))audioEl.play().catch(()=>{});return}   /* 맨 끝 문장까지 쌓은 장이 끝났을 때 */
   if(P.mode==='chap'||P.mode==='set'||P.mode==='range'){const st=P.mode==='set'&&s[P.lock]?s[P.lock].start:(P.mode==='range'&&P.rng.a>=0?s[P.rng.a].start:0);audioEl.currentTime=st;audioEl.play().catch(()=>{});return}
   nextChap()});
 window.addEventListener('pagehide',()=>{if(P.d)saveLast();flush(true)});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){if(P.d)saveLast();flush(true)}else{if(P.chain&&P.want&&audioEl.paused)audioEl.play().catch(()=>{});if(SYNC_ON&&Date.now()-SY.t>60000)syncNow()}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){if(P.d)saveLast();flush(true)}else{if(P.chain&&P.want&&audioEl.paused)audioEl.play().catch(()=>{});try{if(P.d&&!audioEl.paused&&!P.cb&&!(P.aq&&P.aq.exp)&&TAB==='study')markNow(idxAt(audioEl.currentTime||0),true)}catch(e){}   /* 화면이 다시 켜지면 지금 읽는 문장으로 바로 */if(SYNC_ON&&Date.now()-SY.t>60000)syncNow()}});
 $('chSel').addEventListener('change',()=>{openChap(P.b,+$('chSel').value,{play:false})});
 /* V0.9 공부 탭에서 책 고르기 (사장님 2026-10-09 「공부에서 성경 선택할 수 있게 · 클릭이 안 돼」) — 책을 누르면 그 책의 마지막 읽던 장(없으면 첫 장)으로 */
 /* 책 → 장 두 단계: 책 칩을 누르면 그 책의 장 버튼이 아래에 나오고, 장을 누르면 열린다 (제목 「장을 골라 주세요」 · 📖 책 · 장 선택 칸 어느 것을 눌러도 같은 칸이 열림) */
