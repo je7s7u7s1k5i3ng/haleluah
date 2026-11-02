@@ -343,16 +343,16 @@
   },
   {
    "rank": "1",
-   "name": "말랑이 복숭아 4kg",
+   "name": "말랑이 복숭아 2.5kg",
    "category": "과일",
-   "price": "말랑이 복숭아 4kg 35,000원",
-   "note": "말랑이 복숭아 · 4kg",
+   "price": "말랑이 복숭아 2.5kg 36,500원",
+   "note": "말랑이 복숭아 · 2.5kg",
    "image": "assets/malangi-peach-20261002.jpg",
    "options": [
     {
      "title": "중량 선택",
-     "label": "4kg / 35,000원",
-     "value": "4kg / 35,000원"
+     "label": "2.5kg / 36,500원",
+     "value": "2.5kg / 36,500원"
     }
    ],
    "bulk_list": false,
