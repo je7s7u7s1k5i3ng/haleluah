@@ -1,0 +1,6 @@
+__pycache__/
+.pytest_cache/
+결과/
+data/
+logs/
+collected_data/
