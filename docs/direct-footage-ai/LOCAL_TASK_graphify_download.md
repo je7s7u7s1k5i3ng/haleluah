@@ -15,14 +15,23 @@
 
 ## 2. PC에 줄 한 줄 지시
 ```
-G드라이브 '원격 컴퓨터 제어_전달_20261031' 폴더의 graphify_v0.9.106_src.zip 을
-J:\프로그램 관리\직접 촬영 영상 AI로 화면 화려하게 하는 방법 프로그램\영상제작 종류별 샘플\ 에 풀고,
-저장소 docs/direct-footage-ai/LOCAL_TASK_graphify_download.md 3번 순서대로 설치·확인까지 해줘
+https://github.com/Graphify-Labs/graphify 를
+J:\프로그램 관리\직접 촬영 영상 AI로 화면 화려하게 하는 방법 프로그램\영상제작 종류별 샘플\graphify 에 내려받고,
+G드라이브 '원격 컴퓨터 제어_전달_20261031' 폴더의 LOCAL_TASK_graphify_download.md 3번 순서대로 설치·확인까지 해줘
 ```
+(클라우드에서 만든 압축본 14.8MB는 G드라이브 업로드 한도를 넘어 올리지 못했습니다. 공개 저장소라서 PC에서 GitHub로 바로 받습니다.)
 
 ## 3. 순서 (PC)
-1. 압축 파일 SHA-256이 `63d0bba55d4d7ad59b1e81ce68d2b9c4c077c06203e27d2076d2440f65cb5cb9` 인지 확인합니다 (`certutil -hashfile 파일 SHA256`). 다르면 멈춥니다.
-2. 위 1번 위치에 풉니다. 결과는 `...\영상제작 종류별 샘플\graphify\README.md` 처럼 됩니다. 샘플 폴더에 이미 있던 파일은 건드리지 않습니다.
+1. 같은 판본으로 받습니다:
+   ```
+   cd /d "J:\프로그램 관리\직접 촬영 영상 AI로 화면 화려하게 하는 방법 프로그램\영상제작 종류별 샘플"
+   git clone https://github.com/Graphify-Labs/graphify.git graphify
+   cd graphify
+   git checkout 35d1d2038b9e9d470f117bf8f2473d415b5f5358
+   ```
+   git이 없으면 https://github.com/Graphify-Labs/graphify/archive/35d1d2038b9e9d470f117bf8f2473d415b5f5358.zip 을 받아 `graphify` 폴더 이름으로 풉니다.
+   그 커밋이 없다고 나오면(저장소가 정리된 경우) 최신 판으로 받고, 보고할 때 판본을 적습니다.
+2. 결과는 `...\영상제작 종류별 샘플\graphify\README.md` 처럼 됩니다. 샘플 폴더에 원래 있던 파일은 건드리지 않습니다.
 3. uv가 없으면 설치합니다: `winget install astral-sh.uv`
 4. 영상 받아쓰기 기능까지 받은 소스와 같은 판본으로 설치합니다: `uv tool install "graphifyy[video]==0.9.106"`
    - 내려받은 소스 폴더는 원본 보관용입니다. 설치는 같은 판본의 공식 패키지로 합니다.
