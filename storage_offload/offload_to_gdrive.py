@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
+r"""
 F: 원본 파일 → G드라이브 이동 + 위치표 남기기 (용량 확보)
 
 기본값은 '미리보기'(아무것도 안 옮김). --실행 을 붙여야 실제로 옮긴다.
@@ -22,7 +22,13 @@ F: 원본 파일 → G드라이브 이동 + 위치표 남기기 (용량 확보)
   - 프로그램(J:\프로그램 관리, I:\자동화 프로그램)의 코드·설정이 경로로 가리키는 파일·폴더
   - 최근 N일(기본 14일) 안에 고친 파일 — 작업 중일 수 있음
   - 폴더 안에 작업중.lock / 00_작업중 / _보관금지 표시가 있는 폴더
-  - 한 번 실행에 기본 50GB까지만 (구글 드라이브 앱이 올리는 동안 C: 캐시가 꽉 차지 않게)
+  - 용량 제한은 기본 없음(400GB도 한 번에 대상). 대신 캐시 드라이브 여유가 부족해지면 그 회차를 멈춘다 (아래)
+
+왜 C:가 나오나:
+  구글 드라이브 앱은 G:에 넣은 파일을 클라우드에 다 올릴 때까지 '캐시 폴더'(기본 C:\Users\...\AppData\Local\Google\DriveFS)에
+  임시로 들고 있는다. 그래서 F→G 이동 중에는 C: 공간이 잠깐 줄어든다. 업로드가 끝나면 다시 비워진다.
+  → 매 파일 전에 캐시 드라이브(기본 C:\) 여유를 재고, 여유가 --캐시여유GB(기본 20GB) 아래로 내려갈 것 같으면 그 회차를 멈춘다.
+  → 구글 드라이브 설정에서 캐시 위치를 F:로 바꿨다면 --캐시드라이브 F:\ 로 실행한다.
 """
 
 import argparse
@@ -36,7 +42,7 @@ import time
 from datetime import datetime
 from pathlib import Path
 
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 DEFAULT_SRC = r"F:\채널 별 롱폼 숏폼"
 DEFAULT_DST = r"G:\내 드라이브\보관_원본\채널 별 롱폼 숏폼"
 DEFAULT_CODE_DIRS = [r"J:\프로그램 관리", r"I:\자동화 프로그램"]
@@ -155,7 +161,7 @@ def write_root_readme(src, dst):
     )
 
 
-def plan(src, min_mb, days, now=None, refs=(), move_finals=False, max_gb=50):
+def plan(src, min_mb, days, now=None, refs=(), move_finals=False, max_gb=0):
     now = now or time.time()
     src = Path(src)
     picks, skipped = [], {"작은 파일·문서": 0, "최종 업로드본": 0, "프로그램이 참조": 0,
@@ -166,7 +172,8 @@ def plan(src, min_mb, days, now=None, refs=(), move_finals=False, max_gb=50):
             skipped["작업중 표시 폴더"] += len(filenames)
             dirnames[:] = []
             continue
-        for name in filenames:
+        dirnames.sort()                     # 매번 같은 순서로 (재실행·보고 일관성)
+        for name in sorted(filenames):
             if name in (INDEX_NAME, FOLDER_NOTE) or name.endswith(".part"):
                 continue
             p = Path(dirpath) / name
@@ -212,8 +219,12 @@ def move_one(p, src, dst):
             "sha256": src_hash, "이동시각": datetime.now().isoformat(timespec="seconds")}, None
 
 
+DEFAULT_CACHE_DRIVE = "C:\\"
+
+
 def run(src, dst, min_mb=20, days=14, execute=False, log=print, code_dirs=None,
-        move_finals=False, max_gb=50, gdrive_root=None):
+        move_finals=False, max_gb=0, gdrive_root=None, cache_drive=DEFAULT_CACHE_DRIVE, cache_reserve_gb=20,
+        list_file=None):
     src, dst = Path(src), Path(dst)
     if not src.is_dir():
         log(f"[중단] 원본 폴더 없음: {src}")
@@ -224,6 +235,12 @@ def run(src, dst, min_mb=20, days=14, execute=False, log=print, code_dirs=None,
     picks, skipped = plan(src, min_mb, days, refs=refs, move_finals=move_finals, max_gb=max_gb)
     total = sum(s for _, s in picks)
     log(f"옮길 대상 {len(picks)}개 · {total / (1 << 30):.2f}GB  (건너뜀: {skipped})")
+    if list_file:                        # 옮길 대상 전체 목록 (미리보기 검토용)
+        lf = Path(list_file)
+        lf.parent.mkdir(parents=True, exist_ok=True)
+        lf.write_text("\n".join(f"{p.relative_to(src)}\t{s / (1 << 20):.0f}MB" for p, s in picks)
+                      + f"\n\n합계 {len(picks)}개 · {total / (1 << 30):.2f}GB\n건너뜀 {skipped}\n", encoding="utf-8")
+        log(f"전체 목록 저장: {lf}")
     if not execute:
         for p, s in picks[:30]:
             log(f"  [미리보기] {p.relative_to(src)}  {s / (1 << 20):.0f}MB")
@@ -236,11 +253,24 @@ def run(src, dst, min_mb=20, days=14, execute=False, log=print, code_dirs=None,
     free = shutil.disk_usage(root).free
     if free < total * 1.1:
         log(f"[주의] G드라이브 쪽 여유 {free / (1 << 30):.1f}GB < 필요 {total * 1.1 / (1 << 30):.1f}GB — 가능한 만큼만 옮긴다")
+    cache = Path(cache_drive) if cache_drive else None
+    if cache is not None and not cache.exists():
+        log(f"[주의] 캐시 드라이브 {cache} 를 찾지 못해 캐시 여유 검사를 건너뜀")
+        cache = None
+    reserve = cache_reserve_gb * (1 << 30)
+    if cache is not None:
+        log(f"캐시 드라이브 {cache} 여유 {shutil.disk_usage(cache).free / (1 << 30):.1f}GB (최소 {cache_reserve_gb}GB 남김)")
     index = load_index(src)
     index["보관폴더"] = str(dst)
     moved, failed, freed = 0, [], 0
     by_folder = {}
+    cache_stop = False
     for p, size in picks:
+        if cache is not None and shutil.disk_usage(cache).free - size < reserve:
+            log(f"[멈춤] 캐시 드라이브 {cache} 여유가 {cache_reserve_gb}GB 아래로 내려감 — "
+                f"구글 드라이브 업로드가 끝난 뒤 다시 실행하세요 (남은 {len(picks) - moved - len(failed)}개는 다음 회차)")
+            cache_stop = True
+            break
         if shutil.disk_usage(root).free < size * 1.1:
             failed.append([str(p.relative_to(src)), "G드라이브 쪽 공간 부족"])
             continue
@@ -262,12 +292,13 @@ def run(src, dst, min_mb=20, days=14, execute=False, log=print, code_dirs=None,
         rel_folder = folder.relative_to(src)
         write_folder_note(folder, dst / rel_folder, names)
     index["마지막실행"] = {"시각": datetime.now().isoformat(timespec="seconds"), "옮김": moved,
-                       "확보GB": round(freed / (1 << 30), 2), "실패": failed[:50]}
+                       "확보GB": round(freed / (1 << 30), 2), "실패": failed[:50], "캐시여유로멈춤": cache_stop}
     save_index(src, index)
     write_root_readme(src, dst)
     log(f"완료: {moved}개 이동, {freed / (1 << 30):.2f}GB 확보, 실패 {len(failed)}개 → 위치표 {src / INDEX_NAME}")
-    return {"상태": "완료" if not failed else "일부실패", "옮김": moved,
-            "확보GB": round(freed / (1 << 30), 2), "실패": failed}
+    state = "일부실패" if failed else ("캐시대기" if cache_stop else "완료")
+    return {"상태": state, "옮김": moved, "확보GB": round(freed / (1 << 30), 2), "실패": failed,
+            "캐시여유로멈춤": cache_stop}
 
 
 def find(src, keyword):
@@ -295,9 +326,14 @@ def main(argv=None):
     ap.add_argument("--보관", default=DEFAULT_DST)
     ap.add_argument("--최소MB", type=int, default=20)
     ap.add_argument("--최근일", type=int, default=14, help="이 일수 안에 고친 파일은 옮기지 않음")
-    ap.add_argument("--최대GB", type=int, default=50, help="한 번 실행에 옮길 최대 용량 (0=제한 없음)")
+    ap.add_argument("--최대GB", type=int, default=0, help="한 번 실행에 옮길 최대 용량 (기본 0=제한 없음, 캐시 여유 검사가 대신 멈춤)")
     ap.add_argument("--최종본도이동", "--include-finals", dest="최종본도이동", action="store_true", help="유튜브에 올린 최종 영상도 옮김")
     ap.add_argument("--코드폴더", action="append", help="참조 검사할 프로그램 폴더 (여러 번 가능)")
+    ap.add_argument("--캐시드라이브", "--cache-drive", dest="캐시드라이브", default=DEFAULT_CACHE_DRIVE,
+                    help="구글 드라이브 앱 캐시가 있는 드라이브 (기본 C:\\)")
+    ap.add_argument("--캐시여유GB", "--cache-reserve-gb", dest="캐시여유GB", type=int, default=20,
+                    help="캐시 드라이브에 최소로 남길 여유 (기본 20GB)")
+    ap.add_argument("--목록파일", "--list-file", dest="목록파일", help="옮길 대상 전체 목록을 이 파일에 저장")
     ap.add_argument("--실행", "--execute", dest="실행", action="store_true")
     ap.add_argument("--찾기", "--find", dest="찾기")
     ap.add_argument("--되돌리기", "--restore", dest="되돌리기")
@@ -311,9 +347,10 @@ def main(argv=None):
         print(f"복원: {out}" if out else "위치표에 없는 경로입니다")
         return 0 if out else 1
     result = run(a.원본, a.보관, a.최소MB, a.최근일, a.실행, code_dirs=a.코드폴더 or DEFAULT_CODE_DIRS,
-                 move_finals=a.최종본도이동, max_gb=a.최대GB)
+                 move_finals=a.최종본도이동, max_gb=a.최대GB,
+                 cache_drive=a.캐시드라이브, cache_reserve_gb=a.캐시여유GB, list_file=a.목록파일)
     print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0 if result["상태"] in ("미리보기", "완료") else 1
+    return 0 if result["상태"] in ("미리보기", "완료", "캐시대기") else 1
 
 
 if __name__ == "__main__":

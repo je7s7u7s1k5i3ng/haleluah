@@ -113,3 +113,39 @@ def test_size_cap_per_run_and_root_readme(tmp_path):
     assert r["옮김"] == 1
     readme = (src / off.ROOT_README).read_text(encoding="utf-8")
     assert str(dst) in readme and off.INDEX_NAME in readme
+
+
+def test_cache_drive_low_space_stops_run_and_keeps_originals(tmp_path, monkeypatch):
+    src, dst = setup(tmp_path)
+    cache = tmp_path / "C"
+    cache.mkdir()
+    real = off.shutil.disk_usage
+
+    def fake(path):
+        u = real(path)
+        if str(path) == str(cache):
+            return type(u)(u.total, u.used, 27 * MB)   # C: 여유 27MB
+        return u
+
+    monkeypatch.setattr(off.shutil, "disk_usage", fake)
+    r = off.run(src, dst, execute=True, cache_drive=cache, cache_reserve_gb=0, log=lambda m: None)
+    assert r["상태"] == "캐시대기" and r["캐시여유로멈춤"] is True
+    assert r["옮김"] == 1                                              # 25MB(경제)는 여유 안, 다음 30MB(맛가득)에서 멈춤
+    assert (src / "맛가득" / "사진.png").exists()                       # 못 옮긴 파일은 F에 그대로
+    index = json.loads((src / off.INDEX_NAME).read_text(encoding="utf-8"))
+    assert index["마지막실행"]["캐시여유로멈춤"] is True
+
+
+def test_missing_cache_drive_skips_check(tmp_path):
+    src, dst = setup(tmp_path)
+    r = off.run(src, dst, execute=True, cache_drive=tmp_path / "없는C", log=lambda m: None)
+    assert r["상태"] == "완료" and r["옮김"] == 2
+
+
+def test_preview_writes_full_list_file(tmp_path):
+    src, dst = setup(tmp_path)
+    lf = tmp_path / "목록" / "이동예정.txt"
+    r = off.run(src, dst, list_file=lf, log=lambda m: None)
+    text = lf.read_text(encoding="utf-8")
+    assert r["상태"] == "미리보기" and "원본클립.mp4" in text and "사진.png" in text and "합계 2개" in text
+    assert not dst.exists()
