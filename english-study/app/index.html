@@ -490,7 +490,7 @@ function seekTo(t){audioEl.currentTime=Math.max(0,t);P.rd=false;tick(true);if(au
    예전엔 끝난 뒤에야 다음 장 글을 내려받았고, 그 사이 화면이 꺼진 폰이 소리 재생을 막으면 ▶ 를 다시 눌러야 했다 */
 function applyChap(b,c,d,o){
   audioEl.pause();P.cb=null;P.b=b;P.c=c;P.d=d;P.cur=-1;P.rd=true;P.lock=o.i||0;P.rng={a:-1,b:-1};P.want=!!o.play;P.errN=0;
-  audioEl.src=(CFG.audioBase||'audio/')+b+'_'+pad(c)+'.m4a';audioEl.playbackRate=S.prefs.rate;
+  audioEl.src=cbSrc(b,c);audioEl.playbackRate=S.prefs.rate;
   P.pend=(o.i!=null&&d.sets[o.i])?d.sets[o.i].start:null;
   if(o.play){P.chain=o.chain?Date.now():0;if(!o.cb)audioEl.play().catch(()=>{P.want=false;updateBar();if(o.chain)toast('소리가 멈췄어요 · ▶ 를 눌러 이어서 들어 주세요')})}   /* ★그림 그리기 전에 소리부터 건다 · o.cb = 쉐도잉 이음 읽기가 먼저 소리를 걸 때(앞 장 소리부터)는 여기서 걸지 않는다 */
   $('audioBar').classList.remove('hidden');document.body.classList.add('hasbar');
@@ -629,7 +629,7 @@ function acRender(){const box=$('acBox');box.classList.toggle('hidden',P.mode!==
 const pf=(k,d)=>S.prefs[k]==null?d:+S.prefs[k];
 function acMode(){const m=S.prefs.acMode;return m==='step'||m==='book'?m:'basic'}
 const REGIONS={43:[[1,4],[5,10],[11,17],[18,21]]};   /* 요한복음 4대 권역 · 다른 책은 5장씩(남는 1~2장은 마지막 권역에 합침) */
-function cbSrc(b,c){return (CFG.audioBase||'audio/')+b+'_'+pad(c)+'.m4a'}
+function cbSrc(b,c){const k=b+'_'+pad(c),v=(CFG.audioVer||{})[k];return (CFG.audioBase||'audio/')+k+'.m4a'+(v?'?v='+v:'')}   /* ★소리 주소는 여기 한 곳에서만 만든다. R2 는 1년 캐시(immutable)라 같은 이름으로 덮어쓴 장은 폰이 옛 소리를 튼다 → config.js audioVer 에 판 번호를 올리면 주소가 바뀐다 (2026-11-26 이사야 53장 사고) */
 function aqSteps(n,from){const r=[];for(let s=from;s<n;s+=5){let e=Math.min(s+4,n-1);if(n-1-e<=2&&e!==n-1)e=n-1;r.push([s,e]);if(e===n-1)break}return r}
 function aqPrev(){const a=allChaps(),i=a.findIndex(x=>x[0]===P.b&&x[1]===P.c);return i>0?a[i-1]:null}
 function aqBuildStep(from,withCb){
@@ -829,7 +829,7 @@ const RV={q:[],i:0,ok:0,no:0,again:{},cur:null,end:0};
 const rvAudio=new Audio();rvAudio.preload='none';
 rvAudio.addEventListener('timeupdate',()=>{if(RV.end&&rvAudio.currentTime>=RV.end){rvAudio.pause();RV.end=0}});
 function rvPlay(v){getChap(v.b,v.c).then(d=>{const s=d.sets[v.i];if(!s)return;audioEl.pause();P.want=false;rvAudio.pause();
-  rvAudio.src=(CFG.audioBase||'audio/')+v.b+'_'+pad(v.c)+'.m4a';RV.end=s.end;
+  rvAudio.src=cbSrc(v.b,v.c);RV.end=s.end;
   const go=()=>{rvAudio.removeEventListener('loadedmetadata',go);rvAudio.currentTime=s.start;rvAudio.play().catch(()=>{})};rvAudio.addEventListener('loadedmetadata',go);rvAudio.load()})}
 function rvStart(){const q=vDue().sort(vSort).map(v=>v.k);if(!q.length){toast('오늘 복습할 말이 없어요');return}
   RV.q=q;RV.i=0;RV.ok=0;RV.no=0;RV.again={};$('rv').classList.remove('hidden');rvShow()}
